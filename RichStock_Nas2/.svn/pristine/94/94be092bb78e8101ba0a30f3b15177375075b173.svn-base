@@ -1,0 +1,88 @@
+﻿Imports System.Windows.Forms
+
+Public Class mdiPaikS
+
+    Private Sub ShowNewForm(ByVal sender As Object, ByVal e As EventArgs)
+        ' 자식 폼의 새 인스턴스를 만듭니다.
+        Dim ChildForm As New System.Windows.Forms.Form
+        ' 이 인스턴스를 표시하기 전에 MDI 폼의 자식으로 만듭니다. 
+        ChildForm.MdiParent = Me
+
+        m_ChildFormNumber += 1
+        ChildForm.Text = "창 " & m_ChildFormNumber
+
+        ChildForm.Show()
+    End Sub
+
+    Private Sub OpenFile(ByVal sender As Object, ByVal e As EventArgs)
+        Dim OpenFileDialog As New OpenFileDialog
+        OpenFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        OpenFileDialog.Filter = "텍스트 파일 (*.txt)|*.txt|모든 파일 (*.*)|*.*"
+        If (OpenFileDialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
+            Dim FileName As String = OpenFileDialog.FileName
+            ' TODO: 파일을 여는 코드를 추가합니다.
+        End If
+    End Sub
+
+    Private Sub SaveAsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim SaveFileDialog As New SaveFileDialog
+        SaveFileDialog.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        SaveFileDialog.Filter = "텍스트 파일 (*.txt)|*.txt|모든 파일 (*.*)|*.*"
+
+        If (SaveFileDialog.ShowDialog(Me) = System.Windows.Forms.DialogResult.OK) Then
+            Dim FileName As String = SaveFileDialog.FileName
+            ' TODO: 폼의 현재 내용을 파일에 저장하는 코드를 여기에 추가합니다.
+        End If
+    End Sub
+
+
+    Private Sub ExitToolsStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Me.Close()
+    End Sub
+
+    Private Sub CutToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' 선택한 텍스트나 이미지를 My.Computer.Clipboard를 사용하여 클립보드에 삽입합니다.
+    End Sub
+
+    Private Sub CopyToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' 선택한 텍스트나 이미지를 My.Computer.Clipboard를 사용하여 클립보드에 삽입합니다.
+    End Sub
+
+    Private Sub PasteToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        'My.Computer.Clipboard.GetText() 또는 My.Computer.Clipboard.GetData를 사용하여 클립보드에서 정보를 가져옵니다.
+    End Sub
+
+    Private Sub ToolBarToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+    End Sub
+
+    Private Sub StatusBarToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+
+    End Sub
+
+    Private Sub CascadeToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Me.LayoutMdi(MdiLayout.Cascade)
+    End Sub
+
+    Private Sub TileVerticalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Me.LayoutMdi(MdiLayout.TileVertical)
+    End Sub
+
+    Private Sub TileHorizontalToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Me.LayoutMdi(MdiLayout.TileHorizontal)
+    End Sub
+
+    Private Sub ArrangeIconsToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Me.LayoutMdi(MdiLayout.ArrangeIcons)
+    End Sub
+
+    Private Sub CloseAllToolStripMenuItem_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ' 해당 부모의 자식 폼을 모두 닫습니다.
+        For Each ChildForm As Form In Me.MdiChildren
+            ChildForm.Close()
+        Next
+    End Sub
+
+    Private m_ChildFormNumber As Integer
+
+End Class

@@ -1,0 +1,78 @@
+﻿Imports PaikRichStock.Common
+Imports System.Xml
+Imports System.IO
+
+Public Class ucVolumeAnalysis
+    Private _MainStock As New PaikRichStock.Common.ucMainStockVer2
+    Private _clsFunc As New PaikRichStock.Common.clsFunc
+    Private _clsCombineCallOpt As New PaikRichStock.Common.clsCombineCallOpt
+
+    Public Structure StructureGetStockInfo
+        Public stockCode As String
+        Public stockName As String
+
+        Public Sub Init()
+            stockCode = ""
+            stockName = ""
+        End Sub
+    End Structure
+
+    Private _StockInfo As StructureGetStockInfo
+
+    Public WriteOnly Property StockInfo As StructureGetStockInfo
+        Set(value As StructureGetStockInfo)
+            _StockInfo = value
+            'InitdtSaD()
+            'InitdtAutoCalSaD()
+            'GetXmlData(_StockInfo.stockCode, _StockInfo.stockName)
+        End Set
+    End Property
+
+    Public WriteOnly Property MainStock As PaikRichStock.Common.ucMainStockVer2
+        Set(value As PaikRichStock.Common.ucMainStockVer2)
+            _MainStock = value
+            _clsCombineCallOpt.MainStock = value
+        End Set
+    End Property
+
+    Private Sub ucSupplyDemandAnalysis_Load(sender As Object, e As EventArgs) Handles Me.Load
+        
+    End Sub
+#Region " GetXmlData "
+    Private _ds As New DataSet
+
+    Private Sub GetXmlData(ByVal stockCode As String, ByVal stockName As String)
+        If _ds Is Nothing = False Then
+            _ds.Reset()
+        End If
+
+        Dim xmlFile As XmlReader
+        Dim xmlFileSc As XmlReader
+        xmlFile = XmlReader.Create("C:\Xml2\" & stockCode & "_" & stockName & ".xml", New XmlReaderSettings())
+        xmlFileSc = XmlReader.Create("C:\Xml2\" & stockCode & "_" & stockName & ".xsd", New XmlReaderSettings())
+
+        _ds.ReadXml(xmlFileSc, XmlReadMode.ReadSchema)
+        _ds.ReadXml(xmlFile)
+
+        For i As Integer = 0 To _ds.Tables(0).Rows.Count - 1
+            If Trim(_ds.Tables(0).Rows(i).Item("거래량").ToString()) <> "" Then Exit For
+
+            If Trim(_ds.Tables(0).Rows(i).Item("거래량").ToString()) = "" Then
+                _ds.Tables(0).Rows.RemoveAt(0)
+            End If
+        Next
+
+        If Trim(_ds.Tables(0).Rows(0).Item("일자")) < CDateTime.FormatDate(DateAdd(DateInterval.Day, -1, Now.Date)) Then
+            _clsCombineCallOpt.LastDate = Trim(_ds.Tables(0).Rows(0).Item("일자"))
+            '    CallOpt(_StockInfo.stockCode)
+        Else
+            'AutoCalSupplyAndDemand()
+            'SetBaseInfo()
+            'DisplayChartBase()
+        End If
+
+    End Sub
+#End Region
+
+
+End Class

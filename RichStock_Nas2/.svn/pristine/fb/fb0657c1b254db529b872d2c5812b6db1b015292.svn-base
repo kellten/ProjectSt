@@ -1,0 +1,242 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class ucVolumeBasicAnalysis
+    Inherits System.Windows.Forms.UserControl
+
+    'UserControl은 Dispose를 재정의하여 구성 요소 목록을 정리합니다.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Windows Form 디자이너에 필요합니다.
+    Private components As System.ComponentModel.IContainer
+
+    '참고: 다음 프로시저는 Windows Form 디자이너에 필요합니다.
+    '수정하려면 Windows Form 디자이너를 사용하십시오.  
+    '코드 편집기를 사용하여 수정하지 마십시오.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.spcMain = New System.Windows.Forms.SplitContainer()
+        Me.pnCondition = New System.Windows.Forms.Panel()
+        Me.lblStockCode = New System.Windows.Forms.Label()
+        Me.lblStockName = New System.Windows.Forms.Label()
+        Me.lblOpt10059Price = New System.Windows.Forms.Label()
+        Me.lblOpt10081 = New System.Windows.Forms.Label()
+        Me.lblOpt10059 = New System.Windows.Forms.Label()
+        Me.cboCondition = New System.Windows.Forms.ComboBox()
+        Me.btnJukCondition = New System.Windows.Forms.Button()
+        Me.nudGaInValue = New System.Windows.Forms.NumericUpDown()
+        Me.dgvList = New System.Windows.Forms.DataGridView()
+        Me.lblTagetDtRowCount = New System.Windows.Forms.Label()
+        Me.lblTagetDtRowIndex = New System.Windows.Forms.Label()
+        CType(Me.spcMain, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.spcMain.Panel1.SuspendLayout()
+        Me.spcMain.Panel2.SuspendLayout()
+        Me.spcMain.SuspendLayout()
+        Me.pnCondition.SuspendLayout()
+        CType(Me.nudGaInValue, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvList, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'spcMain
+        '
+        Me.spcMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.spcMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.spcMain.Location = New System.Drawing.Point(0, 0)
+        Me.spcMain.Name = "spcMain"
+        Me.spcMain.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'spcMain.Panel1
+        '
+        Me.spcMain.Panel1.Controls.Add(Me.pnCondition)
+        '
+        'spcMain.Panel2
+        '
+        Me.spcMain.Panel2.Controls.Add(Me.dgvList)
+        Me.spcMain.Size = New System.Drawing.Size(769, 493)
+        Me.spcMain.SplitterDistance = 36
+        Me.spcMain.TabIndex = 0
+        '
+        'pnCondition
+        '
+        Me.pnCondition.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.pnCondition.Controls.Add(Me.lblTagetDtRowIndex)
+        Me.pnCondition.Controls.Add(Me.lblTagetDtRowCount)
+        Me.pnCondition.Controls.Add(Me.lblStockCode)
+        Me.pnCondition.Controls.Add(Me.lblStockName)
+        Me.pnCondition.Controls.Add(Me.lblOpt10059Price)
+        Me.pnCondition.Controls.Add(Me.lblOpt10081)
+        Me.pnCondition.Controls.Add(Me.lblOpt10059)
+        Me.pnCondition.Controls.Add(Me.cboCondition)
+        Me.pnCondition.Controls.Add(Me.btnJukCondition)
+        Me.pnCondition.Controls.Add(Me.nudGaInValue)
+        Me.pnCondition.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnCondition.Location = New System.Drawing.Point(0, 0)
+        Me.pnCondition.Name = "pnCondition"
+        Me.pnCondition.Size = New System.Drawing.Size(765, 32)
+        Me.pnCondition.TabIndex = 0
+        '
+        'lblStockCode
+        '
+        Me.lblStockCode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblStockCode.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblStockCode.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblStockCode.ForeColor = System.Drawing.Color.Black
+        Me.lblStockCode.Location = New System.Drawing.Point(385, 4)
+        Me.lblStockCode.Name = "lblStockCode"
+        Me.lblStockCode.Size = New System.Drawing.Size(72, 22)
+        Me.lblStockCode.TabIndex = 429
+        Me.lblStockCode.Tag = "/D"
+        Me.lblStockCode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblStockName
+        '
+        Me.lblStockName.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblStockName.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblStockName.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblStockName.ForeColor = System.Drawing.Color.Black
+        Me.lblStockName.Location = New System.Drawing.Point(279, 4)
+        Me.lblStockName.Name = "lblStockName"
+        Me.lblStockName.Size = New System.Drawing.Size(105, 22)
+        Me.lblStockName.TabIndex = 428
+        Me.lblStockName.Tag = "/D"
+        Me.lblStockName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblOpt10059Price
+        '
+        Me.lblOpt10059Price.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblOpt10059Price.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblOpt10059Price.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblOpt10059Price.ForeColor = System.Drawing.Color.Black
+        Me.lblOpt10059Price.Location = New System.Drawing.Point(736, 3)
+        Me.lblOpt10059Price.Name = "lblOpt10059Price"
+        Me.lblOpt10059Price.Size = New System.Drawing.Size(19, 22)
+        Me.lblOpt10059Price.TabIndex = 427
+        Me.lblOpt10059Price.Tag = "/D"
+        Me.lblOpt10059Price.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblOpt10081
+        '
+        Me.lblOpt10081.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblOpt10081.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblOpt10081.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblOpt10081.ForeColor = System.Drawing.Color.Black
+        Me.lblOpt10081.Location = New System.Drawing.Point(711, 3)
+        Me.lblOpt10081.Name = "lblOpt10081"
+        Me.lblOpt10081.Size = New System.Drawing.Size(19, 22)
+        Me.lblOpt10081.TabIndex = 426
+        Me.lblOpt10081.Tag = "/D"
+        Me.lblOpt10081.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblOpt10059
+        '
+        Me.lblOpt10059.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblOpt10059.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblOpt10059.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblOpt10059.ForeColor = System.Drawing.Color.Black
+        Me.lblOpt10059.Location = New System.Drawing.Point(686, 3)
+        Me.lblOpt10059.Name = "lblOpt10059"
+        Me.lblOpt10059.Size = New System.Drawing.Size(19, 22)
+        Me.lblOpt10059.TabIndex = 425
+        Me.lblOpt10059.Tag = "/D"
+        Me.lblOpt10059.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'cboCondition
+        '
+        Me.cboCondition.FormattingEnabled = True
+        Me.cboCondition.Location = New System.Drawing.Point(10, 4)
+        Me.cboCondition.Name = "cboCondition"
+        Me.cboCondition.Size = New System.Drawing.Size(121, 19)
+        Me.cboCondition.TabIndex = 3
+        '
+        'btnJukCondition
+        '
+        Me.btnJukCondition.Location = New System.Drawing.Point(198, 3)
+        Me.btnJukCondition.Name = "btnJukCondition"
+        Me.btnJukCondition.Size = New System.Drawing.Size(75, 23)
+        Me.btnJukCondition.TabIndex = 2
+        Me.btnJukCondition.Text = "조회"
+        Me.btnJukCondition.UseVisualStyleBackColor = True
+        '
+        'nudGaInValue
+        '
+        Me.nudGaInValue.Location = New System.Drawing.Point(137, 3)
+        Me.nudGaInValue.Name = "nudGaInValue"
+        Me.nudGaInValue.Size = New System.Drawing.Size(55, 20)
+        Me.nudGaInValue.TabIndex = 1
+        '
+        'dgvList
+        '
+        Me.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvList.Location = New System.Drawing.Point(0, 0)
+        Me.dgvList.Name = "dgvList"
+        Me.dgvList.RowTemplate.Height = 23
+        Me.dgvList.Size = New System.Drawing.Size(765, 449)
+        Me.dgvList.TabIndex = 0
+        '
+        'lblTagetDtRowCount
+        '
+        Me.lblTagetDtRowCount.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblTagetDtRowCount.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblTagetDtRowCount.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblTagetDtRowCount.ForeColor = System.Drawing.Color.Black
+        Me.lblTagetDtRowCount.Location = New System.Drawing.Point(459, 4)
+        Me.lblTagetDtRowCount.Name = "lblTagetDtRowCount"
+        Me.lblTagetDtRowCount.Size = New System.Drawing.Size(49, 22)
+        Me.lblTagetDtRowCount.TabIndex = 430
+        Me.lblTagetDtRowCount.Tag = "/D"
+        Me.lblTagetDtRowCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblTagetDtRowIndex
+        '
+        Me.lblTagetDtRowIndex.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblTagetDtRowIndex.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.lblTagetDtRowIndex.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.lblTagetDtRowIndex.ForeColor = System.Drawing.Color.Black
+        Me.lblTagetDtRowIndex.Location = New System.Drawing.Point(510, 4)
+        Me.lblTagetDtRowIndex.Name = "lblTagetDtRowIndex"
+        Me.lblTagetDtRowIndex.Size = New System.Drawing.Size(60, 22)
+        Me.lblTagetDtRowIndex.TabIndex = 431
+        Me.lblTagetDtRowIndex.Tag = "/D"
+        Me.lblTagetDtRowIndex.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ucVolumeBasicAnalysis
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 11.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.spcMain)
+        Me.Font = New System.Drawing.Font("굴림체", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Name = "ucVolumeBasicAnalysis"
+        Me.Size = New System.Drawing.Size(769, 493)
+        Me.spcMain.Panel1.ResumeLayout(False)
+        Me.spcMain.Panel2.ResumeLayout(False)
+        CType(Me.spcMain, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.spcMain.ResumeLayout(False)
+        Me.pnCondition.ResumeLayout(False)
+        CType(Me.nudGaInValue, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvList, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents spcMain As System.Windows.Forms.SplitContainer
+    Friend WithEvents dgvList As System.Windows.Forms.DataGridView
+    Friend WithEvents pnCondition As System.Windows.Forms.Panel
+    Friend WithEvents btnJukCondition As System.Windows.Forms.Button
+    Friend WithEvents nudGaInValue As System.Windows.Forms.NumericUpDown
+    Friend WithEvents cboCondition As System.Windows.Forms.ComboBox
+    Friend WithEvents lblOpt10059Price As System.Windows.Forms.Label
+    Friend WithEvents lblOpt10081 As System.Windows.Forms.Label
+    Friend WithEvents lblOpt10059 As System.Windows.Forms.Label
+    Friend WithEvents lblStockCode As System.Windows.Forms.Label
+    Friend WithEvents lblStockName As System.Windows.Forms.Label
+    Friend WithEvents lblTagetDtRowIndex As System.Windows.Forms.Label
+    Friend WithEvents lblTagetDtRowCount As System.Windows.Forms.Label
+
+End Class

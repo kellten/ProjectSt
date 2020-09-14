@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Days_Fri_Desc" xml:space="preserve">
+    <value> فينوس في اليوم.</value>
+  </data>
+  <data name="Days_Fri_Name" xml:space="preserve">
+    <value> الجمعة. </value>
+  </data>
+  <data name="Days_Mon_Desc" xml:space="preserve">
+    <value> يوم  من القمر. </value>
+  </data>
+  <data name="Days_Mon_Name" xml:space="preserve">
+    <value> الاثنين. </value>
+  </data>
+  <data name="Days_None_Desc" xml:space="preserve">
+    <value> الحدث سوف لا reoccure. </value>
+  </data>
+  <data name="Days_None_Name" xml:space="preserve">
+    <value> لم يتم تحديد. </value>
+  </data>
+  <data name="Days_NoWork_Desc" xml:space="preserve">
+    <value> فقط السبت والاحد. </value>
+  </data>
+  <data name="Days_NoWork_Name" xml:space="preserve">
+    <value> في عطلة نهاية الاسبوع. </value>
+  </data>
+  <data name="Days_Sat_Desc" xml:space="preserve">
+    <value> يوم  من زحل. </value>
+  </data>
+  <data name="Days_Sat_Name" xml:space="preserve">
+    <value> السبت. </value>
+  </data>
+  <data name="Days_Sun_Desc" xml:space="preserve">
+    <value>  يوم للشمس. </value>
+  </data>
+  <data name="Days_Sun_Name" xml:space="preserve">
+    <value> الاحد. </value>
+  </data>
+  <data name="Days_Thr_Desc" xml:space="preserve">
+    <value> يوم  من كوكب المشتري. </value>
+  </data>
+  <data name="Days_Thr_Name" xml:space="preserve">
+    <value> الخميس. </value>
+  </data>
+  <data name="Days_Tue_Desc" xml:space="preserve">
+    <value> يوم  من المريخ. </value>
+  </data>
+  <data name="Days_Tue_Name" xml:space="preserve">
+    <value> الثلاثاء. </value>
+  </data>
+  <data name="Days_Wed_Desc" xml:space="preserve">
+    <value> يوم  من عطارد. </value>
+  </data>
+  <data name="Days_Wed_Name" xml:space="preserve">
+    <value> الاربعاء. </value>
+  </data>
+  <data name="Days_Work_Desc" xml:space="preserve">
+    <value> كل يوم ما عدا السبت والاحد. </value>
+  </data>
+  <data name="Days_Work_Name" xml:space="preserve">
+    <value>  أيام الأسبوع. </value>
+  </data>
+  <data name="TestClass_Boolean_False_Desc" xml:space="preserve">
+    <value> ومن سلبية. </value>
+  </data>
+  <data name="TestClass_Boolean_False_Name" xml:space="preserve">
+    <value> النيب. </value>
+  </data>
+  <data name="TestClass_Boolean_True_Desc" xml:space="preserve">
+    <value> انه امر ايجابي. </value>
+  </data>
+  <data name="TestClass_Boolean_True_Name" xml:space="preserve">
+    <value> نعم. </value>
+  </data>
+  <data name="TestClass_Cat1" xml:space="preserve">
+    <value> ملامح التعداد. </value>
+  </data>
+  <data name="TestClass_Cat2" xml:space="preserve">
+    <value> الخصائص العامة. </value>
+  </data>
+  <data name="TestClass_Cat3" xml:space="preserve">
+    <value> ملامح صورة. </value>
+  </data>
+  <data name="TestClass_Cat4" xml:space="preserve">
+    <value> استخدام القيم القياسية. </value>
+  </data>
+  <data name="TestClass_Cat5" xml:space="preserve">
+    <value> IEnumerable للتوسيع. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_CenterParent_Desc" xml:space="preserve">
+    <value> ويتركز النموذج على العرض الحالي ، ولها أبعاد محددة في حجم النموذج. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_CenterParent_Name" xml:space="preserve">
+    <value> المركز الرئيسي. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_CenterScreen_Desc" xml:space="preserve">
+    <value> يتم وضع النموذج في الموقع الافتراضي ويندوز ويحتوي على أبعاد محددة في حجم النموذج. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_CenterScreen_Name" xml:space="preserve">
+    <value> مركز الشاشة. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_Manual_Desc" xml:space="preserve">
+    <value> يتم تحديد الموقف من النموذج بواسطة الخاصية المكان. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_Manual_Name" xml:space="preserve">
+    <value> يدوي. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_WindowsDefaultBounds_Desc" xml:space="preserve">
+    <value> يتم وضع النموذج في الموقع الافتراضي ويندوز ويحتوي على الحدود التي يحددها Windows الافتراضي. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_WindowsDefaultBounds_Name" xml:space="preserve">
+    <value> رد يندوز  منضم. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_WindowsDefaultLocation_Desc" xml:space="preserve">
+    <value> يتركز النموذج ضمن حدود النموذج الأصل. </value>
+  </data>
+  <data name="TestClass_FormStartPosition_WindowsDefaultLocation_Name" xml:space="preserve">
+    <value> ويندوز  الموقع الافتراضي. </value>
+  </data>
+  <data name="TestClass_PropA_Desc" xml:space="preserve">
+    <value> يوضح كيفية استخدام التعداد دون FlagsAttribute. </value>
+  </data>
+  <data name="TestClass_PropA_Name" xml:space="preserve">
+    <value> التعداد دون أعلام. </value>
+  </data>
+  <data name="TestClass_PropB_Desc" xml:space="preserve">
+    <value> يوضح كيفية استخدام التعداد مع FlagsAttribute. </value>
+  </data>
+  <data name="TestClass_PropB_Name" xml:space="preserve">
+    <value> التعداد مع أعلام. </value>
+  </data>
+  <data name="TestClass_PropC_Desc" xml:space="preserve">
+    <value> يوضح كيفية استخدام booean حيث التعداد. </value>
+  </data>
+  <data name="TestClass_PropC_False_Desc" xml:space="preserve">
+    <value> عروض "لا" بدلا من "خطأ". </value>
+  </data>
+  <data name="TestClass_PropC_False_Name" xml:space="preserve">
+    <value> رقم </value>
+  </data>
+  <data name="TestClass_PropC_Name" xml:space="preserve">
+    <value> دون  منطقية صواب / خطأ. </value>
+  </data>
+  <data name="TestClass_PropC_True_Desc" xml:space="preserve">
+    <value> عروض "نعم" بدلا من كلمة "صحيح". </value>
+  </data>
+  <data name="TestClass_PropC_True_Name" xml:space="preserve">
+    <value> نعم. </value>
+  </data>
+  <data name="TestClass_PropD_Desc" xml:space="preserve">
+    <value> يوضح كيفية استخدام المدمج في التعداد. </value>
+  </data>
+  <data name="TestClass_PropD_Name" xml:space="preserve">
+    <value> مدمج في التعداد. </value>
+  </data>
+  <data name="TestClass_PropE_Desc" xml:space="preserve">
+    <value> تم إنشاء هذه المنشأة في وقت التشغيل. </value>
+  </data>
+  <data name="TestClass_PropE_Name" xml:space="preserve">
+    <value> على ذبابة الملكية. </value>
+  </data>
+  <data name="TestClass_PropF_Desc" xml:space="preserve">
+    <value> لشرح كيفية تعطيل خاصية. </value>
+  </data>
+  <data name="TestClass_PropF_Name" xml:space="preserve">
+    <value> معطل الممتلكات. </value>
+  </data>
+  <data name="TestClass_PropG_Desc" xml:space="preserve">
+    <value> يظهر صورة لقيمة العقار. قيم الاختبار : 0 ، 1 ، 2 ، و 3. </value>
+  </data>
+  <data name="TestClass_PropG_Name" xml:space="preserve">
+    <value>  صورة قيمة. </value>
+  </data>
+  <data name="TestClass_PropH_Desc" xml:space="preserve">
+    <value> كيف يمكنك إظهار صورة الدولة للممتلكات الخاصة بك. قيم الاختبار : 0 ، 1 ، 2 ، و 3. </value>
+  </data>
+  <data name="TestClass_PropH_Name" xml:space="preserve">
+    <value>صورة الدولة  (ق). </value>
+  </data>
+  <data name="TestClass_PropI_Desc" xml:space="preserve">
+    <value> شرح استخدام القيم القياسية. هذه القائمة ليست حصرية ، وهذا يعني يمكنك كتابة في هذا المجال. قيم الاختبار : آدم ، بريان ، رسل ، جونز ، جاكوب ، 101 ، 102 ، 103 ، 104 ، 105 و أي قيمة عددية. </value>
+  </data>
+  <data name="TestClass_PropI_Name" xml:space="preserve">
+    <value> قيمة قياسية غير excluive. </value>
+  </data>
+  <data name="TestClass_PropJ_Desc" xml:space="preserve">
+    <value> شرح استخدام القيم القياسية. هذه القائمة غير حصرية ، وهذا يعني لا يمكنك كتابة في هذا المجال. </value>
+  </data>
+  <data name="TestClass_PropJ_Name" xml:space="preserve">
+    <value> excluive قيمة قياسي. </value>
+  </data>
+  <data name="TestClass_PropK_Desc" xml:space="preserve">
+    <value> شرح استخدام قائمة للتوسيع. </value>
+  </data>
+  <data name="TestClass_PropK_Name" xml:space="preserve">
+    <value> توسيع قائمة. </value>
+  </data>
+  <data name="TestClass_PropL_Desc" xml:space="preserve">
+    <value> شرح استخدام مصفوفة للتوسيع. </value>
+  </data>
+  <data name="TestClass_PropL_Name" xml:space="preserve">
+    <value> توسيع الصفيف. </value>
+  </data>
+  <data name="TestClass_PropM_Desc" xml:space="preserve">
+    <value> شرح استخدام جمع للتوسيع. </value>
+  </data>
+  <data name="TestClass_PropM_Name" xml:space="preserve">
+    <value> المجموعة قابلة للتوسيع. </value>
+  </data>
+</root>

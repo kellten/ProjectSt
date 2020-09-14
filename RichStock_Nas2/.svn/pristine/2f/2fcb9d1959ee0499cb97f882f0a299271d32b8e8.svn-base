@@ -1,0 +1,137 @@
+﻿Public Class ucCondition
+
+    Private _MainStock As New PaikRichStock.Common.ucMainStockVer2
+    Private _Connected As Boolean = False
+    Private _dsStockList As New DataSet
+
+    Public WriteOnly Property MainStock As PaikRichStock.Common.ucMainStockVer2
+        Set(value As PaikRichStock.Common.ucMainStockVer2)
+            _MainStock = value
+            AddHandler _MainStock.OnReceiveConditionVer, AddressOf _MainStock_OnReceiveConditionVer
+            AddHandler _MainStock.OnReceiveTrCondition, AddressOf _MainStock_OnReceiveTrCondition
+        End Set
+    End Property
+
+    Public WriteOnly Property Connected As Boolean
+        Set(value As Boolean)
+            _Connected = True
+        End Set
+    End Property
+
+    Public ReadOnly Property DsStockList As DataSet
+        Get
+            Return _dsStockList
+        End Get
+    End Property
+
+    Private Enum DgvCondiListIndex
+        DetailGroupName
+        Index
+        ScreenNo
+    End Enum
+
+    Private Enum DgvConditionStockListIndex
+        STOCK_NAME          ' 종목명
+        CurrentPrice        ' 현재가
+        lossGainRate        ' 등락율
+        VolumePower         ' 체결강도
+        TradingVolume       ' 거래량
+        StartPrice          ' 시가
+        HighestPrice        ' 고가
+        LowestPrice         ' 저가
+        TradingTime         ' 체결시간
+        PreDayBySymbol      ' 전일대비기호
+        STOCK_CODE
+        ScreenNo_GetIn      ' 화면번호
+    End Enum
+
+#Region " "
+    Private Sub GetConditionList()
+        If _Connected = True Then
+            _MainStock.GetConditionLoad_OnReceiveTrCondition()
+        End If
+    End Sub
+
+    Private Sub _MainStock_OnReceiveConditionVer(ByVal ds As System.Data.DataSet)
+        If ds Is Nothing = False Then
+            Try
+                If ds Is Nothing = False Then
+                    Dim row As Integer = 0
+
+                    drvConditionList.Rows.Clear()
+
+                    With drvConditionList
+                        For Each dr As DataRow In ds.Tables("CondiList").Rows
+                            .Rows.Insert(row, 1)
+
+                            .Rows(row).Cells(DgvCondiListIndex.DetailGroupName).Value = Trim(dr("CONDI_NAME"))
+                            .Rows(row).Cells(DgvCondiListIndex.Index).Value = Trim(dr("CONDI_SEQ"))
+                            .Rows(row).Cells(DgvCondiListIndex.ScreenNo).Value = "9" & Trim(dr("CONDI_SEQ"))
+
+                            row = row + 1
+                        Next
+                    End With
+                End If
+            Catch ex As Exception
+                MsgBox(ex.ToString(), MsgBoxStyle.Exclamation)
+
+            End Try
+        End If
+    End Sub
+
+    Private Sub drvConditionList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles drvConditionList.CellDoubleClick
+        If Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.ScreenNo).Value) = "" Then Exit Sub
+
+        With drvConditionList
+            _MainStock.SendCondition_OnReceiveConditionVer(Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.ScreenNo).Value), Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.DetailGroupName).Value), _
+                                                    Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.Index).Value), 0)
+
+        End With
+    End Sub
+
+    Private Sub _MainStock_OnReceiveTrCondition(ByVal ds As System.Data.DataSet)
+        If ds Is Nothing = False Then
+            Try
+                If _dsStockList Is Nothing = False Then
+                    _dsStockList.Reset()
+                End If
+
+                _dsStockList = ds.Copy
+
+                dgvFavStockList.Rows.Clear()
+
+                Dim row As Integer = 0
+
+                With dgvFavStockList
+                    For Each dr As DataRow In ds.Tables(0).Rows
+                        .Rows.Insert(row, 1)
+
+                        .Rows(row).Cells(DgvConditionStockListIndex.STOCK_CODE).Value = Trim(dr("STOCK_CODE").ToString())
+
+                        Select Case Len((row + 1).ToString)
+                            Case 1
+                                .Rows(row).Cells(DgvConditionStockListIndex.ScreenNo_GetIn).Value = "4" & "00" & (row + 1).ToString
+                            Case 2
+                                .Rows(row).Cells(DgvConditionStockListIndex.ScreenNo_GetIn).Value = "4" & "0" & (row + 1).ToString
+                            Case 3
+                                .Rows(row).Cells(DgvConditionStockListIndex.ScreenNo_GetIn).Value = "4" & "" & (row + 1).ToString
+                        End Select
+
+                        .Rows(row).Cells(DgvConditionStockListIndex.STOCK_NAME).Value = Trim(dr("STOCK_NAME").ToString())
+
+                        row = row + 1
+                    Next
+
+                End With
+
+                Application.DoEvents()
+
+            Catch ex As Exception
+                MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+
+            End Try
+        End If
+    End Sub
+#End Region
+
+End Class

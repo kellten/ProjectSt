@@ -1,0 +1,25 @@
+TERM 폴더는 팩토리 메소드 패턴
+Atmega 폴더는 추상 팩토리 패턴
+
+
+팩토리 메소드 패턴
+
+Pizza = Equipment
+PizzaStorage = StorageBox
+NYPizzaStore = BoardStorageBox
+NYStyleCheesePizza = BoardPC100StorageBox
+
+orderPizza = inquiryEquipment
+CreatePiza = TakeOutEq
+
+
+추상 팩토리 패턴
+
+Pizza = Atmega
+PizzaStore = AtmegaBox
+NYPizzaStore = Atmega128BOX
+IPizzaIngredientFactory = component
+NYPizzaIngredientFactory = Atmega1284Box
+CheesePizza 등등 = Atmega1280, 1, 4, 4P, A
+
+IDough 등등 = EIsp 등등

@@ -1,0 +1,64 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmVolumeAnalysis
+    Inherits System.Windows.Forms.Form
+
+    'Form은 Dispose를 재정의하여 구성 요소 목록을 정리합니다.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Windows Form 디자이너에 필요합니다.
+    Private components As System.ComponentModel.IContainer
+
+    '참고: 다음 프로시저는 Windows Form 디자이너에 필요합니다.
+    '수정하려면 Windows Form 디자이너를 사용하십시오.  
+    '코드 편집기를 사용하여 수정하지 마십시오.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.UcSupplyDemandAnalysis1 = New PaikRichStock.UcForm.ucSupplyDemandAnalysis()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.SuspendLayout()
+        '
+        'UcSupplyDemandAnalysis1
+        '
+        Me.UcSupplyDemandAnalysis1.AutoSize = True
+        Me.UcSupplyDemandAnalysis1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.UcSupplyDemandAnalysis1.Location = New System.Drawing.Point(0, 0)
+        Me.UcSupplyDemandAnalysis1.Name = "UcSupplyDemandAnalysis1"
+        Me.UcSupplyDemandAnalysis1.Size = New System.Drawing.Size(869, 473)
+        Me.UcSupplyDemandAnalysis1.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(174, 283)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(101, 50)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'frmVolumeAnalysis
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 11.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(869, 473)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.UcSupplyDemandAnalysis1)
+        Me.Font = New System.Drawing.Font("굴림체", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Name = "frmVolumeAnalysis"
+        Me.Text = "frmVolumeAnalysis"
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents UcSupplyDemandAnalysis1 As PaikRichStock.UcForm.ucSupplyDemandAnalysis
+    Friend WithEvents Button1 As System.Windows.Forms.Button
+End Class

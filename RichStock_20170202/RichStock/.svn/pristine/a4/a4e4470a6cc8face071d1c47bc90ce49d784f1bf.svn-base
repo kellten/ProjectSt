@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using PaikRichStock.Common;
+
+namespace StockDayDataSaver
+{
+    static class Program
+    {
+        /// <summary>
+        /// 해당 응용 프로그램의 주 진입점입니다.
+        /// </summary>
+        [STAThread]
+        static void Main(string[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            frmSaver frm = new frmSaver();
+
+            if (args.Length > 0 && args[0] == "auto")
+            {
+
+                //Application.Run(frm);
+                frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+
+                frm.UcMainStock1.Connection();
+
+                while (frm.UcMainStock1._allStockDataset == null) { Application.DoEvents(); }
+                frm.ExcuteSendData();
+            }
+            else
+            {
+                Application.Run(frm);
+            }
+            
+            
+        }
+    }
+}

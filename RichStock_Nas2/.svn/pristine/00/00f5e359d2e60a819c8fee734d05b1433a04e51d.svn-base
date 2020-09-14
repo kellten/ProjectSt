@@ -1,0 +1,165 @@
+﻿Public Class clsKiwoomMarketInfoDefine
+
+    Public opt10016 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락율", "거래량", "전일거래량대비율", "매도호가", "매수호가", "고가", "저가"}
+    Public opt10017 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락율", "거래량", "전일거래량", "매도잔량", "매도호가", "매수호가", "매수잔량", "횟수"}
+    Public opt10018 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락율", "거래량", "매도호가", "매수호가", "매수호가", "당일고가", "당일저가"}
+    Public opt10019 As String() = {"종목코드", "종목분류", "종목명", "전일대비기호", "전일대비", "등락율", "기준가", "현재가", "기준대비", "거래량", "급등률"}
+    Public opt10020 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "거래량", "총매도잔량", "총매수잔량", "순매수잔량", "매수비율"}
+    Public opt10021 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "기준률", "현재", "급증수량", "급증률", "총매수량"}
+    Public opt10022 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "기준률", "현재비율", "급증률", "총매도잔량", "총매수잔량"}
+    Public opt10023 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "이전거래량", "현재거래량", "급증량", "급증률"}
+    Public opt10024 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "이전거래량", "현재거래량", "매도호가", "매수호가"}
+    Public opt10025 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "현재거래량", "가격대시작", "가격대끝", "매물량", "매물비"}
+    Public opt10026 As String() = {"종목코드", "종목명", "PER", "현재가", "전일대비기호", "전일대비", "등락률", "현재거래량", "매도호가"}
+    Public opt10027 As String() = {"종목분류", "종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "매도잔량", "매수잔량", "현재거래량", "체결강도", "횟수"}
+    Public opt10028 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "시가", "고가", "저가", "시가대비", "현재거래량", "체결강도"}
+    Public opt10029 As String() = {"종목코드", "종목명", "예상체결가", "기준가", "전일대비기호", "전일대비", "등락률", "예상체결량", "매도잔량", "매도호가", "매수호가", "매수잔량"}
+    Public opt10030 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "거래량", "전일비", "거래회전율", "거래금액"}
+    Public opt10031 As String() = {"종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "거래량"}
+    Public opt10032 As String() = {"종목코드", "현재순위", "전일순위", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "매도호가", "매수호가", "현재거래량", "전일거래량", "거래대금"}
+    Public opt10033 As String() = {"종목정보", "종목코드", "종목명", "현재가", "전일대비기호", "전일대비", "등락률", "신용비율", "매도잔량", "매수잔량", "현재거래량"}
+
+    Public Enum KiwoomMaketInfoDefineIndex
+        Opt10016
+        Opt10017
+        Opt10018
+        Opt10019
+        Opt10020
+        Opt10021
+        Opt10022
+        Opt10023
+        Opt10024
+        Opt10025
+        Opt10026
+        Opt10027
+        Opt10028
+        Opt10029
+        Opt10030
+        Opt10031
+        Opt10032
+        Opt10033
+    End Enum
+
+    Public Function KiwoomDefineDic(ByVal sKiwoomMaketInfoDefine As KiwoomMaketInfoDefineIndex, ByVal tableName As String, ByVal AxKH As AxKHOpenAPILib.AxKHOpenAPI, ByVal e As AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent) As DataSet
+        Dim dt As New DataTable(tableName)
+        Dim dr As DataRow, returnDs As New DataSet
+        Dim nCnt As Integer = 0
+
+        With dt.Columns
+            Select Case sKiwoomMaketInfoDefine
+                Case KiwoomMaketInfoDefineIndex.Opt10016
+                    For i As Integer = 0 To UBound(Opt10016)
+                        .Add(Opt10016(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10017
+                    For i As Integer = 0 To UBound(Opt10017)
+                        .Add(opt10017(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10018
+                    For i As Integer = 0 To UBound(opt10018)
+                        .Add(opt10018(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10019
+                    For i As Integer = 0 To UBound(opt10019)
+                        .Add(opt10019(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10020
+                    For i As Integer = 0 To UBound(opt10020)
+                        .Add(opt10020(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10021
+                    For i As Integer = 0 To UBound(opt10021)
+                        .Add(opt10021(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10022
+                    For i As Integer = 0 To UBound(opt10022)
+                        .Add(opt10022(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10023
+                    For i As Integer = 0 To UBound(opt10023)
+                        .Add(opt10023(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10024
+                    For i As Integer = 0 To UBound(opt10024)
+                        .Add(opt10024(i))
+                    Next
+                Case KiwoomMaketInfoDefineIndex.Opt10025
+                    For i As Integer = 0 To UBound(opt10025)
+                        .Add(opt10025(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10026
+                    For i As Integer = 0 To UBound(opt10026)
+                        .Add(opt10026(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10027
+                    For i As Integer = 0 To UBound(opt10027)
+                        .Add(opt10027(i))
+                    Next
+
+
+                Case KiwoomMaketInfoDefineIndex.Opt10028
+                    For i As Integer = 0 To UBound(opt10028)
+                        .Add(opt10028(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10029
+                    For i As Integer = 0 To UBound(opt10029)
+                        .Add(opt10029(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10030
+                    For i As Integer = 0 To UBound(opt10030)
+                        .Add(opt10030(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10031
+                    For i As Integer = 0 To UBound(opt10031)
+                        .Add(opt10031(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10032
+                    For i As Integer = 0 To UBound(opt10032)
+                        .Add(opt10032(i))
+                    Next
+
+                Case KiwoomMaketInfoDefineIndex.Opt10033
+                    For i As Integer = 0 To UBound(opt10033)
+                        .Add(opt10033(i))
+                    Next
+
+
+            End Select
+        End With
+
+        nCnt = AxKH.GetRepeatCnt(e.sTrCode, e.sRQName)
+
+        For i As Integer = 0 To (nCnt - 1)
+            dr = dt.Rows.Add()
+
+            'For intColumnName As Integer = 0 To dt.Columns.Count - 1
+            '    If DicKiwoomDefine(kiwoomDefine) = DicKiwoomDefine(clsKiwoomDefine.KiwoomDefine.Opt10003) OrElse DicKiwoomDefine(kiwoomDefine) = DicKiwoomDefine(clsKiwoomDefine.KiwoomDefine.opt10006) Then
+            '        If intColumnName = 0 Then
+            '            dr(dt.Columns.Item(intColumnName).ColumnName) = Right(e.sRQName.Trim(), 6)
+            '        Else
+            '            dr(dt.Columns.Item(intColumnName).ColumnName) = AxKH.GetCommData(e.sTrCode, e.sRQName, i, dt.Columns.Item(intColumnName).ColumnName).Trim()
+            '        End If
+            '    Else
+            '        dr(dt.Columns.Item(intColumnName).ColumnName) = AxKH.GetCommData(e.sTrCode, e.sRQName, i, dt.Columns.Item(intColumnName).ColumnName).Trim()
+            '    End If
+            'Next
+
+            'If DicKiwoomDefine(kiwoomDefine) = DicKiwoomDefine(clsKiwoomDefine.KiwoomDefine.Opt10081) Then
+            '    If i > 0 Then
+            '        dt.Rows(i - 1)("전일종가") = dt.Rows(i)("현재가")
+            '    End If
+            'End If
+        Next
+
+        returnDs.Tables.Add(dt)
+
+        Return returnDs
+
+    End Function
+End Class

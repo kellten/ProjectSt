@@ -1,0 +1,404 @@
+﻿Public Class clsScreenNoManage
+
+    ' 관심종목 : 1101 ~ 1199(StockId1),  1201 ~ 1299(StockId2), 1301 ~ 1399(StockId3), 1401 ~ 1499(StockId4), 1501 ~ 1599(StockId5)
+    ' 개별관심종목 : 1101 ~ 1199(StockId1),  1201 ~ 1299(StockId2), 1301 ~ 1399(StockId3), 1401 ~ 1499(StockId4), 1501 ~ 1599(StockId5)
+    ' 주문 : 8000~8999
+    ' 실시간 종목 데이터 Tx수신 : 7001~7999
+
+    Sub New()
+        SetDtScreenNoDt()
+        SetTradingScreenNoDt()
+        SetOptKWFidScreenNoDt()
+    End Sub
+
+    Private Sub SetDtScreenNoDt()
+        With _dtScreenNo.Columns
+            .Add("SCREEN_NO")
+            .Add("OPT_CODE")
+            .Add("OPT_NAME")
+        End With
+    End Sub
+
+    Public Enum ReturnScreenNo
+        Success
+        Fail
+        Exists
+    End Enum
+
+#Region " ScreenNo Return "
+    Public Enum StockIdIndex
+        Stock_Id1
+        Stock_Id2
+        Stock_Id3
+        Stock_Id4
+        Stock_Id5
+    End Enum
+
+    ''' <summary>
+    ''' 관심종목의 화면번호를 만든다.
+    ''' </summary>
+    ''' <param name="stockId"></param>
+    ''' <param name="favId"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Function ReceiveFavScreenNo(ByVal stockId As StockIdIndex, ByVal favId As String) As String
+        If Len(favId) = 3 Then Return ""
+
+        Dim screenNo As String = ""
+        Dim screenNo2th As String = ""
+
+        If Len(favId) = 2 Then
+            screenNo2th = favId
+        Else
+            screenNo2th = "0" & favId
+        End If
+
+        Select Case stockId
+            Case StockIdIndex.Stock_Id1
+                screenNo = "11" & screenNo2th
+            Case StockIdIndex.Stock_Id2
+                screenNo = "12" & screenNo2th
+            Case StockIdIndex.Stock_Id3
+                screenNo = "13" & screenNo2th
+            Case StockIdIndex.Stock_Id4
+                screenNo = "14" & screenNo2th
+            Case StockIdIndex.Stock_Id5
+                screenNo = "15" & screenNo2th
+        End Select
+
+        Return screenNo
+
+    End Function
+
+    Public Function ConditionSearchScreenNo()
+        Return "2100"
+    End Function
+#End Region
+
+#Region " InScreenNo "
+    Public Function InScreenNo(ByVal screenNo As String, ByVal optCode As String, ByVal optName As String) As ReturnScreenNo
+
+        Try
+
+            Dim blnChk As Boolean = False
+
+            With _dtScreenNo
+                Dim dr As DataRow
+                Dim drReader As DataRow
+
+                If _dtScreenNo.Rows.Count < 1 Then
+                    dr = _dtScreenNo.Rows.Add
+
+                    dr("SCREEN_NO") = screenNo
+                    dr("OPT_CODE") = optCode
+                    dr("OPT_NAME") = optName
+
+                    Return ReturnScreenNo.Success
+                End If
+
+                For Each drReader In _dtScreenNo.Rows
+                    If Trim(drReader("SCREEN_NO").ToString()) = screenNo Then
+                        blnChk = True
+                    End If
+                Next
+
+                If blnChk = True Then
+
+                    Return ReturnScreenNo.Exists
+
+                Else
+                    dr = _dtScreenNo.Rows.Add
+
+                    dr("SCREEN_NO") = screenNo
+                    dr("OPT_CODE") = optCode
+                    dr("OPT_NAME") = optName
+
+                    Return ReturnScreenNo.Success
+
+                End If
+
+            End With
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+            Return ReturnScreenNo.Fail
+        End Try
+
+    End Function
+#End Region
+
+#Region " 매수, 매도 화면번호 관리 (8001~8999)"
+
+    Private Sub SetTradingScreenNoDt()
+        With _dtTradingScreenNo.Columns
+            .Add("SCREEN_NO")
+            .Add("TRADING_NAME")
+            .Add("STOCK_CODE")
+        End With
+    End Sub
+
+#Region " InTradingScreenNo "
+    Public Function InTradingScreenNo(ByVal screenNo As String, ByVal tradingName As String, ByVal stockCode As String) As ReturnScreenNo
+
+        Try
+
+            Dim blnChk As Boolean = False
+
+            With _dtTradingScreenNo
+                Dim dr As DataRow
+                Dim drReader As DataRow
+
+                If _dtTradingScreenNo.Rows.Count < 1 Then
+                    dr = _dtTradingScreenNo.Rows.Add
+
+                    dr("SCREEN_NO") = screenNo
+                    dr("TRADING_NAME") = tradingName
+                    dr("STOCK_CODE") = stockCode
+
+                    Return ReturnScreenNo.Success
+                End If
+
+                For Each drReader In _dtTradingScreenNo.Rows
+                    If Trim(drReader("SCREEN_NO").ToString()) = screenNo Then
+                        blnChk = True
+                    End If
+                Next
+
+                If blnChk = True Then
+
+                    Return ReturnScreenNo.Exists
+
+                Else
+                    dr = _dtTradingScreenNo.Rows.Add
+
+                    dr("SCREEN_NO") = screenNo
+                    dr("TRADING_NAME") = tradingName
+                    dr("STOCK_CODE") = stockCode
+
+                    Return ReturnScreenNo.Success
+
+                End If
+
+            End With
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+            Return ReturnScreenNo.Fail
+        End Try
+
+    End Function
+#End Region
+
+#Region " GetTradingScreenNo "
+    Public Function GetTradingScreenNo(ByVal tradingName As String, ByVal stockCode As String) As String
+        Dim screeNo As String = ""
+        Dim blnExists As Boolean = False
+
+        If _dtTradingScreenNo.Rows.Count = 0 Then
+
+            Return "8001"
+
+        Else
+            Dim dv As DataView
+
+            dv = New DataView(_dtTradingScreenNo)
+
+            For i As Integer = 8001 To 8999
+
+                blnExists = False
+
+                dv.RowFilter = String.Format("SCREEN_NO = '{0}'", i.ToString)
+
+                For Each drRowView As DataRowView In dv
+                    blnExists = True
+                Next
+
+                If blnExists = False Then
+                    Return i.ToString()
+                End If
+
+            Next
+
+        End If
+
+        Return "fail"
+
+    End Function
+
+    Public Function DeleteTradingScreenNo(ByVal screenNo As String) As Boolean
+
+        Try
+            Dim row As Integer = 0
+
+            For Each drReader As DataRow In _dtTradingScreenNo.Rows
+                If Trim(drReader("SCREEN_NO").ToString()) = screenNo Then
+                    _dtTradingScreenNo.Rows(row).Delete()
+                    Return True
+                End If
+
+                row = row + 1
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+        End Try
+
+        Return False
+
+    End Function
+
+#End Region
+
+#End Region
+
+#Region " 실시간 종목 데이터 Tx수신 "
+    Private Sub SetOptKWFidScreenNoDt()
+        With _dtOptKWFidScreenNo.Columns
+            .Add("SCREEN_NO")
+            .Add("STOCK_CODE")
+        End With
+    End Sub
+
+#Region " InOptKWFidScreenNo "
+    Public Function InOptKWFidScreenNo(ByVal screenNo As String, ByVal stockCode As String) As ReturnScreenNo
+
+        Try
+
+            Dim blnChk As Boolean = False
+            With _dtOptKWFidScreenNo
+                If screenNo = "" Then
+                    Dim dr As DataRow
+                    Dim drReader As DataRow
+
+                    If _dtOptKWFidScreenNo.Rows.Count < 1 Then
+                        Return ReturnScreenNo.Success
+                    Else
+                        For Each drReader In _dtOptKWFidScreenNo.Rows
+                            If Trim(drReader("STOCK_CODE").ToString()) = stockCode Then
+                                blnChk = True
+                            End If
+                        Next
+
+                        If blnChk = True Then
+
+                            Return ReturnScreenNo.Exists
+
+                        Else
+                            dr = _dtOptKWFidScreenNo.Rows.Add
+
+                            dr("SCREEN_NO") = screenNo
+                            dr("STOCK_CODE") = stockCode
+
+                            Return ReturnScreenNo.Success
+
+                        End If
+                    End If
+                Else
+                    Dim dr As DataRow
+                    Dim drReader As DataRow
+
+                    If _dtOptKWFidScreenNo.Rows.Count < 1 Then
+                        dr = _dtOptKWFidScreenNo.Rows.Add
+
+                        dr("SCREEN_NO") = screenNo
+                        dr("STOCK_CODE") = stockCode
+
+                        Return ReturnScreenNo.Success
+                    End If
+
+                    For Each drReader In _dtOptKWFidScreenNo.Rows
+                        If Trim(drReader("SCREEN_NO").ToString()) = screenNo Then
+                            blnChk = True
+                        End If
+                    Next
+
+                    If blnChk = True Then
+
+                        Return ReturnScreenNo.Exists
+
+                    Else
+                        dr = _dtOptKWFidScreenNo.Rows.Add
+
+                        dr("SCREEN_NO") = screenNo
+                        dr("STOCK_CODE") = stockCode
+
+                        Return ReturnScreenNo.Success
+
+                    End If
+
+
+                End If
+            End With
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+            Return ReturnScreenNo.Fail
+        End Try
+
+    End Function
+#End Region
+
+#Region " GetOptKWFidScreenNo "
+    Public Function GetOptKWFidScreenNo(ByVal stockCode As String) As String
+        Dim screeNo As String = ""
+        Dim dr As DataRow
+        Dim blnExists As Boolean = False
+
+        If _dtOptKWFidScreenNo.Rows.Count = 0 Then
+            dr = _dtOptKWFidScreenNo.Rows.Add
+
+            dr("SCREEN_NO") = "7001"
+            dr("STOCK_CODE") = stockCode
+
+            Return "7001"
+
+        Else
+            Dim dv As DataView
+
+            dv = New DataView(_dtOptKWFidScreenNo)
+
+            For i As Integer = 7001 To 7999
+                dv.RowFilter = String.Format("SCREEN_NO = '{0}'", i.ToString)
+
+                For Each drRowView As DataRowView In dv
+                    blnExists = True
+                Next
+
+                If blnExists = False Then
+                    Return i.ToString()
+                End If
+
+            Next
+
+        End If
+
+        Return "fail"
+
+    End Function
+
+    Public Function DeleteOptKWFidScreenNo(ByVal screenNo As String) As Boolean
+
+        Try
+
+            For Each drReader As DataRow In _dtOptKWFidScreenNo.Rows
+                If Trim(drReader("SCREEN_NO").ToString()) = screenNo Then
+                    _dtOptKWFidScreenNo.Rows.Remove(drReader)
+                    Return True
+                End If
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+        End Try
+
+        Return False
+
+    End Function
+
+#End Region
+
+#Region " "
+
+#End Region
+
+#End Region
+
+End Class

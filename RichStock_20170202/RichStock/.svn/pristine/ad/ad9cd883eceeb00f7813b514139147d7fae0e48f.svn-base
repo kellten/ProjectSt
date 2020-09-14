@@ -1,0 +1,442 @@
+﻿Imports PaikRichStock.Common
+Imports Microsoft.Office.Interop
+
+Public Class ucStockVolumeAnalysis
+    Private _MainStock As New PaikRichStock.Common.ucMainStockVer2
+    Private _stockCode As String = ""
+    Private _clsCallOpt As New clsCallOpt
+    Private _RegisterEvent As Boolean = False
+
+    Private _dtOpt10014 As New DataTable
+    Private _dtOpt10059 As New DataTable
+    Private _dtOpt10081 As New DataTable
+    Private _dtOpt20068 As New DataTable
+
+    Private _dtSaD As New DataTable
+    Private _dtAutoCalSaD As New DataTable
+
+    Public Property StockCode As String
+        Get
+            Return _stockCode
+        End Get
+        Set(value As String)
+            
+            _stockCode = value
+
+            lblStockCode.Text = value
+            lblStockName.Text = _MainStock.GetStockInfo(value)
+
+            _dtOpt10014.Clear()
+            _dtOpt10059.Clear()
+            _dtOpt10081.Clear()
+            _dtOpt20068.Clear()
+
+            lblOpt10014.Text = ""
+            lblOpt10059.Text = ""
+            lblOpt10081.Text = ""
+            lblOpt20068.Text = ""
+
+            If _RegisterEvent = False Then
+                _RegisterEvent = True
+                RegisterCallOptEvent()
+                InitdtSaD()
+                InitdtAutoCalSaD()
+            End If
+
+            CallOpt()
+
+        End Set
+    End Property
+
+    Public WriteOnly Property MainStock As PaikRichStock.Common.ucMainStockVer2
+        Set(value As PaikRichStock.Common.ucMainStockVer2)
+            _MainStock = value
+        End Set
+    End Property
+
+    Private Sub RegisterCallOptEvent()
+        AddHandler _clsCallOpt.OnEventReturn10014ResultDt, AddressOf OnEventReturn10014ResultDt
+        AddHandler _clsCallOpt.OnEventReturn10059ResultDt, AddressOf OnEventReturn10059ResultDt
+        AddHandler _clsCallOpt.OnEventReturn10081ResultDt, AddressOf OnEventReturn10081ResultDt
+        AddHandler _clsCallOpt.OnEventReturn20068ResultDt, AddressOf OnEventReturn20068ResultDt
+    End Sub
+
+    Private Sub InitdtSaD()
+        With _dtSaD.Columns
+            .Add("일자")
+            .Add("평균단가")
+            .Add("거래량")
+            .Add("개인")
+            .Add("세력합")
+            .Add("외국인")
+            .Add("금융투자")
+            .Add("보험")
+            .Add("투신")
+            .Add("기타금융")
+            .Add("은행")
+            .Add("연기금")
+            .Add("사모펀드")
+            .Add("국가")
+            .Add("내외국인")
+        End With
+    End Sub
+
+    Private Sub InitdtAutoCalSaD()
+        With _dtAutoCalSaD.Columns
+            .Add("일자")
+
+            .Add("총합")
+            .Add("유통량")
+
+            .Add("개인투자자합")
+            .Add("개투최고저점")
+            .Add("개투매집수량")
+            .Add("개투매집고점")
+            .Add("개투분산비율")
+
+            .Add("외국인투자자합")
+            .Add("외투최고저점")
+            .Add("외투매집수량")
+            .Add("외투매집고점")
+            .Add("외투분산비율")
+
+            .Add("기관계합")
+            .Add("기관최고저점")
+            .Add("기관매집수량")
+            .Add("기관매집고점")
+            .Add("기관분산비율")
+
+            .Add("금융투자합")
+            .Add("금투최고저점")
+            .Add("금투매집수량")
+            .Add("금투매집고점")
+            .Add("금투분산비율")
+
+            .Add("보험합")
+            .Add("보험최고저점")
+            .Add("보험매집수량")
+            .Add("보험매집고점")
+            .Add("보험분산비율")
+
+            .Add("투신합")
+            .Add("투신최고저점")
+            .Add("투신매집수량")
+            .Add("투신매집고점")
+            .Add("투신분산비율")
+
+            .Add("기타금융합")
+            .Add("기금최고저점")
+            .Add("기금매집수량")
+            .Add("기금매집고점")
+            .Add("기금분산비율")
+
+            .Add("은행합")
+            .Add("은행최고저점")
+            .Add("은행매집수량")
+            .Add("은행매집고점")
+            .Add("은행분산비율")
+
+            .Add("연기금등합")
+            .Add("연금최고저점")
+            .Add("연금매집수량")
+            .Add("연금매집고점")
+            .Add("연금분산비율")
+
+            .Add("사모펀드합")
+            .Add("사모최고저점")
+            .Add("사모매집수량")
+            .Add("사모매집고점")
+            .Add("사모분산비율")
+
+            .Add("국가합")
+            .Add("국가최고저점")
+            .Add("국가매집수량")
+            .Add("국가매집고점")
+            .Add("국가분산비율")
+
+            .Add("기타법인합")
+            .Add("기법최고저점")
+            .Add("기법매집수량")
+            .Add("기법매집고점")
+            .Add("기법분산비율")
+
+            .Add("내외국인합")
+            .Add("내외최고저점")
+            .Add("내외매집수량")
+            .Add("내외매집고점")
+            .Add("내외분산비율")
+        End With
+    End Sub
+
+    Private Sub CallOpt()
+        _clsCallOpt.GetOpt10014(_stockCode)
+        System.Threading.Thread.Sleep(500)
+        _clsCallOpt.GetOpt10059(_stockCode)
+        System.Threading.Thread.Sleep(500)
+        _clsCallOpt.GetOpt10081(_stockCode)
+        System.Threading.Thread.Sleep(500)
+        _clsCallOpt.GetOpt20068(_stockCode)
+    End Sub
+
+#Region " 수급분석표 "
+    Private Sub SupplyAndDemandAnalysis()
+        Dim dr2th As DataRow
+        Dim row As Integer = 0
+
+        With _dtSaD
+            For Each dr As DataRow In _dtOpt10059.Rows
+                dr2th = .Rows.Add
+                ' 1. 최근 5일
+
+
+
+                ' 2. 1주, 2주, 3주, 4주
+                ' 3. 1달, 2달, 3달
+                ' 4. 1분기, 2분기, 3분기, 4분기, 5분기
+                ' 5. 1년, 2년, 3년, 4년.....
+
+            Next
+        End With
+    End Sub
+#End Region
+
+#Region " 자동 수급 계산 "
+    Private Function MaxCal(ByVal value1 As Integer, ByVal value2 As Integer) As Integer
+        If value1 < value2 Then
+            Return value2
+        Else
+            Return value1
+        End If
+    End Function
+
+    Private Function MinCal(ByVal value1 As Integer, ByVal value2 As Integer) As Integer
+        If value1 < value2 Then
+            Return value1
+        Else
+            Return value2
+        End If
+    End Function
+
+    Private Function CalDistribution(ByVal value As Integer, ByVal minValue As Integer, ByVal MaxValue As Integer) As Integer
+        If MaxValue = 0 Then Return 0
+
+        Return CInt((value - minValue) / MaxValue * 100)
+    End Function
+
+    Private Sub AutoCalSupplyAndDemand()
+        Dim dr2th As DataRow
+
+        Dim Max_GAEIN As Integer = 0
+        Dim Max_FORE As Integer = 0
+        Dim Max_GIGAN As Integer = 0
+        Dim Max_GUMWOONG As Integer = 0
+        Dim Max_BOHUM As Integer = 0
+        Dim Max_TUSIN As Integer = 0
+        Dim Max_GITAGUMWOONG As Integer = 0
+        Dim Max_BANK As Integer = 0
+        Dim Max_YEUNGGIGUM As Integer = 0
+        Dim Max_SAMOFUND As Integer = 0
+        Dim Max_NATION As Integer = 0
+        Dim Max_GITABUBIN As Integer = 0
+        Dim Max_IOFOR As Integer = 0
+
+        Dim Min_GAEIN As Integer = 0
+        Dim Min_FORE As Integer = 0
+        Dim Min_GIGAN As Integer = 0
+        Dim Min_GUMWOONG As Integer = 0
+        Dim Min_BOHUM As Integer = 0
+        Dim Min_TUSIN As Integer = 0
+        Dim Min_GITAGUMWOONG As Integer = 0
+        Dim Min_BANK As Integer = 0
+        Dim Min_YEUNGGIGUM As Integer = 0
+        Dim Min_SAMOFUND As Integer = 0
+        Dim Min_NATION As Integer = 0
+        Dim Min_GITABUBIN As Integer = 0
+        Dim Min_IOFOR As Integer = 0
+
+        With _dtAutoCalSaD
+
+            .Rows.Clear()
+
+            For i As Integer = _dtOpt10059.Rows.Count - 1 To 0 Step -1
+                With _dtOpt10059.Rows(i)
+
+                    dr2th = _dtAutoCalSaD.Rows.Add
+
+                    If i = _dtOpt10059.Rows.Count - 1 Then
+                        Max_GAEIN = CInt(.Item("개인투자자합"))
+                        Max_FORE = CInt(.Item("외국인투자자합"))
+                        Max_GIGAN = CInt(.Item("기관계합"))
+                        Max_GUMWOONG = CInt(.Item("금융투자합"))
+                        Max_BOHUM = CInt(.Item("보험합"))
+                        Max_TUSIN = CInt(.Item("투신합"))
+                        Max_GITAGUMWOONG = CInt(.Item("기타금융합"))
+                        Max_BANK = CInt(.Item("은행합"))
+                        Max_YEUNGGIGUM = CInt(.Item("연기금등합"))
+                        Max_SAMOFUND = CInt(.Item("사모펀드합"))
+                        Max_NATION = CInt(.Item("국가합"))
+                        Max_GITABUBIN = CInt(.Item("기타법인합"))
+                        Max_IOFOR = CInt(.Item("내외국인합"))
+
+                        Min_GAEIN = CInt(.Item("개인투자자합"))
+                        Min_FORE = CInt(.Item("외국인투자자합"))
+                        Min_GIGAN = CInt(.Item("기관계합"))
+                        Min_GUMWOONG = CInt(.Item("금융투자합"))
+                        Min_BOHUM = CInt(.Item("보험합"))
+                        Min_TUSIN = CInt(.Item("투신합"))
+                        Min_GITAGUMWOONG = CInt(.Item("기타금융합"))
+                        Min_BANK = CInt(.Item("은행합"))
+                        Min_YEUNGGIGUM = CInt(.Item("연기금등합"))
+                        Min_SAMOFUND = CInt(.Item("사모펀드합"))
+                        Min_NATION = CInt(.Item("국가합"))
+                        Min_GITABUBIN = CInt(.Item("기타법인합"))
+                        Min_IOFOR = CInt(.Item("내외국인합"))
+                    Else
+                        Max_GAEIN = MaxCal(Max_GAEIN, (.Item("개인투자자합")))
+                        Max_FORE = MaxCal(Max_FORE, (.Item("외국인투자자합")))
+                        Max_GIGAN = MaxCal(Max_GIGAN, (.Item("기관계합")))
+                        Max_GUMWOONG = MaxCal(Max_GUMWOONG, (.Item("금융투자합")))
+                        Max_BOHUM = MaxCal(Max_BOHUM, (.Item("보험합")))
+                        Max_TUSIN = MaxCal(Max_TUSIN, (.Item("투신합")))
+                        Max_GITAGUMWOONG = MaxCal(Max_GITAGUMWOONG, (.Item("기타금융합")))
+                        Max_BANK = MaxCal(Max_BANK, (.Item("은행합")))
+                        Max_YEUNGGIGUM = MaxCal(Max_YEUNGGIGUM, (.Item("연기금등합")))
+                        Max_SAMOFUND = MaxCal(Max_SAMOFUND, (.Item("사모펀드합")))
+                        Max_NATION = MaxCal(Max_NATION, (.Item("국가합")))
+                        Max_GITABUBIN = MaxCal(Max_GITABUBIN, (.Item("기타법인합")))
+                        Max_IOFOR = MaxCal(Max_IOFOR, (.Item("내외국인합")))
+
+                        Min_GAEIN = MinCal(Min_GAEIN, (.Item("개인투자자합")))
+                        Min_FORE = MinCal(Min_FORE, (.Item("외국인투자자합")))
+                        Min_GIGAN = MinCal(Min_GIGAN, (.Item("기관계합")))
+                        Min_GUMWOONG = MinCal(Min_GUMWOONG, (.Item("금융투자합")))
+                        Min_BOHUM = MinCal(Min_BOHUM, (.Item("보험합")))
+                        Min_TUSIN = MinCal(Min_TUSIN, (.Item("투신합")))
+                        Min_GITAGUMWOONG = MinCal(Min_GITAGUMWOONG, (.Item("기타금융합")))
+                        Min_BANK = MinCal(Min_BANK, (.Item("은행합")))
+                        Min_YEUNGGIGUM = MinCal(Min_YEUNGGIGUM, (.Item("연기금등합")))
+                        Min_SAMOFUND = MinCal(Min_SAMOFUND, (.Item("사모펀드합")))
+                        Min_NATION = MinCal(Min_NATION, (.Item("국가합")))
+                        Min_GITABUBIN = MinCal(Min_GITABUBIN, (.Item("기타법인합")))
+                        Min_IOFOR = MinCal(Min_IOFOR, (.Item("내외국인합")))
+                    End If
+                    dr2th("일자") = .Item("일자")
+                    dr2th("총합") = CInt(.Item("총합"))
+                    dr2th("유통량") = CInt(.Item("유통량"))
+
+                    dr2th("개인투자자합") = CInt(.Item("개인투자자합"))
+                    dr2th("개투최고저점") = Min_GAEIN
+                    dr2th("개투매집수량") = CInt(.Item("개인투자자합")) - Min_GAEIN
+                    dr2th("개투매집고점") = Max_GAEIN
+                    dr2th("개투분산비율") = CalDistribution(CInt(.Item("개인투자자합")), Min_GAEIN, Max_GAEIN)
+
+                    dr2th("외국인투자자합") = CInt(.Item("외국인투자자합"))
+                    dr2th("외투최고저점") = Min_FORE
+                    dr2th("외투매집수량") = CInt(.Item("외국인투자자합")) - Min_FORE
+                    dr2th("외투매집고점") = Max_FORE
+                    dr2th("외투분산비율") = CalDistribution(CInt(.Item("외국인투자자합")), Min_FORE, Max_FORE)
+
+                    dr2th("기관계합") = CInt(.Item("기관계합"))
+                    dr2th("기관최고저점") = Min_GIGAN
+                    dr2th("기관매집수량") = CInt(.Item("기관계합")) - Min_GIGAN
+                    dr2th("기관매집고점") = Max_GIGAN
+                    dr2th("기관분산비율") = CalDistribution(CInt(.Item("기관계합")), Min_GIGAN, Max_GIGAN)
+
+                    dr2th("금융투자합") = CInt(.Item("금융투자합"))
+                    dr2th("금투최고저점") = Min_GUMWOONG
+                    dr2th("금투매집수량") = CInt(.Item("금융투자합")) - Min_GUMWOONG
+                    dr2th("금투매집고점") = Max_GUMWOONG
+                    dr2th("금투분산비율") = CalDistribution(CInt(.Item("금융투자합")), Min_GUMWOONG, Max_GUMWOONG)
+
+                    dr2th("보험합") = CInt(.Item("보험합"))
+                    dr2th("보험최고저점") = Min_BOHUM
+                    dr2th("보험매집수량") = CInt(.Item("보험합")) - Min_BOHUM
+                    dr2th("보험매집고점") = Max_BOHUM
+                    dr2th("보험분산비율") = CalDistribution(CInt(.Item("보험합")), Min_BOHUM, Max_BOHUM)
+
+                    dr2th("투신합") = CInt(.Item("투신합"))
+                    dr2th("투신최고저점") = Min_TUSIN
+                    dr2th("투신매집수량") = CInt(.Item("투신합")) - Min_TUSIN
+                    dr2th("투신매집고점") = Max_TUSIN
+                    dr2th("투신분산비율") = CalDistribution(CInt(.Item("투신합")), Min_TUSIN, Max_TUSIN)
+
+                    dr2th("기타금융합") = CInt(.Item("기타금융합"))
+                    dr2th("기금최고저점") = Min_GITAGUMWOONG
+                    dr2th("기금매집수량") = CInt(.Item("기타금융합")) - Min_GITAGUMWOONG
+                    dr2th("기금매집고점") = Max_GITAGUMWOONG
+                    dr2th("기금분산비율") = CalDistribution(CInt(.Item("기타금융합")), Min_GITAGUMWOONG, Max_GITAGUMWOONG)
+
+                    dr2th("은행합") = CInt(.Item("은행합"))
+                    dr2th("은행최고저점") = Min_BANK
+                    dr2th("은행매집수량") = CInt(.Item("은행합")) - Min_BANK
+                    dr2th("은행매집고점") = Max_BANK
+                    dr2th("은행분산비율") = CalDistribution(CInt(.Item("은행합")), Min_BANK, Max_BANK)
+
+                    dr2th("연기금등합") = CInt(.Item("연기금등합"))
+                    dr2th("연금최고저점") = Min_YEUNGGIGUM
+                    dr2th("연금매집수량") = CInt(.Item("연기금등합")) - Min_YEUNGGIGUM
+                    dr2th("연금매집고점") = Max_YEUNGGIGUM
+                    dr2th("연금분산비율") = CalDistribution(CInt(.Item("연기금등합")), Min_YEUNGGIGUM, Max_YEUNGGIGUM)
+
+                    dr2th("사모펀드합") = CInt(.Item("사모펀드합"))
+                    dr2th("사모최고저점") = Min_SAMOFUND
+                    dr2th("사모매집수량") = CInt(.Item("사모펀드합")) - Min_SAMOFUND
+                    dr2th("사모매집고점") = Max_SAMOFUND
+                    dr2th("사모분산비율") = CalDistribution(CInt(.Item("사모펀드합")), Min_SAMOFUND, Max_SAMOFUND)
+
+                    dr2th("국가합") = CInt(.Item("국가합"))
+                    dr2th("국가최고저점") = Min_NATION
+                    dr2th("국가매집수량") = CInt(.Item("국가합")) - Min_NATION
+                    dr2th("국가매집고점") = Max_NATION
+                    dr2th("국가분산비율") = CalDistribution(CInt(.Item("국가합")), Min_NATION, Max_NATION)
+
+                    dr2th("기타법인합") = CInt(.Item("기타법인합"))
+                    dr2th("기법최고저점") = Min_GITABUBIN
+                    dr2th("기법매집수량") = CInt(.Item("기타법인합")) - Min_GITABUBIN
+                    dr2th("기법매집고점") = Max_GITABUBIN
+                    dr2th("기법분산비율") = CalDistribution(CInt(.Item("기타법인합")), Min_GITABUBIN, Max_GITABUBIN)
+
+                    dr2th("내외국인합") = CInt(.Item("내외국인합"))
+                    dr2th("내외최고저점") = Min_IOFOR
+                    dr2th("내외매집수량") = CInt(.Item("내외국인합")) - Min_IOFOR
+                    dr2th("내외매집고점") = Max_IOFOR
+                    dr2th("내외분산비율") = CalDistribution(CInt(.Item("내외국인합")), Min_IOFOR, Max_IOFOR)
+
+                End With
+            Next
+        End With
+
+        '_dtAutoCalSaD.DefaultView.Sort = "일자 Desc"
+
+        dgvVolumeA.DataSource = Nothing
+        dgvVolumeA.DataSource = _dtAutoCalSaD
+        dgvVolumeA.Sort(dgvVolumeA.Columns(0), System.ComponentModel.ListSortDirection.Descending)
+        DataGridView1.DataSource = Nothing
+        DataGridView1.DataSource = _dtOpt10059
+        DataGridView1.Sort(DataGridView1.Columns(0), System.ComponentModel.ListSortDirection.Descending)
+
+    End Sub
+
+#End Region
+
+#Region " CallOpt_Event"
+    Private Sub OnEventReturn10014ResultDt(ByVal dt As DataTable)
+        lblOpt10014.Text = "10014"
+        _dtOpt10014 = dt.Clone
+    End Sub
+    Private Sub OnEventReturn10059ResultDt(ByVal dt As DataTable, ByVal calOpt10059 As clsCallOpt.CalOpt10059)
+        lblOpt10059.Text = "10059"
+        _dtOpt10059 = dt
+        AutoCalSupplyAndDemand()
+    End Sub
+    Private Sub OnEventReturn10081ResultDt(ByVal dt As DataTable)
+        lblOpt10081.Text = "10081"
+        _dtOpt10081 = dt.Clone
+    End Sub
+    Private Sub OnEventReturn20068ResultDt(ByVal dt As DataTable)
+        lblOpt20068.Text = "20068"
+        _dtOpt20068 = dt.Clone
+    End Sub
+#End Region
+
+End Class

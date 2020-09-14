@@ -1,0 +1,290 @@
+﻿Public Class clsKiwoomRealDefine
+
+    Sub New()
+
+    End Sub
+
+
+    Public OptKWFid As String() = {"종목코드", "종목명", "현재가", "기준가", "전일대비", "전일대비기호", "등락율", "거래량", _
+                                "거래대금", "체결량", "체결강도", "전일거래량대비", _
+                                "매도호가", "매수호가", "매도1차호가", "매도2차호가", "매도3차호가", "매도4차호가", "매도5차호가", _
+                                "매수1차호가", "매수2차호가", "매수3차호가", "매수4차호가", "매수5차호가", _
+                                "상한가", "하한가", "시가", "고가", "저가", "종가", "체결시간", "예상체결가", "예상체결량", _
+                                "자본금", "액면가", "시가총액", "주식수", "호가시간", "일자", _
+                                "우선매도잔량", "우선매수잔량", "우선매도건수", "우선매수건수", _
+                                "총매도잔량", "총매수잔량", "총매도건수", "총매수건수", "패리티", "기어링", "손익분기", "자본지지", _
+                                "ELW행사가", "전환비율", "ELW만기일", "미결제약정", "미결제전일대비", "이론가", "내재변동성", _
+                                "델타", "감마", "쎄타", "베가", "로"}
+
+    Public StockSise As String(,) = {{"10", "현재가"}, {"11", "전일대비"}, {"12", "등락율"}, {"27", "(최우선)매도호가"}, _
+                                        {"28", "(최우선)매수호가"}, {"13", "누적거래량"}, {"14", "누적거래대금"}, {"16", "시가"}, _
+                                        {"17", "고가"}, {"18", "저가"}, {"25", "전일대비기호"}, {"26", "전일거래량대비(계약,주)"}, _
+                                        {"29", "거래대금증감"}, {"30", "전일거래량대비(비율)"}, {"31", "거래회전율"}, {"32", "거래비용"}, _
+                                        {"311", "시가총액"}, {"567", "상한가발생시간"}, {"568", "하한가발생시간"}}
+
+    Public StockTrade As String(,) = {{"20", "체결시간"}, {"10", "현재가"}, {"11", "전일대비"}, {"12", "등락율"}, {"27", "(최우선)매도호가"}, _
+                                        {"28", "(최우선)매수호가"}, {"15", "거래량"}, {"13", "누적거래량"}, {"14", "누적거래대금"}, {"16", "시가"}, _
+                                        {"17", "고가"}, {"18", "저가"}, {"25", "전일대비기호"}, {"26", "전일거래량대비(계약,주)"}, _
+                                        {"29", "거래대금증감"}, {"30", "전일거래량대비(비율)"}, {"31", "거래회전율"}, {"32", "거래비용"}, _
+                                        {"228", "체결강도"}, {"311", "시가총액"}, {"290", "장구분"}, {"691", "KO접근도"}, {"567", "상한가발생시간"}, {"568", "하한가발생시간"}}
+
+    Public StockHogaJanQty As String(,) = {{"21", "호가시간"}, _
+                                            {"41", "매도호가1"}, {"61", "매도호가수량1"}, {"81", "매도호가직전대비1"}, _
+                                            {"51", "매수호가1"}, {"71", "매수호가수량1"}, {"91", "매수호가직전대비1"}, _
+                                            {"42", "매도호가2"}, {"62", "매도호가수량2"}, {"82", "매도호가직전대비2"}, _
+                                            {"52", "매수호가2"}, {"72", "매수호가수량2"}, {"92", "매수호가직전대비2"}, _
+                                            {"43", "매도호가3"}, {"63", "매도호가수량3"}, {"83", "매도호가직전대비3"}, _
+                                            {"53", "매수호가3"}, {"73", "매수호가수량3"}, {"93", "매수호가직전대비3"}, _
+                                            {"44", "매도호가4"}, {"64", "매도호가수량4"}, {"84", "매도호가직전대비4"}, _
+                                            {"54", "매수호가4"}, {"74", "매수호가수량4"}, {"94", "매수호가직전대비4"}, _
+                                            {"45", "매도호가5"}, {"65", "매도호가수량5"}, {"85", "매도호가직전대비5"}, _
+                                            {"55", "매수호가5"}, {"75", "매수호가수량5"}, {"95", "매수호가직전대비5"}, _
+                                            {"46", "매도호가6"}, {"66", "매도호가수량6"}, {"86", "매도호가직전대비6"}, _
+                                            {"56", "매수호가6"}, {"76", "매수호가수량6"}, {"96", "매수호가직전대비6"}, _
+                                            {"47", "매도호가7"}, {"67", "매도호가수량7"}, {"87", "매도호가직전대비7"}, _
+                                            {"57", "매수호가7"}, {"77", "매수호가수량7"}, {"97", "매수호가직전대비7"}, _
+                                            {"48", "매도호가8"}, {"68", "매도호가수량8"}, {"88", "매도호가직전대비8"}, _
+                                            {"58", "매수호가8"}, {"78", "매수호가수량8"}, {"98", "매수호가직전대비8"}, _
+                                            {"49", "매도호가9"}, {"69", "매도호가수량9"}, {"89", "매도호가직전대비9"}, _
+                                            {"59", "매수호가9"}, {"79", "매수호가수량9"}, {"99", "매수호가직전대비9"}, _
+                                            {"50", "매도호가10"}, {"70", "매도호가수량10"}, {"90", "매도호가직전대비10"}, _
+                                            {"60", "매수호가10"}, {"80", "매수호가수량10"}, {"100", "매수호가직전대비10"}, _
+                                            {"23", "예상체결가"}, {"24", "예상체결수량"}, {"128", "순매수잔량"}, _
+                                            {"129", "매수비율"}, {"138", "순매도잔량"}, {"139", "매도비율"}, _
+                                            {"200", "예상체결가전일종가대비"}, {"201", "예상체결가전일종가대비등락율"}, {"238", "예상체결가전일종가대비기호"}, _
+                                            {"291", "예상체결가2"}, {"292", "예상체결량"}, {"293", "예상체결가전일대비기호"}, {"294", "예상체결가전일대비등락률"}, _
+                                            {"621", "LP매도호가수량1"}, {"631", "LP매수호가수량1"}, {"622", "LP매도호가수량2"}, {"632", "LP매수호가수량2"}, _
+                                            {"623", "LP매도호가수량3"}, {"633", "LP매수호가수량3"}, {"624", "LP매도호가수량4"}, {"634", "LP매수호가수량4"}, _
+                                            {"625", "LP매도호가수량5"}, {"635", "LP매수호가수량5"}, {"626", "LP매도호가수량6"}, {"636", "LP매수호가수량6"}, _
+                                            {"627", "LP매도호가수량7"}, {"637", "LP매수호가수량7"}, {"628", "LP매도호가수량8"}, {"638", "LP매수호가수량8"}, _
+                                            {"629", "LP매도호가수량9"}, {"639", "LP매수호가수량9"}, {"630", "LP매도호가수량10"}, {"640", "LP매수호가수량10"}, _
+                                            {"13", "누적거래량"}, {"299", "전일거래량대비예상체결률"}, {"215", "장운영구분"}, {"216", "투자자별ticker"}}
+
+    Public StockTradePort As String(,) = {{"9001", "종목코드,업종코드"}, {"9026", "회원사코드(거래원)"}, {"302", "종목명"}, {"334", "거래원명"}, {"20", "체결시간"}, _
+                                          {"203", "매도증감"}, {"207", "매수증감"}, {"210", "순매수수량"}, {"211", "순매수수량증감"}, {"260", "매매구분Text"}, _
+                                          {"337", "거래소구분"}, {"10", "현재가"}, {"11", "전일대비"}, {"12", "등락율"}, {"25", "전일대비기호"}}
+
+
+
+    Public Function RealKiwoomDefineDic(ByVal AxKH As AxKHOpenAPILib.AxKHOpenAPI, ByVal e As AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent) As DataSet
+
+        Dim dr As DataRow, returnDs As New DataSet
+        Dim nCnt As Integer = 0
+
+        Select Case e.sRealType
+            Case "주식시세"
+                returnDs = GetStockSise(AxKH, e)
+            Case "주식체결"
+                returnDs = GetStockTrade(AxKH, e)
+            Case "주식우선호가"
+
+            Case "주식호가잔량"
+                returnDs = GetStockHogaJanQty(AxKH, e)
+            Case "주식시간외호가"
+
+            Case "주식당일거래원"
+
+            Case "주식거래원"
+                returnDs = GetStockTradePort(AxKH, e)
+
+        End Select
+
+        Return returnDs
+
+    End Function
+
+    Private Function GetStockSise(ByVal AxKH As AxKHOpenAPILib.AxKHOpenAPI, ByVal e As AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent) As DataSet
+        Dim dt As New DataTable("Default")
+        Dim dt2New As New DataTable("StockSise")
+        Dim dr As DataRow, returnDs As New DataSet
+        Dim dr2th As DataRow
+
+        With dt.Columns
+            For i As Integer = 0 To UBound(StockSise)
+                .Add(StockSise(i, 0))
+            Next
+
+            dr = dt.Rows.Add()
+
+            For intColumnName As Integer = 0 To .Count - 1
+                dr(dt.Columns.Item(intColumnName).ColumnName) = AxKH.GetCommRealData(e.sRealType, CInt(dt.Columns.Item(intColumnName).ColumnName))
+            Next
+
+        End With
+
+        With dt2New.Columns
+            .Add("sRealType")
+            .Add("STOCK_CODE")
+
+            For i As Integer = 0 To UBound(StockSise)
+                .Add(StockSise(i, 1))
+            Next
+
+            dr2th = dt2New.Rows.Add
+
+            For i As Integer = 0 To UBound(StockSise)
+                If Trim(dt.Columns.Item(i).ColumnName) = StockTrade(i, 0) Then
+                    dr2th(StockTrade(i, 1)) = Trim(dt.Rows(0).Item(dt.Columns.Item(i)).ToString)
+                End If
+            Next
+
+            dr2th("sRealType") = e.sRealType
+
+            dr2th("STOCK_CODE") = e.sRealKey
+
+        End With
+
+        returnDs.Tables.Add(dt2New)
+
+        Return returnDs
+
+    End Function
+
+    Private Function GetStockTrade(ByVal AxKH As AxKHOpenAPILib.AxKHOpenAPI, ByVal e As AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent) As DataSet
+        Dim dt As New DataTable("Default")
+        Dim dt2New As New DataTable("StockTrade")
+        Dim dr As DataRow, returnDs As New DataSet
+        Dim dr2th As DataRow
+
+        With dt.Columns
+            For i As Integer = 0 To UBound(StockTrade)
+                .Add(StockTrade(i, 0))
+            Next
+
+            dr = dt.Rows.Add()
+
+            For intColumnName As Integer = 0 To .Count - 1
+                dr(dt.Columns.Item(intColumnName).ColumnName) = AxKH.GetCommRealData(e.sRealType, CInt(dt.Columns.Item(intColumnName).ColumnName))
+            Next
+
+        End With
+
+        With dt2New.Columns
+            .Add("sRealType")
+            .Add("STOCK_CODE")
+
+            For i As Integer = 0 To UBound(StockTrade)
+                .Add(StockTrade(i, 1))
+            Next
+
+            dr2th = dt2New.Rows.Add
+
+            For i As Integer = 0 To UBound(StockTrade)
+                If Trim(dt.Columns.Item(i).ColumnName) = StockTrade(i, 0) Then
+                    dr2th(StockTrade(i, 1)) = Trim(dt.Rows(0).Item(dt.Columns.Item(i)).ToString)
+                End If
+            Next
+
+            dr2th("sRealType") = e.sRealType
+            dr2th("STOCK_CODE") = e.sRealKey
+
+        End With
+
+        returnDs.Tables.Add(dt2New)
+
+        Return returnDs
+
+    End Function
+
+    Private Function GetStockHogaJanQty(ByVal AxKH As AxKHOpenAPILib.AxKHOpenAPI, ByVal e As AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent) As DataSet
+        Dim dt As New DataTable("Default")
+        Dim dt2New As New DataTable("StockHogaJanQty ")
+        Dim dr As DataRow, returnDs As New DataSet
+        Dim dr2th As DataRow
+        Try
+
+        
+        With dt.Columns
+            For i As Integer = 0 To UBound(StockHogaJanQty)
+                .Add(StockHogaJanQty(i, 0))
+            Next
+
+            dr = dt.Rows.Add()
+
+            For intColumnName As Integer = 0 To .Count - 1
+                dr(dt.Columns.Item(intColumnName).ColumnName) = AxKH.GetCommRealData(e.sRealType, CInt(dt.Columns.Item(intColumnName).ColumnName))
+            Next
+
+        End With
+
+        With dt2New.Columns
+
+            .Add("sRealType")
+            .Add("STOCK_CODE")
+
+            For i As Integer = 0 To UBound(StockHogaJanQty)
+                .Add(StockHogaJanQty(i, 1))
+            Next
+
+            dr2th = dt2New.Rows.Add
+
+            For i As Integer = 0 To UBound(StockHogaJanQty)
+                If Trim(dt.Columns.Item(i).ColumnName) = StockHogaJanQty(i, 0) Then
+                    dr2th(StockHogaJanQty(i, 1)) = Trim(dt.Rows(0).Item(dt.Columns.Item(i)).ToString)
+                End If
+            Next
+
+            dr2th("sRealType") = e.sRealType
+            dr2th("STOCK_CODE") = e.sRealKey
+
+        End With
+
+        returnDs.Tables.Add(dt2New)
+
+            Return returnDs
+
+        Catch ex As Exception
+            MsgBox(ex.ToString())
+        End Try
+
+    End Function
+
+    Private Function GetStockTradePort(ByVal AxKH As AxKHOpenAPILib.AxKHOpenAPI, ByVal e As AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEvent) As DataSet
+        Dim dt As New DataTable("Default")
+        Dim dt2New As New DataTable("StockTradePort")
+        Dim dr As DataRow, returnDs As New DataSet
+        Dim dr2th As DataRow
+
+        With dt.Columns
+            For i As Integer = 0 To UBound(StockTradePort)
+                .Add(StockTradePort(i, 0))
+            Next
+
+            dr = dt.Rows.Add()
+
+            For intColumnName As Integer = 0 To .Count - 1
+                dr(dt.Columns.Item(intColumnName).ColumnName) = AxKH.GetCommRealData(e.sRealType, CInt(dt.Columns.Item(intColumnName).ColumnName))
+            Next
+
+        End With
+
+        With dt2New.Columns
+            .Add("sRealType")
+            .Add("STOCK_CODE")
+
+            For i As Integer = 0 To UBound(StockTradePort)
+                .Add(StockTradePort(i, 1))
+            Next
+
+            dr2th = dt2New.Rows.Add
+
+            For i As Integer = 0 To UBound(StockTradePort)
+                If Trim(dt.Columns.Item(i).ColumnName) = StockTrade(i, 0) Then
+                    dr2th(StockTradePort(i, 1)) = Trim(dt.Rows(0).Item(dt.Columns.Item(i)).ToString)
+                End If
+            Next
+
+            dr2th("sRealType") = e.sRealType
+
+            dr2th("STOCK_CODE") = e.sRealKey
+
+        End With
+
+        returnDs.Tables.Add(dt2New)
+
+        Return returnDs
+
+    End Function
+
+
+End Class

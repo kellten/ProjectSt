@@ -1,0 +1,6 @@
+﻿Imports System.Windows.Forms.DataVisualization.Charting
+Imports PaikRichStock.Common
+
+Public Class ucChartVolumeAnalysisA
+
+End Class

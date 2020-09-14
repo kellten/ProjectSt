@@ -1,0 +1,247 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class ucStockChartBase
+    Inherits System.Windows.Forms.UserControl
+
+    'UserControl은 Dispose를 재정의하여 구성 요소 목록을 정리합니다.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Windows Form 디자이너에 필요합니다.
+    Private components As System.ComponentModel.IContainer
+
+    '참고: 다음 프로시저는 Windows Form 디자이너에 필요합니다.
+    '수정하려면 Windows Form 디자이너를 사용하십시오.  
+    '코드 편집기를 사용하여 수정하지 마십시오.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series11 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series12 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series13 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series14 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series15 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Me.stockBaseChart = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.chkVolume = New System.Windows.Forms.CheckBox()
+        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
+        CType(Me.stockBaseChart, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
+        CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer2.Panel2.SuspendLayout()
+        Me.SplitContainer2.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'stockBaseChart
+        '
+        ChartArea1.Name = "Price"
+        ChartArea2.AlignWithChartArea = "Price"
+        ChartArea2.Name = "Volume"
+        ChartArea3.Name = "VolumeCalQty"
+        ChartArea3.Visible = False
+        Me.stockBaseChart.ChartAreas.Add(ChartArea1)
+        Me.stockBaseChart.ChartAreas.Add(ChartArea2)
+        Me.stockBaseChart.ChartAreas.Add(ChartArea3)
+        Me.stockBaseChart.Dock = System.Windows.Forms.DockStyle.Fill
+        Legend1.Name = "Legend1"
+        Me.stockBaseChart.Legends.Add(Legend1)
+        Me.stockBaseChart.Location = New System.Drawing.Point(0, 0)
+        Me.stockBaseChart.Name = "stockBaseChart"
+        Series1.ChartArea = "Price"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Stock
+        Series1.Legend = "Legend1"
+        Series1.Name = "Price"
+        Series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime
+        Series1.YValuesPerPoint = 4
+        Series2.ChartArea = "Volume"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Volume"
+        Series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime
+        Series3.ChartArea = "Price"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series3.Legend = "Legend1"
+        Series3.LegendText = "외국인"
+        Series3.Name = "VolumeCalQtyFore"
+        Series3.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series4.ChartArea = "Price"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series4.Legend = "Legend1"
+        Series4.LegendText = "개인"
+        Series4.Name = "VolumeCalQtyGaeIn"
+        Series4.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series5.ChartArea = "Price"
+        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series5.Legend = "Legend1"
+        Series5.LegendText = "기관합"
+        Series5.Name = "VolumeCalQtyGigan"
+        Series5.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series6.ChartArea = "Price"
+        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series6.Legend = "Legend1"
+        Series6.LegendText = "금융"
+        Series6.Name = "VolumeCalQtyGumWoong"
+        Series6.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series7.ChartArea = "Price"
+        Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series7.Legend = "Legend1"
+        Series7.LegendText = "보험"
+        Series7.Name = "VolumeCalQtyBohum"
+        Series7.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series8.ChartArea = "Price"
+        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series8.Legend = "Legend1"
+        Series8.LegendText = "투신"
+        Series8.Name = "VolumeCalQtyTusin"
+        Series8.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series9.ChartArea = "Price"
+        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series9.Legend = "Legend1"
+        Series9.LegendText = "기금"
+        Series9.Name = "VolumeCalQtyGitaGumWoong"
+        Series9.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series10.ChartArea = "Price"
+        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series10.Legend = "Legend1"
+        Series10.LegendText = "은행"
+        Series10.Name = "VolumeCalQtyBank"
+        Series10.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series11.ChartArea = "Price"
+        Series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series11.Legend = "Legend1"
+        Series11.LegendText = "연기금"
+        Series11.Name = "VolumeCalQtyYeungGiGum"
+        Series11.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series12.ChartArea = "Price"
+        Series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series12.Legend = "Legend1"
+        Series12.LegendText = "사모펀드"
+        Series12.Name = "VolumeCalQtySamoFund"
+        Series12.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series13.ChartArea = "Price"
+        Series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series13.Legend = "Legend1"
+        Series13.LegendText = "국가"
+        Series13.Name = "VolumeCalQtyNation"
+        Series13.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series14.ChartArea = "Price"
+        Series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series14.Legend = "Legend1"
+        Series14.LegendText = "기법"
+        Series14.Name = "VolumeCalQtyGitaBubin"
+        Series14.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Series15.ChartArea = "Price"
+        Series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.FastLine
+        Series15.Legend = "Legend1"
+        Series15.LegendText = "내외국인"
+        Series15.Name = "VolumeCalQtyIOFor"
+        Series15.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+        Me.stockBaseChart.Series.Add(Series1)
+        Me.stockBaseChart.Series.Add(Series2)
+        Me.stockBaseChart.Series.Add(Series3)
+        Me.stockBaseChart.Series.Add(Series4)
+        Me.stockBaseChart.Series.Add(Series5)
+        Me.stockBaseChart.Series.Add(Series6)
+        Me.stockBaseChart.Series.Add(Series7)
+        Me.stockBaseChart.Series.Add(Series8)
+        Me.stockBaseChart.Series.Add(Series9)
+        Me.stockBaseChart.Series.Add(Series10)
+        Me.stockBaseChart.Series.Add(Series11)
+        Me.stockBaseChart.Series.Add(Series12)
+        Me.stockBaseChart.Series.Add(Series13)
+        Me.stockBaseChart.Series.Add(Series14)
+        Me.stockBaseChart.Series.Add(Series15)
+        Me.stockBaseChart.Size = New System.Drawing.Size(615, 453)
+        Me.stockBaseChart.TabIndex = 0
+        Me.stockBaseChart.Text = "Chart1"
+        '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.chkVolume)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.stockBaseChart)
+        Me.SplitContainer1.Size = New System.Drawing.Size(619, 486)
+        Me.SplitContainer1.SplitterDistance = 25
+        Me.SplitContainer1.TabIndex = 1
+        '
+        'chkVolume
+        '
+        Me.chkVolume.AutoSize = True
+        Me.chkVolume.Location = New System.Drawing.Point(3, 3)
+        Me.chkVolume.Name = "chkVolume"
+        Me.chkVolume.Size = New System.Drawing.Size(78, 15)
+        Me.chkVolume.TabIndex = 0
+        Me.chkVolume.Text = "CheckBox1"
+        Me.chkVolume.UseVisualStyleBackColor = True
+        '
+        'SplitContainer2
+        '
+        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer2.Name = "SplitContainer2"
+        '
+        'SplitContainer2.Panel2
+        '
+        Me.SplitContainer2.Panel2.Controls.Add(Me.SplitContainer1)
+        Me.SplitContainer2.Size = New System.Drawing.Size(678, 486)
+        Me.SplitContainer2.SplitterDistance = 55
+        Me.SplitContainer2.TabIndex = 2
+        '
+        'ucStockChartBase
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 11.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.SplitContainer2)
+        Me.Font = New System.Drawing.Font("굴림체", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Name = "ucStockChartBase"
+        Me.Size = New System.Drawing.Size(678, 486)
+        CType(Me.stockBaseChart, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel1.PerformLayout()
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
+        Me.SplitContainer2.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer2.ResumeLayout(False)
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents stockBaseChart As System.Windows.Forms.DataVisualization.Charting.Chart
+    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+    Friend WithEvents chkVolume As System.Windows.Forms.CheckBox
+    Friend WithEvents SplitContainer2 As System.Windows.Forms.SplitContainer
+
+End Class

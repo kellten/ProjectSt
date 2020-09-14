@@ -1,0 +1,213 @@
+﻿Imports PaikRichStock.Common
+Imports System.Threading
+
+Public Class ucStockAvgMagipPrice
+
+    Private _MainStock As New PaikRichStock.Common.ucMainStockVer2
+
+    Private _PropWriteStockList As DataSet
+    Private _PropReadStockList As DataSet
+
+    Public WriteOnly Property PropWriteStockList As DataSet
+        Set(value As DataSet)
+            _PropWriteStockList = value
+            GetOpt10001()
+        End Set
+    End Property
+
+    Public ReadOnly Property PropReadStockList As DataSet
+        Get
+            Return _PropReadStockList
+        End Get
+    End Property
+
+    Public WriteOnly Property MainStock As PaikRichStock.Common.ucMainStockVer2
+        Set(value As PaikRichStock.Common.ucMainStockVer2)
+            _MainStock = value
+            AddHandler _MainStock.OnReceiveTrData_opt10081, AddressOf OnReceiveTrData_opt10081
+            AddHandler _MainStock.OnReceiveTrData_Opt10001, AddressOf OnReceiveTrData_opt10001
+        End Set
+    End Property
+
+    Private _dsOpt10001WithStockList As New DataSet
+
+    Private Sub GetOpt10001()
+        If _dsOpt10001 Is Nothing = False Then
+            _dsOpt10001.Reset()
+            If _dsOpt10001.Tables.Count >= 0 Then
+                _dsOpt10001.Reset()
+            End If
+        End If
+
+        If _dtOpt10001 Is Nothing = False Then
+            _dtOpt10001.Reset()
+        End If
+
+        For col As Integer = 0 To _PropWriteStockList.Tables(0).Columns.Count - 1
+            If Trim(_PropWriteStockList.Tables(0).Columns(col).ColumnName) = "종목코드" Then
+                _PropWriteStockList.Tables(0).Columns(col).ColumnName = "STOCK_CODE"
+            End If
+
+            If Trim(_PropWriteStockList.Tables(0).Columns(col).ColumnName) = "종목명" Then
+                _PropWriteStockList.Tables(0).Columns(col).ColumnName = "STOCK_NAME"
+            End If
+        Next
+
+        Dim strStockCode As String = ""
+
+        For Each dr In _PropWriteStockList.Tables(0).Rows
+            If Trim(dr("STOCK_CODE").ToString()) = "" Then Exit For
+            If strStockCode = "" Then
+                strStockCode = Trim(dr("STOCK_CODE").ToString()) & ";"
+            Else
+                strStockCode = strStockCode & Trim(dr("STOCK_CODE").ToString()) & ";"
+            End If
+        Next
+
+        If strStockCode = "" Then
+            MsgBox("내역이 없습니다. ", MsgBoxStyle.Exclamation)
+        Else
+            CallOpt10001(clsFunc.FirstCallSequnceOpt(strStockCode, ";"))
+        End If
+
+    End Sub
+
+#Region " 종목명을 반환한다. "
+    Private Function GetStockInfo(ByVal stockCode As String) As String
+        Dim dv As DataView
+
+        dv = New DataView(_MainStock._allStockDataset.Tables("StockList"))
+
+        dv.RowFilter = String.Format("STOCK_CODE = '{0}'", stockCode)
+
+        For Each drRowView As DataRowView In dv
+            Return Trim(drRowView("STOCK_NAME").ToString())
+        Next
+
+        Return ""
+    End Function
+#End Region
+
+    Private _StockCodeOpt10001 As String = ""
+
+    Private Sub CallOpt10001(ByVal stockCode As String)
+        _StockCodeOpt10001 = stockCode
+        _MainStock.Opt10001_OnReceiveTrData(Trim(stockCode), GetStockInfo(stockCode))
+
+    End Sub
+
+    Private Sub DsOpt10001Sum()
+        _dsOpt10001.Tables.Add(_dtOpt10001.Copy)
+
+        _dsOpt10001WithStockList.Tables.Add(_dsOpt10001.Tables(0))
+        _dsOpt10001WithStockList.Tables.Add(_PropWriteStockList.Tables(0))
+        _dsOpt10001WithStockList.Relations.Add(_dsOpt10001.Tables(0).Columns("종목코드"), _PropWriteStockList.Tables(0).Columns("STOCK_CODE"))
+    End Sub
+
+    Private Sub CalAvgMagipPrice(ByVal stdDateValue As String)
+        Dim dr As DataRow
+        Dim stdDate As String = ""
+
+        If stdDateValue = "" Then
+            stdDate = CDateTime.FormatDate(DateAdd("d", -1, CDateTime.FormatDate(Now.Date, "-")), "")
+        Else
+            stdDate = stdDateValue
+        End If
+
+        Dim time As Integer = 0
+
+        For Each dr In _PropWriteStockList.Tables(0).Rows
+            _MainStock.Opt10081_OnReceiveTrData(Trim(dr("STOCK_CODE")), Trim(dr("STOCK_NAME")), stdDate)
+
+            System.Threading.Thread.Sleep(500)
+
+        Next
+
+    End Sub
+
+    Private _dsOpt10081 As DataSet
+    Private _dsOpt10001 As DataSet
+    Private _dtOpt10001 As New DataTable
+
+    Private Sub OnReceiveTrData_opt10081(ByVal ds As DataSet)
+        If ds Is Nothing = True Then Exit Sub
+        If ds.Tables(0).Rows.Count < 1 Then Exit Sub
+
+        Dim tableName As String = Trim(ds.Tables(0).Rows(0).Item("종목코드"))
+
+        If _dsOpt10081.Tables(tableName) Is Nothing = False Then
+
+            _dsOpt10081.Tables.Remove(tableName)
+            Dim dt As New DataTable(tableName)
+
+            ds.Tables(0).TableName = tableName
+
+            dt = ds.Tables(tableName)
+
+            _dsOpt10081.Tables.Add(dt.Copy)
+        Else
+            Dim dt As New DataTable(tableName)
+
+            ds.Tables(0).TableName = tableName
+
+            dt = ds.Tables(tableName)
+
+            _dsOpt10081.Tables.Add(dt.Copy)
+
+        End If
+
+    End Sub
+
+    Private Sub OnReceiveTrData_opt10001(ByVal ds As DataSet)
+        If ds Is Nothing = True Then Exit Sub
+        If ds.Tables(0).Rows.Count < 1 Then Exit Sub
+        If _StockCodeOpt10001 = "" Then Exit Sub
+        If _StockCodeOpt10001 <> Trim(ds.Tables(0).Rows(0).Item("종목코드").ToString()) Then Exit Sub
+
+        If TextBox1.Text = "" Then
+            TextBox1.Text = 0
+        Else
+            TextBox1.Text = TextBox1.Text + 1
+        End If
+
+        Dim dr2th As DataRow
+
+        With _dtOpt10001
+
+            If _dtOpt10001.Rows.Count < 1 Then
+                For i As Integer = 0 To ds.Tables(0).Columns.Count - 1
+                    .Columns.Add(ds.Tables(0).Columns(i).ColumnName)
+                Next
+
+            End If
+
+            dr2th = .Rows.Add
+
+            For i As Integer = 0 To ds.Tables(0).Columns.Count - 1
+                dr2th(ds.Tables(0).Columns(i).ColumnName) = ds.Tables(0).Rows(0).Item(ds.Tables(0).Columns(i).ColumnName)
+            Next
+
+        End With
+
+        System.Threading.Thread.Sleep(200)
+
+        Dim stockCode As String = ""
+
+        stockCode = clsFunc.NextCallSequnceOpt()
+
+        If stockCode = "STOP" Then
+            MsgBox(" 모든 자료를 다 가져왔습니다. ")
+            Exit Sub
+        Else
+            CallOpt10001(stockCode)
+        End If
+
+    End Sub
+
+
+
+    Private Sub TextBox1_DoubleClick(sender As Object, e As EventArgs) Handles TextBox1.DoubleClick
+
+    End Sub
+
+End Class

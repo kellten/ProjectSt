@@ -1,0 +1,840 @@
+﻿Public Class frmPaikStockMainVer2
+
+    Private _blnDartStart As Boolean = False
+    Private _clsScreenNoManage As PaikRichStock.Common.clsScreenNoManage
+
+#Region " DgvRealDataIndex "
+    Private Enum DgvRealDataIndex
+        STOCK_NAME          ' 종목명
+        CurrentPrice        ' 현재가
+        lossGainRate        ' 등락율
+        VolumePower         ' 체결강도
+        TradingVolume       ' 거래량
+        StartPrice          ' 시가
+        HighestPrice        ' 고가
+        LowestPrice         ' 저가
+        TradingTime         ' 체결시간
+        PreDayBySymbol      ' 전일대비기호
+        STOCK_CODE
+        ScreenNo_GetIn      ' 화면번호
+    End Enum
+
+    Private Enum DgvRealDataDartIndex
+        STOCK_NAME          ' 종목명
+        CurrentPrice        ' 현재가
+        lossGainRate        ' 등락율
+        VolumePower         ' 체결강도
+        TradingVolume       ' 거래량
+        StartPrice          ' 시가
+        HighestPrice        ' 고가
+        LowestPrice         ' 저가
+        TradingTime         ' 체결시간
+        PreDayBySymbol      ' 전일대비기호
+        STOCK_CODE
+        ScreenNo_GetIn      ' 화면번호
+        creator
+        link
+        title
+        FirstTradeQty
+        NextTradeQty
+        FirstAllowQty
+        NextAllowQty
+        FirstPrice
+        FirstTradeTime
+        NextTradeTime
+    End Enum
+#End Region
+
+#Region " Load & Connect "
+    Private Sub frmPaikStockMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        UcMainStock1.OnEventConnect = EventOn
+        UcMainStock1.OnReceiveConditionVer = EventOn
+        UcMainStock1.OnReceiveTrCondition = EventOn
+        UcMainStock1.OnReceiveTrData = EventOn
+        _blnDartStart = False
+        UcDart1.timer1.Stop()
+    End Sub
+
+    Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
+        UcMainStock1.Connection()
+    End Sub
+
+    Private Sub UcMainStock1_OnConnection(status As String) Handles UcMainStock1.OnConnection
+        'SetBaseFavControl(0)
+        'SetBaseStockListDisplay()
+
+        UcMainStock1.GetAccount()
+
+        For Each dr As DataRow In UcMainStock1._AccNo.Tables("ACCNO").Rows
+            cboAccount.Items.Add(Trim(dr("ACCNO").ToString()))
+        Next
+
+        cboAccount.SelectedIndex = 0
+
+        UcHogaWindow1.MainStock = UcMainStock1
+
+        UcMainStock1.Getopt10085(Trim(cboAccount.Text), "0998")
+
+    End Sub
+#End Region
+
+#Region " 1. 실시간 종목 데이터 수신 Tx "
+
+#Region " RealDataDisplay "
+    Private Sub RealDataDisplay(ByVal ds As DataSet)
+        Dim dr As DataRow = ds.Tables(0).Rows(0)
+
+        With dgvMyStock
+            For i As Integer = 0 To .Rows.Count - 1
+                If dr("STOCK_CODE") = Trim(.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) Then
+
+                    '            Dim dgvRow As DataGridViewRow = .Rows
+
+
+                    '            DataGridViewRow row = dgv.Rows
+                    '    .Cast<DataGridViewRow>()
+                    '    .Where(r => r.Cells["SystemId"].Value.ToString().Equals(searchValue))
+                    '    .First();
+
+                    'rowIndex = row.Index;
+
+                    .Rows(i).Cells(DgvRealDataIndex.CurrentPrice).Value = Trim(dr("현재가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.lossGainRate).Value = Trim(dr("등락율").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.VolumePower).Value = Trim(dr("체결강도").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.TradingVolume).Value = Trim(dr("거래량").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.StartPrice).Value = Trim(dr("시가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.HighestPrice).Value = Trim(dr("고가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.LowestPrice).Value = Trim(dr("저가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.TradingTime).Value = Trim(dr("체결시간").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.PreDayBySymbol).Value = Trim(dr("전일대비기호").ToString())
+
+                    Exit For
+
+                End If
+            Next
+        End With
+
+        With dgvDart
+            For i As Integer = 0 To .Rows.Count - 1
+                If dr("STOCK_CODE") = Trim(.Rows(i).Cells(DgvRealDataDartIndex.STOCK_CODE).Value) Then
+
+                    .Rows(i).Cells(DgvRealDataDartIndex.CurrentPrice).Value = Trim(dr("현재가").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.lossGainRate).Value = Trim(dr("등락율").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.VolumePower).Value = Trim(dr("체결강도").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.TradingVolume).Value = Trim(dr("거래량").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.StartPrice).Value = Trim(dr("시가").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.HighestPrice).Value = Trim(dr("고가").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.LowestPrice).Value = Trim(dr("저가").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.TradingTime).Value = Trim(dr("체결시간").ToString())
+                    .Rows(i).Cells(DgvRealDataDartIndex.PreDayBySymbol).Value = Trim(dr("전일대비기호").ToString())
+
+                    If Trim(.Rows(i).Cells(DgvRealDataDartIndex.FirstTradeQty).Value) <> "" Then
+                        .Rows(i).Cells(DgvRealDataDartIndex.NextTradeQty).Value = Trim(dr("거래량").ToString())
+                    Else
+                        .Rows(i).Cells(DgvRealDataDartIndex.FirstTradeQty).Value = Trim(dr("거래량").ToString())
+                    End If
+
+                    If Trim(.Rows(i).Cells(DgvRealDataDartIndex.FirstAllowQty).Value) <> "" Then
+                        .Rows(i).Cells(DgvRealDataDartIndex.NextAllowQty).Value = Trim(dr("체결강도").ToString())
+                    Else
+                        .Rows(i).Cells(DgvRealDataDartIndex.FirstAllowQty).Value = Trim(dr("체결강도").ToString())
+                    End If
+
+                    If Trim(.Rows(i).Cells(DgvRealDataDartIndex.FirstAllowQty).Value) = "" Then
+                        .Rows(i).Cells(DgvRealDataDartIndex.FirstPrice).Value = Trim(dr("현재가").ToString())
+                    End If
+
+                    If Trim(.Rows(i).Cells(DgvRealDataDartIndex.FirstTradeTime).Value) <> "" Then
+                        .Rows(i).Cells(DgvRealDataDartIndex.NextTradeTime).Value = Trim(dr("체결시간").ToString())
+                    Else
+                        .Rows(i).Cells(DgvRealDataDartIndex.FirstTradeTime).Value = Trim(dr("체결시간").ToString())
+                    End If
+
+                    Exit For
+
+                End If
+            Next
+        End With
+
+        With dgvCondition
+            For i As Integer = 0 To .Rows.Count - 1
+                If dr("STOCK_CODE") = Trim(.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) Then
+
+                    .Rows(i).Cells(DgvRealDataIndex.CurrentPrice).Value = Trim(dr("현재가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.lossGainRate).Value = Trim(dr("등락율").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.VolumePower).Value = Trim(dr("체결강도").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.TradingVolume).Value = Trim(dr("거래량").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.StartPrice).Value = Trim(dr("시가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.HighestPrice).Value = Trim(dr("고가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.LowestPrice).Value = Trim(dr("저가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.TradingTime).Value = Trim(dr("체결시간").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.PreDayBySymbol).Value = Trim(dr("전일대비기호").ToString())
+
+                    Exit For
+
+                End If
+            Next
+        End With
+
+        With dgvFav
+            For i As Integer = 0 To .Rows.Count - 1
+                If dr("STOCK_CODE") = Trim(.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) Then
+
+                    .Rows(i).Cells(DgvRealDataIndex.CurrentPrice).Value = Trim(dr("현재가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.lossGainRate).Value = Trim(dr("등락율").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.VolumePower).Value = Trim(dr("체결강도").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.TradingVolume).Value = Trim(dr("거래량").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.StartPrice).Value = Trim(dr("시가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.HighestPrice).Value = Trim(dr("고가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.LowestPrice).Value = Trim(dr("저가").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.TradingTime).Value = Trim(dr("체결시간").ToString())
+                    .Rows(i).Cells(DgvRealDataIndex.PreDayBySymbol).Value = Trim(dr("전일대비기호").ToString())
+
+                    Exit For
+
+                End If
+            Next
+        End With
+
+    End Sub
+
+#End Region
+
+#Region " 종목 실시간 데이터 수신 Tx "
+    Private Sub UcMainStock1_OnDsReceiveRealData(ds As DataSet) Handles UcMainStock1.OnDsReceiveRealData
+        If ds.Tables.Count = 0 Then Exit Sub
+        Select Case ds.Tables(0).Rows(0).Item("sRealType")
+            Case "주식체결"
+                If UcHogaWindow1.StockCode = Trim(ds.Tables(0).Rows(0).Item("STOCK_CODE")) Then
+                    UcHogaWindow1.Property_GetStockTrade = ds
+                End If
+
+                RealDataDisplay(ds)
+
+            Case "주식호가잔량"
+                If UcHogaWindow1.StockCode = Trim(ds.Tables(0).Rows(0).Item("STOCK_CODE")) Then
+                    UcHogaWindow1.Property_GetStockHogaJanQty = ds
+                End If
+
+            Case "주식당일거래원"
+                If UcHogaWindow1.StockCode = Trim(ds.Tables(0).Rows(0).Item("STOCK_CODE")) Then
+                    UcHogaWindow1.Property_ToDayStockTradeAt = ds
+                End If
+        End Select
+    End Sub
+#End Region
+
+#Region " 종목 선택 이벤트 "
+    Private Sub dgvDart_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDart.CellContentDoubleClick, dgvMyStock.CellDoubleClick, dgvFav.CellDoubleClick, dgvCondition.CellDoubleClick
+        Dim oDataGridView As DataGridView = CType(sender, DataGridView)
+
+        With oDataGridView
+            Select Case .Name
+                Case dgvDart.Name
+                    If Trim(.Rows(e.RowIndex).Cells(DgvRealDataDartIndex.STOCK_CODE).Value) = "" Then
+                        Exit Sub
+                    End If
+
+                    UcHogaWindow1.StockCode = Trim(.Rows(e.RowIndex).Cells(DgvRealDataDartIndex.STOCK_CODE).Value)
+
+                Case dgvMyStock.Name
+                    If Trim(.Rows(e.RowIndex).Cells(DgvRealDataIndex.STOCK_CODE).Value) = "" Then
+                        Exit Sub
+                    End If
+
+                    UcHogaWindow1.StockCode = Trim(.Rows(e.RowIndex).Cells(DgvRealDataIndex.STOCK_CODE).Value)
+
+                Case dgvFav.Name
+                    If Trim(.Rows(e.RowIndex).Cells(DgvRealDataIndex.STOCK_CODE).Value) = "" Then
+                        Exit Sub
+                    End If
+
+                    UcHogaWindow1.StockCode = Trim(.Rows(e.RowIndex).Cells(DgvRealDataIndex.STOCK_CODE).Value)
+
+                Case dgvCondition.Name
+                    If Trim(.Rows(e.RowIndex).Cells(DgvRealDataIndex.STOCK_CODE).Value) = "" Then
+                        Exit Sub
+                    End If
+
+                    UcHogaWindow1.StockCode = Trim(.Rows(e.RowIndex).Cells(DgvRealDataIndex.STOCK_CODE).Value)
+
+            End Select
+
+        End With
+
+    End Sub
+#End Region
+
+#End Region
+
+#Region " 2. 공시 "
+    ' 공시 발생 시 넘어오는 이벤트
+    Private Sub UcDart1_OnChangeDartV(dartV As DartPrj.UcDart.dartValue) Handles UcDart1.OnChangeDartV
+        Dim dv As DataView
+
+        dv = New DataView(UcMainStock1._allStockDataset.Tables("StockList"))
+
+        'dv.RowFilter = String.Format("STOCK_NAME LIKE '{0}", "%" & dartV.title & "%")
+        dv.RowFilter = String.Format("STOCK_NAME LIKE '{0}'", "%" & dartV.creator & "%")
+
+        Dim screenNo As String = ""
+        Dim blnRealGb As Boolean = False
+
+        With dgvDart
+            For Each drRowView As DataRowView In dv
+
+                blnRealGb = False
+
+                For i As Integer = 0 To .RowCount - 1
+                    If Trim(.Rows(i).Cells(DgvRealDataDartIndex.STOCK_CODE).Value) = Trim(drRowView("STOCK_CODE").ToString()) Then
+                        blnRealGb = True
+                        Exit For
+                    End If
+                Next
+
+                If blnRealGb = False Then
+                    .Rows.Insert(0, 1)
+
+                    .Rows(0).Cells(DgvRealDataDartIndex.STOCK_CODE).Value = Trim(drRowView("STOCK_CODE").ToString())
+                    .Rows(0).Cells(DgvRealDataDartIndex.STOCK_NAME).Value = Trim(drRowView("STOCK_NAME").ToString())
+                    .Rows(0).Cells(DgvRealDataDartIndex.creator).Value = dartV.creator
+                    .Rows(0).Cells(DgvRealDataDartIndex.link).Value = dartV.link
+                    .Rows(0).Cells(DgvRealDataDartIndex.title).Value = dartV.title
+
+                End If
+                
+                For i As Integer = 0 To dgvFav.RowCount - 1
+                    If Trim(dgvFav.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) = Trim(drRowView("STOCK_CODE").ToString()) Then
+                        blnRealGb = True
+                        Exit For
+                    End If
+                Next
+
+                For i As Integer = 0 To dgvMyStock.RowCount - 1
+                    If Trim(dgvMyStock.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) = Trim(drRowView("STOCK_CODE").ToString()) Then
+                        blnRealGb = True
+                        Exit For
+                    End If
+                Next
+
+                For i As Integer = 0 To dgvCondition.RowCount - 1
+                    If Trim(dgvCondition.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) = Trim(drRowView("STOCK_CODE").ToString()) Then
+                        blnRealGb = True
+                        Exit For
+                    End If
+                Next
+
+                If blnRealGb = True Then
+                    Continue For
+                Else
+                    If UcMainStock1.InOptKWFidScreenNo("", Trim(drRowView("STOCK_CODE").ToString())) = Common.ucMainStock.ReturnScreenNo.Success Then
+                        screenNo = UcMainStock1.GetOptKWFidScreenNo(Trim(drRowView("STOCK_CODE").ToString()))
+                        UcMainStock1.GetOptKWFid(Trim(drRowView("STOCK_CODE").ToString()), 1, screenNo)
+                        System.Threading.Thread.Sleep(600)
+                    End If
+                End If
+
+            Next
+        End With
+    End Sub
+
+    Private Sub btnDartStart_Click(sender As Object, e As EventArgs) Handles btnDartStart.Click
+        _blnDartStart = Not _blnDartStart
+        If _blnDartStart = False Then
+            btnDartStart.Text = "▶"
+            UcDart1.timer1.Stop()
+        Else
+
+            btnDartStart.Text = "||"
+            UcDart1.timer1.Interval = Val(msktDartTimer.Text)
+            UcDart1.timer1.Start()
+
+        End If
+    End Sub
+
+#End Region
+
+#Region " 3. 조건검색 "
+    Private Enum DgvCondiListIndex
+        DetailGroupName
+        Index
+        ScreenNo
+    End Enum
+
+    Private Enum DgvConditionStockListIndex
+        STOCK_NAME
+        CurrentPrice
+        lossGainRate
+        VolumePower
+        TradingVolume
+        StartPrice
+        HighestPrice
+        LowestPrice
+        TradingTime
+        PreDayBySymbol
+        STOCK_CODE
+        ScreenNo_GetIn
+    End Enum
+
+    Private Sub GetConditionList()
+        UcMainStock1.GetUserConditionLoad()
+    End Sub
+
+    Private Sub drvConditionList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles drvConditionList.CellDoubleClick
+        If Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.ScreenNo).Value) = "" Then Exit Sub
+
+        With drvConditionList
+            UcMainStock1.GetUserConditionStockLoad(Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.ScreenNo).Value), Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.DetailGroupName).Value), _
+                                                    Trim(drvConditionList.Rows(e.RowIndex).Cells(DgvCondiListIndex.Index).Value), 0)
+
+        End With
+    End Sub
+
+    Private Sub dgvConditionStockList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvConditionStockList.CellDoubleClick
+
+    End Sub
+
+
+    Private Sub SettingConditionStockListDetailData(ByVal ds As DataSet)
+        'If ds Is Nothing = True Then Exit Sub
+        'Dim row As Integer = 0
+        'Dim dr As DataRow
+
+        'With spConDetailList.ActiveSheet
+        '    For Each dr In ds.Tables(0).Rows
+        '        For row = 0 To .GetLastNonEmptyRow(FarPoint.Win.Spread.NonEmptyItemFlag.Data)
+        '            If Trim(dr("STOCK_CODE").ToString()) = Trim(.Cells(row, FavStockList.StockCode).Text) Then
+        '                .Cells(row, spConDetailListIndex.NowPrice).Text = Trim(dr("현재가").ToString())
+        '                .Cells(row, spConDetailListIndex.UpDownRate).Text = Trim(dr("등락율").ToString())
+        '                .Cells(row, spConDetailListIndex.PrevRateSymbol).Text = Trim(dr("전일대비기호").ToString())
+        '                .Cells(row, spConDetailListIndex.StartPrice).Text = Trim(dr("시가").ToString())
+        '                .Cells(row, spConDetailListIndex.HighPrice).Text = Trim(dr("고가").ToString())
+        '                .Cells(row, spConDetailListIndex.LowPrice).Text = Trim(dr("저가").ToString())
+
+        '                Select Case Len(row.ToString())
+        '                    Case 1
+        '                        .Cells(row, spConDetailListIndex.ScreenNo).Text = "2" & "00" & row.ToString()
+        '                    Case 2
+        '                        .Cells(row, spConDetailListIndex.ScreenNo).Text = "2" & "0" & row.ToString()
+        '                    Case 3
+        '                        .Cells(row, spConDetailListIndex.ScreenNo).Text = "2" & row.ToString()
+        '                End Select
+
+        '                Exit Sub
+        '            End If
+        '        Next
+
+        '    Next
+        'End With
+
+        'Application.DoEvents()
+
+    End Sub
+
+
+    Private Sub GetDayBaseStockInfo()
+
+        'With spConDetailList.ActiveSheet
+        '    If Trim(.Cells(0, spConDetailListIndex.ScreenNo).Text) = "" Then Exit Sub
+
+        '    For row As Integer = 0 To .GetLastNonEmptyRow(FarPoint.Win.Spread.NonEmptyItemFlag.Data)
+
+        '        UcMainStock1.GetDayStockBaseInfo(Trim(.Cells(row, spConDetailListIndex.StockCode).Text), Trim(.Cells(row, spConDetailListIndex.ScreenNo).Text))
+
+        '        System.Threading.Thread.Sleep(500)
+
+        '    Next
+
+        'End With
+
+    End Sub
+
+#Region " UcMainStock Event "
+    Private Sub UcMainStock1_OnDsGetConditionList(ByVal ds As System.Data.DataSet) Handles UcMainStock1.OnDsGetConditionList
+        If ds Is Nothing = False Then
+            Try
+                Dim row As Integer = 0
+
+                drvConditionList.Rows.Clear()
+
+                With drvConditionList
+                    For Each dr As DataRow In ds.Tables("CondiList").Rows
+                        .Rows.Insert(row, 1)
+
+                        .Rows(row).Cells(DgvCondiListIndex.DetailGroupName).Value = Trim(dr("CONDI_NAME"))
+                        .Rows(row).Cells(DgvCondiListIndex.Index).Value = Trim(dr("CONDI_SEQ"))
+                        .Rows(row).Cells(DgvCondiListIndex.ScreenNo).Value = "9" & Trim(dr("CONDI_SEQ"))
+
+                        row = row + 1
+                    Next
+                End With
+
+            Catch ex As Exception
+                MsgBox(ex.ToString(), MsgBoxStyle.Exclamation)
+                If UcMainStock1.EVENT_STATUS.STATUS_OnReceiveConditionVer = EventOff Then
+                    UcMainStock1.OnReceiveConditionVer = EventOn
+                End If
+            End Try
+        End If
+    End Sub
+
+    Private Sub UcMainStock1_OnDsSetConditionList(ByVal ds As System.Data.DataSet) Handles UcMainStock1.OnDsSetConditionList
+        If ds Is Nothing = False Then
+            Try
+
+                dgvConditionStockList.Rows.Clear()
+                Dim row As Integer = 0
+
+                With dgvConditionStockList
+                    For Each dr As DataRow In ds.Tables(0).Rows
+                        .Rows.Insert(row, 1)
+
+                        .Rows(row).Cells(DgvConditionStockListIndex.STOCK_CODE).Value = Trim(dr("STOCK_CODE").ToString())
+
+                        Select Case Len((row + 1).ToString)
+                            Case 1
+                                .Rows(row).Cells(DgvConditionStockListIndex.ScreenNo_GetIn).Value = "4" & "00" & (row + 1).ToString
+                            Case 2
+                                .Rows(row).Cells(DgvConditionStockListIndex.ScreenNo_GetIn).Value = "4" & "0" & (row + 1).ToString
+                            Case 3
+                                .Rows(row).Cells(DgvConditionStockListIndex.ScreenNo_GetIn).Value = "4" & "" & (row + 1).ToString
+                        End Select
+
+                        .Rows(row).Cells(DgvConditionStockListIndex.STOCK_NAME).Value = Trim(dr("STOCK_NAME").ToString())
+
+                        row = row + 1
+                    Next
+
+                End With
+
+                Application.DoEvents()
+
+                GetDayBaseStockInfo()
+
+            Catch ex As Exception
+                MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+                If UcMainStock1.EVENT_STATUS.STATUS_OnReceiveTrCondition = EventOff Then
+                    UcMainStock1.OnReceiveTrCondition = EventOn
+                End If
+            End Try
+
+        End If
+    End Sub
+
+    Private Sub UcMainStock1_OnDayDsBaseInfo(ByVal ds As System.Data.DataSet) Handles UcMainStock1.OnDayDsBaseInfo
+        If ds Is Nothing = False Then
+            'Select Case tbStockList.SelectedIndex
+            '    Case 1
+            '        Dim tableName As String = Trim(ds.Tables("DayStockBaseInfo").Rows(0).Item("종목코드"))
+
+            '        If _dsNode1.Tables(tableName) Is Nothing = False Then
+
+            '            _dsNode1.Tables.Remove(tableName)
+            '            Dim dt As New DataTable(tableName)
+
+            '            ds.Tables("DayStockBaseInfo").TableName = tableName
+
+            '            dt = ds.Tables(tableName)
+
+            '            _dsNode1.Tables.Add(dt.Copy)
+            '        Else
+            '            Dim dt As New DataTable(tableName)
+
+            '            ds.Tables("DayStockBaseInfo").TableName = tableName
+
+            '            dt = ds.Tables(tableName)
+
+            '            _dsNode1.Tables.Add(dt.Copy)
+
+            '        End If
+            'End Select
+
+
+        End If
+    End Sub
+#End Region
+#End Region
+
+#Region " 4. 관심종목"
+
+    Private Enum dgvFavStockListIndex
+        STOCK_NAME          ' 종목명
+        CurrentPrice        ' 현재가
+        lossGainRate        ' 등락율
+        VolumePower         ' 체결강도
+        TradingVolume       ' 거래량
+        StartPrice          ' 시가
+        HighestPrice        ' 고가
+        LowestPrice         ' 저가
+        TradingTime         ' 체결시간
+        PreDayBySymbol      ' 전일대비기호
+        STOCK_CODE
+        ScreenNo_GetIn      ' 화면번호
+    End Enum
+
+    Private _clsFavStock As New PaikRichStock.Common.clsFavStock
+    Private _PaintedBaseFavTitle As String = ""
+
+    Private Sub SettingFavStockListData(ByVal stockId As String, ByVal interId As Integer)
+        Dim ds As DataSet, dr As DataRow
+        Dim strCode As String = ""
+        Dim favStockIdIndex As Common.ucMainStock.StockIdIndex
+        Dim nCount As Integer
+        Dim row As Integer = 0
+        Dim screenNo As String = ""
+
+        ds = _clsFavStock.GetDataFavStockList(stockId, interId)
+
+        If ds.Tables(0).Rows.Count < 1 Then
+            ds.Reset()
+            Exit Sub
+        End If
+
+        dgvFavStockList.Rows.Clear()
+
+        With dgvFavStockList
+
+            For Each dr In ds.Tables(0).Rows
+
+                .Rows.Insert(row, 1)
+
+                strCode = strCode & Trim(dr("STOCK_CODE").ToString()) & ";"
+
+                .Rows(row).Cells(dgvFavStockListIndex.STOCK_CODE).Value = Trim(dr("STOCK_CODE").ToString())
+                .Rows(row).Cells(dgvFavStockListIndex.STOCK_NAME).Value = GetStockInfo(Trim(dr("STOCK_CODE").ToString()))
+
+                row = row + 1
+
+            Next
+
+        End With
+
+        nCount = ds.Tables(0).Rows.Count
+
+        ds.Reset()
+
+        Select Case Mid(stockId, 1, 6)
+            Case "000001"
+                favStockIdIndex = Common.ucMainStock.StockIdIndex.Stock_Id1
+            Case "000002"
+                favStockIdIndex = Common.ucMainStock.StockIdIndex.Stock_Id2
+            Case "000003"
+                favStockIdIndex = Common.ucMainStock.StockIdIndex.Stock_Id3
+            Case "000004"
+                favStockIdIndex = Common.ucMainStock.StockIdIndex.Stock_Id4
+            Case "000005"
+                favStockIdIndex = Common.ucMainStock.StockIdIndex.Stock_Id5
+        End Select
+
+        screenNo = UcMainStock1.ReceiveFavScreenNo(favStockIdIndex, interId)
+
+        ' UcMainStock1.GetOptKWFid(strCode, nCount, screenNo)
+
+    End Sub
+
+    Private Sub SettingFavStockListDetailData(ByVal ds As DataSet)
+        If ds Is Nothing = True Then Exit Sub
+        Dim row As Integer = 0
+        Dim dr As DataRow
+
+        With dgvFavStockList
+            For Each dr In ds.Tables(0).Rows
+                For row = 0 To .Rows.Count - 1
+                    If Trim(dr("STOCK_CODE").ToString()) = Trim(.Rows(row).Cells(dgvFavStockListIndex.STOCK_CODE).Value) Then
+
+                        .Rows(row).Cells(dgvFavStockListIndex.CurrentPrice).Value = Trim(dr("현재가").ToString())
+                        .Rows(row).Cells(dgvFavStockListIndex.lossGainRate).Value = Trim(dr("등락율").ToString())
+                        .Rows(row).Cells(dgvFavStockListIndex.PreDayBySymbol).Value = Trim(dr("전일대비기호").ToString())
+                        .Rows(row).Cells(dgvFavStockListIndex.StartPrice).Value = Trim(dr("시가").ToString())
+                        .Rows(row).Cells(dgvFavStockListIndex.HighestPrice).Value = Trim(dr("고가").ToString())
+                        .Rows(row).Cells(dgvFavStockListIndex.LowestPrice).Value = Trim(dr("저가").ToString())
+
+                        Exit Sub
+                    End If
+                Next
+
+            Next
+        End With
+
+        Application.DoEvents()
+
+    End Sub
+
+    Private Sub btnNextInter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNextInter.Click
+        SetBaseFavControl(1)
+    End Sub
+
+    Private Sub btnPrevInter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrevInter.Click
+        SetBaseFavControl(-1)
+    End Sub
+
+    Private Sub btnFavDeung_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFavDeung.Click
+        'Dim oform As New frmFavManage(UcMainStock1._allStockDataset, UcMainStock1._KospiStockDataset, UcMainStock1._KosDakStockDataset, spFavList)
+        'oform.ShowDialog()
+        'UcMainStock1.DisconnectRealData(Trim(spFavList.ActiveSheet.Tag))
+    End Sub
+
+    Private Sub btnFav1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnFav1.Click, btnFav2.Click, btnFav3.Click, btnFav4.Click, _
+                                                                                                  btnFav5.Click, btnFav6.Click, btnFav7.Click, btnFav8.Click
+
+        SettingFavStockListData(Mid(cboStockId.Text, 1, 6), CInt(CType(sender, Button).Text))
+
+        CType(sender, Button).BackColor = Color.Yellow
+
+        _PaintedBaseFavTitle = Trim(CType(sender, Button).Text)
+
+        ' tbStockList.Tag = CInt(CType(sender, Button).Text)
+
+    End Sub
+    Private Sub SetBaseFavControl(ByVal interval As Integer)
+        If interval = -1 Then
+            If btnFav1.Text = "1" Then Exit Sub
+        End If
+
+        If interval = 0 Then
+            For i As Integer = 1 To 8
+                CType(PaikRichStock.Common.clsFunc.FindControl(Me, "btnFav" & i.ToString), Button).Text = i.ToString()
+            Next
+        Else
+            For i As Integer = 1 To 8
+                CType(PaikRichStock.Common.clsFunc.FindControl(Me, "btnFav" & i.ToString), Button).Text = _
+                Val(CType(PaikRichStock.Common.clsFunc.FindControl(Me, "btnFav" & i.ToString), Button).Text) + interval
+            Next
+        End If
+
+        SetBaseFavColorSetting()
+
+    End Sub
+
+    Private Sub SetBaseFavColorSetting()
+        For i As Integer = 1 To 8
+            If CType(PaikRichStock.Common.clsFunc.FindControl(Me, "btnFav" & i.ToString), Button).Text = _PaintedBaseFavTitle Then
+                CType(PaikRichStock.Common.clsFunc.FindControl(Me, "btnFav" & i.ToString), Button).BackColor = Color.Yellow
+            Else
+                CType(PaikRichStock.Common.clsFunc.FindControl(Me, "btnFav" & i.ToString), Button).BackColor = Color.Transparent
+            End If
+        Next
+    End Sub
+
+#End Region
+  
+#Region " 종목명을 반환한다. "
+    Private Function GetStockInfo(ByVal stockCode As String) As String
+        Dim dv As DataView
+
+        dv = New DataView(UcMainStock1._allStockDataset.Tables("StockList"))
+
+        dv.RowFilter = String.Format("STOCK_CODE = '{0}'", stockCode)
+
+        For Each drRowView As DataRowView In dv
+            Return Trim(drRowView("STOCK_NAME").ToString())
+        Next
+
+        Return ""
+    End Function
+#End Region
+
+#Region " 매수, 매도 이벤트 "
+    Private Sub UcMainStock1_OnDsReceiveChejanData(ByVal ds As System.Data.DataSet) Handles UcMainStock1.OnDsReceiveChejanData
+        If ds Is Nothing = False Then
+            Dim row As Integer = 0
+            Dim dr As DataRow
+
+            dr = ds.Tables("ChejanFidList").Rows(0)
+
+            If dr("미체결수량") <> "" Then
+                If CInt(dr("미체결수량")) = 0 Then
+                    UcMainStock1.DeleteTradingScreenNo(Trim(dr("화면번호").ToString()))
+                    UcMainStock1.DisconnectRealData(Trim(dr("화면번호").ToString()))
+                End If
+            End If
+
+            UcMainStock1.Getopt10085(Trim(cboAccount.Text), "0998")
+
+            If UcMainStock1._OrderResult Is Nothing = False Then
+                If UcMainStock1._OrderResult.Tables.Count > 0 Then
+                    dgvTradeInfo.DataSource = UcMainStock1._OrderResult.Tables(0)
+                    dgvTradeInfo.AutoResizeRows()
+                End If
+            End If
+
+        End If
+    End Sub
+
+    Private Sub UcMainStock1_OnDsopt10085(ds As DataSet) Handles UcMainStock1.OnDsopt10085
+        Dim blnExist As Boolean = False
+        Dim screenNo As String = ""
+        Dim strStockCode As String = ""
+        Dim nCount As Integer = 0
+
+        For Each dr As DataRow In ds.Tables(0).Rows
+
+            screenNo = ""
+
+            blnExist = False
+
+            For i As Integer = 0 To dgvMyStock.Rows.Count - 1
+                If Trim(dr("종목코드").ToString()) = Trim(dgvMyStock.Rows(i).Cells(DgvRealDataIndex.STOCK_CODE).Value) Then
+                    blnExist = True
+                End If
+            Next
+
+            If blnExist = False Then
+                dgvMyStock.Rows.Insert(0, 1)
+                dgvMyStock.Rows(0).Cells(DgvRealDataIndex.STOCK_CODE).Value = Trim(dr("종목코드").ToString())
+                dgvMyStock.Rows(0).Cells(DgvRealDataIndex.STOCK_NAME).Value = Trim(dr("종목명").ToString())
+
+                If strStockCode = "" Then
+                    strStockCode = Trim(dr("종목코드").ToString())
+                Else
+                    strStockCode = strStockCode & ";" & Trim(dr("종목코드").ToString())
+                End If
+
+
+                'If UcMainStock1.InOptKWFidScreenNo("", Trim(dr("종목코드").ToString())) = Common.ucMainStock.ReturnScreenNo.Success Then
+                '    screenNo = UcMainStock1.GetOptKWFidScreenNo(Trim(dr("종목코드").ToString()))
+                '    UcMainStock1.GetOptKWFid(Trim(dr("종목코드").ToString()), 1, screenNo)
+                '    System.Threading.Thread.Sleep(600)
+                'Else
+                '    Continue For
+                'End If
+                nCount = nCount + 1
+            End If
+        Next
+
+        If strStockCode <> "" Then
+            If UcMainStock1.InOptKWFidScreenNo("", strStockCode) = Common.ucMainStock.ReturnScreenNo.Success Then
+                screenNo = UcMainStock1.GetOptKWFidScreenNo(strStockCode)
+                UcMainStock1.GetOptKWFid(strStockCode, nCount, screenNo)
+                System.Threading.Thread.Sleep(600)
+            End If
+        End If
+
+        dgvAccountInfo.DataSource = ds
+
+    End Sub
+#End Region
+
+
+    Private Sub UcMainStock1_OnMsg(msg As String) Handles UcMainStock1.OnMsg
+        If msg = "" Then Exit Sub
+
+        lblMsg.Text = Trim(msg)
+
+    End Sub
+
+    Private Sub tcMain_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tcMain.SelectedIndexChanged
+        Select Case tcMain.SelectedIndex
+            Case 1
+                GetConditionList()
+        End Select
+    End Sub
+
+    'Private Sub Button1_Click(sender As Object, e As EventArgs)
+    '    UcMainStock1.SetRealReg("8888", dgvMyStock.Rows(0).Cells(DgvRealDataIndex.STOCK_CODE).Value, Trim(TextBox3.Text), "1")
+    'End Sub
+
+    'Private Sub Button2_Click(sender As Object, e As EventArgs)
+    '    UcMainStock1.SetRealRemove("8888", dgvMyStock.Rows(0).Cells(DgvRealDataIndex.STOCK_CODE).Value)
+    'End Sub
+End Class

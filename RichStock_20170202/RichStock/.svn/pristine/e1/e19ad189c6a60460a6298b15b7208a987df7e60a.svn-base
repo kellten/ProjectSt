@@ -1,0 +1,123 @@
+﻿Imports System.Windows.Forms.DataVisualization.Charting
+
+Imports PaikRichStock.Common
+
+Public Class ucVolumeChartBase
+
+    Private _ds As DataSet
+    Private _ds2th As DataSet
+    Private _clsFunc As New clsFunc
+    Private _ColumeName As Struture_ColumnName
+
+    Public WriteOnly Property Ds As DataSet
+        Set(value As DataSet)
+            _ds = value
+            DisplayChart()
+        End Set
+    End Property
+
+    Public WriteOnly Property Ds2th As DataSet
+        Set(value As DataSet)
+            _ds2th = value
+        End Set
+    End Property
+
+    Public WriteOnly Property ColumeName As Struture_ColumnName
+        Set(value As Struture_ColumnName)
+            _ColumeName.Init()
+            _ColumeName = value
+        End Set
+    End Property
+
+    Public Structure Struture_ColumnName
+        Public VolumeSumName As String
+        Public AvgPriceSum As String
+        Public Title As String
+        Public DistributeVolume As String
+
+        Public Sub Init()
+            VolumeSumName = ""
+            AvgPriceSum = ""
+            Title = ""
+            DistributeVolume = ""
+        End Sub
+    End Structure
+
+    Private Sub DisplayChart()
+
+        Dim intPoint As Integer = 0
+        Dim high As Integer = 0
+        Dim close As Integer = 0
+        Dim low As Integer = 0
+
+        With chartBase
+            For j As Integer = 0 To .Series.Count - 1
+                .Series(j).Points.Clear()
+            Next
+
+            .Titles(0).Text = _ColumeName.Title
+
+            .Series("Price").ChartType = SeriesChartType.Candlestick
+
+            For i As Integer = _ds.Tables(0).Rows.Count - 1 To 0 Step -1
+                If high = 0 Then
+
+                    high = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("고가").ToString())
+
+                Else
+
+                    If high < _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("고가").ToString()) Then
+                        high = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("고가").ToString())
+                    End If
+
+                End If
+
+                If low = 0 Then
+                    low = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("저가").ToString())
+                Else
+                    If _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("저가").ToString()) <> 0 Then
+                        If low > _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("저가").ToString()) Then
+                            low = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("저가").ToString())
+                        End If
+                    End If
+                End If
+
+                .Series("Price").Points.AddXY(_ds.Tables(0).Rows(i).Item("일자"), _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("고가").ToString()))
+                .Series("Price2").Points.AddXY(_ds.Tables(0).Rows(i).Item("일자"), _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("고가").ToString()))
+                .Series("VolumeSum").Points.AddXY(_ds.Tables(0).Rows(i).Item("일자"), _ds.Tables(0).Rows(i).Item(_ColumeName.VolumeSumName).ToString())
+
+                If CInt(_ds.Tables(0).Rows(i).Item(_ColumeName.VolumeSumName)) = 0 Then
+                    .Series("AvgPrice").Points.AddXY(_ds.Tables(0).Rows(i).Item("일자"), 0)
+                Else
+                    .Series("AvgPrice").Points.AddXY(_ds.Tables(0).Rows(i).Item("일자"), _
+                                                   _ds.Tables(0).Rows(i).Item(_ColumeName.AvgPriceSum).ToString() / _
+                                                   _ds.Tables(0).Rows(i).Item(_ColumeName.VolumeSumName).ToString() * 1000000)
+                End If
+
+                .Series("Price").Points(intPoint).YValues(1) = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("저가").ToString())
+                .Series("Price").Points(intPoint).YValues(2) = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("시가").ToString())
+                .Series("Price").Points(intPoint).YValues(3) = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("현재가").ToString())
+
+                .Series("Price2").Points(intPoint).YValues(1) = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("저가").ToString())
+                .Series("Price2").Points(intPoint).YValues(2) = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("시가").ToString())
+                .Series("Price2").Points(intPoint).YValues(3) = _clsFunc.RemovePlusMinus(_ds.Tables(0).Rows(i).Item("현재가").ToString())
+
+                intPoint = intPoint + 1
+            Next
+
+            For Each dr In _ds2th.Tables(0).Rows
+                .Series("Distri").Points.AddXY(dr("일자"), dr(_ColumeName.VolumeSumName).ToString())
+            Next
+
+            .ChartAreas("Volume").AxisY.Minimum = CInt(low - (low * 0.1))
+            .ChartAreas("Volume").AxisY.Maximum = CInt(high + (high * 0.1))
+            .ChartAreas("Volume").AxisX.IsLabelAutoFit = True
+
+            .ChartAreas("DistVolume").AxisY.Minimum = CInt(low - (low * 0.1))
+            .ChartAreas("DistVolume").AxisY.Maximum = CInt(high + (high * 0.1))
+            .ChartAreas("DistVolume").AxisX.IsLabelAutoFit = True
+
+        End With
+    End Sub
+
+End Class

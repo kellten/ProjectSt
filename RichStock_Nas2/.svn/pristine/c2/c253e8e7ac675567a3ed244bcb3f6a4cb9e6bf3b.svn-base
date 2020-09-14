@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using PaikRichStock.Common;
+
+namespace StockDayDataSaver
+{
+    static class Program
+    {
+        /// <summary>
+        /// 해당 응용 프로그램의 주 진입점입니다.
+        /// </summary>
+        [STAThread]
+        static void Main(string[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            //frmTest frm1 = new frmTest();
+            //Application.Run(frm1);
+            //return;
+
+            frmSaver frm = new frmSaver();
+            frmSaverNew frm1 = new frmSaverNew();
+
+            if (args.Length > 0 && args[0] == "auto")
+            {
+                //Application.Run(frm);
+                //frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+
+                //frm.UcMainStock1.Connection();
+
+                //while (frm.UcMainStock1._allStockDataset == null) { Application.DoEvents(); }
+                //frm.ExcuteSendData();
+
+                frm1 = new frmSaverNew("auto");
+                Application.Run(frm1);
+            }
+            else if (args.Length > 0 && args[0] == "autoweek")
+            {
+                //Application.Run(frm);
+                //frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+
+                //frm.UcMainStock1.Connection();
+
+                //while (frm.UcMainStock1._allStockDataset == null) { Application.DoEvents(); }
+                //frm.ExcuteSendData();
+
+                frm1 = new frmSaverNew("autoweek");
+                Application.Run(frm1);
+            }
+            else if (args.Length > 0 && args[0] == "automibi")
+            {
+                //frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+                //frm.UcMainStock1.Connection();
+
+                //while (frm.UcMainStock1._allStockDataset == null) { Application.DoEvents(); }
+                //frm.ExcuteSendDataMibi();
+
+                frm1 = new frmSaverNew("automibi");
+                Application.Run(frm1);
+            }
+            else if (args.Length > 0 && args[0] == "finance")
+            {
+                //Application.Run(frm);
+                //frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+                //frm.UcMainStock1.Connection();
+
+                //while (frm.UcMainStock1._allStockDataset == null) { Application.DoEvents(); }
+                //frm.ExcuteStockFinance();
+
+                frm1 = new frmSaverNew("finance");
+                Application.Run(frm1);
+            }
+            else if (args.Length > 0 && args[0] == "company")
+            {
+                //Application.Run(frm);
+                //frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+                //frm.UcMainStock1.Connection();
+
+                frm1.ucMainStockVer2.Connection();
+                while (frm1.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+                frm1.ExcuteCompanyData();
+                frm1.ExcuteCompanyCEO();
+            }
+            else if (args.Length > 0 && args[0] == "stockmaster")
+            {
+                //Application.Run(frm);
+                //frm.UcMainStock1.OnEventConnect = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+                //frm.UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+                //frm.UcMainStock1.Connection();
+
+                frm1.ucMainStockVer2.Connection();
+                while (frm1.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+                frm1.ExcuteStockMaster();
+            }
+
+            else
+            {
+                Application.Run(frm1);
+            }
+
+
+        }
+    }
+}

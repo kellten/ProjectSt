@@ -1,0 +1,147 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using VB6 = Microsoft.VisualBasic;
+using System.Globalization;
+using PaikRichStock.Common;
+
+namespace StockDayDataSaver
+{
+    public partial class frmSaver : Form
+    {
+        private DataAccess _DataAcc;
+        public frmSaver()
+        {
+            InitializeComponent();
+            _DataAcc = new DataAccess();
+        }
+
+        public void ExcuteSendData()
+        {
+            if (UcMainStock1._allStockDataset == null) { return; }
+            int cnt = 5001;
+
+            foreach (DataRow dr in UcMainStock1._allStockDataset.Tables[0].Rows)
+            {
+                UcMainStock1.GetDayStockBaseInfo(dr["STOCK_CODE"].ToString().Trim(), cnt.ToString());
+                System.Threading.Thread.Sleep(1000);
+                Application.DoEvents();
+                cnt++;
+            }
+        }
+
+        private void btn일봉데이터전송_Click(object sender, EventArgs e)
+        {
+            if (UcMainStock1._allStockDataset == null) { return; }
+
+            progressBarTotal.Maximum = UcMainStock1._allStockDataset.Tables[0].Rows.Count;
+            progressBarTotal.Value = 0;
+            int cnt = 5001;
+
+            foreach (DataRow dr in UcMainStock1._allStockDataset.Tables[0].Rows)
+            {
+                UcMainStock1.GetDayStockBaseInfo(dr["STOCK_CODE"].ToString().Trim(), cnt.ToString());
+                System.Threading.Thread.Sleep(1000);
+                progressBarTotal.Value++;
+                Application.DoEvents();
+                cnt++;
+            }
+
+            tslStatus.Text = "작업이 완료되었습니다!!";
+
+            
+        }
+
+        private void frmSaver_Load(object sender, EventArgs e)
+        {
+            UcMainStock1.OnEventConnect = ModStatus.EventOn;
+            UcMainStock1.OnReceiveConditionVer = ModStatus.EventOn;
+            UcMainStock1.OnReceiveTrCondition = ModStatus.EventOn;
+            UcMainStock1.OnReceiveTrData = ModStatus.EventOn;
+
+            UcMainStock1.Connection();
+            tslStatus.Text = "";
+        }
+
+        private void ucMainStock1_OnDayDsBaseInfo(DataSet ds)
+        {
+            StoredStockDayData(ds);
+        }
+
+        private void StoredStockDayData(DataSet ds) 
+        {
+            DataView dv = new DataView(ds.Tables[0]);
+            
+            dv.RowFilter = "일자 >= " + DateTime.Now.AddDays(-30).ToString("yyyyMMdd")  + "";
+            
+            string 종목코드 = ds.Tables[0].Rows[0]["종목코드"].ToString().Trim();
+            progressBarDetail.Maximum = dv.Count;
+            progressBarDetail.Value = 0;
+            try
+            {
+
+                foreach(DataRowView dr in dv) {
+                    int 현재가 = Convert.ToInt32(dr["현재가"].ToString().Trim());
+                    int 거래량 = Convert.ToInt32(dr["거래량"].ToString().Trim());
+                    Int64 거래대금 = Convert.ToInt64(dr["거래대금"].ToString().Trim());
+                    string 일자 = dr["일자"].ToString().Trim();
+                    int 시가 = Convert.ToInt32(dr["시가"].ToString().Trim());
+                    int 고가 = Convert.ToInt32(dr["고가"].ToString().Trim());
+                    int 저가 = Convert.ToInt32(dr["저가"].ToString().Trim());
+                    string 수정주가구분 = dr["수정주가구분"].ToString().Trim();
+                    string 수정비율 = dr["수정비율"].ToString().Trim();
+                    string 대업종구분 = dr["대업종구분"].ToString().Trim();
+                    string 소업종구분 = dr["소업종구분"].ToString().Trim();
+                    string 종목정보 = dr["종목정보"].ToString().Trim();
+                    string 수정주가이벤트 = dr["수정주가이벤트"].ToString().Trim();
+                    string 전일종가 = dr["전일종가"].ToString().Trim();
+                    string 저가MA = dr["저가MA"].ToString().Trim();
+                    string 기간최저가 = dr["기간최저가"].ToString().Trim();
+                    string 기간종가최저가 = dr["기간종가최저가"].ToString().Trim();
+                    string 최저가MA = dr["최저가MA"].ToString().Trim();
+                    string 최저가종가MA = dr["최저가종가MA"].ToString().Trim();
+                    _DataAcc.p_stock_day_data_Add("1",
+                        종목코드,
+                        현재가.ToString().Trim(),
+                        거래량.ToString().Trim(),
+                        거래대금.ToString().Trim(),
+                        일자,
+                        시가.ToString().Trim(),
+                        고가.ToString().Trim(),
+                        저가.ToString().Trim(),
+                        수정주가구분,
+                        수정비율.ToString().Trim(), 
+                        대업종구분, 
+                        소업종구분,
+                        종목정보,
+                        수정주가이벤트, 
+                        전일종가.ToString().Trim(), 
+                        저가MA.ToString().Trim(),
+                        기간최저가.ToString().Trim(), 
+                        기간종가최저가.ToString().Trim(), 
+                        최저가MA.ToString().Trim(), 
+                        최저가종가MA.ToString().Trim(), 
+                        true,
+                        null,
+                        null);
+                    progressBarDetail.Value++;
+                    Application.DoEvents();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                _DataAcc.DisConnect();
+            }
+        }
+    }
+}

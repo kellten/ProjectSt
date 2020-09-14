@@ -1,0 +1,170 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class ucMainStockVer2
+    Inherits System.Windows.Forms.UserControl
+
+    'UserControl은 Dispose를 재정의하여 구성 요소 목록을 정리합니다.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Windows Form 디자이너에 필요합니다.
+    Private components As System.ComponentModel.IContainer
+
+    '참고: 다음 프로시저는 Windows Form 디자이너에 필요합니다.
+    '수정하려면 Windows Form 디자이너를 사용하십시오.  
+    '코드 편집기를 사용하여 수정하지 마십시오.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucMainStockVer2))
+        Me.lblLoginStatus = New System.Windows.Forms.Label()
+        Me.btnConnect = New System.Windows.Forms.Button()
+        Me.btnDisconnect = New System.Windows.Forms.Button()
+        Me.lblMsg = New System.Windows.Forms.Label()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnLoggerStart = New System.Windows.Forms.Button()
+        Me.btnPassword = New System.Windows.Forms.Button()
+        Me.AxKH = New AxKHOpenAPILib.AxKHOpenAPI()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        CType(Me.AxKH, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'lblLoginStatus
+        '
+        Me.lblLoginStatus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblLoginStatus.Location = New System.Drawing.Point(3, 4)
+        Me.lblLoginStatus.Name = "lblLoginStatus"
+        Me.lblLoginStatus.Size = New System.Drawing.Size(134, 21)
+        Me.lblLoginStatus.TabIndex = 6
+        Me.lblLoginStatus.Tag = "/D"
+        Me.lblLoginStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'btnConnect
+        '
+        Me.btnConnect.Location = New System.Drawing.Point(143, 2)
+        Me.btnConnect.Name = "btnConnect"
+        Me.btnConnect.Size = New System.Drawing.Size(45, 23)
+        Me.btnConnect.TabIndex = 7
+        Me.btnConnect.Text = "접속"
+        Me.btnConnect.UseVisualStyleBackColor = True
+        '
+        'btnDisconnect
+        '
+        Me.btnDisconnect.Location = New System.Drawing.Point(194, 2)
+        Me.btnDisconnect.Name = "btnDisconnect"
+        Me.btnDisconnect.Size = New System.Drawing.Size(61, 23)
+        Me.btnDisconnect.TabIndex = 8
+        Me.btnDisconnect.Text = "로그아웃"
+        Me.btnDisconnect.UseVisualStyleBackColor = True
+        '
+        'lblMsg
+        '
+        Me.lblMsg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblMsg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblMsg.Location = New System.Drawing.Point(0, 0)
+        Me.lblMsg.Name = "lblMsg"
+        Me.lblMsg.Size = New System.Drawing.Size(506, 28)
+        Me.lblMsg.TabIndex = 9
+        Me.lblMsg.Tag = "/D"
+        Me.lblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'SplitContainer1
+        '
+        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Name = "SplitContainer1"
+        '
+        'SplitContainer1.Panel1
+        '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.Panel1)
+        Me.SplitContainer1.Panel1MinSize = 284
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.btnPassword)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.AxKH)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.lblMsg)
+        Me.SplitContainer1.Size = New System.Drawing.Size(842, 32)
+        Me.SplitContainer1.SplitterDistance = 328
+        Me.SplitContainer1.TabIndex = 10
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.btnLoggerStart)
+        Me.Panel1.Controls.Add(Me.btnConnect)
+        Me.Panel1.Controls.Add(Me.btnDisconnect)
+        Me.Panel1.Controls.Add(Me.lblLoginStatus)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(324, 28)
+        Me.Panel1.TabIndex = 0
+        '
+        'btnLoggerStart
+        '
+        Me.btnLoggerStart.Location = New System.Drawing.Point(261, 1)
+        Me.btnLoggerStart.Name = "btnLoggerStart"
+        Me.btnLoggerStart.Size = New System.Drawing.Size(61, 23)
+        Me.btnLoggerStart.TabIndex = 9
+        Me.btnLoggerStart.Text = "로그off"
+        Me.btnLoggerStart.UseVisualStyleBackColor = True
+        '
+        'btnPassword
+        '
+        Me.btnPassword.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnPassword.Location = New System.Drawing.Point(431, 2)
+        Me.btnPassword.Name = "btnPassword"
+        Me.btnPassword.Size = New System.Drawing.Size(75, 23)
+        Me.btnPassword.TabIndex = 11
+        Me.btnPassword.Text = "비번넣기"
+        Me.btnPassword.UseVisualStyleBackColor = True
+        '
+        'AxKH
+        '
+        Me.AxKH.Enabled = True
+        Me.AxKH.Location = New System.Drawing.Point(120, -3)
+        Me.AxKH.Name = "AxKH"
+        Me.AxKH.OcxState = CType(resources.GetObject("AxKH.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.AxKH.Size = New System.Drawing.Size(100, 50)
+        Me.AxKH.TabIndex = 11
+        Me.AxKH.Visible = False
+        '
+        'ucMainStockVer2
+        '
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+        Me.Controls.Add(Me.SplitContainer1)
+        Me.Font = New System.Drawing.Font("굴림체", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(129, Byte))
+        Me.Name = "ucMainStockVer2"
+        Me.Size = New System.Drawing.Size(842, 32)
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        CType(Me.AxKH, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+    Friend WithEvents lblLoginStatus As System.Windows.Forms.Label
+    Friend WithEvents btnConnect As System.Windows.Forms.Button
+    Friend WithEvents btnDisconnect As System.Windows.Forms.Button
+    Friend WithEvents lblMsg As System.Windows.Forms.Label
+    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents AxKH As AxKHOpenAPILib.AxKHOpenAPI
+    Friend WithEvents btnLoggerStart As System.Windows.Forms.Button
+    Friend WithEvents btnPassword As System.Windows.Forms.Button
+
+End Class

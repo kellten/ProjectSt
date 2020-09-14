@@ -1,0 +1,191 @@
+﻿using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using PaikRichStock.Common;
+
+namespace Chart
+{
+    public class clsChart
+    {
+        public class ResultDtEventArgs : EventArgs
+        {
+            public System.Data.DataSet Data { get; set; }
+            public ResultDtEventArgs(System.Data.DataSet data)
+            {
+                Data = data;
+            }          
+        }
+
+        public event EventHandler<ResultDtEventArgs> OnEventReturn10081ResultDt;
+        public event EventHandler<ResultDtEventArgs> OnEventReturnRealTime;
+
+        private PaikRichStock.Common.ucMainStockVer2 _MainStock;
+
+        private System.Data.DataTable _dtOpt10081 = new System.Data.DataTable();
+        private string _stockCode_Opt10081 = "";
+
+        private string _lastDate = "";
+
+        public  PaikRichStock.Common.ucMainStockVer2 MainStock
+        {
+            set
+            {
+                _MainStock = value;
+
+                _MainStock.OnReceiveTrData_opt10081 += new PaikRichStock.Common.ucMainStockVer2.OnReceiveTrData_opt10081EventHandler(OnReceiveTrData_opt10081);
+                _MainStock.OnReceiveRealData_Volume += _MainStock_OnReceiveRealData_Volume;
+            }
+        }
+        
+        public string LastDate
+        {
+            set
+            {
+                _lastDate = value;
+            }
+        }
+        
+        
+        #region CallOpt10081Day(주식일봉차트조회요청)
+        
+        #endregion
+
+        public void GetOpt10081(string stockCode)
+        {
+            if (stockCode == "")
+            {
+                return;
+            }
+
+            string stdDate = "";
+
+            //_MainStock.OnReceiveTrData_opt10081 += new PaikRichStock.Common.ucMainStockVer2.OnReceiveTrData_opt10081EventHandler(OnReceiveTrData_opt10081);
+
+            stdDate = PaikRichStock.Common.CDateTime.FormatDate(DateTime.Now.Date.ToString("yyyyMMdd"), "");
+
+            _stockCode_Opt10081 = stockCode;
+
+            CallOpt10081(_stockCode_Opt10081, stdDate);
+
+            _MainStock.OptKWFid_OnReceiveRealData(stockCode, 1);
+
+
+        }
+
+        private void CallOpt10081(string stockCode, string stdDate)
+        {
+            _MainStock.Opt10081_OnReceiveTrData(stockCode, _MainStock.GetStockInfo(stockCode), stdDate);
+        }
+
+        void _MainStock_OnReceiveRealData_Volume(DataSet ds)
+        {            
+            if (ds == null) return;
+            if (ds.Tables.Count < 1) return;
+            if (ds.Tables[0].Rows.Count < 1) return;
+
+            if(_stockCode_Opt10081 == ds.Tables[0].Rows[0]["STOCK_CODE"].ToString())
+            {
+                var handler = OnEventReturnRealTime;
+                if (handler != null)
+                {
+                    handler(this, new ResultDtEventArgs(ds));
+                }
+            }
+            
+
+        }
+
+        private void OnReceiveTrData_opt10081(System.Data.DataSet ds)
+        {
+            if(ds==null)
+            {
+                var handler = OnEventReturn10081ResultDt;
+                if (handler != null)
+                {
+                    handler(this, new ResultDtEventArgs(ds));
+                }
+            }
+            
+            if(ds.Tables[0].Rows.Count < 1)
+            {
+                var handler = OnEventReturn10081ResultDt;
+                if (handler != null)
+                {
+                    handler(this, new ResultDtEventArgs(ds));
+                }
+            }
+
+            var handler1 = OnEventReturn10081ResultDt;
+            if (handler1 != null)
+            {
+                handler1(this, new ResultDtEventArgs(ds));
+            }
+
+            ////System.Data.DataRow dr2th;
+            ////string nextDate = "";
+
+            ////if(_dtOpt10081.Columns.Count < 1)
+            ////{
+                
+            ////    if(PaikRichStock.Common.clsFunc.DataTableColumnCloneToDataSet(_dtOpt10081, ds) == false)
+            ////    {
+            ////        System.Windows.Forms.MessageBox.Show("_dtOpt10081에 컬럼 추가가 실패했습니다.");
+            ////        return;
+            ////    }
+
+            ////    foreach (DataRow dr in ds.Tables[0].Rows)
+            ////    {
+            ////        if(_dtOpt10081.Rows.Count>0)
+            ////        {
+            ////            if (DateTime.Parse(CDateTime.FormatDate(_dtOpt10081.Rows[_dtOpt10081.Rows.Count - 1]["일자"].ToString(), "-")) < DateTime.Parse(CDateTime.FormatDate(dr["일자"].ToString(), "-")))
+            ////            {
+            ////                continue;
+            ////            }
+                        
+            ////        }
+
+            ////        if(_lastDate != "")
+            ////        {
+            ////            if(DateTime.Parse(CDateTime.FormatDate(dr["일자"].ToString(), "-")) <= DateTime.Parse(CDateTime.FormatDate(_lastDate, "-")))
+            ////            {
+            ////               continue ;
+            ////            }
+            ////        }
+
+            ////        dr2th = _dtOpt10081.Rows.Add();
+
+            ////        for (int i = 0; i < ds.Tables[0].Columns.Count - 1; i++)
+            ////        {
+            ////            dr2th[ds.Tables[0].Columns[i].ColumnName] = dr[ds.Tables[0].Columns[i].ColumnName];
+            ////        }                
+            ////    }
+
+            ////    string stdDate = "";
+
+            ////    stdDate = DateTime.Now.AddDays(1).ToString("yyyyMMdd");
+
+            ////    nextDate = DateTime.Parse(CDateTime.FormatDate(ds.Tables[0].Rows[ds.Tables[0].Rows.Count - 1]["일자"].ToString(), "-")).AddDays(-1).ToString("yyyyMMdd");
+
+
+            ////    if (_lastDate != "")
+            ////    {
+            ////        if(DateTime.Parse(CDateTime.FormatDate(nextDate,"-")) <= DateTime.Parse(CDateTime.FormatDate(_lastDate, "-")))
+            ////        {
+            ////            var handler = OnEventReturn10081ResultDt;
+            ////            if (handler != null)
+            ////            {
+            ////                handler(this, new ResultDtEventArgs(ds));
+            ////            }
+            ////        }
+            ////    }
+            ////}
+
+            
+        }
+
+    }
+}

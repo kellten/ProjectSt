@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using PaikRichStock.Common;
+
+namespace StockDayDataSaver
+{
+    static class Program
+    {
+        /// <summary>
+        /// 해당 응용 프로그램의 주 진입점입니다.
+        /// </summary>
+        [STAThread]
+        static void Main(string[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            //frmTest frm1 = new frmTest();
+            //Application.Run(frm1);
+            //return;
+
+            frmSaver frm1 = new frmSaver();
+            frmSaverNew frm = new frmSaverNew();
+            if (args.Length > 0 && args[0] == "auto")
+            {
+
+                //Application.Run(frm);
+                frm.ucMainStockVer2.Connection();
+
+                while (frm.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+                frm.ExcuteSendData();
+            }
+            else if (args.Length > 0 && args[0] == "automibi")
+            {
+                //Application.Run(frm);
+                frm.ucMainStockVer2.Connection();
+
+                while (frm.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+                frm.ExcuteSendDataMibi();
+            }
+            else if (args.Length > 0 && args[0] == "company")
+            {
+                //Application.Run(frm);
+                frm.ucMainStockVer2.Connection();
+
+                while (frm.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+                frm.ExcuteCompanyData();
+                frm.ExcuteCompanyCEO();
+            }
+            else if (args.Length > 0 && args[0] == "stockmaster")
+            {
+                //Application.Run(frm);
+                frm.ucMainStockVer2.Connection();
+
+                while (frm.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+                frm.ExcuteStockMaster();
+            }
+            //else if (args.Length > 0 && args[0] == "finance")
+            //{
+            //    //Application.Run(frm);
+            //    frm.ucMainStockVer2.Connection();
+
+            //    while (frm.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+            //    frm.ExcuteStockFinance();
+            //}
+            //else if (args.Length > 0 && args[0] == "ceo")
+            //{
+            //    //Application.Run(frm);
+            //    frm.ucMainStockVer2.Connection();
+
+            //    while (frm.ucMainStockVer2._allStockDataset == null) { Application.DoEvents(); }
+            //    frm.ExcuteCompanyCEO();
+            //}
+            else
+            {
+                Application.Run(frm1);
+            }
+            
+            
+        }
+    }
+}

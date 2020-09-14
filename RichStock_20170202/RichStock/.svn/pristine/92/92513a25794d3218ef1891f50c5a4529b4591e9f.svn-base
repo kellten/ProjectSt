@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Chart
+{
+    public partial class ucChart : UserControl
+    {
+        private clsChart _clsChart = new clsChart();
+        private PaikRichStock.Common.ucMainStockVer2 _MainStock;
+        private string _stockCode = "";
+
+        public PaikRichStock.Common.ucMainStockVer2 MainStock
+        {
+            set
+            {
+                _MainStock = value;
+
+            }
+        }
+        
+        public ucChart(string stockCode)
+        {
+            InitializeComponent();
+
+            _stockCode = stockCode;
+        }
+
+        public void GetChartData()
+        {
+            _clsChart.MainStock = _MainStock;
+            _clsChart.GetOpt10081(_stockCode);
+            _clsChart.OnEventReturn10081ResultDt += EventReturn10081ResultDt;
+        }
+
+        private void EventReturn10081ResultDt(object sender, clsChart.ResultDtEventArgs e)
+        {
+                
+        }      
+
+    }
+}

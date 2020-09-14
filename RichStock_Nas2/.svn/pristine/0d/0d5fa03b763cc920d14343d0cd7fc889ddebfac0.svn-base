@@ -1,0 +1,262 @@
+﻿namespace Chart
+{
+    partial class frmChart
+    {
+        /// <summary> 
+        /// 필수 디자이너 변수입니다.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// 사용 중인 모든 리소스를 정리합니다.
+        /// </summary>
+        /// <param name="disposing">관리되는 리소스를 삭제해야 하면 true이고, 그렇지 않으면 false입니다.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region 구성 요소 디자이너에서 생성한 코드
+
+        /// <summary> 
+        /// 디자이너 지원에 필요한 메서드입니다. 
+        /// 이 메서드의 내용을 코드 편집기로 수정하지 마십시오.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnPrev = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.pnlMA = new System.Windows.Forms.Panel();
+            this.chk220MA = new System.Windows.Forms.CheckBox();
+            this.chkEnv = new System.Windows.Forms.CheckBox();
+            this.chk120MA = new System.Windows.Forms.CheckBox();
+            this.chk41bl = new System.Windows.Forms.CheckBox();
+            this.chk60MA = new System.Windows.Forms.CheckBox();
+            this.chk20MA = new System.Windows.Forms.CheckBox();
+            this.chk10MA = new System.Windows.Forms.CheckBox();
+            this.chk5MA = new System.Windows.Forms.CheckBox();
+            this.chk3MA = new System.Windows.Forms.CheckBox();
+            this.chkRSI = new System.Windows.Forms.CheckBox();
+            this.pnlMA.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Location = new System.Drawing.Point(3, 3);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(54, 23);
+            this.btnPrev.TabIndex = 0;
+            this.btnPrev.Text = "◀";
+            this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(63, 3);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(54, 23);
+            this.btnNext.TabIndex = 1;
+            this.btnNext.Text = "▶";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // pnlMA
+            // 
+            this.pnlMA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlMA.Controls.Add(this.chkRSI);
+            this.pnlMA.Controls.Add(this.chk220MA);
+            this.pnlMA.Controls.Add(this.chkEnv);
+            this.pnlMA.Controls.Add(this.chk120MA);
+            this.pnlMA.Controls.Add(this.chk41bl);
+            this.pnlMA.Controls.Add(this.chk60MA);
+            this.pnlMA.Controls.Add(this.chk20MA);
+            this.pnlMA.Controls.Add(this.chk10MA);
+            this.pnlMA.Controls.Add(this.chk5MA);
+            this.pnlMA.Controls.Add(this.chk3MA);
+            this.pnlMA.Location = new System.Drawing.Point(277, 3);
+            this.pnlMA.Name = "pnlMA";
+            this.pnlMA.Size = new System.Drawing.Size(575, 34);
+            this.pnlMA.TabIndex = 2;
+            // 
+            // chk220MA
+            // 
+            this.chk220MA.AutoSize = true;
+            this.chk220MA.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.chk220MA.Checked = true;
+            this.chk220MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk220MA.Location = new System.Drawing.Point(336, 9);
+            this.chk220MA.Name = "chk220MA";
+            this.chk220MA.Size = new System.Drawing.Size(61, 16);
+            this.chk220MA.TabIndex = 10;
+            this.chk220MA.Text = "220MA";
+            this.chk220MA.UseVisualStyleBackColor = false;
+            this.chk220MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chkEnv
+            // 
+            this.chkEnv.AutoSize = true;
+            this.chkEnv.BackColor = System.Drawing.Color.DarkGray;
+            this.chkEnv.Checked = true;
+            this.chkEnv.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkEnv.ForeColor = System.Drawing.Color.White;
+            this.chkEnv.Location = new System.Drawing.Point(479, 9);
+            this.chkEnv.Name = "chkEnv";
+            this.chkEnv.Size = new System.Drawing.Size(49, 16);
+            this.chkEnv.TabIndex = 9;
+            this.chkEnv.Text = "ENV";
+            this.chkEnv.UseVisualStyleBackColor = false;
+            this.chkEnv.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk120MA
+            // 
+            this.chk120MA.AutoSize = true;
+            this.chk120MA.BackColor = System.Drawing.Color.Blue;
+            this.chk120MA.Checked = true;
+            this.chk120MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk120MA.Location = new System.Drawing.Point(274, 9);
+            this.chk120MA.Name = "chk120MA";
+            this.chk120MA.Size = new System.Drawing.Size(61, 16);
+            this.chk120MA.TabIndex = 8;
+            this.chk120MA.Text = "120MA";
+            this.chk120MA.UseVisualStyleBackColor = false;
+            this.chk120MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk41bl
+            // 
+            this.chk41bl.AutoSize = true;
+            this.chk41bl.BackColor = System.Drawing.Color.Black;
+            this.chk41bl.Checked = true;
+            this.chk41bl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk41bl.ForeColor = System.Drawing.Color.White;
+            this.chk41bl.Location = new System.Drawing.Point(398, 9);
+            this.chk41bl.Name = "chk41bl";
+            this.chk41bl.Size = new System.Drawing.Size(80, 16);
+            this.chk41bl.TabIndex = 7;
+            this.chk41bl.Text = "볼밴(40,2)";
+            this.chk41bl.UseVisualStyleBackColor = false;
+            this.chk41bl.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk60MA
+            // 
+            this.chk60MA.AutoSize = true;
+            this.chk60MA.BackColor = System.Drawing.Color.Pink;
+            this.chk60MA.Checked = true;
+            this.chk60MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk60MA.Location = new System.Drawing.Point(218, 9);
+            this.chk60MA.Name = "chk60MA";
+            this.chk60MA.Size = new System.Drawing.Size(55, 16);
+            this.chk60MA.TabIndex = 6;
+            this.chk60MA.Text = "60MA";
+            this.chk60MA.UseVisualStyleBackColor = false;
+            this.chk60MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk20MA
+            // 
+            this.chk20MA.AutoSize = true;
+            this.chk20MA.BackColor = System.Drawing.Color.Magenta;
+            this.chk20MA.Checked = true;
+            this.chk20MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk20MA.Location = new System.Drawing.Point(161, 9);
+            this.chk20MA.Name = "chk20MA";
+            this.chk20MA.Size = new System.Drawing.Size(55, 16);
+            this.chk20MA.TabIndex = 5;
+            this.chk20MA.Text = "20MA";
+            this.chk20MA.UseVisualStyleBackColor = false;
+            this.chk20MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk10MA
+            // 
+            this.chk10MA.AutoSize = true;
+            this.chk10MA.BackColor = System.Drawing.Color.Green;
+            this.chk10MA.Checked = true;
+            this.chk10MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk10MA.Location = new System.Drawing.Point(104, 9);
+            this.chk10MA.Name = "chk10MA";
+            this.chk10MA.Size = new System.Drawing.Size(55, 16);
+            this.chk10MA.TabIndex = 4;
+            this.chk10MA.Text = "10MA";
+            this.chk10MA.UseVisualStyleBackColor = false;
+            this.chk10MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk5MA
+            // 
+            this.chk5MA.AutoSize = true;
+            this.chk5MA.BackColor = System.Drawing.Color.YellowGreen;
+            this.chk5MA.Checked = true;
+            this.chk5MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk5MA.Location = new System.Drawing.Point(53, 9);
+            this.chk5MA.Name = "chk5MA";
+            this.chk5MA.Size = new System.Drawing.Size(49, 16);
+            this.chk5MA.TabIndex = 3;
+            this.chk5MA.Text = "5MA";
+            this.chk5MA.UseVisualStyleBackColor = false;
+            this.chk5MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chk3MA
+            // 
+            this.chk3MA.AutoSize = true;
+            this.chk3MA.BackColor = System.Drawing.Color.Purple;
+            this.chk3MA.Checked = true;
+            this.chk3MA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk3MA.ForeColor = System.Drawing.Color.White;
+            this.chk3MA.Location = new System.Drawing.Point(3, 9);
+            this.chk3MA.Name = "chk3MA";
+            this.chk3MA.Size = new System.Drawing.Size(49, 16);
+            this.chk3MA.TabIndex = 0;
+            this.chk3MA.Text = "3MA";
+            this.chk3MA.UseVisualStyleBackColor = false;
+            this.chk3MA.CheckedChanged += new System.EventHandler(this.chk3MA_CheckedChanged);
+            // 
+            // chkRSI
+            // 
+            this.chkRSI.AutoSize = true;
+            this.chkRSI.Checked = true;
+            this.chkRSI.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkRSI.Location = new System.Drawing.Point(530, 9);
+            this.chkRSI.Name = "chkRSI";
+            this.chkRSI.Size = new System.Drawing.Size(43, 16);
+            this.chkRSI.TabIndex = 11;
+            this.chkRSI.Text = "RSI";
+            this.chkRSI.UseVisualStyleBackColor = false;
+            this.chkRSI.CheckedChanged += new System.EventHandler(this.chkRSI_CheckedChanged);
+            // 
+            // frmChart
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(858, 681);
+            this.Controls.Add(this.pnlMA);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnPrev);
+            this.Name = "frmChart";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChart_FormClosing);
+            this.Load += new System.EventHandler(this.frmChart_Load);
+            this.SizeChanged += new System.EventHandler(this.ucChart_SizeChanged);
+            this.pnlMA.ResumeLayout(false);
+            this.pnlMA.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnPrev;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Panel pnlMA;
+        private System.Windows.Forms.CheckBox chk10MA;
+        private System.Windows.Forms.CheckBox chk5MA;
+        private System.Windows.Forms.CheckBox chk3MA;
+        private System.Windows.Forms.CheckBox chk60MA;
+        private System.Windows.Forms.CheckBox chk20MA;
+        private System.Windows.Forms.CheckBox chk41bl;
+        private System.Windows.Forms.CheckBox chk120MA;
+        private System.Windows.Forms.CheckBox chkEnv;
+        private System.Windows.Forms.CheckBox chk220MA;
+        private System.Windows.Forms.CheckBox chkRSI;
+
+    }
+}

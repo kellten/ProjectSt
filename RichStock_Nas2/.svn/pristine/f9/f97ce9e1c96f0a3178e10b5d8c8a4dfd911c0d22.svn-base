@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace NewsFinder
+{
+    public partial class Form1 : Form
+    {
+        string _str;
+        Process p = new Process();
+
+        public Form1()
+        {
+            InitializeComponent();
+            _str = "";
+        }
+
+        public Form1(Form frm)
+        {
+            InitializeComponent();
+            _str = "";
+            this.Owner = frm;
+        }
+
+        public Form1(string str , string title)
+        {
+            InitializeComponent();
+            this.Text = title;
+            _str = str;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.Left = Screen.PrimaryScreen.WorkingArea.Right - this.Width;
+            this.Top = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height;
+            richTextBox1.Text = _str;
+        }
+
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            p = Process.Start(e.LinkText);
+        }
+
+        public void UpdateNoti(string str)
+        {
+            this.Left = Screen.PrimaryScreen.WorkingArea.Right-this.Width;
+            this.Top = Screen.PrimaryScreen.WorkingArea.Bottom - this.Height;
+            string temp = "";
+            temp = richTextBox1.Text;
+            richTextBox1.Text = str + "\r\n==========================================\r\n";
+            richTextBox1.Text += temp;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                this.Visible = false;
+                e.Cancel = true;
+            }
+            catch
+            {
+
+            }
+        }
+    }
+}

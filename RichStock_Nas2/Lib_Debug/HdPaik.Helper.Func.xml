@@ -1,0 +1,193 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+HdPaik.Helper.Func
+</name>
+</assembly>
+<members>
+<member name="M:HdPaik.Helper.Func.CFunc.GetImageFromDB(System.Byte[])">
+	<summary>
+ DB의 Image형 자료를 가져와 Image로 반환한다.
+ </summary>
+	<param name="imgByte">Image형의 DataRow</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.GetDataPatientInfo(System.String,System.String)">
+	<summary>
+ MDI와 MDI Child폼간의 전달할 환자정보를 가져온다 
+ </summary>
+	<param name="chartNo">등록번호</param>
+	<param name="bedinDate">입원일자</param>
+	<returns>환자정보 (StructPatientInfo)</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.GetDataEMRPatientInfo(System.String,System.String)">
+	<summary>
+ MDI와 MDI Child폼간의 전달할 EMR 엑티브환자정보를 가져온다 
+ </summary>
+	<param name="chartNo">등록번호</param>
+	<param name="bedinDate">입원일자</param>
+	<returns>환자정보 (StructPatientInfo)</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.GetDataEMRPatActiveInfo(System.String,System.String)">
+	<summary>
+ MDI와 MDI Child폼간의 전달할 EMR 엑티브환자정보를 가져온다 
+ </summary>
+	<param name="chartNo">등록번호</param>
+	<param name="bedinDate">입원일자</param>
+	<returns>환자정보 (StructPatientInfo)</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.CalcICUHoldDate(System.String,System.String,System.String,System.String)">
+	<summary>
+ 중환자실 체류일수를 계산한다.
+ </summary>
+	<param name="chartNo">환자번호</param>
+	<param name="bedinDate">입원일자</param>
+	<param name="deptCode">부서코드</param>
+	<param name="exeDate">실행일시 (미입력시 현재일자)</param>
+	<returns>중환자실 체류일수</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.GetDutyTime(System.String)">
+	<summary>
+ 근무별 실행시간을 구한다.
+ </summary>
+	<param name="duty">"D":Day, "E":Evening, "N":Night</param>
+	<returns>String배열(0:시작시간, 1:종료시간)</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.EMRGubun(System.String,System.String,System.String)">
+	<summary>
+ EMR 대상환자인지 구별
+ </summary>
+	<param name="yeobmuGb">업무구분 외래 1, 병동 2</param>
+	<param name="chartNo">환자번호</param>
+	<param name="BedinDate">입원일자, 외래의 경우 빈값</param>
+	<returns>true : EMR대상환자</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CFunc.ReturnSizePreferMonthCal(System.Windows.Forms.MonthCalendar)">
+	<summary>
+ MonthCalendar 컨트롤이 들어갈 수 있는 사각형 영역의 크기를 반환합니다. 
+ </summary>
+	<param name="valueMonthCalender">monthCalendar</param>
+	<returns>MonthCalendar 컨트롤이 들어갈 수 있는 사각형 영역의 크기를 반환</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CMakeEmrChosNoKeyData.GetDataYeobmuGb">
+	<summary>
+ 환자의 재원상태 구분을 호출
+ </summary>
+	<returns>1 : 외래, 2 : 병동, E : 응급실, X : 재원상태없음</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CMakeEmrChosNoKeyData.GetDataYeobmuGb(System.Boolean)">
+	<summary>
+ 환자의 재원상태 구분을 호출
+ </summary>
+	<returns>1 : 외래, 2 : 병동, E : 응급실, X : 재원상태없음</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CMakeEmrChosNoKeyData.GetDataYeobmuGbErIncludeDate">
+	<summary>
+ 환자의 재원상태 구분을 호출
+ </summary>
+	<returns>1 : 외래, 2 : 병동, E : 응급실, X : 재원상태없음</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CMakeEmrChosNoKeyData.GetDataYeobmuGbCopyPrint(System.String,System.String)">
+	<summary>
+ 환자의 재원상태 구분을 호출
+ </summary>
+	<returns>1 : 외래, 2 : 병동, E : 응급실, X : 재원상태없음</returns>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CheckFormAuthority.WriteFormAccessLog(HdPaik.Helper.Func.CheckFormAuthority.SystemGb,HdPaik.Helper.Func.CheckFormAuthority.AccessGb,HdPaik.Helper.Func.CheckFormAuthority.AuthType,System.String,System.String)">
+	<summary>
+ 통합로그인 Login/Out, 프로젝트 Open, Close시 접근이력을 기록한다.
+ </summary>
+	<param name="pAccessGb"></param>
+	<param name="pSystemGb"></param>
+	<param name="pAuthType"></param>
+	<param name="pOperId"></param>
+	<param name="pFormName"></param>
+	<remarks></remarks>
+</member><member name="M:HdPaik.Helper.Func.CheckFormAuthority.WriteFormQueryLog(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ 폼에서 질의한 내역을 Log로 저장한다.
+ </summary>
+	<param name="pOperId">작업자(5)</param>
+	<param name="pFormName">화면이름(50)</param>
+	<param name="pChartNo">등록번호(7)</param>
+	<param name="pTeam">팀(3)</param>
+	<param name="pDeptCode">과(3)</param>
+	<param name="pWard">병동(3)</param>
+	<param name="pFromDate">조회시작일자(8)</param>
+	<param name="pToDate">조회종료일자(8)</param>
+	<remarks></remarks>
+</member><member name="T:HdPaik.Helper.Func.CMail">
+	<summary>
+ 백병원 WebMail 서버를 이용하여 메일을 보내는 클래스입니다.
+ </summary>
+	<remarks>
+ 사용법 : 초기화               Initialize()
+          보내는사람 Email주소 _fromAddress 
+          보내는사람 이름      _fromAddressName
+          받는사람 Email주소   _toAddress
+          받는사람 이름        _toAddressName
+          메일제목             _subject
+          메일내용             _body
+          첨부파일             SetAttachment(fileName1, fileName2, ... fileNameXXX)
+          메일보내기           SendMail (에러시 Exception 발생)
+ 
+          Private Sub test()
+              Try
+                  Dim cMail As New CMail
+
+                  cMail.Initialize()
+
+                  cMail.FromAddress = "acccount@paik.ac.kr"   '보내는사람 Email Address
+                  cMail.FromAddressName = "해운대백병원 경리부" '보내는사람 이름
+                  cMail.ToAddress = "B0527@paik.ac.kr"        '받는사람 Email Address
+                  cMail.ToAddressName = "박지현"              '받는사람 이름
+                  cMail.Subject = "TEST"                      '제목
+                  cMail.Body = "TEST"                         '내용
+
+                  '//첨부파일
+                  cMail.SetAttachment("C:\요양비계산대장1.TXT", "C:\요양비계산대장1.TXT")
+
+                  '//메일보내기
+                  cMail.SendMail()
+              Catch ex As Exception
+                  '//에러처리해야함.
+                  MsgBox(ex.ToString)
+              End Try
+          End Sub
+ </remarks>
+</member><member name="P:HdPaik.Helper.Func.My.Resources.Resource.ResourceManager">
+	<summary>
+  이 클래스에서 사용하는 캐시된 ResourceManager 인스턴스를 반환합니다.
+</summary>
+</member><member name="P:HdPaik.Helper.Func.My.Resources.Resource.Culture">
+	<summary>
+  이 강력한 형식의 리소스 클래스를 사용하여 모든 리소스 조회에 대한 현재 스레드의 CurrentUICulture
+  속성을 재정의합니다.
+</summary>
+</member><member name="T:HdPaik.Helper.Func.My.Resources.Resource">
+	<summary>
+  지역화된 문자열 등을 찾기 위한 강력한 형식의 리소스 클래스입니다.
+</summary>
+</member><member name="M:HdPaik.Helper.Func.CheckData.GetOrderStatus(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,HdPaik.Helper.Func.CheckData.ProgramType,System.String,System.String,System.String)">
+	<summary>
+ 검사파트에서 처방상태를 체크한다. 
+  
+ </summary>
+	<param name="yeobmuGb">HdPaik.Helper.Func.CDataType에 EnumYeobmuGb참조</param>
+	<param name="chartNo"></param>
+	<param name="deptCode"></param>
+	<param name="ordDate"></param>
+	<param name="OrdNo"></param>
+	<param name="bedinDate"></param>
+	<param name="exeDate"></param>
+	<param name="OrdAt"></param>
+	<param name="recProgramType">programType참조</param>
+	<param name="dcYn">DC체크</param>
+	<param name="sunabYn">수납체크</param>
+	<param name="beoutYn">퇴원체크</param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

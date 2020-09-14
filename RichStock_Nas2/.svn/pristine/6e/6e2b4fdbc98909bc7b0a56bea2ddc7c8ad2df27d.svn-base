@@ -1,0 +1,153 @@
+﻿Imports PaikRichStock.Common
+Imports System.Xml
+Imports System.IO
+
+Public Class ucVolumeBasicAnalysis
+    Sub New(ByVal mainStock As PaikRichStock.Common.ucMainStockVer2)
+
+        ' 이 호출은 디자이너에 필요합니다.
+        InitializeComponent()
+
+        ' InitializeComponent() 호출 뒤에 초기화 코드를 추가하십시오.
+
+        _MainStock2 = mainStock
+
+    End Sub
+
+    Private _MainStock2 As New PaikRichStock.Common.ucMainStockVer2
+    Private _sourceDt As New DataTable
+
+#Region " Property "
+    Private _tagetDt As New DataTable
+
+    Public WriteOnly Property TagetDt As DataTable
+        Set(value As DataTable)
+            GetTagetDt(value)
+        End Set
+    End Property
+
+    Public WriteOnly Property TagetDataSet As DataSet
+        Set(value As DataSet)
+            GetTagetDataSet(value)
+        End Set
+    End Property
+#End Region
+
+#Region " InitTagetDataTable "
+    Private Sub InitTagetDataTable()
+        _tagetDt.Reset()
+        _tagetDt = Nothing
+        _tagetDt = New DataTable
+
+        With _tagetDt.Columns
+            .Add("STOCK_CODE", System.Type.GetType("System.String"))
+            .Add("STOCK_NAME", System.Type.GetType("System.String"))
+        End With
+
+    End Sub
+
+    Private Sub InitSourceDataTable()
+        _sourceDt.Reset()
+        _sourceDt = Nothing
+        _sourceDt = New DataTable
+
+        With _sourceDt.Columns
+            .Add("STOCK_CODE", System.Type.GetType("System.String"))
+            .Add("STOCK_NAME", System.Type.GetType("System.String"))
+            For i As Integer = 0 To UBound(modDataTable.opt10059_Cal)
+                .Add(modDataTable.opt10059_Cal(i) & "합최저점", System.Type.GetType("System.Int32"))
+                .Add(modDataTable.opt10059_Cal(i) & "합최고점", System.Type.GetType("System.Int32"))
+                .Add(modDataTable.opt10059_Cal(i) & "분산합비율", System.Type.GetType("System.Int16"))
+                .Add(modDataTable.opt10059_Cal(i) & "금액최저점", System.Type.GetType("System.Int64"))
+                .Add(modDataTable.opt10059_Cal(i) & "금액최고점", System.Type.GetType("System.Int64"))
+                .Add(modDataTable.opt10059_Cal(i) & "분산금액비율", System.Type.GetType("System.Int16"))
+            Next
+        End With
+    End Sub
+#End Region
+
+#Region " GetTagetDt "
+    Private Sub GetTagetDt(ByVal value As DataTable)
+        Dim dr2th As DataRow
+
+        InitTagetDataTable()
+
+        With _tagetDt
+            For Each dr As DataRow In value.Rows
+                dr2th = .NewRow
+
+                dr2th("STOCK_CODE") = dr("STOCK_CODE")
+                dr2th("STOCK_NAME") = dr("STOCK_NAME")
+
+                .Rows.Add(dr2th)
+            Next
+        End With
+
+    End Sub
+#End Region
+
+#Region " GetTagetDataSet "
+    Private Sub GetTagetDataSet(ByVal value As DataSet)
+        Dim dr2th As DataRow
+
+        InitTagetDataTable()
+
+        With _tagetDt
+            For Each dr As DataRow In value.Tables(0).Rows
+                dr2th = .NewRow
+
+                dr2th("STOCK_CODE") = dr("STOCK_CODE")
+                dr2th("STOCK_NAME") = dr("STOCK_NAME")
+
+                .Rows.Add(dr2th)
+            Next
+        End With
+    End Sub
+#End Region
+
+#Region " GetCurrentVolume "
+    Private Sub GetCurrentVolume()
+        If _tagetDt.Rows.Count < 1 Then Exit Sub
+        Try
+
+            For Each dr In _tagetDt.Rows
+
+            Next
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+        End Try
+    End Sub
+
+    Private Sub GetXmlDataAnalysis(ByVal stockCode As String, ByVal stockName As String)
+        Dim dt As New DataTable
+
+        If File.Exists("C:\Xml2\" & stockCode & "_" & stockName & ".xml") Then
+
+            Dim xmlFile As XmlReader
+            Dim xmlFileSc As XmlReader
+            xmlFile = XmlReader.Create("C:\Xml2\" & stockCode & "_" & stockName & ".xml", New XmlReaderSettings())
+            xmlFileSc = XmlReader.Create("C:\Xml2\" & stockCode & "_" & stockName & ".xsd", New XmlReaderSettings())
+
+            dt.ReadXmlSchema(xmlFileSc)
+            dt.ReadXml(xmlFile)
+
+            For i As Integer = 0 To dt.Rows.Count - 1
+                If Trim(dt.Rows(i).Item("거래량").ToString()) <> "" Then Exit For
+
+                If Trim(dt.Rows(i).Item("거래량").ToString()) = "" Then
+                    dt.Rows.RemoveAt(0)
+                End If
+            Next
+
+            Dim MaxQty As Integer = 0
+            Dim MinQty As Integer = 0
+            Dim MaxPriceQty As Integer = 0
+            Dim MinPriceQty As Integer = 0
+
+
+        End If
+    End Sub
+#End Region
+
+End Class

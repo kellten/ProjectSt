@@ -1,0 +1,670 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="txtGiho.Text" xml:space="preserve">
+    <value>한글 특수문자표  
+ 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 4 5 6 7 8 9 1 2 3 
+ㄱ 　 ！ ＇ ， ． ／ ： ； ？ ＾ ＿ ｀ ｜ ￣ 、 。 · ‥ … ¨ 〃 ­ ― ∥ ＼ ∼ ´ ～ ˇ ˘ ˝ ˚ ˙ ¸ ˛ ¡ ¿ ː                                                        
+ㄴ ＂ （ ） ［ ］ ｛ ｝ ‘ ’ “ ” 〔 〕 〈 〉 《 》 「 」 『 』 【 】                                                                       
+ㄷ ＋ － ＜ ＝ ＞ ± × ÷ ≠ ≤ ≥ ∞ ∴ ♂ ♀ ∠ ⊥ ⌒ ∂ ∇ ≡ ≒ ≪ ≫ √ ∽ ∝ ∵ ∫ ∬ ∈ ∋ ⊆ ⊇ ⊂ ⊃ ∪ ∩ ∧ ∨ ￢ ⇒ ⇔ ∀ ∃ ∮ ∑ ∏                                              
+ㄹ ＄ ％ ￦ Ｆ ′ ″ ℃ Å ￠ ￡ ￥ ¤ ℉ ‰ ? ㎕ ㎖ ㎗ ㎘ ㏄ ㎣ ㎤ ㎥ ㎦ ㎙ ㎚ ㎛ ㎜ ㎝ ㎞ ㎟ ㎠ ㎡ ㎢ ㏊ ㎍ ㎎ ㎏ ㏏ ㎈ ㎉ ㏈ ㎧ ㎨ ㎰ ㎱ ㎲ ㎳ ㎴ ㎵ ㎶ ㎷ ㎸ ㎹ ㎀ ㎁ ㎂ ㎃ ㎄ ㎺ ㎻ ㎼ ㎽ ㎾ ㎿ ㎐ ㎑ ㎒ ㎓ ㎔ Ω ㏀ ㏁ ㎊ ㎋ ㎌ ㏖ ㏅ ㎭ ㎮ ㎯ ㏛ ㎩ ㎪ ㎫ ㎬ ㏝ ㏐ ㏓ ㏃ ㏉ ㏜ ㏆ 
+ㅁ ＃ ＆ ＊ ＠ § ※ ☆ ★ ○ ● ◎ ◇ ◆ □ ■ △ ▲ ▽ ▼ → ← ↑ ↓ ↔ 〓 ▷ ◀ ◁ ▶ ♤ ♠ ♡ ♥ ♧ ⊙ ◈ ▣ ◐ ◑ ▒ ▤ ▥ ▨ ▧ ▦ ▩ ♨ ☏ ☎ ☜ ☞ ¶ † ‡ ↕ ↗ ↙ ↖ ↘ ♭ ♩ ♪ ♬ ㉿ ㈜ № ㏇ ™ ㏂ ㏘ ℡ ? ª º                    
+ㅂ ─ │ ┌ ┐ ┘ └ ├ ┬ ┤ ┴ ┼ ━ ┃ ┏ ┓ ┛ ┗ ┣ ┳ ┫ ┻ ╋ ┠ ┯ ┨ ┷ ┿ ┝ ┰ ┥ ┸ ╂ ┒ ┑ ┚ ┙ ┖ ┕ ┎ ┍ ┞ ┟ ┡ ┢ ┦ ┧ ┩ ┪ ┭ ┮ ┲ ┵ ┶ ┹ ┺ ┽ ┾ ╀ ╁ ╃ ╄ ╅ ╆ ╇ ╈ ╉ ╊                           
+ㅅ ㉠ ㉡ ㉢ ㉣ ㉤ ㉥ ㉦ ㉧ ㉨ ㉩ ㉪ ㉫ ㉬ ㉭ ㉮ ㉯ ㉰ ㉱ ㉲ ㉳ ㉴ ㉵ ㉶ ㉷ ㉸ ㉹ ㉺ ㉻ ㈀ ㈁ ㈂ ㈃ ㈄ ㈅ ㈆ ㈇ ㈈ ㈉ ㈊ ㈋ ㈌ ㈍ ㈎ ㈏ ㈐ ㈑ ㈒ ㈓ ㈔ ㈕ ㈖ ㈗ ㈘ ㈙ ㈚ ㈛                                      
+ㅇ ⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ ⓘ ⓙ ⓚ ⓛ ⓜ ⓝ ⓞ ⓟ ⓠ ⓡ ⓢ ⓣ ⓤ ⓥ ⓦ ⓧ ⓨ ⓩ ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⒜ ⒝ ⒞ ⒟ ⒠ ⒡ ⒢ ⒣ ⒤ ⒥ ⒦ ⒧ ⒨ ⒩ ⒪ ⒫ ⒬ ⒭ ⒮ ⒯ ⒰ ⒱ ⒲ ⒳ ⒴ ⒵ ⑴ ⑵ ⑶ ⑷ ⑸ ⑹ ⑺ ⑻ ⑼ ⑽ ⑾ ⑿ ⒀ ⒁ ⒂            
+ㅈ ０ １ ２ ３ ４ ５ ６ ７ ８ ９ ⅰ ⅱ ⅲ ⅳ ⅴ ⅵ ⅶ ⅷ ⅸ ⅹ Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ                                                                
+ㅊ ½ ⅓ ⅔ ¼ ¾ ⅛ ⅜ ⅝ ⅞ ¹ ² ³ ⁴ ⁿ ₁ ₂ ₃ ₄                                                                            
+ㅋ ㄱ ㄲ ㄳ ㄴ ㄵ ㄶ ㄷ ㄸ ㄹ ㄺ ㄻ ㄼ ㄽ ㄾ ㄿ ㅀ ㅁ ㅂ ㅃ ㅄ ㅅ ㅆ ㅇ ㅈ ㅉ ㅊ ㅋ ㅌ ㅍ ㅎ ㅏ ㅐ ㅑ ㅒ ㅓ ㅔ ㅕ ㅖ ㅗ ㅘ ㅙ ㅚ ㅛ ㅜ ㅝ ㅞ ㅟ ㅠ ㅡ ㅢ ㅣ
+ㅌ ㅥ ㅦ ㅧ ㅨ ㅩ ㅪ ㅫ ㅬ ㅭ ㅮ ㅯ ㅰ ㅱ ㅲ ㅳ ㅴ ㅵ ㅶ ㅷ ㅸ ㅹ ㅺ ㆄ ㅼ ㅽ ㅾ ㅿ ㆀ ㆁ ㆂ ㆃ ㆄ ㆅ ㆆ ㆇ ㆈ ㆉ ㆊ ㆋ ㆌ ㆍ ㆎ
+ㅍ Ａ Ｂ Ｃ Ｄ Ｅ Ｆ Ｇ Ｈ Ｉ Ｊ Ｋ Ｌ Ｍ Ｎ Ｏ Ｐ Ｑ Ｒ Ｓ Ｔ Ｕ Ｖ Ｗ Ｘ Ｙ Ｚ ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ ｉ ｊ ｋ ｌ ｍ ｎ ｏ ｐ ｑ ｒ ｓ ｔ ｕ ｖ ｗ ｘ ｙ ｚ
+ㅎ Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω
+ㄲ Æ Ð Ħ Ĳ Ŀ Ł Ø Œ Þ Ŧ Ŋ æ đ ð ħ ı ĳ ĸ ŀ ł ø œ ß þ ŧ ŋ ŉ
+ㄸ ぁ あ ぃ い ぅ う ぇ え ぉ お か が き ぎ く ぐ け げ こ ご さ ざ し じ す ず せ ぜ そ ぞ た だ ち ぢ っ つ づ て で と ど な に ぬ ね の は ば ぱ ひ び ぴ ふ ぶ ぷ へ べ ぺ ほ ぼ ぽ ま み む め も ゃ や ゅ ゆ ょ よ ら り る れ ろ ゎ わ ゐ ゑ を ん
+ㅃ ァ ア ィ イ ゥ ウ ェ エ ォ オ カ ガ キ ギ ク グ ケ ゲ コ ゴ サ ザ シ ジ ス ズ セ ゼ ソ ゾ タ ダ チ ヂ ッ ツ ヅ テ デ ト ド ナ ニ ヌ ネ ノ ハ バ パ ヒ ビ ピ フ ブ プ ヘ ベ ペ ホ ボ ポ マ ミ ム メ モ ャ ヤ ュ ユ ョ ヨ ラ リ ル レ ロ ヮ ワ ヰ ヱ ヲ ン ヴ ヵ ヶ
+ㅆ А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я а б в г д е ё ж з и й к л м н о п р с т у ф х ц ч ш щ ъ ы ь э ю я</value>
+  </data>
+  <data name="txtScript.Text" xml:space="preserve">
+    <value>☞ 스프레드 프린트하기
+   Dim printInfo As New FarPoint.Win.Spread.PrintInfo
+
+        printInfo.Preview = True '미리보기
+        printInfo.Orientation = FarPoint.Win.Spread.PrintOrientation.Portrait
+        printInfo.ShowBorder = True
+
+        'FpSpread1.SetPrintInfo(printInfo, 0)
+        FpSpread1.Sheets(0).PrintInfo = printInfo
+        FpSpread1.PrintSheet(0)
+
+☞ Combo값 얻기
+  Dim oCombo As FarPoint.Win.Spread.CellType.ComboBoxCellType
+
+        With FpSpread1.ActiveSheet
+            oCombo = .Cells(0, 0).CellType
+            Dim ix As Integer
+            For ix = 0 To oCombo.Items.Length - 1
+                '
+                Exit For
+            Next
+            .Cells(0, 0).Text = oCombo.Items(ix)
+
+        End With
+
+
+☞ Child Form에서 다른 ChildForm을 띄울 때
+ Private Sub ShowChildForm(ByVal childForm As System.Windows.Forms.Form)
+        Dim isAlreadyContained As Boolean = False
+        Dim frm As System.Windows.Forms.Form
+
+        For Each frm In Me.MdiParent.MdiChildren
+            If (frm.GetType Is childForm.GetType) Then
+                isAlreadyContained = True
+                frm.Activate()
+                CType(frm, SgPaik.Forms.Inquiry.Order.frmOpdOrderInquiry).SetChartNo(txtChartNo.Text)
+                Exit For
+            End If
+        Next
+
+        If Not isAlreadyContained Then
+            childForm.MdiParent = Me.MdiParent
+            childForm.Show()
+        Else
+            childForm.Close()
+        End If
+    End Sub
+
+
+☞ 스프레드 헤더의 라벨 텍스트 설정
+	spread.ActiveSheet.ColumnHeader.Cells(0, 4).Text = "텍스트....."
+
+☞커서모양
+	Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+
+
+☞체크코드
+	Dim oCheck As New Paik.ClassLibrary.CheckCode(ClassLibrary.CheckCode.CheckDbType.WardDb, ClassLibrary.CheckCode.CheckCodeType.OperId)
+
+        If Not oCheck.CheckCode(txtOperId.Text) Then
+            MsgBox("작업자 ID가 정확하지 않습니다...", MsgBoxStyle.Information)
+            txtOperId.Focus()
+            Exit Sub
+        End If
+
+        lblOperName.Text = oCheck.CheckCodeName
+
+
+☞MsgBar
+	Paik.ClassLibrary.CFunc.MsgBar(Me.ParentForm, "")
+
+
+☞ActiveCell
+        FPSpread1.ActiveSheet.SetActiveCell(0, 0)
+        FPSpread1.ShowActiveCell(FarPoint.Win.Spread.VerticalPosition.Center, FarPoint.Win.Spread.HorizontalPosition.Center)
+
+
+☞SpreadClear
+	FPSpread1.ActiveSheet.ClearRange(0, 0, .ActiveSheet.RowCount, .ActiveSheet.ColumnCount, True)
+
+
+☞Spread 초기화
+        With FPSpread1
+            .ActiveSheet.ClearRange(0, 0, .ActiveSheet.RowCount, .ActiveSheet.ColumnCount, True)
+            .ActiveSheet.Cells(0, 0, .ActiveSheet.RowCount, .ActiveSheet.ColumnCount).Locked = False
+            .AllowDragDrop = False
+            .SelectionBlockOptions = FarPoint.Win.Spread.SelectionBlockOptions.None
+            .ActiveSheet.SetActiveCell(0, 0)
+            .ShowActiveCell(FarPoint.Win.Spread.VerticalPosition.Center, FarPoint.Win.Spread.HorizontalPosition.Center)
+        End With
+
+
+☞Spread Visible Row
+        Paik.ClassLibrary.SpreadHelper.VisibleRow(FpSpread1, iRow, 16)
+
+
+☞Spread Sort
+	Dim sInfo(1) As FarPoint.Win.Spread.SortInfo
+        sInfo(0) = New FarPoint.Win.Spread.SortInfo(0, True)
+        sInfo(1) = New FarPoint.Win.Spread.SortInfo(2, True)
+        FpSpread1.ActiveSheet.SortRange(0, 0, FpSpread1.ActiveSheet.RowCount, 	FpSpread1.ActiveSheet.ColumnCount, True, sInfo)
+
+
+☞Spread Cusor(Form Load에 넣는다-스프레드 위에서 커서모양 Default로 지정)
+	FPSpread1.SetCursor(FarPoint.Win.Spread.CursorType.Normal, System.Windows.Forms.Cursors.Default)
+
+
+☞DB질의코드
+	Dim ds As DataSet, dr As DataRow
+	Dim oQuery As New WardQuery("TABLE")
+
+        ds = oQuery.StoreProcedure("2", "", "", "")
+
+        If ds.Tables("TABLE").Rows.Count &lt;= 0 Then
+            ds.Clear()
+            Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+            Exit Sub
+        End If
+
+	'1
+        dr = ds.Tables("TABLE").Rows(0)
+
+	''2
+	'For Each dr In ds.Tables("TABLE").Rows
+
+	'Next
+
+        ds.Clear()
+
+
+☞DB질의코드(간단)
+	Dim ds As DataSet, dr As DataRow
+	Dim oQuery As New WardQuery
+
+        ds = oQuery.StoreProcedure("2", "", "", "")
+
+        If ds.Tables(0).Rows.Count &lt;= 0 Then
+            ds.Clear()
+            Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+            Exit Sub
+        End If
+
+	'1
+        dr = ds.Tables(0).Rows(0)
+
+	''2
+	'For Each dr In ds.Tables(0).Rows
+
+	'Next
+
+        ds.Clear()
+
+
+☞DB질의코드(Spread)
+	Dim oRow As Integer, iRow As Integer
+	Dim ds As DataSet, dr As DataRow
+	Dim oQuery As New WardQuery("TABLE")
+
+        ds = oQuery.QueryString("", "", "", "")
+
+        If ds.Tables("TABLE").Rows.Count &lt;= 0 Then
+            Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+            MsgBox("검색 내역이 존재하지 않습니다", vbInformation)
+            ds.Clear()
+            Exit Sub
+        End If
+
+        iRow = 0
+
+        For Each dr In ds.Tables("TABLE").Rows
+
+            If Trim("STRING") &lt;&gt; "" Then GoTo NextData
+
+            With SS.ActiveSheet
+                If iRow &gt;= .RowCount Then .RowCount = iRow + 1
+                .Cells(iRow, Index.Colomn).Text = ""
+
+		'''ex)콤보박스 동적설정
+		''oCombo.Items = cbotext
+		''oCombo.Editable = False
+		''.Cells(iRow, Index.Colomn).CellType = oCombo
+		''.Cells(iRow, Index.Colomn).Text = rCheck
+
+                iRow += 1
+            End With
+
+NextData:
+        Next
+        ds.Clear()
+        Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+
+
+
+☞DB입력코드
+	Dim arrParam As New ArrayParam()
+	Dim oSql As New SqlT("ADM", "WARDDB")
+	'----------------------------------------
+	'코드 입력
+	'----------------------------------------
+        With arrParam
+            .Add("@QUERY", action)
+            .Add("@CHART_NO", txtChartNo.Text)
+        End With
+
+        oSql.ExecuteNonQuery("StoreProcedure", CommandType.StoredProcedure, arrParam)
+
+        ClassLibrary.CFunc.MsgBar(Me.ParentForm, "작업중 Error가 발생하였습니다.")
+
+
+☞DB입력코드(Transaction)
+    Dim arrParam As New ArrayParam()
+    Dim oSql As New SqlT("ADM", "WARDDB")
+
+        Try
+            oSql.BeginTransaction()
+
+            With arrParam
+                .Add("@QUERY", action)
+                .Add("@CHART_NO", txtChartNo.Text)
+            End With
+
+            oSql.ExecuteNonQueryTransaction("StoreProcedure", CommandType.StoredProcedure, arrParam)
+
+            oSql.CommitTransaction()
+
+        Catch ex As Exception
+
+            oSql.RollBack()
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+
+            ClassLibrary.CFunc.MsgBar(Me.ParentForm, "작업중 Error가 발생하였습니다.")
+Finally
+            oSql.Endtransaction()
+            Windows.Forms.Cursor.Current = Cursors.Default        
+End Try
+
+
+
+☞DB ReturnValue Parameter
+	.Add("RETURN_VALUE", 0, SqlDbType.Int, ParameterDirection.ReturnValue)
+
+
+☞시스템 일자,시간
+	Dim SysDate As String, SysTime As String
+        '-----------------------------------'
+        '시스템 현재일자,시간을 질의한다.   '
+        '-----------------------------------'
+        SysDate = Paik.DataAccess.DateTimeQuery.GetServerDate
+        SysTime = Paik.DataAccess.DateTimeQuery.GetServerTime
+
+
+☞InfectText
+Paik.ClassLibrary.CFunc.GetDataInfectText(dr("INFECT_TEXT"))
+
+
+☞KeyDown Action
+        FormKeyDownHandle(Me, New Windows.Forms.KeyEventArgs(Keys.F5))
+
+
+☞FormKeyDownHandle선언
+#Region "Form의 Key Event를 제어"
+    '------------------------------------------------------------
+    ' 목적: Form의 Key Event를 제어한다.
+    ' 입력: 없음
+    ' 반환: 없음
+    '------------------------------------------------------------
+    Public Sub FormKeyDownHandle(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode &lt; Keys.F1 Or e.KeyCode &gt; Keys.F12 Then
+            Exit Sub
+        End If
+
+        Windows.Forms.Cursor.Current = Windows.Forms.Cursors.WaitCursor
+
+        Select Case e.KeyCode
+            Case Keys.F5
+            Case Keys.F6
+                FormHandle.EraseForm(Me)
+
+            Case Keys.F9
+
+            Case Keys.F12
+                Me.Close()
+        End Select
+
+KeyEnd:
+        If e.KeyCode &lt;&gt; Keys.F12 Then
+            Me.ActiveControl.Focus()
+        End If
+        Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+        Exit Sub
+    End Sub
+#End Region
+
+
+☞Crystal Report 출력
+'------------------------------------------------------------
+' 목적: Report를 실행시킨다.
+' 입력: 없음
+' 반환: 없음
+'------------------------------------------------------------
+Private Sub ExecuteReport(ByVal Destination As Integer)
+    Dim arrFomulars As New ArrayParam()
+    Dim arrStore As New ArrayParam()
+
+    With arrStore
+        .Add("@ACT_GB", aa)
+        .Add("@FROM_DATE", aa)
+        .Add("@TO_DATE", aa)
+    End With
+
+    With arrFomulars
+        .Add("FROM_DATE", CDateTime.FormatDate(mskFromDate.Text, "-"))
+        .Add("TO_DATE", CDateTime.FormatDate(mskToDate.Text, "-"))
+        .Add("PRT_DATE", Format(Now, "yyyy-MM-dd"))
+        .Add("PRT_TIME", Format(Now, "hh:mm"))
+    End With
+
+    With UcPrinterDeviceSimple
+        .ExecuteReport("Ord", "Ord4320", "", "", "", _
+                arrStore.ConvertArrToString, arrFomulars.ConvertArrToString, Destination, .PrintCount, "")
+    End With
+End Sub
+
+
+☞ WinForm Modal로 띄우면서 데이터 주고받기
+Public Class 호출하는Form
+    '호출하는 Form
+    Dim oForm As New 호출받은Form()
+        If oForm.ShowDialog = DialogResult.OK Then
+    '호출하는쪽 내부에 있는 함수실행
+            WorkFunction(oForm.DeptCode, oForm.DeptName)
+        End If
+
+        oForm.Close()
+End Class
+
+
+'호출받은 Form
+Public Class 호출받은Form
+#Region "Property 설정"
+    Public ReadOnly Property DeptCode() As String
+        Get
+            Return _deptCode
+        End Get
+    End Property
+
+    Public ReadOnly Property DeptName() As String
+        Get
+            Return _deptName
+        End Get
+    End Property
+#End Region
+
+    Private _deptCode As String
+    Private _deptName As String
+
+    '호출받은쪽에서 값넘기기
+    Private Sub Test()
+        If lvwDepts.Items.Count &lt;= 0 Then Exit Sub
+
+        _deptCode = txtDeptCode.Text
+        _deptName = txtDeptName.Text
+
+        Me.DialogResult = DialogResult.OK
+    End Sub
+End Class
+
+
+☞ Sex / AgeCalc
+Dim ageType As Paik.DevTools.Utility.AgeType
+                Dim sex As String
+
+                ageType = Paik.DevTools.Utility.AgeCalc(dr("BIRTH_DAY"))
+                sex = Paik.DevTools.Utility.Sex(dr("JUMIN_NO"))
+
+                lblSexage.text = sex &amp; "/" &amp; ageType.Year
+
+
+☞ Age
+Dim ageType As Paik.DevTools.Utility.AgeType
+        ageType = Paik.DevTools.Utility.AgeCalc(dr("BIRTH_DAY"))
+        lblage.text = ageType.Year
+
+
+☞ Sex
+Paik.DevTools.Utility.Sex(dr("JUMIN_NO"))
+
+
+☞ DateAdd
+CDateTime.FormatDate(DateAdd("d", 1, CDateTime.FormatDate(mskWorkDate.TextValue, "-")), ".")
+
+
+☞ Spread HeadClick Sort
+Private _Sort As Boolean
+        _sort = Not _sort
+        If e.ColumnHeader Then
+            .SortRows(e.Column, _sort, False)
+        End If
+
+
+☞ MousePointer
+Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+
+
+☞ XP Style로 보기
+Application.EnableVisualStyles()
+
+
+☞ DB Data Loop
+    For Each dr In ds.Tables("TABLE").Rows
+
+    Next
+
+
+☞ DB Data Spread에 뿌리기
+        For Each dr In ds.Tables("TABLE").Rows
+            With Spread.ActiveSheet
+                If iRow &gt;= .RowCount Then .RowCount = iRow + 1
+                .Cells(iRow, iCol).Text = ""
+
+                iRow += 1
+            End With
+        Next
+
+☞ DB EOF
+        If ds.Tables("TABLE").Rows.Count &lt;= 0 Then
+            ds.Clear()
+            'GoTo NextData
+            'Exit Sub
+        End If
+
+☞ DB ReturnValue 사용
+    ReturnValue = oSql.ExecuteNonQuery("StoreProcedureName", CommandType.StoredProcedure, arrParam)
+
+☞ Spread ScrollBar
+    Spread.VerticalScrollBarPolicy = FarPoint.Win.Spread.ScrollBarPolicy.AsNeeded
+
+☞ Spread Column 숨기기
+    Spread.ActiveSheet.Columns.Get(10, 25).Visible = False
+
+☞ DB 질의 (CommandText)
+        Dim oSql As New Paik.Data.Sql("ADM", "PATNT")
+
+        Query = "SELECT * FROM PATNT " &amp; _
+                " WHERE CHART_NO = " &amp; "'" &amp; txtChartNo.Text &amp; "'"
+
+        ds = oSql.ExecuteDataSet(Query, CommandType.Text)
+
+        If ds.Tables("PATNT").Rows.Count &lt;= 0 Then
+            ds.Clear()
+            Windows.Forms.Cursor.Current = Windows.Forms.Cursors.Default
+            Exit Sub
+        End If
+
+        For Each dr In ds.Tables("PATNT").Rows
+            With Spreda.ActiveSheet
+                If Row &gt;= .RowCount Then .RowCount = Row + 1
+                .Cells(Row, 1).Text = ""
+                Row += 1
+            End With
+        Next
+
+        ds.Clear()
+
+
+☞ Form에 있는 컨트롤찾아서 값할당
+    CType(FormHandle.FindControl(Me, "txtChartNo"), TextBox).Text = ""
+
+☞ Spread AcionKey 설정(' 스프레드 입력 키를 안 먹게 하기 위해서~~)ㄴ
+Dim ActionKey As FarPoint.Win.Spread.InputMap
+        
+ActionKey = Spread.GetInputMap(FarPoint.Win.Spread.InputMapMode.WhenAncestorOfFocused)
+ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.Escape, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+
+☞ Spread CellType CheckBox 설정
+Dim oCheck As Object
+If CType(S1.ActiveSheet.Cells(Row, 0).CellType, CheckBox).Checked = True Then
+    oCheck = New FarPoint.Win.Spread.CellType.CheckBoxCellType
+    oCheck.Picture.True = picChecked.Image
+    oCheck.Picture.False = picUnChecked.Image
+    Spread.ActiveSheet.Cells(Row, 0).CellType = oCheck
+End If
+
+☞ Spread CellType ComboBox 설정
+Dim oCheck As Object
+oCombo = New FarPoint.Win.Spread.CellType.ComboBoxCellType
+oCombo.Items = New String() {"1-급여", "2-비급", "4-불가"}
+Spread.ActiveSheet.Cells(Row, 5).CellType = oCombo
+
+☞ Spread에 Border 그리기
+.Cells.Get(row, column, row2, colum2).Border = New FarPoint.Win.ComplexBorder( _
+                                                                New FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), _
+                                                                New FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), _
+                                                                New FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.None), _
+                                                                New FarPoint.Win.ComplexBorderSide(FarPoint.Win.ComplexBorderSideStyle.ThinLine, Color.LightGray))
+
+
+☞ SendKey
+SendKeys.Send("{F5}")
+
+☞ Spread Remove Row
+S1.ActiveSheet.Cells(S1.ActiveSheet.ActiveRowIndex, S1.ActiveSheet.ActiveColumnIndex).Row.Remove()
+
+☞ Stored Procedure의 return 값 받아오기
+
+                Dim Returnvalue As Integer
+                Dim arrParam As New ArrayParam
+                Dim oSql As New Data.SqlT("ADM", "LABDB")
+
+                With arrParam
+                    .Clear()
+                    .Add("RETURN_VALUE", 0, SqlDbType.Int, ParameterDirection.ReturnValue)
+                    .Add("@iPART", "PP")
+                    .Add("@iF_EXE_DATE", mskWorkDate1.Text)
+                    .Add("@iT_EXE_DATE", mskWorkDate1.Text)
+                    .Add("@iNIGHT_GB", "")
+                    .Add("@iWEEK", "")
+                End With
+
+                Returnvalue = oSql.ExecuteNonQuery("Rpt_l3a01Sum", CommandType.StoredProcedure, arrParam)
+
+
+                With arrFomulars
+                    .Add("WorkDate", "작업일: " &amp; CDateTime.FormatDate(mskWorkDate1.Text, "."))
+                    .Add("MAN_TOT", "총 인원수: " &amp; CStr(Returnvalue))
+                End With</value>
+  </data>
+</root>

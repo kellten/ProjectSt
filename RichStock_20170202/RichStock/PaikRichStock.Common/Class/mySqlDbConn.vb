@@ -1,0 +1,318 @@
+﻿Imports System
+Imports System.Data
+Imports System.Data.SqlClient
+
+Public Class mySqlDbConn
+    Public Shared _sqlCon As New Odbc.OdbcConnection
+    Protected _arrDirectValue As New ArrayParam
+    Private _connectionString As String = ""
+    Private _commandTimeOut As Integer
+    Public Shared QueryStr As String = ""
+    Public Shared Function Open() As Boolean
+
+        Try
+
+            _sqlCon.ConnectionString = "DRIVER={MySQL ODBC 5.3 ANSI Driver};SERVER=sundown99.ipdisk.co.kr;PORT=1433;DATABASE=kapi;USER=root;PASSWORD=rnjs99@;allow user variables=true;"
+            _sqlCon.ConnectionTimeout = 300
+            _sqlCon.Open()
+
+            Return True
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+        End Try
+
+        Return False
+
+    End Function
+
+
+    Public Shared Function Close() As Boolean
+
+        Try
+            _sqlCon.Close()
+
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Exclamation)
+        End Try
+
+        Return False
+
+    End Function
+
+#Region " DbExcuteQuery "
+    Private Sub DbExcuteQuery(ByVal sql As String, ByVal arrParam As ArrayParam)
+
+    End Sub
+#End Region
+
+#Region " ExecuteNonQuery "
+    Public Shared Function ExecuteNonQuery(ByVal sp As String, ByVal arrParam As ArrayParam, Optional ByVal cmdType As System.Data.CommandType = CommandType.StoredProcedure) As Integer
+        Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+        Dim cmd As Odbc.OdbcCommand
+        Dim odbcAdapt As New Odbc.OdbcDataAdapter
+        Dim retValue As Integer
+        Dim spParam As String = ""
+        Try
+            cmd = New Odbc.OdbcCommand()
+            cmd.Connection = _sqlCon
+            If cmdType = CommandType.StoredProcedure Then
+                For i As Integer = 0 To arrParam.Count - 1
+                    spParam += "?"
+                    If i < arrParam.Count - 1 Then
+                        spParam += ","
+                    End If
+                Next
+
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = "CALL " + sp + "(" + spParam + ")"
+                For i As Integer = 0 To arrParam.Count - 1
+                    'cmd.Parameters.AddWithValue(arrParam.Item(i).Name, arrParam.Item(i).Value)
+                    cmd.Parameters.Add(arrParam.Item(i).Name, arrParam.Item(i).Type, arrParam.Item(i).Size)
+                    cmd.Parameters(arrParam.Item(i).Name).Direction = arrParam.Item(i).Direction
+                    cmd.Parameters(arrParam.Item(i).Name).Value = arrParam.Item(i).Value
+                Next
+            Else
+                cmd.CommandType = CommandType.Text
+                cmd.CommandText = sp
+            End If
+
+            retValue = cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
+
+    Public Shared Function ExecuteNonQueryTransaction(ByVal arrParams As ArrayParams) As Integer
+        Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+        Dim cmd As Odbc.OdbcCommand
+        Dim odbcAdapt As New Odbc.OdbcDataAdapter
+        Dim retValue As Integer
+        Dim spParam As String = ""
+        Dim query As String = ""
+        Dim spName As String = ""
+        Try
+            cmd = New Odbc.OdbcCommand()
+            cmd.Connection = _sqlCon
+            cmd.CommandType = CommandType.StoredProcedure
+            For i As Integer = 0 To arrParams.Count - 1
+                spParam = ""
+                spName = ""
+                For j As Integer = 0 To arrParams(i).Count - 1
+                    spParam += "?"
+                    If j < arrParams(i).Count - 1 Then
+                        spParam += ","
+                    End If
+                    spName = arrParams(i).CommandString
+                Next
+                query += String.Format("CALL {0} ({1});", spName, spParam)
+            Next
+
+            cmd.CommandText = query
+
+            For i As Integer = 0 To arrParams.Count - 1
+                For j As Integer = 0 To arrParams(i).Count - 1
+                    cmd.Parameters.AddWithValue(arrParams(i).Item(j).Name, arrParams(i).Item(j).Value)
+                Next
+            Next
+
+            retValue = cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
+#End Region
+
+#Region " ExecuteNonMultiInsert "
+    Public Shared Function ExecuteNonMultiInsert(ByVal tableName As String, ByVal arrParams As ArrayParams) As Integer
+        Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+        Dim cmd As Odbc.OdbcCommand
+        Dim odbcAdapt As New Odbc.OdbcDataAdapter
+        Dim retValue As Integer
+        Dim spParam As String = ""
+        Dim arrParam As ArrayParam
+        Dim colStr As String = ""
+        Dim valuesStr As String = ""
+        Dim valuesStrMulti As String = ""
+        Dim query As String = ""
+        Dim strCol() As String
+        Try
+            If _sqlCon.State = ConnectionState.Closed Then
+                _sqlCon.Open()
+            End If
+
+            For i As Integer = 0 To arrParams.Count - 1
+                colStr = ""
+                valuesStr = ""
+                arrParam = arrParams(i)
+                strCol = arrParam.ConvertArrToString().Split("#")
+
+                For j As Integer = 0 To strCol.Length - 1
+                    colStr += strCol(j).Substring(0, strCol(j).IndexOf("!"))
+                    If j < strCol.Length - 1 Then
+                        colStr += ","
+                    End If
+
+                    valuesStr += strCol(j).Substring(strCol(j).IndexOf("@"), strCol(j).Length - strCol(j).IndexOf("@"))
+                    valuesStr = valuesStr.Replace("@", "'").Replace("!", "'")
+                    If j = strCol.Length - 1 Then
+                        valuesStr += "'"
+                    End If
+
+                    If j < strCol.Length - 1 Then
+                        valuesStr += ","
+                    End If
+                Next
+                valuesStr = "(" + valuesStr + ") ,"
+                valuesStrMulti += valuesStr
+            Next
+
+            query = String.Format("INSERT INTO {0} ({1}) VALUES {2}", tableName, colStr, valuesStrMulti)
+            query = Left(query, query.Length - 1) '마지막에 , 때문에 하나 제거 해준다.
+            cmd = New Odbc.OdbcCommand(query, _sqlCon)
+            cmd.CommandType = CommandType.Text
+
+            retValue = cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
+#End Region
+
+#Region " ExecuteNonMultiDelete "
+    Public Shared Function ExecuteNonMultiDelete(ByVal tableName As String, ByVal arrParams As ArrayParams) As Integer
+        Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+        Dim cmd As Odbc.OdbcCommand
+        Dim odbcAdapt As New Odbc.OdbcDataAdapter
+        Dim retValue As Integer
+        Dim arrParam As ArrayParam
+        Dim query As String = ""
+        Dim whereStr As String = ""
+        Try
+            If _sqlCon.State = ConnectionState.Closed Then
+                _sqlCon.Open()
+            End If
+
+            For i As Integer = 0 To arrParams.Count - 1
+                arrParam = arrParams(i)
+                For j As Integer = 0 To arrParam.Count - 1
+                    If j = 0 Then
+                        whereStr += " ( "
+                    End If
+                    whereStr += String.Format("{0} = '{1}'", arrParam(j).Name, arrParam(j).Value)
+                    If j < arrParam.Count - 1 Then
+                        whereStr += " AND "
+                    End If
+
+                    If j = arrParam.Count - 1 Then
+                        whereStr += " ) "
+                    End If
+                Next
+
+                If i < arrParams.Count - 1 Then
+                    whereStr += " OR "
+                End If
+            Next
+
+            query = String.Format("DELETE FROM {0} WHERE {1} ", tableName, whereStr)
+            cmd = New Odbc.OdbcCommand(query, _sqlCon)
+            cmd.CommandType = CommandType.Text
+
+            retValue = cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+    End Function
+#End Region
+
+#Region " GetDataTableSp "
+    'Public Shared Function GetDataTableSp(ByVal sql As String) As DataSet
+    '    Dim ds As New DataSet
+    '    Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+    '    Dim cmd As Odbc.OdbcCommand
+    '    Dim odbcAdapt As New Odbc.OdbcDataAdapter
+
+    '    sql = "CALL " & sql
+
+    '    cmd = New Odbc.OdbcCommand(sql, _sqlCon)
+
+    '    odbcAdapt.SelectCommand = cmd
+
+    '    odbcAdapt.Fill(ds)
+
+    '    Return ds
+
+    'End Function
+
+    Public Shared Function GetDataTableSp(ByVal sp As String, ByVal arrParam As ArrayParam) As DataSet
+        Dim ds As New DataSet
+        Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+        Dim cmd As Odbc.OdbcCommand
+        Dim odbcAdapt As New Odbc.OdbcDataAdapter
+        Dim cmdText As String = ""
+        Dim spParam As String = ""
+
+        For i As Integer = 0 To arrParam.Count - 1
+            spParam += "?"
+            If i < arrParam.Count - 1 Then
+                spParam += ","
+            End If
+        Next
+
+        If spParam = "" Then
+            cmdText = "CALL " + sp
+        Else
+            cmdText = "CALL " + sp + "(" + spParam + ")"
+        End If
+
+
+        cmd = New Odbc.OdbcCommand(cmdText, _sqlCon)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = cmdText
+
+        For i As Integer = 0 To arrParam.Count - 1
+            cmd.Parameters.Add(arrParam.Item(i).Name, arrParam.Item(i).Type, arrParam.Item(i).Size)
+            cmd.Parameters(arrParam.Item(i).Name).Direction = arrParam.Item(i).Direction
+            cmd.Parameters(arrParam.Item(i).Name).Value = arrParam.Item(i).Value
+        Next
+
+        odbcAdapt = New Odbc.OdbcDataAdapter(cmd)
+        odbcAdapt.Fill(ds)
+
+        Return ds
+    End Function
+#End Region
+
+#Region " GetDataTableCommndText "
+    Public Shared Function GetDataTableCommndText(ByVal sql As String) As DataSet
+        Dim ds As New DataSet
+        Dim methodName As String = System.Reflection.MethodBase.GetCurrentMethod().Name
+        Dim cmd As Odbc.OdbcCommand
+        Dim odbcAdapt As New Odbc.OdbcDataAdapter
+
+        cmd = New Odbc.OdbcCommand(sql, _sqlCon)
+
+        odbcAdapt.SelectCommand = cmd
+
+        odbcAdapt.Fill(ds)
+
+        Return ds
+
+    End Function
+#End Region
+
+    Protected Function GetConnection() As SqlConnection
+        Return (New SqlConnection(MyClass._connectionString))
+    End Function
+
+    Protected Sub FillParameters(ByRef FilledCommand As SqlCommand, _
+        ByVal ParamArray parameters As SqlParameter())
+        Dim param As SqlParameter
+
+        For Each param In parameters
+            FilledCommand.Parameters.Add(param)
+        Next
+    End Sub
+
+End Class

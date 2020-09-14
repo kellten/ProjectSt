@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46081646-CDD9-4820-B58C-23AF48617F2C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PaikRichStockMain</RootNamespace>
+    <AssemblyName>PaikRichStockMain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Lib_Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Lib_Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\Lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mdi\PaikRichStockMdi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mdi\PaikRichStockMdi.Designer.cs">
+      <DependentUpon>PaikRichStockMdi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mdi\PaikRichStockMdi.resx">
+      <DependentUpon>PaikRichStockMdi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chart\Chart.csproj">
+      <Project>{38eb6154-f996-4f76-aabc-46fb0fb66efc}</Project>
+      <Name>Chart</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f036c71d-0f00-44d0-9b95-89665f0bcc08}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DartPrj\DartPrj.csproj">
+      <Project>{7455814e-d7b3-4ab7-b493-f1b610132c5c}</Project>
+      <Name>DartPrj</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NewsFinder\NewsFinder.csproj">
+      <Project>{622557f5-ec71-441e-bcb1-798dd635a5d6}</Project>
+      <Name>NewsFinder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaikRichStock.Common\PaikRichStock.Common.vbproj">
+      <Project>{c9364de0-591e-476c-9b37-6461bf269716}</Project>
+      <Name>PaikRichStock.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaikRichStock.MenuItem1\PaikRichStock.MenuItem1.vbproj">
+      <Project>{431f87f3-b153-4e68-b1e3-e8e1ae3d7165}</Project>
+      <Name>PaikRichStock.MenuItem1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaikRichStock.MenuItem2\PaikRichStock.MenuItem2.vbproj">
+      <Project>{6e5bdbec-3c8f-43c2-8862-f9d14c0d2ae6}</Project>
+      <Name>PaikRichStock.MenuItem2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaikRichStock.Mini\PaikRichStock.Mini.vbproj">
+      <Project>{eba23da1-a234-4c7b-85be-867ee2ab297b}</Project>
+      <Name>PaikRichStock.Mini</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PaikRichStock.UcForm\PaikRichStock.UcForm.vbproj">
+      <Project>{cd5e28e5-0dd1-49e1-944b-bb0ba0b76a75}</Project>
+      <Name>PaikRichStock.UcForm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StockDayDataSaver\StockDayDataSaver.csproj">
+      <Project>{6fe15d1a-50da-4b29-b37a-2db82edbd5c9}</Project>
+      <Name>StockDayDataSaver</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0BF1F4D5-6ECE-49A0-81D7-4C6B6179F9CF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AnSt</RootNamespace>
+    <AssemblyName>AnSt</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Lib_Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Lib\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mdi\MdiAnSt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mdi\MdiAnSt.Designer.cs">
+      <DependentUpon>MdiAnSt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\FrmFavTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\FrmFavTester.Designer.cs">
+      <DependentUpon>FrmFavTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\FrmWaveInfoTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\FrmWaveInfoTester.Designer.cs">
+      <DependentUpon>FrmWaveInfoTester.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mdi\MdiAnSt.resx">
+      <DependentUpon>MdiAnSt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\FrmFavTester.resx">
+      <DependentUpon>FrmFavTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\FrmWaveInfoTester.resx">
+      <DependentUpon>FrmWaveInfoTester.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnSt.Analysis\AnSt.Analysis.csproj">
+      <Project>{6e214e6e-5ede-41f6-9bc4-42efb585ab53}</Project>
+      <Name>AnSt.Analysis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnSt.BasicSetting\AnSt.BasicSetting.csproj">
+      <Project>{e55df74b-56e4-4731-8158-868ba14ee6a9}</Project>
+      <Name>AnSt.BasicSetting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnSt.Chart\AnSt.Chart.csproj">
+      <Project>{0765a7e5-e8cd-4ef8-b0bf-6d156e7cb3de}</Project>
+      <Name>AnSt.Chart</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnSt.Define\AnSt.Define.csproj">
+      <Project>{91b058fd-0aba-40aa-bd6f-492d94791cfe}</Project>
+      <Name>AnSt.Define</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnSt.Singleton\AnSt.Singleton.csproj">
+      <Project>{9470859e-f569-4615-a2f2-35740e0c9e57}</Project>
+      <Name>AnSt.Singleton</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnSt.Util\AnSt.Util.csproj">
+      <Project>{d017e286-3a0f-4636-bf93-0c7632d585ac}</Project>
+      <Name>AnSt.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

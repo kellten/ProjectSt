@@ -1,0 +1,587 @@
+﻿Imports System.Windows.Forms
+
+Public Class clsFunc
+
+#Region "EraseForm"
+
+    '-----------------------------------------------------------------------------------------------
+    '각 컨트롤의 Text 및 자료를 지운다(재귀호출 방식)
+    ' 입력: oControl : Control
+    '       blnNotLockInit; Lock 속성(/L)인것은 Erase 않는다.
+    ' 반환: 없음
+    '
+    ' Tag Option:   / - 속성의 시작 문자 (ex. /D/L ...)
+    '               D - Display
+    '               L - Lock
+    '               I - Initialize
+    '               F - Function
+    '               P - Property
+    '               M - MaskEdit
+    '               N - NotEraseLock이 True인것과 상관없이 /L된 내역의 Index를 변경하지 않고자 할때
+    '               E - TagStop 속성을 가진 컨트롤의 마지막
+    '-----------------------------------------------------------------------------------------------
+    Private Shared Sub ClearFormControl(ByVal oControl As System.Windows.Forms.Control, Optional ByVal blnNotEraseLock As Boolean = False)
+        Dim inControl As System.Windows.Forms.Control
+
+        If InStr(UCase(oControl.Tag), "/L") Then
+            If blnNotEraseLock OrElse InStr(UCase(oControl.Tag), "/N") > 0 Then
+                GoTo NextLoop
+            End If
+            If Not (TypeOf oControl Is ComboBox) Then
+                GoTo NextLoop
+            End If
+        End If
+
+        If TypeOf oControl Is Label Then
+            If InStr(UCase(oControl.Tag), "/D") Then
+                oControl.Text = ""
+            End If
+        ElseIf TypeOf oControl Is TextBox Then
+            oControl.Text = vbNullString
+        ElseIf TypeOf oControl Is ComboBox Then
+            If InStr(UCase(oControl.Tag), "/L") Then
+                If InStr(UCase(oControl.Tag), "/T") Then
+                    GoTo NextLoop
+                Else
+                    Select Case CType(oControl, ComboBox).DropDownStyle
+                        Case 0, 1
+                            'oControl.Text = vbNullString
+                            CType(oControl, ComboBox).Text = vbNullString
+                        Case 2
+                            CType(oControl, ComboBox).SelectedIndex = -1
+                    End Select
+                End If
+            ElseIf InStr(UCase(oControl.Tag), "/M") Then
+            Else
+                CType(oControl, ComboBox).Items.Clear()
+                Select Case CType(oControl, ComboBox).DropDownStyle
+                    Case 0, 1
+                        CType(oControl, ComboBox).Text = vbNullString
+                    Case 2
+                        CType(oControl, ComboBox).SelectedIndex = -1
+                End Select
+            End If
+        ElseIf TypeOf oControl Is CheckBox Then
+            CType(oControl, CheckBox).Checked = False
+        ElseIf TypeOf oControl Is RadioButton Then
+            CType(oControl, RadioButton).Checked = False
+            'ElseIf TypeOf oControl Is FarPoint.Win.Spread.FpSpread Then
+            '    If InStr(UCase(oControl.Tag), "/L") Then
+
+            '    Else
+            '        With CType(oControl, FarPoint.Win.Spread.FpSpread).ActiveSheet
+            '            CType(oControl, FarPoint.Win.Spread.FpSpread).SetCursor(FarPoint.Win.Spread.CursorType.LockedCell, System.Windows.Forms.Cursors.Default)
+            '            .ClearRange(0, 0, .RowCount, .ColumnCount, False)
+            '            '스프레드에서는 F2, F3 Key를 눌려도 폼에 KeyDown Event발생되지 않아서 이부분에 해당기능 수정
+            '            Dim ActionKey As FarPoint.Win.Spread.InputMap
+            '            ActionKey = CType(oControl, FarPoint.Win.Spread.FpSpread).GetInputMap(FarPoint.Win.Spread.InputMapMode.WhenFocused)
+            '            ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.F2, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+            '            ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.F3, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+            '            ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.F4, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+
+            '            ActionKey = CType(oControl, FarPoint.Win.Spread.FpSpread).GetInputMap(FarPoint.Win.Spread.InputMapMode.WhenAncestorOfFocused)
+            '            ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.F2, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+            '            ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.F3, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+            '            ActionKey.Put(New FarPoint.Win.Spread.Keystroke(Keys.F4, Keys.None), FarPoint.Win.Spread.SpreadActions.None)
+
+            '            If .ColumnHeader.RowCount > 0 Then
+            '                For col As Integer = 0 To .ColumnCount - 1
+            '                    .Columns(col).SortIndicator = FarPoint.Win.Spread.Model.SortIndicator.None
+            '                Next
+            '            End If
+            '            .SetActiveCell(0, 0)
+            '            CType(oControl, FarPoint.Win.Spread.FpSpread).ShowActiveCell(FarPoint.Win.Spread.VerticalPosition.Top, FarPoint.Win.Spread.HorizontalPosition.Left)
+            '        End With
+            '    End If
+        ElseIf TypeOf oControl Is ListBox Then
+            CType(oControl, ListBox).Items.Clear()
+        ElseIf TypeOf oControl Is RichTextBox Then
+            oControl.Text = vbNullString
+        ElseIf TypeOf oControl Is ListView Then
+            CType(oControl, ListView).Items.Clear()
+        ElseIf TypeOf oControl Is System.Windows.Forms.NumericUpDown Then
+            If InStr(UCase(oControl.Tag), "/0") Then
+                CType(oControl, System.Windows.Forms.NumericUpDown).Text = "0"
+            Else
+                CType(oControl, System.Windows.Forms.NumericUpDown).Text = "1"
+            End If
+        ElseIf TypeOf oControl Is System.Windows.Forms.MaskedTextBox Then
+            CType(oControl, System.Windows.Forms.MaskedTextBox).Text = ""
+        ElseIf TypeOf oControl Is System.Windows.Forms.SplitContainer Then
+            ClearFormControl(CType(oControl, SplitContainer).Panel1)
+            ClearFormControl(CType(oControl, SplitContainer).Panel2)
+        End If
+
+NextLoop:
+        'Tag Analysis call
+        If Trim(oControl.Tag) <> "" Then
+            Call AnalysisTag(oControl, blnNotEraseLock)
+        End If
+
+        For Each inControl In oControl.Controls
+            If inControl.Name <> "" Then
+                If Not (TypeOf oControl Is System.Windows.Forms.UserControl And InStr(UCase(oControl.Tag), "/L") > 0) Then
+                    ClearFormControl(inControl, blnNotEraseLock)
+                End If
+            End If
+        Next
+    End Sub
+
+    '--------------------------------------------------------------------------------------
+    ' 목적: 폼내의 특정 컨트롤(패널, 그룹박스)의 내용을 내용을 Clear 하고,Tag의 속성을 분석
+    '       하여 처리를 한다.
+    ' 입력: EraseForm(frmForm,Optional blnNotEraseLock)
+    '       blnNotLockInit; Lock 속성(/L)인것은 Erase 않는다.
+    ' 반환: 없음
+    '--------------------------------------------------------------------------------------
+    Public Shared Sub EraseForm(ByVal container As System.Windows.Forms.Control, Optional ByVal blnNotEraseLock As Boolean = False)
+        Dim oControl As System.Windows.Forms.Control
+
+        For Each oControl In container.Controls
+            ClearFormControl(oControl, blnNotEraseLock)
+            RemoveHandlerControl(oControl)                  '화면을 지우면서 기존에 등록되어있던 이벤트를 삭제함
+        Next
+    End Sub
+
+    '------------------------------------------------------------
+    ' 목적: 화면의 Controls의 내용을 Clear 하고,Tag의 속성을 분석
+    '       하여 처리를 한다.
+    ' 입력: EraseForm(frmForm,Optional blnNotEraseLock)
+    '       blnNotLockInit; Lock 속성(/L)인것은 Erase 않는다.
+    ' 반환: 없음
+    '------------------------------------------------------------
+    Public Shared Sub EraseForm(ByVal ucForm As UserControl, Optional ByVal blnNotEraseLock As Boolean = False)
+        Dim oControl As System.Windows.Forms.Control
+
+        For Each oControl In ucForm.Controls
+            ClearFormControl(oControl, blnNotEraseLock)
+            RemoveHandlerControl(oControl)                  '화면을 지우면서 기존에 등록되어있던 이벤트를 삭제함
+        Next
+    End Sub
+
+    '------------------------------------------------------------
+    ' 목적: 화면의 Controls의 내용을 Clear 하고,Tag의 속성을 분석
+    '       하여 처리를 한다.
+    ' 입력: EraseForm(frmForm,Optional blnNotEraseLock)
+    '       blnNotLockInit; Lock 속성(/L)인것은 Erase 않는다.
+    ' 반환: 없음
+    '------------------------------------------------------------
+    Public Shared Sub EraseForm(ByVal frmForm As Form, Optional ByVal blnNotEraseLock As Boolean = False)
+        Dim oControl As System.Windows.Forms.Control
+
+        For Each oControl In frmForm.Controls
+            ClearFormControl(oControl, blnNotEraseLock)
+            RemoveHandlerControl(oControl)                  '화면을 지우면서 기존에 등록되어있던 이벤트를 삭제함
+        Next
+    End Sub
+
+    '------------------------------------------------------------
+    ' 목적: 컨트롤의 Tag를 분석하여 각 칸트롤의 초기값을 할당한다.
+    ' 입력: AnalysisTag(ctrControl,blnNotEraseLock)
+    ' 반환: 초기화
+    '------------------------------------------------------------
+    Private Shared Sub AnalysisTag(ByVal ctrControl As System.Windows.Forms.Control, ByVal blnNotEraseLock As Boolean)
+        Dim i As Integer, Attr As String, TagProp As String = "", strTag As String
+
+        Select Case UCase(Trim(ctrControl.Tag))
+            Case "/D", "/L", "/M", "/E"
+                Exit Sub
+            Case Else
+                strTag = UCase(ctrControl.Tag)
+        End Select
+
+        Do Until InStr(strTag, "/") < 1
+            'Tag의 속성을 분석한다.
+            For i = InStr(strTag, "/") + 1 To Len(strTag) + 1
+                If Mid(strTag, i, 1) = "/" Or Mid(strTag, i, 1) = vbNullString Then
+                    TagProp = Mid(strTag, InStr(strTag, "/"), i - 1)
+                    strTag = Trim(Mid(strTag, i, Len(strTag)))
+                    Exit For
+                End If
+            Next
+            If Len(TagProp) <= 2 Then
+                GoTo NextLoop
+            End If
+            Attr = Microsoft.VisualBasic.Right(TagProp, Len(TagProp) - 2)
+
+            'blnNotEraseLock True이면 Control 속성만 처리한다.
+            If Microsoft.VisualBasic.Left(TagProp, 2) <> "/P" Then
+                If blnNotEraseLock Then
+                    GoTo NextLoop
+                End If
+            End If
+
+            Select Case Microsoft.VisualBasic.Left(TagProp, 2)
+                Case "/I"
+                    If TypeOf ctrControl Is TextBox Then
+                        ctrControl.Text = Attr
+                    ElseIf TypeOf ctrControl Is ComboBox Then
+                        If CType(ctrControl, ComboBox).Items.Count > 0 Then
+                            If Val(Attr) >= 0 And Val(Attr) < CType(ctrControl, ComboBox).Items.Count Then
+                                CType(ctrControl, ComboBox).SelectedIndex = Val(Attr)
+                            End If
+                        End If
+                    ElseIf TypeOf ctrControl Is CheckBox Then
+                        CType(ctrControl, CheckBox).Checked = Val(Attr)
+                    ElseIf TypeOf ctrControl Is RadioButton Then
+                        CType(ctrControl, RadioButton).Checked = Val(Attr)
+                    ElseIf TypeOf ctrControl Is MaskedTextBox Then
+                        ctrControl.Text = Attr
+                    ElseIf TypeOf ctrControl Is Label Then
+                        ctrControl.Text = Attr
+                    End If
+
+                Case "/F"
+                    Select Case Attr
+                        Case "DATE"
+                            ctrControl.Text = CDateTime.FormatDate(Format(Today, "yyyyMMdd"), ".")
+                        Case "TIME"
+                            ctrControl.Text = Format(Now, "HH:mm:ss")
+                        Case "TIME2"
+                            ctrControl.Text = Format(Now, "HH:mm")
+                        Case "WEEKDAY"
+                            ctrControl.Text = CDateTime.WeekDayNames(System.DateTime.Now)     'WeekdayName(1)
+                        Case "DATETIME"
+                            ctrControl.Text = Format(Now, "yyyy-MM-dd HH:mm")
+                    End Select
+                Case "/P"
+                    If InStr(Attr, "ENABLED") Then
+                        If InStr(Attr, "TRUE") Then
+                            ctrControl.Enabled = True
+                        ElseIf InStr(Attr, "FALSE") Then
+                            ctrControl.Enabled = False
+                        End If
+                    ElseIf InStr(Attr, "VISIBLE") Then
+                        If InStr(Attr, "TRUE") Then
+                            ctrControl.Visible = True
+                        ElseIf InStr(Attr, "FALSE") Then
+                            ctrControl.Visible = False
+                        End If
+                    ElseIf InStr(Attr, "READONLY") Then
+                        If InStr(Attr, "TRUE") Then
+                            CType(ctrControl, Object).ReadOnly = True
+                        ElseIf InStr(Attr, "FALSE") Then
+                            CType(ctrControl, Object).ReadOnly = False
+                        End If
+                    ElseIf InStr(Attr, "TABSTOP") Then
+                        If InStr(Attr, "TRUE") Then
+                            ctrControl.TabStop = True
+                        ElseIf InStr(Attr, "FALSE") Then
+                            ctrControl.TabStop = False
+                        End If
+                    ElseIf InStr(Attr, "FORECOLOR") Then
+                        ctrControl.ForeColor = CObj(Mid(Attr, InStr(Attr, "=") + 1))
+                    ElseIf InStr(Attr, "BACKCOLOR") Then
+                        ctrControl.BackColor = CObj(Mid(Attr, InStr(Attr, "=") + 1))
+                    ElseIf InStr(Attr, "CHECKED") Then
+                        If TypeOf ctrControl Is CheckBox Then
+                            If InStr(Attr, "TRUE") Then
+                                CType(ctrControl, CheckBox).Checked = True
+                            ElseIf InStr(Attr, "FALSE") Then
+                                CType(ctrControl, CheckBox).Checked = False
+                            End If
+                        ElseIf TypeOf ctrControl Is RadioButton Then
+                            If InStr(Attr, "TRUE") Then
+                                CType(ctrControl, RadioButton).Checked = True
+                            ElseIf InStr(Attr, "FALSE") Then
+                                CType(ctrControl, RadioButton).Checked = False
+                            End If
+                        End If
+                    End If
+            End Select
+NextLoop:
+        Loop
+
+    End Sub
+
+#End Region
+
+#Region "IsEditMode"
+    '화면 로드시 IsEditMode(Me) 로 선언해주고
+    '화면 닫기전에 bEditMode 의 True, False 여부에 따라 변경이 있었는지 확인한다.
+    Private Shared _blnEditMode As Boolean = False
+
+    ''' <summary>
+    ''' 컨트롤의 값 변경이 있었는지 체크 (변경시 :True)
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Property bEditMode() As Boolean
+        Get
+            Return _blnEditMode
+        End Get
+        Set(ByVal value As Boolean)
+            _blnEditMode = value
+        End Set
+    End Property
+
+    ''' <summary>
+    ''' 화면에 컨트롤의 값이 변경이 있었는지 체크하는 함수
+    ''' </summary>
+    ''' <param name="ucForm"></param>
+    ''' <remarks></remarks>
+    Public Shared Sub IsEditMode(ByVal ucForm As UserControl)
+        For Each oControl As System.Windows.Forms.Control In ucForm.Controls
+            addHandlerControl(oControl)
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' 화면에 컨트롤의 값이 변경이 있었는지 체크하는 함수
+    ''' </summary>
+    ''' <param name="ucForm"></param>
+    ''' <remarks></remarks>
+    Public Shared Sub IsEditMode(ByVal ucForm As Form)
+        For Each oControl As System.Windows.Forms.Control In ucForm.Controls
+            addHandlerControl(oControl)
+        Next
+    End Sub
+
+    Private Shared Sub addHandlerControl(ByVal oControl As System.Windows.Forms.Control)
+        If TypeOf oControl Is TextBox Then
+            AddHandler oControl.TextChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is MaskedTextBox Then
+            AddHandler oControl.TextChanged, AddressOf EditModeOnEvent
+
+            'ElseIf TypeOf oControl Is FarPoint.Win.Spread.FpSpread Then
+            '    AddHandler CType(oControl, FarPoint.Win.Spread.FpSpread).EditModeOn, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is CheckBox Then
+            AddHandler CType(oControl, CheckBox).CheckedChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is RadioButton Then
+            AddHandler CType(oControl, RadioButton).CheckedChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is ComboBox Then
+            AddHandler CType(oControl, ComboBox).SelectedIndexChanged, AddressOf EditModeOnEvent
+            AddHandler oControl.TextChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is NumericUpDown Then
+            AddHandler CType(oControl, NumericUpDown).ValueChanged, AddressOf EditModeOnEvent
+        End If
+
+
+
+        For Each iControl As System.Windows.Forms.Control In oControl.Controls
+            addHandlerControl(iControl)
+        Next
+
+    End Sub
+
+    '화면을 지우면서 기존에 등록되어있던 이벤트를 삭제함
+    Private Shared Sub RemoveHandlerControl(ByVal oControl As System.Windows.Forms.Control)
+        If TypeOf oControl Is TextBox Then
+            RemoveHandler oControl.TextChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is MaskedTextBox Then
+            RemoveHandler oControl.TextChanged, AddressOf EditModeOnEvent
+
+            'ElseIf TypeOf oControl Is FarPoint.Win.Spread.FpSpread Then
+            '    RemoveHandler CType(oControl, FarPoint.Win.Spread.FpSpread).EditModeOn, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is CheckBox Then
+            RemoveHandler CType(oControl, CheckBox).CheckedChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is RadioButton Then
+            RemoveHandler CType(oControl, RadioButton).CheckedChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is ComboBox Then
+            RemoveHandler CType(oControl, ComboBox).SelectedIndexChanged, AddressOf EditModeOnEvent
+            RemoveHandler oControl.TextChanged, AddressOf EditModeOnEvent
+
+        ElseIf TypeOf oControl Is NumericUpDown Then
+            RemoveHandler CType(oControl, NumericUpDown).ValueChanged, AddressOf EditModeOnEvent
+        End If
+
+        For Each iControl As System.Windows.Forms.Control In oControl.Controls
+            RemoveHandlerControl(iControl)
+        Next
+
+        _blnEditMode = False                '화면을 지우면서 값 초기화
+
+    End Sub
+
+    Private Shared Sub EditModeOnEvent(ByVal sender As Object, ByVal e As EventArgs)
+        _blnEditMode = True
+    End Sub
+#End Region
+
+#Region "FindControl"
+    '폼또는 사용자 정의 컨트롤 내부에서 검색되어진 컨트롤 Object
+    Private Shared _findControl As System.Windows.Forms.Control
+
+    '------------------------------------------------------------------
+    ' 재취호출을 통해서 폼 또는 사용자정의 컨트롤 내에 포함된 컨트롤 중
+    '   검색하고자 하는 컨트롤의 성명과 동일한 컨트롤을 찾는다.
+    '------------------------------------------------------------------
+    Private Shared Sub FindControlRecursive(ByVal oControl As System.Windows.Forms.Control, ByVal findControlName As String)
+        If oControl Is Nothing Then
+            Exit Sub
+        End If
+        If Not _findControl Is Nothing Then
+            Exit Sub
+        End If
+        If oControl.Name.ToUpper = findControlName.ToUpper Then
+            _findControl = oControl
+        End If
+
+        Dim inControl As System.Windows.Forms.Control
+        For Each inControl In oControl.Controls
+            FindControlRecursive(inControl, findControlName)
+        Next
+    End Sub
+
+    '---------------------------------------------------------------------------
+    ' 사용자 정의 컨트롤 내의 여러 컨트롤 중 찾고자 하는 성명의 컨트를을 찾는다.
+    '---------------------------------------------------------------------------
+    Public Shared Function FindControl(ByVal grpControl As GroupBox, ByVal findControlName As String) As System.Windows.Forms.Control
+        Dim oControl As System.Windows.Forms.Control
+
+        If grpControl Is Nothing Then
+            Return Nothing
+        End If
+
+        _findControl = Nothing
+        findControlName = Trim(findControlName)
+
+        For Each oControl In grpControl.Controls
+            FindControlRecursive(oControl, findControlName)
+            If Not _findControl Is Nothing Then
+                Exit For
+            End If
+        Next
+
+        Return _findControl
+    End Function
+
+    '---------------------------------------------------------------------------
+    ' 사용자 정의 컨트롤 내의 여러 컨트롤 중 찾고자 하는 성명의 컨트를을 찾는다.
+    '---------------------------------------------------------------------------
+    Public Shared Function FindControl(ByVal pnlControl As Panel, ByVal findControlName As String) As System.Windows.Forms.Control
+        Dim oControl As System.Windows.Forms.Control
+
+        If pnlControl Is Nothing Then
+            Return Nothing
+        End If
+
+        _findControl = Nothing
+        findControlName = Trim(findControlName)
+
+        For Each oControl In pnlControl.Controls
+            FindControlRecursive(oControl, findControlName)
+            If Not _findControl Is Nothing Then
+                Exit For
+            End If
+        Next
+
+        Return _findControl
+    End Function
+
+    '---------------------------------------------------------------------------
+    ' 사용자 정의 컨트롤 내의 여러 컨트롤 중 찾고자 하는 성명의 컨트를을 찾는다.
+    '---------------------------------------------------------------------------
+    Public Shared Function FindControl(ByVal ucForm As UserControl, ByVal findControlName As String) As System.Windows.Forms.Control
+        Dim oControl As System.Windows.Forms.Control
+
+        If ucForm Is Nothing Then
+            Return Nothing
+        End If
+
+        _findControl = Nothing
+        findControlName = Trim(findControlName)
+
+        For Each oControl In ucForm.Controls
+            FindControlRecursive(oControl, findControlName)
+            If Not _findControl Is Nothing Then
+                Exit For
+            End If
+        Next
+
+        Return _findControl
+    End Function
+
+    '---------------------------------------------------------------------------
+    ' 폼 내의 여러 컨트롤 중 찾고자 하는 성명의 컨트를을 찾는다.
+    '---------------------------------------------------------------------------
+    Public Shared Function FindControl(ByVal frmForm As Form, ByVal findControlName As String) As System.Windows.Forms.Control
+        Dim oControl As System.Windows.Forms.Control
+
+        If frmForm Is Nothing Then
+            Return Nothing
+        End If
+
+        _findControl = Nothing
+        findControlName = Trim(findControlName)
+
+        For Each oControl In frmForm.Controls
+            FindControlRecursive(oControl, findControlName)
+            If Not _findControl Is Nothing Then
+                Exit For
+            End If
+        Next
+
+        Return _findControl
+    End Function
+
+#End Region
+
+    Public Shared Function FavAddDataGridViewToDataSet(ByVal oDgv As DataGridView) As DataSet
+        Dim returnDs As New DataSet
+
+        Dim dt As New DataTable
+        Dim dr As DataRow
+        Dim blnValidatoin As Boolean = False
+
+        Try
+
+            dt.Columns.Add("STOCK_CODE")
+            dt.Columns.Add("STOCK_NAME")
+
+        With oDgv
+                For row As Integer = 0 To .Rows.Count - 1
+
+                    dr = dt.Rows.Add()
+
+                    For column As Integer = 0 To .ColumnCount - 1
+
+                        If .Columns(column).HeaderText = "STOCK_CODE" Then
+                            dr("STOCK_CODE") = .Rows(row).Cells(column).Value
+                            blnValidatoin = True
+                        End If
+
+                        If .Columns(column).HeaderText = "STOCK_NAME" Then
+                            dr("STOCK_NAME") = .Rows(row).Cells(column).Value
+                        End If
+
+                        If .Columns(column).HeaderText = "종목코드" Then
+                            dr("STOCK_CODE") = .Rows(row).Cells(column).Value
+                            blnValidatoin = True
+                        End If
+
+                        If .Columns(column).HeaderText = "종목명" Then
+                            dr("STOCK_NAME") = .Rows(row).Cells(column).Value
+                        End If
+                    Next
+                Next
+
+                If blnValidatoin = True Then
+                    returnDs.Tables.Add(dt)
+                Else
+                    MsgBox(" datagridView 타입에 맞지 않습니다. ", MsgBoxStyle.Exclamation)
+                    Return Nothing
+                End If
+
+            End With
+
+            Return returnDs
+        
+        Catch ex As Exception
+            MsgBox(" datagridView 타입에 맞지 않습니다. ", MsgBoxStyle.Exclamation)
+            Return Nothing
+        End Try
+
+    End Function
+
+End Class

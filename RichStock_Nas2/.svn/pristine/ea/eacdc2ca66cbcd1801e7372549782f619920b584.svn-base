@@ -1,0 +1,257 @@
+﻿
+Public Class DataAccess
+
+    Private _arrParam As New ArrayParam
+    Private _mySqlDbConn As New mySqlDbConn
+
+#Region "p_Psi01Query"
+    '--------------------------------------------------
+    '관심그룹을 가져온다.
+    '--------------------------------------------------
+    Public Function p_Psi01Query(ByVal query As String, ByVal stockId As String, ByVal interId As Integer, ByVal interName As String, _
+            Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As DataSet
+        Dim returnDs As DataSet
+        Try
+
+            mySqlDbConn.Open()
+
+            With _arrParam
+                .Clear()
+                .Add("_QUERY", query)
+                .Add("_STOCK_ID", stockId)
+                .Add("_INTER_ID", interId)
+                .Add("_INTER_NAME", interName)
+            End With
+
+            returnDs = mySqlDbConn.GetDataTableSp("p_Psi01Query", _arrParam)
+
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+
+            Return returnDs
+
+        Catch ex As Exception
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+            Return Nothing
+        End Try
+
+    End Function
+#End Region
+
+#Region "p_Psi01Add"
+    '--------------------------------------------------
+    '관심그룹을 저장한다.
+    '--------------------------------------------------
+    Public Function p_Psi01Add(ByVal query As String, ByVal stockId As String, ByVal interId As Integer, ByVal interName As String, _
+            Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As Boolean
+
+        Try
+
+            mySqlDbConn.Open()
+
+            With _arrParam
+                .Clear()
+                .Add("_STOCK_ID", stockId)
+                .Add("_INTER_ID", interId)
+                .Add("_INTER_NAME", interName)
+            End With
+
+            mySqlDbConn.GetDataTableSp("p_Psi01Add", _arrParam)
+
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+            Return False
+        End Try
+
+    End Function
+#End Region
+
+#Region "p_Psi02Query"
+    '--------------------------------------------------
+    '관심그룹의 종목을 가져온다.
+    '--------------------------------------------------
+    Public Function p_Psi02Query(ByVal query As String, ByVal stockId As String, ByVal interId As Integer, ByVal stockCode As String, _
+                                 ByVal stockPoint As String, ByVal remark As String, _
+            Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As DataSet
+
+        Dim returnDs As DataSet
+        Dim cmd As String = ""
+
+        Try
+
+            mySqlDbConn.Open()
+
+            With _arrParam
+                .Clear()
+                .Add("_QUERY", query)
+                .Add("_STOCK_ID", stockId)
+                .Add("_INTER_ID", interId)
+                .Add("_STOCK_CODE", stockCode)
+                .Add("_STOCK_POINT", stockPoint)
+                .Add("_REMARK", remark)
+            End With
+
+            returnDs = mySqlDbConn.GetDataTableSp("p_Psi02Query", _arrParam)
+
+            ' returnDs = mySqlDbConn.GetDataTableCommndText(cmd)
+
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+
+            Return returnDs
+
+        Catch ex As Exception
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+            Return Nothing
+        End Try
+
+
+    End Function
+#End Region
+
+#Region "p_Psi02Add"
+    '--------------------------------------------------
+    '관심그룹의 종목을 저장한다.
+    '--------------------------------------------------
+    Public Function p_Psi02Add(ByVal query As String, ByVal stockId As String, ByVal interId As Integer, ByVal stockCode As String, _
+                                 ByVal stockPoint As String, ByVal remark As String, _
+            Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As Boolean
+
+        Dim cmd As String = ""
+
+        Try
+
+            mySqlDbConn.Open()
+
+            With _arrParam
+                .Clear()
+                .Add("_STOCK_ID", stockId)
+                .Add("_INTER_ID", interId)
+                .Add("_STOCK_CODE", stockCode)
+                .Add("_STOCK_POINT", stockPoint)
+                .Add("_REMARK", remark)
+            End With
+
+            mySqlDbConn.GetDataTableSp("p_Psi02Add", _arrParam)
+
+            ' returnDs = mySqlDbConn.GetDataTableCommndText(cmd)
+
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+            Return Nothing
+        End Try
+
+
+    End Function
+#End Region
+
+#Region "p_psi02Del"
+    '--------------------------------------------------
+    '관심그룹의 종목을 저장한다.
+    '--------------------------------------------------
+    Public Function p_psi02Del(ByVal query As String, ByVal stockId As String, ByVal interId As Integer, ByVal stockCode As String, _
+            Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As Boolean
+
+        Dim cmd As String = ""
+
+        Try
+
+            mySqlDbConn.Open()
+
+            With _arrParam
+                .Clear()
+                .Add("_STOCK_ID", stockId)
+                .Add("_INTER_ID", interId)
+                .Add("_STOCK_CODE", stockCode)
+            End With
+
+            mySqlDbConn.GetDataTableSp("p_psi02Del", _arrParam)
+
+            ' returnDs = mySqlDbConn.GetDataTableCommndText(cmd)
+
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+            Return False
+        End Try
+
+
+    End Function
+#End Region
+
+#Region "p_D1a01Add"
+    '--------------------------------------------------
+    '공시내역을 저장한다.
+    '--------------------------------------------------
+    Public Function p_D1a01Add(ByVal query As String, ByVal deungDate As String, ByVal stockCode As String, _
+                            ByVal deungPrice As String, ByVal creator As String, ByVal title As String, ByVal link As String, _
+            Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As Boolean
+
+        Dim cmd As String = ""
+
+        Try
+
+            mySqlDbConn.Open()
+
+            With _arrParam
+                .Clear()
+                .Add("_QUERY", query)
+                .Add("_DEUNG_DATE", deungDate)
+                .Add("_STOCK_CODE", stockCode)
+                .Add("_DEUNG_PRICE", deungPrice)
+                .Add("_CREATOR", creator)
+                .Add("_TITLE", title)
+                .Add("_LINK", link)
+            End With
+
+            mySqlDbConn.GetDataTableSp("p_D1a01Add", _arrParam)
+
+            ' returnDs = mySqlDbConn.GetDataTableCommndText(cmd)
+
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            If mySqlDbConn._sqlCon.State = ConnectionState.Open Then
+                mySqlDbConn.Close()
+            End If
+            Return Nothing
+        End Try
+
+
+    End Function
+#End Region
+
+End Class

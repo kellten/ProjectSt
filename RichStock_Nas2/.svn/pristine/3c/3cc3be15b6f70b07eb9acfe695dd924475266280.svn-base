@@ -1,0 +1,1007 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Threading;
+using PaikRichStock.Common;
+
+namespace Chart
+{
+    public partial class frmChart : Form
+    {
+        private clsChart _clsChart = new clsChart();
+        private PaikRichStock.Common.ucMainStockVer2 _MainStock;
+        private string _stockCode = "";
+        System.Windows.Forms.DataVisualization.Charting.Chart _baseChart;
+
+        public delegate void OnDelEventReturn10081ResultDt(DataSet ds);
+        public delegate void OnDelEventReturnRealTime(DataSet ds);    
+
+        public delegate void AddDataDelegate();
+        public AddDataDelegate addDataDel;        
+        
+        public PaikRichStock.Common.ucMainStockVer2 MainStock
+        {
+            set
+            {
+                _MainStock = value;
+
+            }
+        }
+        
+        public frmChart()
+        {
+            InitializeComponent();
+                        
+            //InitChart();
+        }
+
+        public void GetChartData(string stockCode)
+        {
+            this._clsChart.MainStock = _MainStock;
+            this._clsChart.GetOpt10081(stockCode);
+            _stockCode = stockCode;
+            this.Text = _MainStock.GetStockInfo(stockCode) + "(" + stockCode + ")";
+            this._clsChart.OnEventReturn10081ResultDt += new clsChart.OnEvent10081ResultDtEventHandler(this.onEventReturn10081ResultDt);
+            this._clsChart.OnEventReturnRealTime += new clsChart.OnEventReturnRealTimeEventHandler(this.OnEventReturnRealTime);
+               
+        }
+
+        public void CallMdiGetChartData(string stockCode)
+        {
+            this._clsChart.OnEventReturn10081ResultDt -= new clsChart.OnEvent10081ResultDtEventHandler(this.onEventReturn10081ResultDt);
+            this._clsChart.OnEventReturn10081ResultDt -= new clsChart.OnEvent10081ResultDtEventHandler(this.onEventReturn10081ResultDt);
+            this._clsChart.OnEventReturnRealTime -= new clsChart.OnEventReturnRealTimeEventHandler(this.OnEventReturnRealTime);
+            this._clsChart.OnEventReturnRealTime -= new clsChart.OnEventReturnRealTimeEventHandler(this.OnEventReturnRealTime);
+            this._clsChart.MainStock = _MainStock;
+            this._clsChart.GetOpt10081(stockCode);
+            _stockCode = stockCode;
+            this.Text = _MainStock.GetStockInfo(stockCode) + "(" + stockCode + ")";
+            this._clsChart.OnEventReturn10081ResultDt += new clsChart.OnEvent10081ResultDtEventHandler(this.onEventReturn10081ResultDt);
+            this._clsChart.OnEventReturnRealTime += new clsChart.OnEventReturnRealTimeEventHandler(this.OnEventReturnRealTime);
+
+        }       
+
+        private void InitChart()
+        {
+
+            this._baseChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            
+            chartArea1.Name = "ChartArea1";
+            chartArea2.Name = "Volume";
+            chartArea3.Name = "RSI";
+
+            this._baseChart.ChartAreas.Clear();
+            this._baseChart.Series.Clear();
+            this._baseChart.ChartAreas.Add(chartArea1);
+            this._baseChart.ChartAreas.Add(chartArea2);
+            this._baseChart.ChartAreas.Add(chartArea3);
+            
+            //_baseChart.ChartAreas["Volume"].AlignWithChartArea = System.Windows.Forms.DataVisualization.Charting.al
+
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Candlestick;
+            series1.Name = "캔들";
+            series1.YValuesPerPoint = 4;
+
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = Color.Magenta  ;
+            series2.Name = "20MA라인";
+            
+            series3.ChartArea = "Volume";
+            series3.Name = "거래량";
+
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Color = Color.Purple  ;
+            series4.Name = "3MA라인";
+
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Color = Color.YellowGreen;
+            series5.Name = "5MA라인";
+
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Color = Color.Green;
+            series6.Name = "10MA라인";
+
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Color = Color.Pink ;
+            series7.Name = "60MA라인";
+
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Color = Color.Blue;
+            series8.Name = "120MA라인";
+
+            series9.YValuesPerPoint = 4;
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
+            series9.Color = Color.Transparent;
+            series9.BorderColor = Color.Black;
+            series9.Name = "볼밴";
+
+            series10.YValuesPerPoint = 4;
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Range;
+            series10.Color = Color.Transparent;
+            series10.BorderColor = Color.DarkGray;
+            series10.Name = "ENV";
+
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series11.Color = Color.DeepSkyBlue;
+            series11.Name = "220MA라인";
+
+            series12.ChartArea = "RSI";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series12.Color = Color.Red;
+            series12.Name = "RSI";
+
+            this._baseChart.ChartAreas["Volume"].AxisX.MajorGrid.Enabled = false;
+            this._baseChart.ChartAreas["Volume"].AxisX.MajorTickMark.Enabled = false;
+            this._baseChart.ChartAreas["Volume"].AxisX.LineWidth = 0;
+            this._baseChart.ChartAreas["Volume"].AxisY.MajorGrid.Enabled = false;
+            this._baseChart.ChartAreas["Volume"].AxisY.MajorTickMark.Enabled = false;
+            this._baseChart.ChartAreas["Volume"].AxisY.LineWidth = 0;
+
+            this._baseChart.ChartAreas["RSI"].AxisY.Maximum = 100;
+            this._baseChart.ChartAreas["RSI"].AxisY.Minimum = 0;
+            this._baseChart.ChartAreas["RSI"].AxisY.IntervalOffset = 30;
+            this._baseChart.ChartAreas["RSI"].AxisY.Interval = 40;
+            this._baseChart.ChartAreas["RSI"].AxisX.MajorGrid.Enabled = false;
+            this._baseChart.ChartAreas["RSI"].AxisX.MajorTickMark.Enabled = false;
+            this._baseChart.ChartAreas["RSI"].AxisX.LineWidth = 0;
+
+            this._baseChart.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+            this._baseChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Position = _baseChart.ChartAreas["ChartArea1"].AxisX.Maximum;
+            this._baseChart.ChartAreas["ChartArea1"].CursorX.IsUserEnabled = true;
+            this._baseChart.ChartAreas["ChartArea1"].CursorX.IsUserSelectionEnabled = true;
+            this._baseChart.ChartAreas["ChartArea1"].AxisX.ScaleView.Zoomable = true;
+            //_baseChart.ChartAreas["ChartArea1"].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
+            this._baseChart.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Days;
+            this._baseChart.ChartAreas["ChartArea1"].AxisX.Interval = 10;
+            this._baseChart.ChartAreas["Volume"].CursorX.IsUserEnabled = true;
+            this._baseChart.ChartAreas["Volume"].CursorX.IsUserSelectionEnabled = true;
+            this._baseChart.ChartAreas["Volume"].AxisX.ScaleView.Zoomable = true;
+
+            this._baseChart.ChartAreas["RSI"].CursorX.IsUserEnabled = true;
+            this._baseChart.ChartAreas["RSI"].CursorX.IsUserSelectionEnabled = true;
+            this._baseChart.ChartAreas["RSI"].AxisX.ScaleView.Zoomable = true;
+
+            this._baseChart.ChartAreas["ChartArea1"].InnerPlotPosition.Auto = true;
+            this._baseChart.ChartAreas["Volume"].InnerPlotPosition.Auto = true;
+            this._baseChart.ChartAreas["RSI"].InnerPlotPosition.Auto = true;
+
+            this._baseChart.ChartAreas["Volume"].AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical;
+            this._baseChart.ChartAreas["Volume"].AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.All;
+            this._baseChart.ChartAreas["Volume"].AlignWithChartArea = "ChartArea1";
+
+            this._baseChart.ChartAreas["RSI"].AlignmentOrientation = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical;
+            this._baseChart.ChartAreas["RSI"].AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.All;
+            this._baseChart.ChartAreas["RSI"].AlignWithChartArea = "ChartArea1";
+
+            this._baseChart.ChartAreas["ChartArea1"].Position.Auto = false;
+            this._baseChart.ChartAreas["ChartArea1"].Position.Height = 60;
+            this._baseChart.ChartAreas["ChartArea1"].Position.Width = 100;
+            this._baseChart.ChartAreas["ChartArea1"].Position.X = 0;
+            this._baseChart.ChartAreas["ChartArea1"].Position.Y = 0;
+
+            this._baseChart.ChartAreas["Volume"].Position.Auto = false;
+            this._baseChart.ChartAreas["Volume"].Position.Height = 25;
+            this._baseChart.ChartAreas["Volume"].Position.Width = 100;
+            this._baseChart.ChartAreas["Volume"].Position.X = _baseChart.ChartAreas["ChartArea1"].Position.X;
+            this._baseChart.ChartAreas["Volume"].Position.Y = _baseChart.ChartAreas["ChartArea1"].Position.Y + _baseChart.ChartAreas["ChartArea1"].Position.Height;
+
+            this._baseChart.ChartAreas["RSI"].Position.Auto = false;
+            this._baseChart.ChartAreas["RSI"].Position.Height = 15;
+            this._baseChart.ChartAreas["RSI"].Position.Width = 100;
+            this._baseChart.ChartAreas["RSI"].Position.X = _baseChart.ChartAreas["ChartArea1"].Position.X;
+            this._baseChart.ChartAreas["RSI"].Position.Y = _baseChart.ChartAreas["Volume"].Position.Y + _baseChart.ChartAreas["Volume"].Position.Height;
+
+            this._baseChart.Series.Add(series1);
+            this._baseChart.Series.Add(series2);
+            this._baseChart.Series.Add(series3);
+            this._baseChart.Series.Add(series4);
+            this._baseChart.Series.Add(series5);
+            this._baseChart.Series.Add(series6);
+            this._baseChart.Series.Add(series7);
+            this._baseChart.Series.Add(series8);
+            this._baseChart.Series.Add(series9);
+            this._baseChart.Series.Add(series10);
+            this._baseChart.Series.Add(series11);
+            this._baseChart.Series.Add(series12);
+
+            this._baseChart.Series["캔들"].ToolTip = "#AXISLABEL";
+            this._baseChart.Series["캔들"].IsXValueIndexed = false;
+            this._baseChart.Series["캔들"].XValueType = ChartValueType.DateTime;
+
+            this._baseChart.Width = this.Width - 20;
+            this._baseChart.Height = this.Height - 5;
+            this.Controls.Add(this._baseChart);
+
+            this._baseChart.MouseClick += new System.Windows.Forms.MouseEventHandler(this._baseChart_MouseClick);
+            this._baseChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chart_MouseMove);
+            this._baseChart.MouseDown += new System.Windows.Forms.MouseEventHandler(this._baseChart_MouseDown);
+            this._baseChart.AxisViewChanged += new System.EventHandler<System.Windows.Forms.DataVisualization.Charting.ViewEventArgs>(this._baseChart_AxisViewChanged);
+            this._baseChart.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.chData_MouseWheel);
+
+            chkEnv.Checked = false;
+        }
+        
+        void _baseChart_AxisViewChanged(object sender, ViewEventArgs e)
+        {
+            int start = (int)e.Axis.ScaleView.ViewMinimum;
+            int end = (int)e.Axis.ScaleView.ViewMaximum;
+                       
+            double[] temp = _baseChart.Series["캔들"].Points.Where((x, i) => i >= start && i <= end).Select(x => x.YValues[0]).ToArray();
+            double ymin = temp.Min();
+            double ymax = temp.Max();
+
+            this._baseChart.ChartAreas["ChartArea1"].AxisY.Minimum = ymin - (ymin * 0.1);
+            this._baseChart.ChartAreas["ChartArea1"].AxisY.Maximum = ymax + (ymax * 0.1);           
+        }
+
+        private DataSet _ds;
+        private int _month = 0;
+        private double _prevLow;
+        private double _prevHigh;
+
+        private void DisplayChart(DataSet ds, int month)
+        {
+            int pt = 0;
+            DataView dv = new DataView(ds.Tables[0]);
+
+            dv.Sort = "일자 asc";
+            dv.RowFilter = "일자 >=" + DateTime.Now.AddMonths(-month).ToString("yyyyMMdd");
+
+            int high = 0;
+            int low = 0;
+
+            for (int ix = 0; ix < _baseChart.Series.Count; ix++)
+            {
+                this._baseChart.Series[ix].Points.Clear();
+            }
+
+            DataSet dsTmp = new DataSet();
+
+            using (DataAccess dataAcc = new DataAccess())
+            {
+                dsTmp = dataAcc.p_stock_etc_query("1", _stockCode, "", null, null);
+            }           
+
+            foreach (DataRowView dr in dv)
+            {
+                if (low == 0)
+                {
+                    high = int.Parse(dr["고가"].ToString());
+                }
+                else
+                {
+                    if (high < int.Parse(dr["고가"].ToString()))
+                    {
+                        high = int.Parse(dr["고가"].ToString());
+                    }
+                }
+
+
+                if (low == 0)
+                {
+                    low = int.Parse(dr["저가"].ToString());
+                }
+                else
+                {
+                    if (low > int.Parse(dr["저가"].ToString()))
+                    {
+                        low = int.Parse(dr["저가"].ToString());
+                    }
+                }
+
+                this._baseChart.Series["캔들"].Points.AddXY((object)dr["일자"], int.Parse(dr["고가"].ToString()));
+                this._baseChart.Series["캔들"].Points[pt].YValues[1] = int.Parse(dr["저가"].ToString());
+                this._baseChart.Series["캔들"].Points[pt].YValues[2] = int.Parse(dr["시가"].ToString());
+                this._baseChart.Series["캔들"].Points[pt].YValues[3] = int.Parse(dr["현재가"].ToString());                
+
+                //0 or 1, 수신데이터 1:유상증자, 2:무상증자, 4:배당락, 8:액면분할, 16:액면병합, 32:기업합병, 64:감자, 256:권리락
+                switch (dr["수정주가구분"].ToString().Trim())
+	            {
+                    case "1":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "유상증자";
+                        break;
+                    case "2":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "무상증자";
+                    break;
+                    case "4":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "배당락";
+                        break;
+                    case "8":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "액면분할";
+                        break;
+                    case "16":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "액면병합";
+                        break;
+                    case "32":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "기업합병";
+                        break;
+                    case "64":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "감자";
+                        break;
+                    case "256":
+                        this._baseChart.Series["캔들"].Points[pt].Label = "권리락";
+                        break;                    
+		            default:
+                        break;
+	            }
+
+                foreach (DataRow drTmp in dsTmp.Tables[0].Rows)
+                {
+                    if (dr["일자"].ToString().Trim() == drTmp["STOCK_DATE"].ToString().Trim())
+                    {
+                        this._baseChart.Series["캔들"].Points[pt].Label = drTmp["COMMENT"].ToString().Trim();
+                    }
+                }
+
+
+                this._baseChart.Series["거래량"].Points.AddXY(dr["일자"], double.Parse(dr["거래량"].ToString()));
+                int curCnt = this._baseChart.Series["거래량"].Points.Count - 1;
+                this._baseChart.Series["거래량"].Points[curCnt].Color = System.Drawing.Color.Red;
+
+                if (curCnt > 0) { 
+                    Double preVolume = this._baseChart.Series["거래량"].Points[curCnt - 1].YValues[0];
+                    Double CurVolume = this._baseChart.Series["거래량"].Points[curCnt].YValues[0];
+
+                    if (preVolume < CurVolume)
+                    {
+                        this._baseChart.Series["거래량"].Points[curCnt].Color = System.Drawing.Color.Red;
+                    }
+                    else
+                    {
+                        this._baseChart.Series["거래량"].Points[curCnt].Color = System.Drawing.Color.Blue;
+                    }
+                }
+                                                                
+                if (int.Parse(dr["시가"].ToString()) > int.Parse(dr["현재가"].ToString()))
+                {
+                    this._baseChart.Series["캔들"].Points[pt].Color = System.Drawing.Color.Blue;
+                }
+                else
+                {
+                    this._baseChart.Series["캔들"].Points[pt].Color = System.Drawing.Color.Red;
+                }
+
+                pt++;
+            }
+
+            this._baseChart.ChartAreas["ChartArea1"].AxisY.Minimum = low - (low * 0.1);
+            this._baseChart.ChartAreas["ChartArea1"].AxisY.Maximum = high + (high * 0.1);
+            this._baseChart.ChartAreas["ChartArea1"].AxisX.IsLabelAutoFit = true;
+
+            DataCalcAll();
+
+            _prevLow = low - (low * 0.1);
+            _prevHigh = high + (high * 0.1);
+        }
+
+        Task<Int32> _parent;
+        CancellationTokenSource _cts = new CancellationTokenSource();
+        private void DataCalcAll()
+        {
+            if (_parent != null && _parent.IsCompleted == false)
+            {
+                _cts.Cancel();   
+            }
+
+            btnPrev.Enabled = false;
+            btnNext.Enabled = false;
+            _parent = new Task<Int32>(() =>
+            {
+                var cnt = new Int32();
+                if (_baseChart.Series["캔들"].Points.Count >= 3)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "3", "캔들:Y4", "3MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                if (_baseChart.Series["캔들"].Points.Count >= 5)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "5", "캔들:Y4", "5MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+                
+                if (_baseChart.Series["캔들"].Points.Count >= 10)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "10", "캔들:Y4", "10MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                if (_baseChart.Series["캔들"].Points.Count >= 20)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "20", "캔들:Y4", "20MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                if (_baseChart.Series["캔들"].Points.Count >= 60)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "60", "캔들:Y4", "60MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+                
+                if (_baseChart.Series["캔들"].Points.Count >= 120)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "120", "캔들:Y4", "120MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+                
+                if (_baseChart.Series["캔들"].Points.Count >= 220)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.MovingAverage, "220", "캔들:Y4", "220MA라인"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                if (_baseChart.Series["캔들"].Points.Count >= 20)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.Envelopes, "20,20", "캔들:Y4", "ENV:Y,ENV:Y2"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                if (_baseChart.Series["캔들"].Points.Count >= 40)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.BollingerBands, "40,2", "캔들:Y4", "볼밴:Y,볼밴:Y2"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                if (_baseChart.Series["캔들"].Points.Count >= 14)
+                    new Task(() =>
+                        this.DataCalc(FinancialFormula.RelativeStrengthIndex, "14", "캔들:Y4", "RSI:Y"), TaskCreationOptions.AttachedToParent
+                    ).Start();
+
+                return cnt;
+            }, _cts.Token);
+
+            var cwt = _parent.ContinueWith(// parent Task가끝나면수행할Task 연결
+                parentTask => SettingToolTip()
+            );
+            _parent.ContinueWith(// 예외발생시
+                task => Console.WriteLine("Task threw: " + task.Exception.InnerException), TaskContinuationOptions.OnlyOnFaulted);
+            _parent.ContinueWith(task => Console.WriteLine("Task was canceled"), TaskContinuationOptions.OnlyOnCanceled);
+
+            _parent.Start();
+            _parent.Wait();
+        }
+
+        private void SettingToolTip()
+        {
+            try
+            {
+                string pre_e_p;
+                string pre_e_v;
+                string tooltipStr;
+                string stockDate;
+                string h_p;
+                string l_p;
+                string s_p;
+                string e_p;
+                string volume;
+                string line3;
+                string line5;
+                string line10;
+                string line20;
+                string line20L;
+                string line60;
+                string line120;
+                string line220;
+                string bbup;
+                string bbdown;
+                string rsi;
+
+                for (int ix = 0; ix < this._baseChart.Series["캔들"].Points.Count; ix++)
+                {
+                    pre_e_p = "0";
+                    pre_e_v = "0";
+                    if (ix > 0)
+                    {
+                        pre_e_p = _baseChart.Series["캔들"].Points[ix - 1].YValues[3].ToString();
+                        pre_e_v = _baseChart.Series["거래량"].Points[ix - 1].YValues[0].ToString();
+                    }
+                    stockDate = _baseChart.Series["캔들"].Points[ix].AxisLabel;
+                    h_p = _baseChart.Series["캔들"].Points[ix].YValues[0].ToString();
+                    l_p = _baseChart.Series["캔들"].Points[ix].YValues[1].ToString();
+                    s_p = _baseChart.Series["캔들"].Points[ix].YValues[2].ToString();
+                    e_p = _baseChart.Series["캔들"].Points[ix].YValues[3].ToString();
+                    volume = _baseChart.Series["거래량"].Points[ix].YValues[0].ToString();
+                    line3 = "";
+                    line5 = "";
+                    line10 = "";
+                    line20 = "";
+                    line20L = "";
+                    line60 = "";
+                    line120 = "";
+                    line220 = "";
+                    bbup = "";
+                    bbdown = "";
+                    rsi = "";
+
+                    if (_baseChart.Series["3MA라인"].Points.Count >= 3)
+                    {
+                        line3 = _baseChart.Series["3MA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["5MA라인"].Points.Count >= 5)
+                    {
+                        line5 = _baseChart.Series["5MA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["10MA라인"].Points.Count >= 10)
+                    {
+                        line10 = _baseChart.Series["10MA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["20MA라인"].Points.Count >= 20)
+                    {
+                        line20 = _baseChart.Series["20MA라인"].Points[ix].YValues[0].ToString();
+                        line20L = _baseChart.Series["20LMA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["60MA라인"].Points.Count >= 60)
+                    {
+                        line60 = _baseChart.Series["60MA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["120MA라인"].Points.Count >= 120)
+                    {
+                        line120 = _baseChart.Series["120MA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["220MA라인"].Points.Count >= 220)
+                    {
+                        line220 = _baseChart.Series["220MA라인"].Points[ix].YValues[0].ToString();
+                    }
+                    if (_baseChart.Series["볼밴"].Points.Count >= 40)
+                    {
+                        bbup = _baseChart.Series["볼밴"].Points[ix].YValues[0].ToString();
+                        bbdown = _baseChart.Series["볼밴"].Points[ix].YValues[1].ToString();
+                    }
+                    if (_baseChart.Series["RSI"].Points.Count >= 14)
+                    {
+                        rsi = _baseChart.Series["RSI"].Points[ix].YValues[0].ToString();
+                    }
+
+                    tooltipStr = "일자: " + PaikRichStock.Common.CDateTime.FormatDate(stockDate, ".");
+                    tooltipStr += "\r\n" + "시가: " + String.Format("{0:##,##0}", Convert.ToInt32(s_p)) + "   " + CalcRate(pre_e_p, s_p).ToString() + "%"
+                                + "\r\n" + "고가: " + String.Format("{0:##,##0}", Convert.ToInt32(h_p)) + "   " + CalcRate(pre_e_p, h_p).ToString() + "%"
+                                + "\r\n" + "저가: " + String.Format("{0:##,##0}", Convert.ToInt32(l_p)) + "   " + CalcRate(pre_e_p, l_p).ToString() + "%"
+                                + "\r\n" + "종가: " + String.Format("{0:##,##0}", Convert.ToInt32(e_p)) + "   " + CalcRate(pre_e_p, e_p).ToString() + "%"
+                                + "\r\n"
+                                + "거래량: " + String.Format("{0:##,##0}", Convert.ToInt64(volume)) + "   " + (CalcRate(pre_e_v, volume) + 100).ToString() + "%"
+                                + "\r\n" + "\r\n";
+                    tooltipStr += "이평선========================";
+
+                    if (line3 != "")
+                    {
+                        tooltipStr += "\r\n" + "3: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line3)) + "   " + CalcRate(e_p, line3).ToString() + "%";
+                    }
+                    if (line5 != "")
+                    {
+                        tooltipStr += "\r\n" + "5: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line5)) + "   " + CalcRate(e_p, line5).ToString() + "%";
+                    }
+                    if (line10 != "")
+                    {
+                        tooltipStr += "\r\n" + "10: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line5)) + "   " + CalcRate(e_p, line10).ToString() + "%";
+                    }
+                    if (line20 != "")
+                    {
+                        tooltipStr += "\r\n" + "20: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line20)) + "   " + CalcRate(e_p, line20).ToString() + "%";
+                    }
+                    if (line60 != "")
+                    {
+                        tooltipStr += "\r\n" + "60: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line60)) + "   " + CalcRate(e_p, line60).ToString() + "%";
+                    }
+                    if (line120 != "")
+                    {
+                        tooltipStr += "\r\n" + "120: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line120)) + "   " + CalcRate(e_p, line120).ToString() + "%";
+                    }
+                    if (line220 != "")
+                    {
+                        tooltipStr += "\r\n" + "220: " + String.Format("{0:##,##0.00}", Convert.ToDouble(line220)) + "   " + CalcRate(e_p, line220).ToString() + "%";
+                    }
+
+                    tooltipStr += "\r\n" + "\r\n";
+                    tooltipStr += "보조지표======================";
+
+                    if (bbup != "")
+                    {
+                        tooltipStr += "\r\n" + "볼밴 상한: " + String.Format("{0:#0.00}", Convert.ToDouble(bbup)) + "   " + CalcRate(e_p, bbup).ToString() + "%";
+                        tooltipStr += "\r\n" + "볼밴 하한: " + String.Format("{0:#0.00}", Convert.ToDouble(bbdown)) + "   " + CalcRate(e_p, bbdown).ToString() + "%";
+                    }
+                    if (rsi != "")
+                    {
+                        tooltipStr += "\r\n" + "RSI: " + String.Format("{0:#0.00}", Convert.ToDouble(rsi));
+                    }
+
+                    if (line20 != "")
+                    {
+                        tooltipStr += "\r\n" + "20저가이평: " + String.Format("{0:#0.00}", Convert.ToDouble(line20L));
+                    }
+
+                    try
+                    {
+                        for (int i = 0; i < _baseChart.Series.Count; i++)
+                        {
+                            if (this._baseChart.Series[i].Points.Count > 0)
+                            {
+                                this._baseChart.Series[i].Points[ix].ToolTip = tooltipStr;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                btnPrev.Enabled = true;
+                btnNext.Enabled = true;
+            }
+        }
+
+        private void DataCalc(FinancialFormula formula, string period, string candle, string line)
+        {
+            try { 
+                this._baseChart.DataManipulator.FinancialFormula(formula, period, candle, line);
+            }
+            catch { }
+        }
+
+        private double CalcRate(string value1, string value2)
+        {
+            if (value1 == "" || value2 == "") return 0;
+
+            double calcValue = 0;
+
+            calcValue = Math.Round((double.Parse(value2) - double.Parse(value1)) / double.Parse(value1) * 100, 2);
+
+            if(calcValue > 0)
+            {
+                return Math.Round(calcValue, 2);
+            }            
+            else
+            {
+                return Math.Round(calcValue , 2);
+            }            
+        }
+
+        private void OnEventReturnRealTime(DataSet value)
+        {
+            //_baseChart.Invoke(addDataDel);
+            if (this._baseChart == null) { return; }
+
+            try
+            {
+                if (_stockCode == value.Tables[0].Rows[0]["STOCK_CODE"].ToString())
+                { 
+                    this._baseChart.Series["캔들"].Points[this._baseChart.Series["캔들"].Points.Count - 1].YValues[3] = int.Parse(value.Tables[0].Rows[0]["현재가"].ToString().Replace("-", ""));
+                    this._baseChart.Series["캔들"].Points[this._baseChart.Series["캔들"].Points.Count - 1].Label = value.Tables[0].Rows[0]["현재가"].ToString().Replace("-", "");
+                    _baseChart.Invalidate();
+                    _baseChart.Update();
+
+                }                
+            }
+            catch (Exception)
+            {
+                                
+            }
+            
+            ////_baseChart.Series["캔들"].Points[_baseChart.Series["캔들"].Points.Count].YValues[2] = int.Parse(dr["시가"].ToString());
+            ////_baseChart.Series["캔들"].Points[_baseChart.Series["캔들"].Points.Count].YValues[3] = int.Parse(dr["현재가"].ToString());           
+
+        }
+
+        private void onEventReturn10081ResultDt(DataSet value)
+        {
+            try
+            {
+                InitChart();
+            }
+            catch (Exception)
+            {
+                
+            }            
+
+            //var matplotlib = new MatplotlibCS.MatplotlibCS(@"C:\Users\eunha.BUSANPAIK\AppData\Local\Programs\Python\Python35-32\python.exe", @"D:\RichStock\Chart\MatplotlibCS\matplotlib_cs.py");
+            for (int i = 0; i < this._baseChart.Series.Count; i++)
+            {
+                this._baseChart.Series[i].Points.Clear();
+            }
+
+            DataSet ds = value;
+
+            _ds = ds;
+
+            _month = 6;
+
+            DisplayChart(ds, _month);
+
+            ////_baseChart.ChartAreas["Volume"].Position.X = _baseChart.ChartAreas["ChartArea1"].Position.X;
+            ////_baseChart.ChartAreas["Volume"].Position.Y = _baseChart.ChartAreas["ChartArea1"].Position.X + _baseChart.ChartAreas["ChartArea1"].Position.Height + 10;
+        }
+
+        Point? prevPosition = null;
+        ToolTip tooltip = new ToolTip();
+
+        void chart_MouseMove(object sender, MouseEventArgs e)
+        {
+            //if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            //{
+            //    _baseChart.ChartAreas["ChartArea1"].AxisX.ScaleView.ZoomReset();
+            //    return;
+            //}
+
+            Point mousePoint = new Point(e.X, e.Y);
+
+            this._baseChart.ChartAreas["ChartArea1"].CursorX.SetCursorPixelPosition(mousePoint, true);
+            this._baseChart.ChartAreas["ChartArea1"].CursorY.SetCursorPixelPosition(mousePoint, true);
+            
+            var pos = e.Location;
+            if (prevPosition.HasValue && pos == prevPosition.Value)
+                return;
+            tooltip.RemoveAll();
+            prevPosition = pos;
+            var results = this._baseChart.HitTest(pos.X, pos.Y, false,
+                                         ChartElementType.PlottingArea);
+
+            try
+            {
+                foreach (var result in results)
+                {
+                    if (result.ChartElementType == ChartElementType.PlottingArea)
+                    {
+                        var xVal = result.ChartArea.AxisX.PixelPositionToValue(pos.X);
+                        double yVal = result.ChartArea.AxisY.PixelPositionToValue(pos.Y);
+
+                        tooltip.Show(Math.Round(yVal, 2).ToString(), this._baseChart,
+                                     pos.X, pos.Y - 21);
+                    }
+                    else if (result.ChartElementType == ChartElementType.DataPoint)
+                    {
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                                
+            }
+            
+        }
+
+        ////private void chart_GetToolTipText(object sender, System.Windows.Forms.DataVisualization.Charting.ToolTipEventArgs e)
+        ////{
+
+        ////          // Check selected chart element and set tooltip text
+        ////    switch(    e.HitTestResult.ChartElementType )
+        ////    {
+        ////        case ChartElementType.Axis:
+        ////            e.Text = e.HitTestResult.Axis.Name;
+        ////            break;                
+        ////        case ChartElementType.DataPoint:
+        ////            e.Text = "Data Point " + e.HitTestResult.PointIndex.ToString();
+        ////            break;
+        ////        case ChartElementType.Gridlines:
+        ////            e.Text = "Grid Lines";
+        ////            break;             
+        ////        case ChartElementType.PlottingArea:
+        ////            e.Text = e.HitTestResult;
+        ////            break;
+        ////        case ChartElementType.StripLines:
+        ////            e.Text = "Strip Lines";
+        ////            break;
+        ////        case ChartElementType.TickMarks:
+        ////            e.Text = "Tick Marks";
+        ////            break;
+        ////        case ChartElementType.Title:
+        ////            e.Text = "Title";
+        ////            break;
+        ////    }
+        ////}        
+
+
+        void _baseChart_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                {
+                    this._baseChart.ChartAreas["ChartArea1"].AxisX.ScaleView.ZoomReset();
+
+                    this._baseChart.ChartAreas["ChartArea1"].AxisY.Minimum = _prevLow;
+                    this._baseChart.ChartAreas["ChartArea1"].AxisY.Maximum = _prevHigh;
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }            
+        }
+
+        void _baseChart_MouseClick(object sender, MouseEventArgs e)
+        {
+            
+            //else if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            //{
+            //    var pos = e.Location;
+            //    if (prevPosition.HasValue && pos == prevPosition.Value)
+            //        return;
+            //    tooltip.RemoveAll();
+            //    prevPosition = pos;
+            //    var results = _baseChart.HitTest(pos.X, pos.Y, false,
+            //                                 ChartElementType.PlottingArea);
+            //    foreach (var result in results)
+            //    {
+            //        if (result.ChartElementType == ChartElementType.PlottingArea)
+            //        {
+            //            //var xVal = result.Series.Points[result.PointIndex].XValue;
+            //            var yVal = Math.Round(result.ChartArea.AxisY.PixelPositionToValue(pos.Y),2);
+
+            //            tooltip.Show(yVal.ToString(), _baseChart,
+            //                         pos.X, pos.Y - 15);
+            //        }
+            //    }
+            //}            
+        }
+        private void ucChart_SizeChanged(object sender, EventArgs e)
+        {
+            if (this._baseChart != null)
+            {
+                this._baseChart.Width = this.Width - 20;
+                this._baseChart.Height = this.Height - 5;
+            }            
+        }
+        private void chData_MouseWheel(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Delta < 0)
+                {
+                    this._baseChart.ChartAreas[0].AxisX.ScaleView.ZoomReset();
+                    this._baseChart.ChartAreas[0].AxisY.ScaleView.ZoomReset();
+                }
+
+                if (e.Delta > 0)
+                {
+                    double xMin = this._baseChart.ChartAreas[0].AxisX.ScaleView.ViewMinimum;
+                    double xMax = this._baseChart.ChartAreas[0].AxisX.ScaleView.ViewMaximum;
+                    double yMin = this._baseChart.ChartAreas[0].AxisY.ScaleView.ViewMinimum;
+                    double yMax = this._baseChart.ChartAreas[0].AxisY.ScaleView.ViewMaximum;
+
+                    double posXStart = this._baseChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) - (xMax - xMin) / 4;
+                    double posXFinish = this._baseChart.ChartAreas[0].AxisX.PixelPositionToValue(e.Location.X) + (xMax - xMin) / 4;
+                    double posYStart = this._baseChart.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) - (yMax - yMin) / 4;
+                    double posYFinish = this._baseChart.ChartAreas[0].AxisY.PixelPositionToValue(e.Location.Y) + (yMax - yMin) / 4;
+
+                    this._baseChart.ChartAreas[0].AxisX.ScaleView.Zoom(posXStart, posXFinish);
+                    this._baseChart.ChartAreas[0].AxisY.ScaleView.Zoom(posYStart, posYFinish);
+                }
+            }
+            catch { }
+        }
+
+        private void btnPrev_Click(object sender, EventArgs e)
+        {
+            if(_ds != null)
+            {
+                _month += 3;
+
+                DisplayChart(_ds, _month);
+            }
+            
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (_ds != null)
+            {
+                if(_month - 3 > 0)
+                {
+                    _month -= 3;
+                }                
+
+                DisplayChart(_ds, _month);
+            }
+        }
+
+        private void chart1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void chart1_AxisViewChanged(object sender, ViewEventArgs e)
+        {
+
+        }
+
+        private void frmChart_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void frmChart_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this._clsChart.OnEventReturn10081ResultDt -= this.onEventReturn10081ResultDt;
+            this._clsChart.OnEventReturn10081ResultDt -= this.onEventReturn10081ResultDt;
+            this._clsChart.OnEventReturnRealTime -= this.OnEventReturnRealTime;
+            this._clsChart.OnEventReturnRealTime -= this.OnEventReturnRealTime;
+        }
+
+        private void chk3MA_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (((CheckBox)sender).Name)
+            {
+                case "chk3MA":
+                    this._baseChart.Series["3MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk5MA":
+                    this._baseChart.Series["5MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk10MA":
+                    this._baseChart.Series["10MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk20MA":
+                    this._baseChart.Series["20MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk60MA":
+                    this._baseChart.Series["60MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk120MA":
+                    this._baseChart.Series["120MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk220MA":
+                    this._baseChart.Series["220MA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk41bl":
+                    this._baseChart.Series["볼밴"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chkEnv":
+                    this._baseChart.Series["ENV"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                case "chk20LMA":
+                    this._baseChart.Series["20LMA라인"].Enabled = ((CheckBox)sender).Checked;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void chkRSI_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = ((CheckBox)sender);
+            if (chk.Checked == true)
+            {
+                this._baseChart.ChartAreas["Volume"].Position.Height = this._baseChart.ChartAreas["Volume"].Position.Height - 15;
+                this._baseChart.ChartAreas["RSI"].Visible = true;
+            }
+            else
+            {
+                this._baseChart.ChartAreas["Volume"].Position.Height = this._baseChart.ChartAreas["Volume"].Position.Height + 15;
+                this._baseChart.ChartAreas["RSI"].Visible = false;
+            }
+        }
+    }
+}
