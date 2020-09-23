@@ -1,10 +1,25 @@
 ﻿using System;
 using System.Data;
+using System.Drawing.Printing;
 
 namespace Woom.DataDefine.OptData
 {
     public class ClsColumnSets : IDisposable
     {
+
+        public enum Column10081Index
+        {
+            종목코드, 현재가, 거래량, 거래대금, 일자, 시가, 고가, 저가,
+            수정주가구분, 수정비율, 대업종구분, 소업종구분, 종목정보,
+            수정주가이벤트
+            //, 전일종가
+        }
+        public enum Column10060Index
+        {
+            일자, 현재가, 전일대비, 누적거래대금, 개인투자자, 외국인투자자, 기관계, 금융투자, 보험, 투신, 기타금융, 은행,
+            연기금등, 사모펀드, 국가, 기타법인, 내외국인
+        }
+
         public enum ColumnNameIndex
         {
             일자, 현재가, 대비기호, 전일대비, 등락율, 누적거래대금, 개인투자자,

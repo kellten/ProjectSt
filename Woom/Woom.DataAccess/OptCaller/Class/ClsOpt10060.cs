@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.Threading.Tasks;
 using Woom.DataAccess.OptCaller.InterFace;
@@ -15,6 +16,8 @@ namespace Woom.DataAccess.OptCaller.Class
         private const string ConScreenNoFooter = "60";
         public string ScreenNoFooter { get { return ConScreenNoFooter; } }
         private string _screenNo = "";
+
+
 
         public void SetInit(string FormId)
         {
@@ -35,7 +38,7 @@ namespace Woom.DataAccess.OptCaller.Class
                 {
                     int j = 0;
                     j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(Column10060Index), i));
-                    
+
                     if (_dt.Columns.Contains(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j).ToString()) != true)
                     {
                         _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
@@ -72,6 +75,7 @@ namespace Woom.DataAccess.OptCaller.Class
         #endregion Const
 
         #region 전역변수
+
         private DataTable _dt = new DataTable();
 
         private string _startDate = "";
@@ -115,60 +119,63 @@ namespace Woom.DataAccess.OptCaller.Class
 
         public async void Opt10060(bool nextCall = false)
         {
-            AxKH.SetInputValue("일자", _startDate);
-            AxKH.SetInputValue("종목코드", _stockCode);
-            AxKH.SetInputValue("금액수량구분", _amountQtyGb);
-            AxKH.SetInputValue("매매구분", _maeMaeGb);
-            AxKH.SetInputValue("단위구분", _unitGb);
+            ArrayList SetInputValue = new ArrayList();
+
+            SetInputValue.Add(_startDate);
+            SetInputValue.Add(_stockCode);
+            SetInputValue.Add(_amountQtyGb);
+            SetInputValue.Add(_maeMaeGb);
+            SetInputValue.Add(_unitGb);
 
             if (nextCall == false)
             {
-                await JustRequest();
+                await JustRequest(SetInputValue);
             }
             else
             {
-                await ReJustRequest();
+                await ReJustRequest(SetInputValue);
             }
         }
 
-        private async Task JustRequest()
+        private async Task JustRequest(ArrayList arrayL)
         {
-            TaskCompletionSource<bool> tcs = null;
-            tcs = new TaskCompletionSource<bool>();
+            //TaskCompletionSource<bool> tcs = null;
+            //tcs = new TaskCompletionSource<bool>();
 
-            AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
-            {
-                if (tcs == null || tcs.Task.IsCompleted)
-                { return; }
-                AxKH_OnReceiveTrData(sender, e);
-                tcs.SetResult(true);
-            };
+            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
+            //{
+            //    if (tcs == null || tcs.Task.IsCompleted)
+            //    { return; }
+            //    AxKH_OnReceiveTrData(sender, e);
+            //    tcs.SetResult(true);
+            //};
 
-            // AxKH.CommRqData(RqName, OptName, 0, _screenNo);
-           await OptCommRqData(RqName, OptName, 0, _screenNo);
+            //// AxKH.CommRqData(RqName, OptName, 0, _screenNo);
+            await OptCommRqData( OptType.Opt10060, arrayL, RqName, OptName, 0, _screenNo);
+            //await tcs.Task;
+            //AxKH.OnReceiveTrData -= AxKH_OnReceiveTrData;
 
-            await tcs.Task;
         }
 
-        private async Task ReJustRequest()
+        private async Task ReJustRequest(ArrayList arrayL)
         {
             // await Task.Delay(TimeSpan.FromSeconds(4));
 
-            TaskCompletionSource<bool> tcs = null;
-            tcs = new TaskCompletionSource<bool>();
+            //TaskCompletionSource<bool> tcs = null;
+            //tcs = new TaskCompletionSource<bool>();
 
-            AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
-            {
-                if (tcs == null || tcs.Task.IsCompleted)
-                { return; }
-                AxKH_OnReceiveTrData(sender, e);
-                tcs.SetResult(true);
-            };
+            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
+            //{
+            //    if (tcs == null || tcs.Task.IsCompleted)
+            //    { return; }
+            //    AxKH_OnReceiveTrData(sender, e);
+            //    tcs.SetResult(true);
+            //};
 
             // AxKH.CommRqData(RqName, OptName, 2, _screenNo);
-            await OptCommRqData(RqName, OptName, 2, _screenNo);
-            await tcs.Task;
-
+            await OptCommRqData( OptType.Opt10060, arrayL, RqName, OptName, 2, _screenNo);
+            //await tcs.Task;
+            //AxKH.OnReceiveTrData -= AxKH_OnReceiveTrData;
             //OptCommRqData(RqName, OptName, 2, _screenNo);
         }
 

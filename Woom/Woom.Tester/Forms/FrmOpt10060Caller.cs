@@ -313,7 +313,8 @@ namespace Woom.Tester.Forms
                 _opt10060Ps = null;
             }
             _opt10060Ps = new ClsOpt10060();
-            _opt10060Ps.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+            //_opt10060Ps.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
             WriteTextSafe(stockCode + " Price 매수 작업 중 ");
 
@@ -339,8 +340,9 @@ namespace Woom.Tester.Forms
             }
 
             _opt10060Pd = new ClsOpt10060();
-            _opt10060Pd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
-            
+            //_opt10060Pd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+
             WriteTextSafe(stockCode + " Price 매도 작업 중 ");
 
             Task t = new Task(() =>
@@ -365,7 +367,8 @@ namespace Woom.Tester.Forms
             }
 
             _opt10060Qs = new ClsOpt10060();
-            _opt10060Qs.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+            //_opt10060Qs.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
 
             WriteTextSafe(stockCode + " Qty 매수 작업 중 ");
 
@@ -391,7 +394,9 @@ namespace Woom.Tester.Forms
             }
 
             _opt10060Qd = new ClsOpt10060();
-            _opt10060Qd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+            //_opt10060Qd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+
 
             WriteTextSafe(stockCode + " Qty 매도 작업 중 ");
 

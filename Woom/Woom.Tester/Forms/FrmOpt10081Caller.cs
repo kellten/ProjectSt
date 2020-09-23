@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Woom.DataAccess.OptCaller.Class;
+using Woom.DataAccess.PlugIn;
 
 namespace Woom.Tester.Forms
 {
@@ -136,7 +137,8 @@ namespace Woom.Tester.Forms
             }
 
             _opt10081 = new ClsOpt10081();
-            _opt10081.Opt10081_OnReceived += new ClsOpt10081.OnReceivedEventHandler(Opt10081_OnReceived);
+            //_opt10081.Opt10081_OnReceived += new ClsOpt10081.OnReceivedEventHandler(Opt10081_OnReceived);
+            ClsOptCallerMain.AxKH_10081_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(Opt10081_OnReceived);
 
             _opt10081.SetInit(_FormId);
             if (_opt10081.SetValue(stockCode, "", _stdDate, "1") == false)
@@ -147,6 +149,8 @@ namespace Woom.Tester.Forms
             _opt10081.Opt10081();
 
         }
+
+  
 
         private async void Opt10081_OnReceived(string stockCode, DataTable dt, int sPreNext)
         {

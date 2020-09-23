@@ -138,7 +138,7 @@ namespace Woom.DataAccess.OptCaller.Class
             };
 
             //AxKH.CommRqData(RqName, OptName, 0, _screenNo);
-             OptCommRqData(RqName, OptName, 0, _screenNo);
+           //  OptCommRqData(RqName, OptName, 0, _screenNo);
 
             await tcs.Task;
 
@@ -159,7 +159,7 @@ namespace Woom.DataAccess.OptCaller.Class
             };
 
             //AxKH.CommRqData(RqName, OptName, 2, _screenNo);
-             OptCommRqData(RqName, OptName, 2, _screenNo);
+         //    OptCommRqData(RqName, OptName, 2, _screenNo);
 
             await tcs.Task;
 

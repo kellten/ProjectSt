@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Woom.DataAccess.OptCaller.InterFace;
 using Woom.DataDefine.OptData;
+using static Woom.DataAccess.PlugIn.ClsAxKH;
 
 namespace Woom.DataAccess.OptCaller.Class
 {
@@ -14,13 +15,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
         private DataTable _dt = new DataTable();
 
-        private enum Column10081Index
-        {
-            종목코드, 현재가, 거래량, 거래대금, 일자, 시가, 고가, 저가,
-            수정주가구분, 수정비율, 대업종구분, 소업종구분, 종목정보,
-            수정주가이벤트
-            //, 전일종가
-        }
+     
 
         #region IDispose 구현
         private void Dispose(bool disposing)
@@ -33,27 +28,69 @@ namespace Woom.DataAccess.OptCaller.Class
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
+        private async Task JustRequest()
+        {
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+
+            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
+            //{
+            //    if (tcs == null || tcs.Task.IsCompleted)
+            //    { return; }
+            //    AxKH_OnReceiveTrData(sender, e);
+            //    tcs.SetResult(true);
+            //};
+
+            //// AxKH.CommRqData(RqName, OptName, 0, _screenNo);
+            //await OptCommRqData(RqName, OptName, 0, _screenNo);
+
+            //await tcs.Task;
+        }
+
+        private async Task ReJustRequest()
+        {
+            // await Task.Delay(TimeSpan.FromSeconds(4));
+
+            //TaskCompletionSource<bool> tcs = null;
+            //tcs = new TaskCompletionSource<bool>();
+
+            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
+            //{
+            //    if (tcs == null || tcs.Task.IsCompleted)
+            //    { return; }
+            //    AxKH_OnReceiveTrData(sender, e);
+            //    tcs.SetResult(true);
+            //};
+
+            //// AxKH.CommRqData(RqName, OptName, 2, _screenNo);
+            //await OptCommRqData(RqName, OptName, 2, _screenNo);
+            //await tcs.Task;
+
+            //OptCommRqData(RqName, OptName, 2, _screenNo);
+        }
+
 
         public void MakeDataTable()
         {
-            if (_dt != null)
-            {
-                _dt = null;
-                _dt = new DataTable();
-            }
+            //if (_dt != null)
+            //{
+            //    _dt = null;
+            //    _dt = new DataTable();
+            //}
 
-            using (ClsColumnSets oBasicDataType = new ClsColumnSets())
-            {
+            //using (ClsColumnSets oBasicDataType = new ClsColumnSets())
+            //{
 
-                foreach (int i in Enum.GetValues(typeof(Column10081Index)))
-                {
-                    int j = 0;
-                    j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(Column10081Index), i));
-                    // _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)i));
-                    _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
-                }
-            };
+            //    foreach (int i in Enum.GetValues(typeof(Column10081Index)))
+            //    {
+            //        int j = 0;
+            //        j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(Column10081Index), i));
+            //        // _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)i));
+            //        _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
+            //    }
+            //};
         }
         #endregion IDispose 구현
     }
+
 }

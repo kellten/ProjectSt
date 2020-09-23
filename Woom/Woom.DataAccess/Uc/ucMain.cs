@@ -8,7 +8,6 @@ namespace Woom.DataAccess.Uc
         {
             InitializeComponent();
         }
-
         public AxKHOpenAPILib.AxKHOpenAPI AxKHApi { get { return AxKH; } }
     }
 }

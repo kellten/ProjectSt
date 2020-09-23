@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using System.Threading.Tasks;
 using Woom.DataAccess.OptCaller.InterFace;
 using Woom.DataDefine.OptData;
-using static Woom.DataAccess.PlugIn.ClsAxKH;
 using static Woom.DataAccess.OptCaller.Class.ClsOptCallerMain;
+using static Woom.DataAccess.PlugIn.ClsAxKH;
 
 namespace Woom.DataAccess.OptCaller.Class
 {
@@ -59,8 +60,10 @@ namespace Woom.DataAccess.OptCaller.Class
         #region 전역변수
 
         private DataTable _dt = new DataTable();
+
         // private ClsOptStatus _OptStatus;
         private string _stdDate = "";
+
         private string _stockCode = "";
         private string _stockName = "";
         private string _modifyJugaGb = "";
@@ -108,56 +111,55 @@ namespace Woom.DataAccess.OptCaller.Class
 
         public async void Opt10081(bool nextCall = false)
         {
-            lock (lockObject)
-            {
-                AxKH.SetInputValue("종목코드", _stockCode);
-                AxKH.SetInputValue("기준일자", _stdDate);
-                AxKH.SetInputValue("수정주가구분", _modifyJugaGb);
-            }
+            ArrayList SetInputValue = new ArrayList();
+
+            SetInputValue.Add(_stockCode);
+            SetInputValue.Add(_stdDate);
+            SetInputValue.Add(_modifyJugaGb);
 
             if (nextCall == false)
             {
-                await JustRequest();
+                await JustRequest(SetInputValue);
             }
             else
             {
-                await ReJustRequest();
+                await ReJustRequest(SetInputValue);
             }
         }
 
-        private async Task JustRequest()
+        private async Task JustRequest(ArrayList arrayL)
         {
-            TaskCompletionSource<bool> tcs = null;
-            tcs = new TaskCompletionSource<bool>();
+            //TaskCompletionSource<bool> tcs = null;
+            //tcs = new TaskCompletionSource<bool>();
 
-            AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
-            {
-                if (tcs == null || tcs.Task.IsCompleted)
-                { return; }
-                AxKH_OnReceiveTrData(sender, e);
-                tcs.SetResult(true);
-            };
+            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
+            //{
+            //    if (tcs == null || tcs.Task.IsCompleted)
+            //    { return; }
+            //    AxKH_OnReceiveTrData(sender, e);
+            //    tcs.SetResult(true);
+            //};
 
-            await OptCommRqData(RqName, OptName, 0, _screenNo);
-            await tcs.Task;
+            await OptCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 0, _screenNo);
+            //await tcs.Task;
         }
 
-        private async Task ReJustRequest()
+        private async Task ReJustRequest(ArrayList arrayL)
         {
-            await Task.Delay(TimeSpan.FromSeconds(2));
-            TaskCompletionSource<bool> tcs = null;
-            tcs = new TaskCompletionSource<bool>();
+            //await Task.Delay(TimeSpan.FromSeconds(2));
+            //TaskCompletionSource<bool> tcs = null;
+            //tcs = new TaskCompletionSource<bool>();
 
-            AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
-            {
-                if (tcs == null || tcs.Task.IsCompleted)
-                { return; }
-                AxKH_OnReceiveTrData(sender, e);
-                tcs.SetResult(true);
-            };
+            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
+            //{
+            //    if (tcs == null || tcs.Task.IsCompleted)
+            //    { return; }
+            //    AxKH_OnReceiveTrData(sender, e);
+            //    tcs.SetResult(true);
+            //};
 
-            await OptCommRqData(RqName, OptName, 2, _screenNo);
-            await tcs.Task;
+            await OptCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 2, _screenNo);
+            //await tcs.Task;
         }
 
         private void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
@@ -214,7 +216,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
         public void Dispose()
         {
-          //  _OptStatus.InitOptCallingStatus();
+            //  _OptStatus.InitOptCallingStatus();
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }

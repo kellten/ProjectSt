@@ -1,4 +1,6 @@
-﻿namespace Woom.DataAccess.ErrorManage.Class
+﻿using System.Windows.Forms;
+
+namespace Woom.DataAccess.ErrorManage.Class
 {
     class KOAErrorCode
     {
@@ -20,14 +22,17 @@
 
     public static class ClsWoomErrorCode
     {
-        public static string GetErrorMessage(int nErrorCode)
-        {
+        private static string errorMessage;
 
+        public static bool GetErrorMessage(int nErrorCode)
+        {
+            bool bRet = false;
             string errorMessage = "";
             switch (nErrorCode)
             {
                 case KOAErrorCode.OP_ERR_NONE:
                     errorMessage = "[" + nErrorCode.ToString() + "] :" + "정상처리";
+                    bRet = true;
                     break;
                 case KOAErrorCode.OP_ERR_LOGIN:
                     errorMessage = "[" + nErrorCode.ToString() + "] :" + "사용자정보교환에 실패하였습니다. 잠시 후 다시 시작하여 주십시오.";
@@ -86,6 +91,17 @@
                     break;
             }
 
+            if (bRet == false)
+            {
+                MessageBox.Show(errorMessage);
+            }
+
+            return bRet;
+        }
+
+        
+        public static string GetErrorMessage()
+        {
             return errorMessage;
         }
 

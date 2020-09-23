@@ -61,7 +61,8 @@ namespace Woom.DataAccess.Forms
                 _loginStatus = false;
                 lblLoginStatus.Text = "오프라인....";
                 lblMsgTitle.Text = "접속정보";
-                lblMsg.Text = GetErrorMessage(e.nErrCode);
+                GetErrorMessage(e.nErrCode);
+                lblMsg.Text = GetErrorMessage();
                 btnDisconnect.Enabled = false;
             }
 
