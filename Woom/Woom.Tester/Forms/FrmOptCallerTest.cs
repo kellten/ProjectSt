@@ -88,11 +88,8 @@ namespace Woom.Tester.Forms
         private void button2_Click(object sender, EventArgs e)
         {
             _opt10081.SetInit("01");
-            if (_opt10081.SetValue(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1") == false)
-            {
-                return;
-            }
-            _opt10081.Opt10081();
+     
+            _opt10081.Opt10081(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1");
         }
 
         private void button3_Click(object sender, EventArgs e)

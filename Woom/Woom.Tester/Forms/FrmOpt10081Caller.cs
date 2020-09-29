@@ -137,17 +137,10 @@ namespace Woom.Tester.Forms
             }
 
             _opt10081 = new ClsOpt10081();
-            //_opt10081.Opt10081_OnReceived += new ClsOpt10081.OnReceivedEventHandler(Opt10081_OnReceived);
             ClsOptCallerMain.AxKH_10081_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(Opt10081_OnReceived);
 
             _opt10081.SetInit(_FormId);
-            if (_opt10081.SetValue(stockCode, "", _stdDate, "1") == false)
-            {
-                return;
-            }
-
-            _opt10081.Opt10081();
-
+            _opt10081.Opt10081(stockCode, "", _stdDate, "1");
         }
 
   
@@ -239,7 +232,7 @@ namespace Woom.Tester.Forms
             else
             {
                 WriteTextSafe(stockCode + "(다음일자로..)");
-                _opt10081.Opt10081(true);
+                _opt10081.Opt10081(stockCode, "", );
             }
         }
         private void btn10081_Click(object sender, EventArgs e)

@@ -86,36 +86,20 @@ namespace Woom.DataAccess.OptCaller.Class
 
         #endregion Event
 
+        
         /// <summary>
         /// SetValue
         /// </summary>
         /// <param name="StockCode">종목코드</param>
         /// <param name="StartDate">일자</param>
         /// <param name="ModifyJugaGb"> 수정주가구분 : 0 or 1, 수신데이터 1:유상증자, 2:무상증자, 4:배당락, 8:액면분할, 16:액면병합, 32:기업합병, 64:감자, 256:권리락</param>
-        public bool SetValue(string StockCode, string StockName, string StdDate, string ModifyJugaGb)
-        {
-            //if (_OptStatus.OptCallingStatus(true) == false)
-            //{
-            //    return false;
-            //}
-
-            //_OptStatus.OptCalling = OptName + "(" + RqName + ")";
-
-            _stdDate = StdDate;
-            _stockCode = StockCode;
-            _stockName = StockName;
-            _modifyJugaGb = ModifyJugaGb;
-
-            return true;
-        }
-
-        public async void Opt10081(bool nextCall = false)
+        public async void Opt10081(string StockCode, string StockName, string StdDate, string ModifyJugaGb, bool nextCall = false)
         {
             ArrayList SetInputValue = new ArrayList();
 
-            SetInputValue.Add(_stockCode);
-            SetInputValue.Add(_stdDate);
-            SetInputValue.Add(_modifyJugaGb);
+            SetInputValue.Add(StockCode);
+            SetInputValue.Add(StdDate);
+            SetInputValue.Add(ModifyJugaGb);
 
             if (nextCall == false)
             {
