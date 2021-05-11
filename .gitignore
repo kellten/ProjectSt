@@ -259,3 +259,22 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+#folder
+SDataAccess/
+SDataAccess_이전/
+Woom_20210502/
+Woom_20210505/
+Woom_20210506/
+Woom_20210506_PM/
+Woom_20210509/
+Woom_20210510/
+Woom2/
+Wpf/
+ZabisProgram/
+디자인패턴/
+Backup/
+CybosDa/
+
+#file
+*.zip
