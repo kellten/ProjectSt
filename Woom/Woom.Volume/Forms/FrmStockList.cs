@@ -25,6 +25,7 @@ namespace Woom.Volume.Forms
         private ClsOpt10001 _clsOpt10001;
         private const string _FormId = "20";
         private int _rowIndex = 0;
+        private Woom.DataDefine.Util.ClsUtil clsUtil;
         public FrmStockList()
         {
             InitializeComponent();
@@ -34,10 +35,13 @@ namespace Woom.Volume.Forms
             //TestCode();
             GetHighestUpRateBySector();
 
-            dtpStartDate.Value = dtpStartDate.Value.AddDays(-31);
+            clsUtil = new DataDefine.Util.ClsUtil();
+
+            dtpStartDate.Value = clsUtil.MondayDateOnWeekTypeDateTime(dtpEndDate.Value.AddMonths(-3));
 
         }
 
+        #region
         private bool GetHighestUpRateBySector()
         {
 
@@ -65,7 +69,7 @@ namespace Woom.Volume.Forms
             foreach (DataRow dr in _dt.Rows)
             {
 
-                if (dr["STOCK_CODE"].ToString().Trim() == "" )
+                if (dr["STOCK_CODE"].ToString().Trim() == "")
                 {
                     continue;
                 }
@@ -81,7 +85,7 @@ namespace Woom.Volume.Forms
             _rowIndex = dgv0.RowCount - 1;
 
             GetOpt10001Caller(0);
-            
+
             return true;
         }
 
@@ -116,7 +120,6 @@ namespace Woom.Volume.Forms
             tcs.SetResult(true);
 
         }
-       
 
         private void OnReceiveTrData_Opt10001(string stockCode, DataTable dt, int sPreNext)
         {
@@ -136,7 +139,11 @@ namespace Woom.Volume.Forms
                 ClsAxKH.AxKH_10001_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10001);
                 throw;
             }
-                      
+
         }
+        #endregion
+
+
+
     }
 }
