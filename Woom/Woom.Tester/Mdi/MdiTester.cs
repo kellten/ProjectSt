@@ -60,13 +60,31 @@ namespace Woom.Tester.Mdi
 
         private void opt10069ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form oform = new Woom.Tester.Forms.FrmOpt10060Caller();
+            Form oform = new Woom.Tester.Forms.FrmOpt10060Caller_New();
             ShowChildForm(oform);
         }
 
         private void opt10081ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form oform = new Woom.Tester.Forms.FrmOpt10081Caller();
+            ShowChildForm(oform);
+        }
+
+        private void tsbFrmStockList_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Volume.Forms.FrmStockList();
+            ShowChildForm(oform);
+        }
+
+        private void opt20068ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmOpt20068Caller();
+            ShowChildForm(oform);
+        }
+
+        private void 종목관리ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmGetStockCode();
             ShowChildForm(oform);
         }
     }

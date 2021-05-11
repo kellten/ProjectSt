@@ -27,7 +27,8 @@
 
     Sub New(ByVal persistSecurity As Boolean)
         If persistSecurity = True Then
-            InitClassVarpersistSecurity(ClsServerInfo.VADISSEVER, "RICHDB", "DEFAULT", "Integrated Security=SSPI;initial catalog= RICHDB;persist security info=false;" & ClsServerInfo.VADISSEVER & " ;Application Name=AnaylsisSt")
+            'InitClassVarpersistSecurity("EDPB2F011\VADIS", "RICHDB", "DEFAULT", "Integrated Security=SSPI;initial catalog= RICHDB;persist security info=false;" & "EDPB2F011\vadis ;Application Name=AnaylsisSt")
+            InitClassVarpersistSecurity(serverName:=ClsServerInfo.VADISSEVER, databaseName:="KIWOOMDB", tableName:="DEFAULT", connectionString:="Server=211.210.61.123, 8081;Database=KIWOOMDB;User Id=ywUser01;Password=hi@84966305;")
         End If
 
     End Sub

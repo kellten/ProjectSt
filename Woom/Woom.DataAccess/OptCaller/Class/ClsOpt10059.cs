@@ -31,7 +31,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
             using (ClsColumnSets oBasicDataType = new ClsColumnSets())
             {
-                foreach (int i in Enum.GetValues(typeof(Column10059Index)))
+                foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10059Index)))
                 {
                     _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)i));
                 }
@@ -44,14 +44,7 @@ namespace Woom.DataAccess.OptCaller.Class
         public event OnReceivedEventHandler Opt10059_OnReceived;
         #endregion
 
-        #region Enum
-        private enum Column10059Index
-        {
-            일자, 현재가, 대비기호, 전일대비, 등락율, 누적거래대금, 개인투자자,
-            외국인투자자, 기관계, 금융투자, 보험, 투신, 기타금융, 은행,
-            연기금등, 사모펀드, 국가, 기타법인, 내외국인
-        }
-        #endregion
+       
 
         #region Const
         private const string RqName = "종목별투자자기관별요청";

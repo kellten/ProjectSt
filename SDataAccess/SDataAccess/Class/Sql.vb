@@ -38,13 +38,15 @@ Public Class Sql
         'MyClass._connectionString = "data source=" + serverName + ";initial catalog=" + databaseName + ";persist security info=False;"
         'MyClass._connectionString += AppSettings.Get(serverName)
 
-        MyClass._connectionString = "Data Source=" & ClsServerInfo.VADISSEVER & "; Initial Catalog=" + databaseName + ";" + " persist security info=True; Integrated Security=SSPI;"
-        'MyClass._connectionString += AppSettings.Get(serverName)
-        If serverName = ClsServerInfo.VADISSEVER Then
-            MyClass._connectionString += "uid=HDPAIK\vadis; pwd=@whdrms2"
+        If serverName = "EDPB2F011\VADIS" Then
+            MyClass._connectionString = "initial catalog=" + databaseName + ";" + " persist security info=True; Integrated Security=SSPI;"
+            MyClass._connectionString += AppSettings.Get(serverName)
+            MyClass._connectionString += "uid=EDPB2F011\vadis; pwd=hi@84966305"
+        ElseIf serverName = "211.210.61.123, 8081" Then
+            MyClass._connectionString = "data source=" + serverName + "; initial catalog=" + databaseName + ";" + " persist security info=True; Integrated Security=false;"
+            'MyClass._connectionString += AppSettings.Get(serverName)
+            MyClass._connectionString += "uid=ywUser01; pwd=hi@84966305"
         End If
-
-        'MyClass._connectionString = "Data Source=EDPB2F011-H\VADIS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
     End Sub
 
     'Server이름과 해당 Server의 Database이름을 이용하여 연결
@@ -69,7 +71,9 @@ Public Class Sql
 
         If cmdTimeOut = -1 Then
             MyClass._connectionString = "data source=" + serverName + ";initial catalog=" + databaseName + ";persist security info=False;"
-            MyClass._connectionString += "uid=HDPAIK\vadis; pwd=@whdrms2"
+            'MyClass._connectionString += "uid=EDPB2F011\vadis; pwd=hi@84966305"
+            MyClass._connectionString += "uid=YwUser01; pwd=hi@84966305"
+            'MyClass._connectionString += "uid=vadis; pwd=hi@84966305"
             _commandTimeOut = 3600
         Else
             If cmdTimeOut > 0 Then

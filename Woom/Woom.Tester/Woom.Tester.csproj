@@ -10,6 +10,22 @@
     <AssemblyName>Woom.Tester</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\ProjectSt\Woom\Install Files\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,6 +69,24 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>B892714A94673C3FF943CB356C3D6908DF40509D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Woom.Tester_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SDataAccess">
       <HintPath>..\..\SDataAccess\Lib\SDataAccess.dll</HintPath>
@@ -69,17 +103,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FrmGetStockCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmGetStockCode.Designer.cs">
+      <DependentUpon>FrmGetStockCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmOpt10060Caller.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmOpt10060Caller.Designer.cs">
       <DependentUpon>FrmOpt10060Caller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOpt10060Caller_New.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOpt10060Caller_New.Designer.cs">
+      <DependentUpon>FrmOpt10060Caller_New.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmOpt10081Caller.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmOpt10081Caller.Designer.cs">
       <DependentUpon>FrmOpt10081Caller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmOpt20068Caller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOpt20068Caller.Designer.cs">
+      <DependentUpon>FrmOpt20068Caller.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmOptCallerTest.cs">
       <SubType>Form</SubType>
@@ -98,11 +150,20 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FrmGetStockCode.resx">
+      <DependentUpon>FrmGetStockCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOpt10060Caller.resx">
       <DependentUpon>FrmOpt10060Caller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOpt10060Caller_New.resx">
+      <DependentUpon>FrmOpt10060Caller_New.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOpt10081Caller.resx">
       <DependentUpon>FrmOpt10081Caller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOpt20068Caller.resx">
+      <DependentUpon>FrmOpt20068Caller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOptCallerTest.resx">
       <DependentUpon>FrmOptCallerTest.cs</DependentUpon>
@@ -116,6 +177,26 @@
       <Project>{b69864e4-2cec-4f50-8615-d902e820a4a5}</Project>
       <Name>Woom.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Woom.Volume\Woom.Volume.csproj">
+      <Project>{d3650d5a-b44c-4b7e-86d4-6d061070da43}</Project>
+      <Name>Woom.Volume</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\app.manifest" />
+    <None Include="Woom.Tester_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

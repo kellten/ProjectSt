@@ -41,30 +41,13 @@ namespace Woom.Tester.Forms
         #endregion 전역변수
 
         #region 이벤트
-
         private delegate void Delegate_OnGetStockCode();
-
-        private event Delegate_OnGetStockCode _OnGetStockCode;
-
         private delegate void Delegate_OnGetEndData(int i, string strStockCode);
-
-        private event Delegate_OnGetEndData _OnGetEndData;
-
         #endregion 이벤트
 
         public FrmOpt10060Caller()
         {
             InitializeComponent();
-
-            _OnGetStockCode += new Delegate_OnGetStockCode(OnGetStockCode);
-            _OnGetEndData += new Delegate_OnGetEndData(OnGetEndData);
-
-            //_opt10060Ps = new ClsOpt10060();
-            //_opt10060Pd = new ClsOpt10060();
-            //_opt10060Qs = new ClsOpt10060();
-            //_opt10060Qd = new ClsOpt10060();
-
-            // RichQuery oRichQuery = new RichQuery();
 
             Func<DataTable> funcGetStockData = () =>
             {
@@ -145,6 +128,10 @@ namespace Woom.Tester.Forms
         {
 
             string strStockCode = "";
+
+            TaskCompletionSource<bool> tcs = null;
+
+            tcs = new TaskCompletionSource<bool>();
 
             Task t = Task.Run(() => strStockCode = GetStockCode());
 
@@ -313,16 +300,15 @@ namespace Woom.Tester.Forms
                 _opt10060Ps = null;
             }
             _opt10060Ps = new ClsOpt10060();
-            //_opt10060Ps.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
-            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+            _opt10060Ps.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
             WriteTextSafe(stockCode + " Price 매수 작업 중 ");
 
             Action StartExecPs = (() =>
             {
                 _opt10060Ps.SetInit(_FormId + "01");
-                _opt10060Ps.SetValue(_stdDate, stockCode, "", "1", "1", "1");
-                _opt10060Ps.Opt10060();
+                _opt10060Ps.JustRequest(StartDate:_stdDate, StockCode: stockCode,  StockName:  "",  AmountQtyGb:  "1",  MaeMaeGb: "1", UnitG: "1",nPrevNext:0 );
+                
             });
 
             StartExecPs();
@@ -340,16 +326,14 @@ namespace Woom.Tester.Forms
             }
 
             _opt10060Pd = new ClsOpt10060();
-            //_opt10060Pd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
-            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
-
+            _opt10060Pd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+            
             WriteTextSafe(stockCode + " Price 매도 작업 중 ");
 
             Task t = new Task(() =>
             {
                 _opt10060Pd.SetInit(_FormId + "02");
-                _opt10060Pd.SetValue(_stdDate, stockCode, "", "1", "2", "1");
-                _opt10060Pd.Opt10060();
+                _opt10060Pd.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "2", UnitG: "1", nPrevNext: 0);
             });
 
             t.Start();
@@ -367,16 +351,14 @@ namespace Woom.Tester.Forms
             }
 
             _opt10060Qs = new ClsOpt10060();
-            //_opt10060Qs.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
-            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
-
+            _opt10060Qs.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+            
             WriteTextSafe(stockCode + " Qty 매수 작업 중 ");
 
             Task t = new Task(() =>
             {
                 _opt10060Qs.SetInit(_FormId + "03");
-                _opt10060Qs.SetValue(_stdDate, stockCode, "", "2", "1", "1");
-                _opt10060Qs.Opt10060();
+                _opt10060Qs.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "1", UnitG: "1", nPrevNext: 0);
             });
 
             t.Start();
@@ -394,17 +376,14 @@ namespace Woom.Tester.Forms
             }
 
             _opt10060Qd = new ClsOpt10060();
-            //_opt10060Qd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
-            ClsOptCallerMain.AxKH_10060_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
-
-
+           _opt10060Qd.Opt10060_OnReceived += new ClsOpt10060.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+            
             WriteTextSafe(stockCode + " Qty 매도 작업 중 ");
 
             Task t = new Task(() =>
             {
                 _opt10060Qd.SetInit(_FormId + "04");
-                _opt10060Qd.SetValue(_stdDate, stockCode, "", "2", "2", "1");
-                _opt10060Qd.Opt10060();
+                _opt10060Qs.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "2", UnitG: "1", nPrevNext: 0);
             });
 
             t.Start();
@@ -419,7 +398,7 @@ namespace Woom.Tester.Forms
             //lblStockName.Text = stockCode + "Price 매수 작업 중";
 
             ArrayParam arrParam = new ArrayParam();
-            Sql oSql = new Sql("EDPB2F011\\VADIS", "KIWOOMDB");
+            Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
             Task<int> funcTaskAsync = Task.Run(() =>
             {
@@ -431,7 +410,7 @@ namespace Woom.Tester.Forms
 
                         if (dr["일자"].ToString() == _LastPsDate)
                         {
-                            Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                            Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                             arrParam.Clear();
                             arrParam.Add("@ACTION_GB", "C7");
@@ -500,7 +479,7 @@ namespace Woom.Tester.Forms
                 }
                 else
                 {
-                    Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                    Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                     arrParam.Clear();
                     arrParam.Add("@ACTION_GB", "C7");
@@ -530,14 +509,14 @@ namespace Woom.Tester.Forms
             else
             {
                 WriteTextSafe(stockCode + " Price 매수" + "(다음일자로..)");
-                _opt10060Ps.Opt10060(true);
+                _opt10060Ps.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "1", UnitG: "1", nPrevNext: 1);
             }
         }
 
         private async void OnReceiveTrData_Opt10060PriceMaedo(string stockCode, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
-            Sql oSql = new Sql("EDPB2F011\\VADIS", "KIWOOMDB");
+            Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
             Task<int> funcTaskAsync = Task.Run(() =>
             {
@@ -549,7 +528,7 @@ namespace Woom.Tester.Forms
 
                         if (dr["일자"].ToString() == _LastPdDate)
                         {
-                            Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                            Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                             arrParam.Clear();
                             arrParam.Add("@ACTION_GB", "C7");
@@ -616,7 +595,7 @@ namespace Woom.Tester.Forms
                 }
                 else
                 {
-                    Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                    Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                     arrParam.Clear();
                     arrParam.Add("@ACTION_GB", "C7");
@@ -647,7 +626,7 @@ namespace Woom.Tester.Forms
             else
             {
                 WriteTextSafe(stockCode + " Price 매도" + "(다음일자로..)");
-                _opt10060Pd.Opt10060(true);
+                _opt10060Pd.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "2", UnitG: "1", nPrevNext: 1);
             }
         }
 
@@ -656,7 +635,7 @@ namespace Woom.Tester.Forms
             // lblStockName.Text = stockCode + "Qty 매수 작업 중";
 
             ArrayParam arrParam = new ArrayParam();
-            Sql oSql = new Sql("EDPB2F011\\VADIS", "KIWOOMDB");
+            Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
             Task<int> funcTaskAsync = Task.Run(() =>
             {
@@ -668,7 +647,7 @@ namespace Woom.Tester.Forms
                         // 가장 최근일자와 같으면 종료
                         if (dr["일자"].ToString() == _LastQsDate)
                         {
-                            Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                            Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                             arrParam.Clear();
                             arrParam.Add("@ACTION_GB", "C6");
@@ -736,7 +715,7 @@ namespace Woom.Tester.Forms
                 }
                 else
                 {
-                    Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                    Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                     arrParam.Clear();
                     arrParam.Add("@ACTION_GB", "C6");
@@ -759,13 +738,13 @@ namespace Woom.Tester.Forms
             if (await t == 1)
             {
                 WriteTextSafe(stockCode + " Qty 매수" + "완료 다음으로..");
-                OnGetEndData(valueType: 2, stockCode);
+                //OnGetEndData(valueType: 2, stockCode:stockCode);
                 return;
             }
             else
             {
                 WriteTextSafe(stockCode + " QTY 매수" + "(다음일자 호출)");
-                _opt10060Qs.Opt10060(true);
+                _opt10060Qs.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "1", UnitG: "1", nPrevNext: 1);
             }
         }
 
@@ -774,7 +753,7 @@ namespace Woom.Tester.Forms
             // lblStockName.Text = stockCode + "Qty 매도 작업 중";
 
             ArrayParam arrParam = new ArrayParam();
-            Sql oSql = new Sql("EDPB2F011\\VADIS", "KIWOOMDB");
+            Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
             Task<int> funcTaskAsync = Task.Run(() =>
             {
@@ -786,7 +765,7 @@ namespace Woom.Tester.Forms
 
                         if (dr["일자"].ToString() == _LastQdDate)
                         {
-                            Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                            Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                             arrParam.Clear();
                             arrParam.Add("@ACTION_GB", "C6");
@@ -852,7 +831,7 @@ namespace Woom.Tester.Forms
                 }
                 else
                 {
-                    Sql oSql2 = new Sql("EDPB2F011\\VADIS", "RICHDB");
+                    Sql oSql2 = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
                     arrParam.Clear();
                     arrParam.Add("@ACTION_GB", "C6");
@@ -883,7 +862,7 @@ namespace Woom.Tester.Forms
             else
             {
                 WriteTextSafe(stockCode + " Qty 매도" + "(다음일자로..)");
-                _opt10060Qd.Opt10060(true);
+                _opt10060Qd.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "2", UnitG: "1", nPrevNext: 1);
             }
         }
 

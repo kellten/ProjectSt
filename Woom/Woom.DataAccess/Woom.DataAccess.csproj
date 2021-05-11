@@ -51,6 +51,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SDataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SDataAccess\Lib\SDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,11 +67,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\ClsConnection.cs" />
+    <Compile Include="ClsDataAccessUtil.cs" />
     <Compile Include="EventManage\Class\ClsOnReceiveTrData.cs" />
-    <Compile Include="OptCaller\Class\ClsAllOptCaller.cs" />
+    <Compile Include="OptCaller\Class\ClsGetKoaStudioMethod.cs" />
+    <Compile Include="OptCaller\Class\ClsOpt10001.cs" />
+    <Compile Include="OptCaller\Class\ClsOpt10014.cs" />
     <Compile Include="OptCaller\Class\ClsOpt10060.cs" />
     <Compile Include="OptCaller\Class\ClsOpt10081.cs" />
+    <Compile Include="OptCaller\Class\ClsOpt10086.cs" />
+    <Compile Include="OptCaller\Class\ClsOpt20068.cs" />
     <Compile Include="OptCaller\Class\ClsOptCallerMain.cs" />
     <Compile Include="OptCaller\Class\ClsOptStatus.cs" />
     <Compile Include="OptCaller\InterFace\IOptCaller.cs" />

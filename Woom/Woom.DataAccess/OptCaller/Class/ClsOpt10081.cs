@@ -6,6 +6,7 @@ using Woom.DataAccess.OptCaller.InterFace;
 using Woom.DataDefine.OptData;
 using static Woom.DataAccess.OptCaller.Class.ClsOptCallerMain;
 using static Woom.DataAccess.PlugIn.ClsAxKH;
+using Woom.DataAccess;
 
 namespace Woom.DataAccess.OptCaller.Class
 {
@@ -93,7 +94,7 @@ namespace Woom.DataAccess.OptCaller.Class
         /// <param name="StockCode">종목코드</param>
         /// <param name="StartDate">일자</param>
         /// <param name="ModifyJugaGb"> 수정주가구분 : 0 or 1, 수신데이터 1:유상증자, 2:무상증자, 4:배당락, 8:액면분할, 16:액면병합, 32:기업합병, 64:감자, 256:권리락</param>
-        public async void Opt10081(string StockCode, string StockName, string StdDate, string ModifyJugaGb, bool nextCall = false)
+        public  void Opt10081(string StockCode, string StockName, string StdDate, string ModifyJugaGb, bool nextCall = false)
         {
             ArrayList SetInputValue = new ArrayList();
 
@@ -103,47 +104,23 @@ namespace Woom.DataAccess.OptCaller.Class
 
             if (nextCall == false)
             {
-                await JustRequest(SetInputValue);
+                 JustRequest(SetInputValue);
             }
             else
             {
-                await ReJustRequest(SetInputValue);
+                 ReJustRequest(SetInputValue);
             }
         }
 
-        private async Task JustRequest(ArrayList arrayL)
+        private void JustRequest(ArrayList arrayL)
         {
-            //TaskCompletionSource<bool> tcs = null;
-            //tcs = new TaskCompletionSource<bool>();
-
-            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
-            //{
-            //    if (tcs == null || tcs.Task.IsCompleted)
-            //    { return; }
-            //    AxKH_OnReceiveTrData(sender, e);
-            //    tcs.SetResult(true);
-            //};
-
-            await OptCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 0, _screenNo);
-            //await tcs.Task;
+            SendCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 0, _screenNo);
         }
 
-        private async Task ReJustRequest(ArrayList arrayL)
+        private void ReJustRequest(ArrayList arrayL)
         {
-            //await Task.Delay(TimeSpan.FromSeconds(2));
-            //TaskCompletionSource<bool> tcs = null;
-            //tcs = new TaskCompletionSource<bool>();
+            SendCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 2, _screenNo);
 
-            //AxKH.OnReceiveTrData += (object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e) =>
-            //{
-            //    if (tcs == null || tcs.Task.IsCompleted)
-            //    { return; }
-            //    AxKH_OnReceiveTrData(sender, e);
-            //    tcs.SetResult(true);
-            //};
-
-            await OptCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 2, _screenNo);
-            //await tcs.Task;
         }
 
         private void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)

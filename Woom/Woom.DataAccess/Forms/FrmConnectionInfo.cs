@@ -27,6 +27,7 @@ namespace Woom.DataAccess.Forms
             AxKH = ucMain0.AxKHApi;
             RegEventMethod();
             Connection();
+            AddOnReceivedEventHandler();
         }
         private void RegEventMethod()
         {
@@ -35,6 +36,7 @@ namespace Woom.DataAccess.Forms
         private void Connection()
         {
             AxKH.CommConnect();
+            
         }
         private void DisConnection()
         {

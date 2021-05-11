@@ -77,7 +77,7 @@ namespace Woom.Tester.Forms
 
             if (sPreNext == 2)
             {
-                _opt10081.Opt10081(true);
+                _opt10081.Opt10081(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1");
             }
             else
             {

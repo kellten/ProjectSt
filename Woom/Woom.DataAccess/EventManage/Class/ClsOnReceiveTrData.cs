@@ -6,18 +6,7 @@ namespace Woom.DataAccess.EventManage.Class
     internal class ClsOnReceiverData : IDisposable
     {
         private string _screenNo = "";
-        public ClsOnReceiverData(string screenNo)
-        {
-            AxKH.OnReceiveTrData += AxKH_OnReceiveTrData;
-        }
 
-        private async void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
-        {
-            if (e.sScrNo != _screenNo)
-            {
-                return;
-            }
-        }
 
         #region IDisposable Support
         private bool disposedValue = false; // 중복 호출을 검색하려면

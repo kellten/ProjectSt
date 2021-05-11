@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom", "Woom\Woom.csproj", "{EB08D764-03B6-4250-83BF-5E802E35E4FF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Volume", "Woom.Volume\Woom.Volume.csproj", "{D3650D5A-B44C-4B7E-86D4-6D061070DA43}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{BA0AA315-266F-4828-8366-BD100D13A6D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA0AA315-266F-4828-8366-BD100D13A6D1}.Release|x86.ActiveCfg = Release|x86
 		{BA0AA315-266F-4828-8366-BD100D13A6D1}.Release|x86.Build.0 = Release|x86
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Debug|x86.Build.0 = Debug|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|x86.ActiveCfg = Release|Any CPU
+		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

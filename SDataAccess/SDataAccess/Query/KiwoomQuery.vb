@@ -27,7 +27,8 @@
 
     Sub New(ByVal persistSecurity As Boolean)
         If persistSecurity = True Then
-            InitClassVarpersistSecurity(ClsServerInfo.VADISSEVER, "KIWOOMDB", "DEFAULT", "Integrated Security=SSPI;initial catalog= RICHDB;persist security info=false;" & ClsServerInfo.VADISSEVER & " ;Application Name=AnaylsisSt")
+            'InitClassVarpersistSecurity(ClsServerInfo.VADISSEVER, "KIWOOMDB", "DEFAULT", "Integrated Security=SSPI;initial catalog= RICHDB;persist security info=false;" & "EDPB2F011\vadis ;Application Name=AnaylsisSt")
+            InitClassVarpersistSecurity(serverName:=ClsServerInfo.VADISSEVER, databaseName:="KIWOOMDB", tableName:="DEFAULT", connectionString:="Server=211.210.61.123, 8081;Database=KIWOOMDB;User Id=ywUser01;Password=hi@84966305;")
         End If
 
     End Sub
@@ -84,12 +85,58 @@
         Return _sql.ExecuteDataSet(queryName, queryType, filledDataTableName, filledDataSet, parameters)
     End Function
 
-    Public Sub ExecuteNonQuery2Tier(ByVal queryName As String, ByVal queryType As CommandType, _
+    Public Sub ExecuteNonQuery2Tier(ByVal queryName As String, ByVal queryType As CommandType,
         ByVal parameters As ArrayParam)
 
         _sql.ExecuteNonQuery(queryName, queryType, parameters)
 
     End Sub
+
+#Region "p_Opt10001Query "
+    Public Function p_Opt10001Query(ByVal query As String, ByVal stockCode As String, ByVal callDate As String,
+                                         ByVal bln3tier As Boolean,
+                                      Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As DataSet
+
+        DataSetBinding(ds, tableName)
+
+        With _arrParam
+            .Clear()
+            .Add("@QUERY", query)
+            .Add("@STOCK_CODE", stockCode)
+            .Add("@CALL_DATE", callDate)
+        End With
+
+        If bln3tier = True Then
+            Return ExecuteDataSet("p_Opt10001Query", CommandType.StoredProcedure, _tableName, _ds, _arrParam)
+        Else
+            Return ExecuteDataSet2Tier("p_Opt10001Query", CommandType.StoredProcedure, _tableName, _ds, _arrParam)
+        End If
+
+    End Function
+#End Region
+
+#Region "p_Opt20068Query "
+    Public Function p_Opt20068Query(ByVal query As String, ByVal STOCK_CODE As String, ByVal STOCK_DATE As String,
+                                         ByVal bln3tier As Boolean,
+                                      Optional ByVal ds As DataSet = Nothing, Optional ByVal tableName As String = Nothing) As DataSet
+
+        DataSetBinding(ds, tableName)
+
+        With _arrParam
+            .Clear()
+            .Add("@QUERY", query)
+            .Add("@STOCK_CODE", STOCK_CODE)
+            .Add("@STOCK_DATE", STOCK_DATE)
+        End With
+
+        If bln3tier = True Then
+            Return ExecuteDataSet("p_Opt20068Query", CommandType.StoredProcedure, _tableName, _ds, _arrParam)
+        Else
+            Return ExecuteDataSet2Tier("p_Opt20068Query", CommandType.StoredProcedure, _tableName, _ds, _arrParam)
+        End If
+
+    End Function
+#End Region
 
 #Region "p_Opt10059PriceMinMaxQuery "
     Public Function p_Opt10059PriceMinMaxQuery(ByVal query As String, ByVal stockCode As String, ByVal stockDate As String, _
@@ -161,6 +208,7 @@
     End Function
 
 #End Region
+
 #Region "p_Opt10060PriceMinMaxQuery "
     Public Function p_Opt10060PriceMinMaxQuery(ByVal query As String, ByVal stockCode As String, ByVal maemeGb As String, _
                                                ByVal stockDate As String, ByVal bln3tier As Boolean, _

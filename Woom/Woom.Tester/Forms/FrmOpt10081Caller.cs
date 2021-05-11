@@ -1,14 +1,10 @@
-﻿using System;
-using SDataAccess;
+﻿using SDataAccess;
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Woom.DataAccess;
 using Woom.DataAccess.OptCaller.Class;
 using Woom.DataAccess.PlugIn;
 
@@ -25,6 +21,7 @@ namespace Woom.Tester.Forms
         private int _seqNo = 0;
         private string _stdDate = "";
         private string _FormId = "81";
+        private string _stockName;
 
         private ClsOpt10081 _opt10081 = new ClsOpt10081();
 
@@ -33,11 +30,16 @@ namespace Woom.Tester.Forms
         // 마지막으로 돌린 일자
         private string _FirstPsDate = "";
         #endregion 전역변수
+        private ClsDataAccessUtil _clsDataAccessUtil;
 
 
         public FrmOpt10081Caller()
         {
             InitializeComponent();
+
+            _clsDataAccessUtil = new ClsDataAccessUtil();
+
+            ClsAxKH.AxKH_10081_OnReceived += new ClsAxKH.OnReceivedEventHandler(Opt10081_OnReceived);
 
             Func<DataTable> funcGetStockData = () =>
             {
@@ -49,6 +51,11 @@ namespace Woom.Tester.Forms
 
             foreach (DataRow dr in _dtStockCode.Rows)
             {
+                if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
+                {
+                    continue;
+                }
+
                 _StockQueue.Enqueue(dr["STOCK_CODE"].ToString());
             }
 
@@ -78,19 +85,29 @@ namespace Woom.Tester.Forms
                 }
             }
         }
-
+        
         private void OnGetStockCode()
         {
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+
+            //Task.Delay(3000).Wait();
+            _clsDataAccessUtil.Delay(3000);
+
+            tcs.SetResult(true);
 
             string strStockCode = "";
-
-            Task<string> t = Task.Run(() => strStockCode = GetStockCode());
-
-            t.ContinueWith(task => GetOpt10081Caller(strStockCode));
+           
+            strStockCode = GetStockCode();
+            if (strStockCode == "End")
+            { return; }
+            GetOpt10081Caller(strStockCode);
 
             proBar10081.Value = _seqNo;
 
-            WriteTextSafe(t.Result + " 작업 중");
+            WriteTextSafe(strStockCode + "(" + ClsAxKH.GetMasterCodeName(strStockCode) + ")" + " 작업 중");
+
+            //   tcs.SetResult(true);
         }
         private void WriteTextSafe(string strMessage)
         {
@@ -112,6 +129,12 @@ namespace Woom.Tester.Forms
         private string GetStockCode()
         {
             string reValue;
+
+            if (_StockQueue.Count == 0)
+            {
+                MessageBox.Show("작업이 완료되었습니다.");
+                return "End";
+            }
             reValue = _StockQueue.Dequeue().ToString();
 
             _MaxStockDate10081 = "";
@@ -137,103 +160,89 @@ namespace Woom.Tester.Forms
             }
 
             _opt10081 = new ClsOpt10081();
-            ClsOptCallerMain.AxKH_10081_OnReceived += new ClsOptCallerMain.OnReceivedEventHandler(Opt10081_OnReceived);
+
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+
+            if (tcs == null || tcs.Task.IsCompleted)
+            {
+                return;
+            }
 
             _opt10081.SetInit(_FormId);
             _opt10081.Opt10081(stockCode, "", _stdDate, "1");
+
+            tcs.SetResult(true);
+
         }
 
-  
-
-        private async void Opt10081_OnReceived(string stockCode, DataTable dt, int sPreNext)
+        private  void Opt10081_OnReceived(string stockCode, DataTable dt, int sPreNext)
         {
-            //if (dt == null)
-            //{
-            //    await Task.Delay(TimeSpan.FromSeconds(3));
-            //    _opt10081.Dispose();
-            //    GetOpt10081StockCode();
-            //    return;
-            //}
 
-            Task<int> funcTaskAsync = Task.Run(() =>
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+
+            if (tcs == null || tcs.Task.IsCompleted)
             {
-
-                if (dt != null)
-                {
-                    ArrayParam arrParam = new ArrayParam();
-                    Sql oSql = new Sql("EDPB2F011\\VADIS", "KIWOOMDB");
-
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        if (_MaxStockDate10081 == dr["일자"].ToString().Trim())
-                        {
-                            return 1;
-                        }
-                        else
-                        {
-                            arrParam.Clear();
-                            arrParam.Add("@ACTION_GB", "A");
-                            arrParam.Add("@STOCK_CODE", stockCode);
-                            arrParam.Add("@STOCK_DATE", dr["일자"]);
-                            arrParam.Add("@DATE_SEQNO", 0);
-                            arrParam.Add("@NOW_PRICE", dr["현재가"]);
-                            arrParam.Add("@TRADE_QTY", dr["거래량"]);
-                            arrParam.Add("@TRADE_DAEGUM", dr["거래대금"]);
-                            arrParam.Add("@START_PRICE", dr["시가"]);
-                            arrParam.Add("@HIGH_PRICE", dr["고가"]);
-                            arrParam.Add("@LOW_PRICE", dr["저가"]);
-                            arrParam.Add("@CHG_JUGA_GB", dr["수정주가구분"]);
-                            arrParam.Add("@CHG_RATE", dr["수정비율"]);
-                            arrParam.Add("@CHG_JUGA_EVENT", dr["수정주가이벤트"]);
-                            arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
-
-                            oSql.ExecuteNonQuery("p_Opt10081Add", CommandType.StoredProcedure, arrParam);
-                        }
-                    }
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
-            });
-
-            if (await funcTaskAsync == 1)
-            {
-                WriteTextSafe(stockCode + "완료 다음으로..");
-                OnGetStockCode();
                 return;
             }
 
-            Task<int> t = Task.Run(() =>
+            if (dt != null)
             {
-                if (sPreNext == 2)
+                ArrayParam arrParam = new ArrayParam();
+                Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
+
+                foreach (DataRow dr in dt.Rows)
                 {
+                    if (_MaxStockDate10081 == dr["일자"].ToString().Trim())
+                    {
+                        _opt10081.Dispose();
 
-                    return 0;
-                    //_opt10081.Opt10081(true);
+                        tcs.SetResult(true);
+
+                        OnGetStockCode();
+
+                        return;
+
+                    }
+                    else
+                    {
+                        arrParam.Clear();
+                        arrParam.Add("@ACTION_GB", "A");
+                        arrParam.Add("@STOCK_CODE", stockCode);
+                        arrParam.Add("@STOCK_DATE", dr["일자"]);
+                        arrParam.Add("@DATE_SEQNO", 0);
+                        arrParam.Add("@NOW_PRICE", dr["현재가"]);
+                        arrParam.Add("@TRADE_QTY", dr["거래량"]);
+                        arrParam.Add("@TRADE_DAEGUM", dr["거래대금"]);
+                        arrParam.Add("@START_PRICE", dr["시가"]);
+                        arrParam.Add("@HIGH_PRICE", dr["고가"]);
+                        arrParam.Add("@LOW_PRICE", dr["저가"]);
+                        arrParam.Add("@CHG_JUGA_GB", dr["수정주가구분"]);
+                        arrParam.Add("@CHG_RATE", dr["수정비율"]);
+                        arrParam.Add("@CHG_JUGA_EVENT", dr["수정주가이벤트"]);
+                        arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
+
+                        oSql.ExecuteNonQuery("p_Opt10081Add", CommandType.StoredProcedure, arrParam);
+                    }
                 }
-                else
-                {
-
-                    return 1;
-                    //await Task.Delay(TimeSpan.FromSeconds(4));
-                    //_opt10081.Dispose();
-                    // return;
-                }
-            });
-
-
-            if (await t == 1)
+            }
+            if (sPreNext == 2)
             {
-                OnGetStockCode();
-                return;
+                tcs.SetResult(true);
+
+                _opt10081.SetInit(_FormId);
+                _opt10081.Opt10081(StockCode: stockCode, StockName: "", StdDate: _stdDate, ModifyJugaGb: "1",nextCall: true); ;
+
             }
             else
             {
-                WriteTextSafe(stockCode + "(다음일자로..)");
-                _opt10081.Opt10081(stockCode, "", );
+                _opt10081.Dispose();
+
+                tcs.SetResult(true);
             }
+
+            OnGetStockCode();
         }
         private void btn10081_Click(object sender, EventArgs e)
         {

@@ -68,7 +68,7 @@
             this.Controls.Add(this.btn10081);
             this.Controls.Add(this.proBar10081);
             this.Name = "FrmOpt10081Caller";
-            this.Text = "frmOpt10081";
+            this.Text = "주식일봉차트조회(frmOpt10081)";
             this.ResumeLayout(false);
             this.PerformLayout();
 
