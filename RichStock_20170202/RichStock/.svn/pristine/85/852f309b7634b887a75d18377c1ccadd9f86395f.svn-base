@@ -1,5 +1,0 @@
-﻿Public Module modDataTable
-    Public _dtScreenNo As New DataTable
-    Public _dtTradingScreenNo As New DataTable
-    Public _dtOptKWFidScreenNo As New DataTable
-End Module
