@@ -155,7 +155,7 @@ namespace Woom.Tester.Forms
         {
             if (_StockQueue.Count == 0)
             {
-                MessageBox.Show("작업이 완료되었습니다.");
+                WriteTextSafe("작업이 완료되었습니다.");
                 return "End";
             }
 

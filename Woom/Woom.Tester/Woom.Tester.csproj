@@ -110,6 +110,12 @@
     <Compile Include="Forms\FrmGetStockCode.Designer.cs">
       <DependentUpon>FrmGetStockCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOpt10005Caller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOpt10005Caller.Designer.cs">
+      <DependentUpon>FrmOpt10005Caller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmOpt10060Caller.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\FrmGetStockCode.resx">
       <DependentUpon>FrmGetStockCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOpt10005Caller.resx">
+      <DependentUpon>FrmOpt10005Caller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOpt10060Caller.resx">
       <DependentUpon>FrmOpt10060Caller.cs</DependentUpon>
