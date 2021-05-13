@@ -18,6 +18,7 @@ namespace Woom.DataAccess.PlugIn
         public delegate void OnReceivedEventHandler(string stockCode, DataTable dt, int sPreNext);
         private static string _stockCode10001 = "";
         private static string _stockCode10005 = "";
+        private static string _stockCode10015 = "";
         private static string _stockCode10014 = "";
         private static string _stockCode10081 = "";
         private static string _stockCode10086 = "";
@@ -41,12 +42,13 @@ namespace Woom.DataAccess.PlugIn
 
         public enum OptType
         {
-            Opt10001, Opt10005, Opt10081, Opt10060, Opt10014, Opt20068, Opt10086
+            Opt10001, Opt10005, Opt10015, Opt10081, Opt10060, Opt10014, Opt20068, Opt10086
 
         }
 
         public static event OnReceivedEventHandler AxKH_10001_OnReceived;
         public static event OnReceivedEventHandler AxKH_10005_OnReceived;
+        public static event OnReceivedEventHandler AxKH_10015_OnReceived;
         public static event OnReceivedEventHandler AxKH_10014_OnReceived;
         public static event OnReceivedEventHandler AxKH_10081_OnReceived;
         public static event OnReceivedEventHandler AxKH_10086_OnReceived;
@@ -60,6 +62,16 @@ namespace Woom.DataAccess.PlugIn
         public static void Opt10005(string stockCode)
         {
             ClsAxKH.AxKH.SetInputValue("종목코드", stockCode);
+        }
+        /// <summary>
+        ///  [ opt10015 : 일별거래상세요청 ]
+        /// </summary>
+        /// <param name="stockCode">종목코드</param>
+        /// <param name="startDate">시작일자 = YYYYMMDD (20160101 연도4자리, 월 2자리, 일 2자리 형식)</param>
+        public static void Opt10015(string stockCode, string startDate)
+        {
+            ClsAxKH.AxKH.SetInputValue("종목코드", stockCode);
+            ClsAxKH.AxKH.SetInputValue("시작일자", startDate);
         }
         /// <summary>
         ///  [ opt10014 : 공매도추이요청 ]
@@ -211,6 +223,13 @@ namespace Woom.DataAccess.PlugIn
 
                         _stockCode10005 = optCall[0].ToString();
                         Opt10005(stockCode: optCall[0].ToString());
+                        break;
+
+                    case OptType.Opt10015:
+                        _stockCode10015 = "";
+
+                        _stockCode10015 = optCall[0].ToString();
+                        Opt10015(stockCode: optCall[0].ToString(), startDate:optCall[1].ToString());
                         break;
                     case OptType.Opt10081:
                         _stockCode10081 = "";
@@ -366,6 +385,55 @@ namespace Woom.DataAccess.PlugIn
 
 
                     break;
+                case "일별거래상세요청":
+                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
+                    {
+                        foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10015Index)))
+                        {
+                            int j = 0;
+                            j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(ClsColumnSets.Column10015Index), i));
+                            dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
+                        }
+                    };
+
+                    handler = AxKH_10015_OnReceived;
+
+                    if (nCnt == 0)
+                    {
+                        if (handler != null)
+                        {
+                            //_OptStatus.InitOptCallingStatus();
+                            AxKH_10015_OnReceived(_stockCode10015, null, 0);
+                            return;
+                        }
+                    }
+
+                    for (int i = 0; i < nCnt; i++)
+                    {
+                        DataRow dr = dt.NewRow();
+                        for (int intColumName = 0; intColumName < dt.Columns.Count; intColumName++)
+                        {
+                            var type = dt.Columns[intColumName].DataType;
+                            dr[dt.Columns[intColumName].ColumnName.ToString()] = Convert.ChangeType(ClsAxKH.AxKH.GetCommData(e.sTrCode, e.sRQName, i, dt.Columns[intColumName].ColumnName.ToString()).ToString().Trim(), type);
+                        }
+
+                        dt.Rows.Add(dr);
+                    }
+
+                    if (handler != null)
+                    {
+                        if (Convert.ToInt32(e.sPrevNext) != 2)
+                        {
+                            //_OptStatus.InitOptCallingStatus();
+                        }
+                        //AxKH_10015_OnReceived(e.sTrCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10015_OnReceived(_stockCode10015, dt, Convert.ToInt32(e.sPrevNext));
+                        return;
+                    }
+
+                    break;
+
+
                 case "공매도추이요청 ":
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                     {

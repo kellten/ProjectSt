@@ -18,6 +18,13 @@ namespace Woom.DataDefine.OptData
             날짜,시가,고가,종가,대비,등락률,거래량,거래대금,체결강도,외인보유,외인비중,외인순매수,기관순매수,개인순매수,외국계,신용잔고율,프로그램
         }
 
+        public enum Column10015Index
+        {
+            일자, 종가, 전일대비기호, 전일대비, 등락율, 거래량, 거래대금, 장전거래량, 장전거래비중, 장중거래량, 장중거래비중, 장후거래량, 장후거래비중
+           ,합계3, 기간중거래량, 체결강도, 외인보유, 외인비중, 외인순매수, 기관순매수, 개인순매수, 외국계, 신용잔고율, 프로그램, 장전거래대금, 장전거래대금비중
+           ,장중거래대금, 장중거래대금비중, 장후거래대금, 장후거래대금비중
+        }
+
         #region Enum
 
         public enum Column10014Index
@@ -67,7 +74,10 @@ namespace Woom.DataDefine.OptData
             최저250, 상한가, 하한가, 기준가, 예상체결가, 예상체결수량, 최고가일250, 최고가대비율250, 최저가일250, 최저가대비율250, 거래대비, 액면가단위,
             대차거래체결주수, 대차거래상환주수, 대차거래증감, 잔고주수, 잔고금액,
             종가, 전일대비기호, 공매도량, 매매비중, 공매도거래대금, 공매도평균가,
-            날짜,  전일비, 등락률,  금액백만, 신용비, 개인, 기관, 외인수량, 외국계, 프로그램, 외인비, 체결강도, 기관순매수, 외인보유, 외인비중, 외인순매수, 개인순매수, 신용잔고율, 대비
+            날짜,  전일비, 등락률,  금액백만, 신용비, 개인, 기관, 외인수량, 외국계, 프로그램, 외인비, 체결강도, 기관순매수, 외인보유, 외인비중, 외인순매수, 개인순매수, 신용잔고율, 대비,
+            장전거래량, 장전거래비중, 장중거래량, 장중거래비중, 장후거래량, 장후거래비중
+           , 합계3, 기간중거래량, 장전거래대금, 장전거래대금비중
+           , 장중거래대금, 장중거래대금비중, 장후거래대금, 장후거래대금비중
 
 
         }
@@ -433,6 +443,49 @@ namespace Woom.DataDefine.OptData
                 case ColumnNameIndex.대비:
                     dc.DataType = typeof(Int32);
                     break;
+                case ColumnNameIndex.장전거래량:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장전거래비중:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장중거래량:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장중거래비중:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장후거래량:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장후거래비중:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.합계3:
+                    dc.DataType = typeof(Int64);
+                    break;
+                case ColumnNameIndex.기간중거래량:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장전거래대금:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장전거래대금비중:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장중거래대금:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장중거래대금비중:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장후거래대금:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.장후거래대금비중:
+                    dc.DataType = typeof(Int32);
+                    break;
+
                 default:
                     break;
             }
