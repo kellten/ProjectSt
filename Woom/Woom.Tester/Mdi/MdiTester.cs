@@ -87,5 +87,11 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Tester.Forms.FrmGetStockCode();
             ShowChildForm(oform);
         }
+
+        private void opt10005ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmOpt10005Caller();
+            ShowChildForm(oform);
+        }
     }
 }

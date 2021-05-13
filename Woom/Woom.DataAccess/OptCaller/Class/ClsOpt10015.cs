@@ -9,12 +9,13 @@ using Woom.DataAccess.OptCaller.InterFace;
 using Woom.DataDefine.OptData;
 using Woom.DataAccess.PlugIn;
 using static Woom.DataAccess.PlugIn.ClsAxKH;
+
 namespace Woom.DataAccess.OptCaller.Class
 {
-    public class ClsOpt10005 : IDisposable, IOptCaller
+    class ClsOpt10015
     {
         #region IOptCaller 구현
-        private const string ConScreenNoFooter = "90";
+        private const string ConScreenNoFooter = "15";
         public string ScreenNoFooter { get { return ConScreenNoFooter; } }
         private string _screenNo = "";
 
@@ -32,10 +33,10 @@ namespace Woom.DataAccess.OptCaller.Class
 
             using (ClsColumnSets oBasicDataType = new ClsColumnSets())
             {
-                foreach (int i in Enum.GetValues(typeof(Column10005Index)))
+                foreach (int i in Enum.GetValues(typeof(Column10001Index)))
                 {
                     int j = 0;
-                    j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(Column10005Index), i));
+                    j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(Column10001Index), i));
 
                     if (_dt.Columns.Contains(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j).ToString()) != true)
                     {
@@ -50,12 +51,12 @@ namespace Woom.DataAccess.OptCaller.Class
 
         public delegate void OnReceivedEventHandler(string stockCode, DataTable dt, int sPreNext);
 
-        public event OnReceivedEventHandler Opt10005_OnReceived;
+        public event OnReceivedEventHandler Opt10001_OnReceived;
 
         #endregion Event
         #region Enum
 
-        private enum Column10005Index
+        private enum Column10001Index
         {
             종목코드, 종목명, 결산월, 액면가, 자본금, 상장주식, 신용비율, 연중최고, 연중최저, 시가총액, 시가총액비중, 외인소진률, 대용가, PER, EPS, ROE, PBR, EV, BPS, 매출액, 영업이익, 당기순이익, 최고250,
             최저250, 시가, 고가, 저가, 상한가, 하한가, 기준가, 예상체결가, 예상체결수량, 최고가일250, 최고가대비율250, 최저가일250, 최저가대비율250, 현재가, 대비기호, 전일대비, 등락율, 거래량, 거래대비, 액면가단위
@@ -64,8 +65,8 @@ namespace Woom.DataAccess.OptCaller.Class
 
         #region Const
 
-        private const string RqName = "주식일주월시분요청";
-        private const string OptName = "opt10005";
+        private const string RqName = "주식기본정보요청";
+        private const string OptName = "opt10001";
 
         #endregion Const
 
@@ -86,7 +87,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
             SetInputValue.Add(StockCode);
 
-            SendCommRqData(PlugIn.ClsAxKH.OptType.Opt10005, SetInputValue, RqName, OptName, nPrevNext, _screenNo);
+            SendCommRqData(PlugIn.ClsAxKH.OptType.Opt10001, SetInputValue, RqName, OptName, nPrevNext, _screenNo);
         }
 
         private void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
@@ -98,7 +99,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
             MakeDataTable();
 
-            var handler = Opt10005_OnReceived;
+            var handler = Opt10001_OnReceived;
 
             int nCnt = AxKH.GetRepeatCnt(e.sTrCode, e.sRQName);
 
@@ -106,7 +107,7 @@ namespace Woom.DataAccess.OptCaller.Class
             {
                 if (handler != null)
                 {
-                    Opt10005_OnReceived(_stockCode, null, 0);
+                    Opt10001_OnReceived(_stockCode, null, 0);
                 }
             }
 
@@ -128,7 +129,7 @@ namespace Woom.DataAccess.OptCaller.Class
                 {
                     //_OptStatus.InitOptCallingStatus();
                 }
-                Opt10005_OnReceived(_stockCode, _dt, Convert.ToInt32(e.sPrevNext));
+                Opt10001_OnReceived(_stockCode, _dt, Convert.ToInt32(e.sPrevNext));
             }
         }
 
@@ -146,6 +147,5 @@ namespace Woom.DataAccess.OptCaller.Class
         }
 
         #endregion IDispose 구현
-
     }
 }

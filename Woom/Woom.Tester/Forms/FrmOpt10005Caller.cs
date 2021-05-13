@@ -73,7 +73,7 @@ namespace Woom.Tester.Forms
         private DataTable _dtStockCode;
         private int _seqNo = 0;
         private string _stdDate = "";
-        private string _FormId = "81";
+        private string _FormId = "05";
         private string _stockName;
 
         private ClsOpt10005 _opt10005 = new ClsOpt10005();
@@ -139,13 +139,6 @@ namespace Woom.Tester.Forms
 
             _MaxStockDate10005 = "";
 
-            KiwoomQuery kiwoomQuery = new KiwoomQuery();
-            DataTable dt = new DataTable();
-
-            dt = kiwoomQuery.p_Opt10005MinMaxQuery("1", reValue.ToString().Trim(), "", false).Tables[0].Copy();
-
-            _MaxStockDate10005 = dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim();
-
             _seqNo = _seqNo + 1;
 
             return reValue;
@@ -170,7 +163,7 @@ namespace Woom.Tester.Forms
             }
 
             _opt10005.SetInit(_FormId);
-            _opt10005.JustRequest(stockCode, "", _stdDate, "1");
+            _opt10005.JustRequest(stockCode, "", 0);
 
             tcs.SetResult(true);
 
@@ -194,7 +187,7 @@ namespace Woom.Tester.Forms
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    if (_MaxStockDate10005 == dr["일자"].ToString().Trim())
+                    if (_MaxStockDate10005 == dr["날짜"].ToString().Trim())
                     {
                         _opt10005.Dispose();
 
@@ -207,23 +200,23 @@ namespace Woom.Tester.Forms
                     }
                     else
                     {
-                        arrParam.Clear();
-                        arrParam.Add("@ACTION_GB", "A");
-                        arrParam.Add("@STOCK_CODE", stockCode);
-                        arrParam.Add("@STOCK_DATE", dr["일자"]);
-                        arrParam.Add("@DATE_SEQNO", 0);
-                        arrParam.Add("@NOW_PRICE", dr["현재가"]);
-                        arrParam.Add("@TRADE_QTY", dr["거래량"]);
-                        arrParam.Add("@TRADE_DAEGUM", dr["거래대금"]);
-                        arrParam.Add("@START_PRICE", dr["시가"]);
-                        arrParam.Add("@HIGH_PRICE", dr["고가"]);
-                        arrParam.Add("@LOW_PRICE", dr["저가"]);
-                        arrParam.Add("@CHG_JUGA_GB", dr["수정주가구분"]);
-                        arrParam.Add("@CHG_RATE", dr["수정비율"]);
-                        arrParam.Add("@CHG_JUGA_EVENT", dr["수정주가이벤트"]);
-                        arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
+                        //arrParam.Clear();
+                        //arrParam.Add("@ACTION_GB", "A");
+                        //arrParam.Add("@STOCK_CODE", stockCode);
+                        //arrParam.Add("@STOCK_DATE", dr["일자"]);
+                        //arrParam.Add("@DATE_SEQNO", 0);
+                        //arrParam.Add("@NOW_PRICE", dr["현재가"]);
+                        //arrParam.Add("@TRADE_QTY", dr["거래량"]);
+                        //arrParam.Add("@TRADE_DAEGUM", dr["거래대금"]);
+                        //arrParam.Add("@START_PRICE", dr["시가"]);
+                        //arrParam.Add("@HIGH_PRICE", dr["고가"]);
+                        //arrParam.Add("@LOW_PRICE", dr["저가"]);
+                        //arrParam.Add("@CHG_JUGA_GB", dr["수정주가구분"]);
+                        //arrParam.Add("@CHG_RATE", dr["수정비율"]);
+                        //arrParam.Add("@CHG_JUGA_EVENT", dr["수정주가이벤트"]);
+                        //arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
-                        oSql.ExecuteNonQuery("p_Opt10005Add", CommandType.StoredProcedure, arrParam);
+                        //oSql.ExecuteNonQuery("p_Opt10005Add", CommandType.StoredProcedure, arrParam);
                     }
                 }
             }
@@ -232,7 +225,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 _opt10005.SetInit(_FormId);
-                _opt10005.JustRequest(StockCode: stockCode, StockName: "",  nextCall: true);
+                _opt10005.JustRequest(StockCode: stockCode, StockName: "", nPrevNext:1);
 
             }
             else
@@ -244,7 +237,8 @@ namespace Woom.Tester.Forms
 
             OnGetStockCode();
         }
-        private void btn10005_Click(object sender, EventArgs e)
+
+        private void btn10005_Click_1(object sender, EventArgs e)
         {
             OnGetStockCode();
         }

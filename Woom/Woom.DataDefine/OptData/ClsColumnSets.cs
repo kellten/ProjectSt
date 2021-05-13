@@ -67,7 +67,8 @@ namespace Woom.DataDefine.OptData
             최저250, 상한가, 하한가, 기준가, 예상체결가, 예상체결수량, 최고가일250, 최고가대비율250, 최저가일250, 최저가대비율250, 거래대비, 액면가단위,
             대차거래체결주수, 대차거래상환주수, 대차거래증감, 잔고주수, 잔고금액,
             종가, 전일대비기호, 공매도량, 매매비중, 공매도거래대금, 공매도평균가,
-            날짜,  전일비, 등락률,  금액백만, 신용비, 개인, 기관, 외인수량, 외국계, 프로그램, 외인비, 체결강도, 외인보유, 외인비중, 외인순매수, 개인순매수, 신용잔고율
+            날짜,  전일비, 등락률,  금액백만, 신용비, 개인, 기관, 외인수량, 외국계, 프로그램, 외인비, 체결강도, 기관순매수, 외인보유, 외인비중, 외인순매수, 개인순매수, 신용잔고율, 대비
+
 
         }
 
@@ -139,6 +140,9 @@ namespace Woom.DataDefine.OptData
                     break;
 
                 case ColumnNameIndex.기관계:
+                    dc.DataType = typeof(Int64);
+                    break;
+                case ColumnNameIndex.기관순매수:
                     dc.DataType = typeof(Int64);
                     break;
 
@@ -424,6 +428,9 @@ namespace Woom.DataDefine.OptData
                     dc.DataType = typeof(Int64);
                     break;
                 case ColumnNameIndex.신용잔고율:
+                    dc.DataType = typeof(Int32);
+                    break;
+                case ColumnNameIndex.대비:
                     dc.DataType = typeof(Int32);
                     break;
                 default:
