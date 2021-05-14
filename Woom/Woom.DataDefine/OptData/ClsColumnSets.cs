@@ -493,6 +493,86 @@ namespace Woom.DataDefine.OptData
             return dc;
         }
 
+        public string TableColumnToKorean(string value)
+        {
+            switch (value)
+            {
+                case "BALANCE_CNT": return "잔고주수"; 
+                case "BALANCE_PRICE": return "잔고금액"; 
+                case "BANK_PRICE": return "은행"; 
+                case "BANK_QTY": return "은행"; 
+                case "BIG_FLOW": return "큰 흐름"; 
+                case "BOHUM_PRICE": return "보험"; 
+                case "BOHUM_QTY": return "보험"; 
+                case "BUBIN_PRICE": return "기타법인"; 
+                case "BUBIN_QTY": return "기타법인"; 
+                case "CALL_DATE": return "조회일자"; 
+                case "CHART_GB": return "구분"; 
+                case "CHG_JUGA_EVENT": return "수정주가이벤트"; 
+                case "CHG_JUGA_GB": return "수정주가구분"; 
+                case "CHG_RATE": return "수정비율"; 
+                case "CREATE_DATE": return "생성일자"; 
+                case "DATE_SEQNO": return "일자순서"; 
+                case "END_DATE": return "종료일자"; 
+                case "FORE_PRICE": return "외국인투자자"; 
+                case "FORE_QTY": return "외국인투자자"; 
+                case "FROM_DATE": return "시작일자"; 
+                case "GAIN_PRICE": return "개인투자자"; 
+                case "GAIN_QTY": return "개인투자자"; 
+                case "GIGAN_PRICE": return "기관계"; 
+                case "GIGAN_QTY": return "기관계"; 
+                case "GIGAN_SUM_PRICE": return "기관계합"; 
+                case "GIGAN_SUM_QTY": return "기관계합"; 
+                case "GITA_PRICE": return "기타금융"; 
+                case "GITA_QTY": return "기타금융"; 
+                case "GUMY_PRICE": return "금융투자"; 
+                case "GUMY_QTY": return "금융투자"; 
+                case "HIGH_PRICE": return "고가"; 
+                case "IOFORE_PRICE": return "내외국인"; 
+                case "IOFORE_QTY": return "내외국인"; 
+                case "KT_CODE": return "회원사코드"; 
+                case "KT_NAME": return "회원사명"; 
+                case "LOW_PRICE": return "저가"; 
+                case "LT_CON_CNT": return "대차거래체결주수"; 
+                case "LT_INCRE": return "대차거래증감"; 
+                case "LT_REPAY_CNT": return "대차거래상환주수"; 
+                case "MAEME_GB": return "매매구분"; 
+                case "MAEME-GB": return "매수구분"; 
+                case "MID_FLOW": return "중간흐름"; 
+                case "MID_STOCK_INFO": return "정보"; 
+                case "MIMA_GB": return "구분"; 
+                case "NATION_PRICE": return "국가"; 
+                case "NATION_QTY": return "국가"; 
+                case "NOW_PRICE": return "현재가"; 
+                case "NUJUK_TRDAEGUM": return "누적거래대금"; 
+                case "OPT10001_TEXT": return "내역"; 
+                case "SAMO_PRICE": return "사모펀드"; 
+                case "SAMO_QTY": return "사모펀드"; 
+                case "SEQ_NO": return "순서"; 
+                case "SET_INFO": return "설정정보"; 
+                case "SGROUP_CODE": return "그룹코드"; 
+                case "SGROUP_INFO": return "그룹정보"; 
+                case "SGROUP_NAME": return "그룹명"; 
+                case "START_DATE": return "시작일자"; 
+                case "START_PRICE": return "시가"; 
+                case "STOCK_CODE": return "종목코드"; 
+                case "STOCK_DATE": return "거래일자"; 
+                case "STOCK_INFO": return "정보"; 
+                case "STOCK_NAME": return "종목이름"; 
+                case "TO_DATE": return "종료일자"; 
+                case "TOSIN_PRICE": return "투신"; 
+                case "TOSIN_QTY": return "투신"; 
+                case "TRADE_DAEGUM": return "거래대금"; 
+                case "TRADE_DATE": return "거래일"; 
+                case "TRADE_QTY": return "거래량"; 
+                case "YBJONG_CODE": return "업종코드"; 
+                case "YBJONG_NAME": return "업종명"; 
+                case "YEONGI_PRICE": return "연기금등"; 
+                case "YEONGI_QTY": return "연기금등"; 
+                }
+            return "";
+        }
+
         public DataColumn GetDataColumn10001(ColumnNameIndex ci)
         {
             DataColumn dc = new DataColumn();
@@ -526,7 +606,6 @@ namespace Woom.DataDefine.OptData
          
 
         }
-
         public System.Windows.Forms.DataGridViewColumn GetDataGridViewColumn(ColumnNameIndex ci)
         {
             System.Windows.Forms.DataGridViewColumn dc = new System.Windows.Forms.DataGridViewColumn();
