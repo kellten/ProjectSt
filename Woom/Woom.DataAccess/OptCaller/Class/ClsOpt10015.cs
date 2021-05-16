@@ -57,7 +57,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
          #region Const
 
-        private const string RqName = "일별거래상세요청 ";
+        private const string RqName = "일별거래상세요청";
         private const string OptName = "opt10015";
 
         #endregion Const
@@ -72,12 +72,13 @@ namespace Woom.DataAccess.OptCaller.Class
 
         #endregion 전역변수
 
-        public void JustRequest(string StockCode, string StockName, int nPrevNext)
+        public void JustRequest(string StockCode, string StartDate, string StockName, int nPrevNext)
         {
 
             ArrayList SetInputValue = new ArrayList();
 
             SetInputValue.Add(StockCode);
+            SetInputValue.Add(StartDate);
 
             SendCommRqData(PlugIn.ClsAxKH.OptType.Opt10015, SetInputValue, RqName, OptName, nPrevNext, _screenNo);
         }
