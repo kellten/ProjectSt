@@ -66,7 +66,6 @@ namespace Woom.Tester.Forms
             }
         }
 
-
         private Queue _StockQueue = new Queue();
 
         #region 전역변수
@@ -75,39 +74,59 @@ namespace Woom.Tester.Forms
         private int _seqNo = 0;
         private string _stdDate = "";
         private string _FormId = "15";
-        private string _stockName;
+        private string _FirstStockDate = ""; // 상장일
 
         private ClsOpt10015 _opt10015 = new ClsOpt10015();
 
         // 마지막으로 돌린 일자
         private string _LastDate = "";
         // 마지막으로 돌린 일자
-        private string _FirstPsDate = "";
+        private string _FirstDate = "";
         #endregion 전역변수
 
         private ClsDataAccessUtil _clsDataAccessUtil;
-
-        private void OnGetStockCode()
+        private void WaitTime()
         {
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
-
             //Task.Delay(3000).Wait();
             _clsDataAccessUtil.Delay(3000);
-
             tcs.SetResult(true);
+        }
 
+        private void OnGetStockCode()
+        {
             string strStockCode = "";
 
             strStockCode = GetStockCode();
+
             if (strStockCode == "End")
             { return; }
-            GetOpt10015Caller(strStockCode);
-
+            _seqNo = _seqNo + 1;
             proBar10015.Value = _seqNo;
+            if (strStockCode == "")
+            {
+                OnGetStockCode();
+                return;
 
-            WriteTextSafe(strStockCode + "(" + ClsAxKH.GetMasterCodeName(strStockCode) + ")" + " 작업 중");
+            }
 
+            WaitTime();
+
+            string stockName = ClsAxKH.GetMasterCodeName(stockCode: strStockCode);
+
+            // 종목명을 못 가져오면 상장폐지된 종목으로 생각.
+            if (stockName == "")
+            {
+                OnGetStockCode();
+                return;
+            }
+
+            _FirstStockDate = ClsAxKH.GetMasterListedStockDate(strStockCode);
+
+            GetOpt10015Caller( strStockCode, _LastDate, _FirstDate);
+
+            WriteTextSafe(strStockCode + " 작업 중");
             //   tcs.SetResult(true);
         }
         private void WriteTextSafe(string strMessage)
@@ -147,11 +166,13 @@ namespace Woom.Tester.Forms
 
             if (dt.Rows.Count > 0)
             {
-                _MaxStockDate10015 = dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim();
+                _LastDate = dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim();
+                _FirstDate = dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim();
             }
             else
             {
-                _MaxStockDate10015 = "";
+                _LastDate = "";
+                _FirstDate = "";
             }
 
             _seqNo = _seqNo + 1;
@@ -159,7 +180,7 @@ namespace Woom.Tester.Forms
             return reValue;
         }
 
-        private void GetOpt10015Caller(string stockCode)
+        private void GetOpt10015Caller(string stockCode, string MaxDate, string MinDate)
         {
             if (_opt10015 != null)
             {
@@ -202,36 +223,36 @@ namespace Woom.Tester.Forms
 
                 foreach (DataRow dr in dt.Rows)
                 {
-                    if (_MaxStockDate10015 == dr["일자"].ToString().Trim())
+                    WriteTextSafe(stockCode + "(일자별상세)" + "[" + dr["일자"].ToString() + "] 작업중");
+                    if (_LastDate == dr["일자"].ToString().Trim())
                     {
-                        _opt10015.Dispose();
+                        if (_FirstDate == _FirstStockDate)
+                        {
+                            _opt10015.Dispose();
 
-                        tcs.SetResult(true);
+                            tcs.SetResult(true);
 
-                        OnGetStockCode();
+                            OnGetStockCode();
 
-                        return;
+                            return;
+                        }
+                        else
+                        {
+                            tcs.SetResult(true);
 
+                            WaitTime();
+
+                            _opt10015.SetInit(_FormId);
+
+                            //e, string StartDate, string StockName, int nPrevNext
+                            _opt10015.JustRequest(StockCode: stockCode, StartDate: _FirstDate.ToString(), StockName:"",   nPrevNext: 0);
+                            return;
+
+                        }
                     }
                     else
                     {
-                        //arrParam.Clear();
-                        //arrParam.Add("@ACTION_GB", "A");
-                        //arrParam.Add("@STOCK_CODE", stockCode);
-                        //arrParam.Add("@STOCK_DATE", dr["일자"]);
-                        //arrParam.Add("@DATE_SEQNO", 0);
-                        //arrParam.Add("@NOW_PRICE", dr["현재가"]);
-                        //arrParam.Add("@TRADE_QTY", dr["거래량"]);
-                        //arrParam.Add("@TRADE_DAEGUM", dr["거래대금"]);
-                        //arrParam.Add("@START_PRICE", dr["시가"]);
-                        //arrParam.Add("@HIGH_PRICE", dr["고가"]);
-                        //arrParam.Add("@LOW_PRICE", dr["저가"]);
-                        //arrParam.Add("@CHG_JUGA_GB", dr["수정주가구분"]);
-                        //arrParam.Add("@CHG_RATE", dr["수정비율"]);
-                        //arrParam.Add("@CHG_JUGA_EVENT", dr["수정주가이벤트"]);
-                        //arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
-
-                        //oSql.ExecuteNonQuery("p_Opt10015Add", CommandType.StoredProcedure, arrParam);
+                   
                         arrParam.Clear();
 
                         arrParam.Add("@ACTION_GB", "A");
@@ -271,10 +292,14 @@ namespace Woom.Tester.Forms
             }
             if (sPreNext == 2)
             {
+                int minDate = Convert.ToInt32(dt.Compute("min([일자])", string.Empty));
+
                 tcs.SetResult(true);
 
+                WaitTime();
+
                 _opt10015.SetInit(_FormId);
-                _opt10015.JustRequest(StockCode: stockCode, StartDate:_LastDate, StockName: "", nPrevNext: 1);
+                _opt10015.JustRequest(StockCode: stockCode, StartDate: minDate.ToString(), StockName: "", nPrevNext: 2);
 
             }
             else
@@ -282,9 +307,11 @@ namespace Woom.Tester.Forms
                 _opt10015.Dispose();
 
                 tcs.SetResult(true);
+
+                OnGetStockCode();
             }
 
-            OnGetStockCode();
+            
         }
 
         private void btn10015_Click(object sender, EventArgs e)
