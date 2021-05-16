@@ -21,7 +21,7 @@ namespace Woom.DataDefine.OptData
         public enum Column10015Index
         {
             일자, 종가, 전일대비기호, 전일대비, 등락율, 거래량, 거래대금, 장전거래량, 장전거래비중, 장중거래량, 장중거래비중, 장후거래량, 장후거래비중
-           ,합계3, 기간중거래량, 체결강도, 외인보유, 외인비중, 외인순매수, 기관순매수, 개인순매수, 외국계, 신용잔고율, 프로그램, 장전거래대금, 장전거래대금비중
+           ,합계3, 기간중거래량,장전거래대금, 장전거래대금비중
            ,장중거래대금, 장중거래대금비중, 장후거래대금, 장후거래대금비중
         }
 
@@ -423,22 +423,22 @@ namespace Woom.DataDefine.OptData
                     dc.DataType = typeof(Int64);
                     break;
                 case ColumnNameIndex.체결강도:
-                    dc.DataType = typeof(Int16);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.외인보유:
-                    dc.DataType = typeof(Int64);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.외인비중:
-                    dc.DataType = typeof(Int16);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.외인순매수:
-                    dc.DataType = typeof(Int64);
+                    dc.DataType = typeof(string);
                     break;
-                case ColumnNameIndex.개인순매수:
-                    dc.DataType = typeof(Int64);
+                case ColumnNameIndex.개인순매수:     
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.신용잔고율:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.대비:
                     dc.DataType = typeof(Int32);
@@ -447,19 +447,19 @@ namespace Woom.DataDefine.OptData
                     dc.DataType = typeof(Int32);
                     break;
                 case ColumnNameIndex.장전거래비중:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.장중거래량:
                     dc.DataType = typeof(Int32);
                     break;
                 case ColumnNameIndex.장중거래비중:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.장후거래량:
                     dc.DataType = typeof(Int32);
                     break;
                 case ColumnNameIndex.장후거래비중:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.합계3:
                     dc.DataType = typeof(Int64);
@@ -471,19 +471,19 @@ namespace Woom.DataDefine.OptData
                     dc.DataType = typeof(Int32);
                     break;
                 case ColumnNameIndex.장전거래대금비중:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.장중거래대금:
                     dc.DataType = typeof(Int32);
-                    break;
+                    break;  
                 case ColumnNameIndex.장중거래대금비중:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
                 case ColumnNameIndex.장후거래대금:
                     dc.DataType = typeof(Int32);
                     break;
                 case ColumnNameIndex.장후거래대금비중:
-                    dc.DataType = typeof(Int32);
+                    dc.DataType = typeof(string);
                     break;
 
                 default:

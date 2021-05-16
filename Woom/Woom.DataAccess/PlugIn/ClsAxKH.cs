@@ -51,7 +51,7 @@ namespace Woom.DataAccess.PlugIn
         public static event OnReceivedEventHandler AxKH_10015_OnReceived;
         public static event OnReceivedEventHandler AxKH_10014_OnReceived;
         public static event OnReceivedEventHandler AxKH_10081_OnReceived;
-        public static event OnReceivedEventHandler AxKH_10086_OnReceived;
+        //public static event OnReceivedEventHandler AxKH_10086_OnReceived;
         public static event OnReceivedEventHandler AxKH_10060_OnReceived;
         public static event OnReceivedEventHandler AxKH_20068_OnReceived;
 

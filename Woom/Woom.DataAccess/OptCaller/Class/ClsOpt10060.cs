@@ -75,13 +75,7 @@ namespace Woom.DataAccess.OptCaller.Class
 
         private DataTable _dt = new DataTable();
 
-        private string _startDate = "";
         private string _stockCode = "";
-        private string _stockName = "";
-        private string _amountQtyGb = "";
-        private string _maeMaeGb = "";
-        private string _unitGb = "";
-
         //private object lockObject = new object();
 
         #endregion 전역변수
