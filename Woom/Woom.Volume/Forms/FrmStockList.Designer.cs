@@ -40,10 +40,13 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.BtnGiganUpDowndSearch = new System.Windows.Forms.Button();
+            this.numUpDownRate = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
+            this.ChkOption1 = new System.Windows.Forms.CheckBox();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -52,7 +55,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownRate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGiganUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv1
@@ -151,16 +155,41 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.ChkOption1);
+            this.splitContainer1.Panel1.Controls.Add(this.BtnGiganUpDowndSearch);
+            this.splitContainer1.Panel1.Controls.Add(this.numUpDownRate);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.dtpStartDate);
             this.splitContainer1.Panel1.Controls.Add(this.dtpEndDate);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvGiganUpDown);
             this.splitContainer1.Size = new System.Drawing.Size(1628, 945);
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // BtnGiganUpDowndSearch
+            // 
+            this.BtnGiganUpDowndSearch.Location = new System.Drawing.Point(451, 9);
+            this.BtnGiganUpDowndSearch.Name = "BtnGiganUpDowndSearch";
+            this.BtnGiganUpDowndSearch.Size = new System.Drawing.Size(75, 23);
+            this.BtnGiganUpDowndSearch.TabIndex = 39;
+            this.BtnGiganUpDowndSearch.Text = "조회";
+            this.BtnGiganUpDowndSearch.UseVisualStyleBackColor = true;
+            this.BtnGiganUpDowndSearch.Click += new System.EventHandler(this.BtnGiganUpDowndSearch_Click);
+            // 
+            // numUpDownRate
+            // 
+            this.numUpDownRate.Location = new System.Drawing.Point(402, 10);
+            this.numUpDownRate.Name = "numUpDownRate";
+            this.numUpDownRate.Size = new System.Drawing.Size(43, 21);
+            this.numUpDownRate.TabIndex = 38;
+            this.numUpDownRate.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -185,15 +214,25 @@
             this.dtpEndDate.Size = new System.Drawing.Size(174, 21);
             this.dtpEndDate.TabIndex = 35;
             // 
-            // dataGridView1
+            // dgvGiganUpDown
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1624, 899);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvGiganUpDown.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGiganUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGiganUpDown.Location = new System.Drawing.Point(0, 0);
+            this.dgvGiganUpDown.Name = "dgvGiganUpDown";
+            this.dgvGiganUpDown.RowTemplate.Height = 23;
+            this.dgvGiganUpDown.Size = new System.Drawing.Size(1624, 899);
+            this.dgvGiganUpDown.TabIndex = 0;
+            // 
+            // ChkOption1
+            // 
+            this.ChkOption1.AutoSize = true;
+            this.ChkOption1.Location = new System.Drawing.Point(532, 13);
+            this.ChkOption1.Name = "ChkOption1";
+            this.ChkOption1.Size = new System.Drawing.Size(84, 16);
+            this.ChkOption1.TabIndex = 40;
+            this.ChkOption1.Text = "상승단위로";
+            this.ChkOption1.UseVisualStyleBackColor = true;
             // 
             // FrmStockList
             // 
@@ -212,7 +251,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDownRate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGiganUpDown)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -231,9 +271,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LOW_PRICE;
         private System.Windows.Forms.DataGridViewTextBoxColumn STOCK_CODE;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvGiganUpDown;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.NumericUpDown numUpDownRate;
+        private System.Windows.Forms.Button BtnGiganUpDowndSearch;
+        private System.Windows.Forms.CheckBox ChkOption1;
     }
 }

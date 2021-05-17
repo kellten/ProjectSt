@@ -15,6 +15,7 @@ using Woom.DataDefine;
 using Woom.DataAccess.OptCaller.Class;
 using Woom.DataAccess.PlugIn;
 using Woom.DataDefine.OptData;
+using SDataAccess;
 
 namespace Woom.Volume.Forms
 {
@@ -143,7 +144,99 @@ namespace Woom.Volume.Forms
         }
         #endregion
 
+        #region 기간별상승종목
+        private void GetOpt10015Data()
+        {
+            SDataAccess.KiwoomQuery kiwoomQuery = new KiwoomQuery();
+            DataTable dt = new DataTable();
 
+            ClsColumnSets oBasicDataType = new ClsColumnSets();
 
+            RemoveGridViewRow(dgvGiganUpDown);
+            RemoveGridViewColumn(dgvGiganUpDown);
+
+            if (ChkOption1.Checked == true)
+            {
+                 dt = kiwoomQuery.p_Opt10015DateQuery(query: "2", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
+            }
+            else
+            {
+                 dt = kiwoomQuery.p_Opt10015DateQuery(query: "1", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
+            }
+
+            if (dt.Rows.Count < 1)
+            {
+                dt = null;
+            }
+            else
+            {
+
+                int row = 0;
+
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
+                    System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
+                    dgvColumn.CellTemplate = cell;
+                    dgvColumn.HeaderText = oBasicDataType.ColumnToKoreanOpt10015(dc.ColumnName.ToString()).ToString();
+                    dgvColumn.Name = dc.ColumnName.ToString();
+
+                    dgvGiganUpDown.Columns.Add(dgvColumn);
+                }
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    dgvGiganUpDown.Rows.Add();
+
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dr[dc.ColumnName.ToString()].ToString();
+                    }
+
+                    row = row + 1;
+                }
+            
+            }
+            
+        }
+
+        #endregion
+
+        private void RemoveGridViewRow(DataGridView dgv)
+        {
+            do
+            {
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    try
+                    {
+                        dgv.Rows.Remove(row);
+                    }
+                    catch (Exception) { }
+                }
+            } while (dgv.Rows.Count > 1);
+
+        }
+
+        private void RemoveGridViewColumn(DataGridView dgv)
+        {
+            do
+            {
+                foreach (DataGridViewColumn column in dgv.Columns)
+                {
+                    try
+                    {
+                        dgv.Columns.Remove(column);
+                    }
+                    catch (Exception) { }
+                }
+            } while (dgv.Columns.Count > 1);
+
+        }
+
+        private void BtnGiganUpDowndSearch_Click(object sender, EventArgs e)
+        {
+            GetOpt10015Data();
+        }
     }
 }
