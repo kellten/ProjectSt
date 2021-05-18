@@ -24,6 +24,7 @@ namespace Woom.DataAccess.PlugIn
         private static string _stockCode10086 = "";
         private static string _stockCode10060 = "";
         private static string _stockCode20068 = "";
+        private static string _kthCode90002 = "";
 
         public static void AddOnReceivedEventHandler()
         {
@@ -42,7 +43,7 @@ namespace Woom.DataAccess.PlugIn
 
         public enum OptType
         {
-            Opt10001, Opt10005, Opt10015, Opt10081, Opt10060, Opt10014, Opt20068, Opt10086
+            Opt10001, Opt10005, Opt10015, Opt10081, Opt10060, Opt10014, Opt20068, Opt10086, Opt90002
 
         }
 
@@ -54,6 +55,7 @@ namespace Woom.DataAccess.PlugIn
         //public static event OnReceivedEventHandler AxKH_10086_OnReceived;
         public static event OnReceivedEventHandler AxKH_10060_OnReceived;
         public static event OnReceivedEventHandler AxKH_20068_OnReceived;
+        public static event OnReceivedEventHandler AxKH_90002_OnReceived;
 
         public static void Opt10001(string stockCode)
         {
@@ -129,7 +131,16 @@ namespace Woom.DataAccess.PlugIn
             ClsAxKH.AxKH.SetInputValue("전체구분", allGb);
             ClsAxKH.AxKH.SetInputValue("종목코드", stockCode);
         }
-
+        /// <summary>
+        /// 테마그룹별요청 
+        /// </summary>
+        /// <param name="dateGb"> 0:전체검색, 1:테마검색, 2:종목검색</param>
+        /// <param name="kthCode">종목코드 = 검색하려는 종목코드</param>
+        public static void Opt90002(string dateGb, string kthCode)
+        {
+            ClsAxKH.AxKH.SetInputValue("날짜구분", dateGb);
+            ClsAxKH.AxKH.SetInputValue("종목코드", kthCode);
+        }
         private static DateTime Delay(int MS)
 
         {
@@ -255,11 +266,16 @@ namespace Woom.DataAccess.PlugIn
                         _stockCode20068 = optCall[3].ToString();
                         Opt20068(optCall[0].ToString(), optCall[1].ToString(), optCall[2].ToString(), optCall[3].ToString());
                         break;
+
+                    case OptType.Opt90002:
+                        _kthCode90002 = "";
+                        _kthCode90002 = optCall[0].ToString();
+                        Opt90002(optCall[0].ToString(), optCall[1].ToString());
+                        break;
                     default:
                         return;
                 }
-             
-                
+                             
                 int  nRet = AxKH.CommRqData(item[0].ToString(), item[1].ToString(), Convert.ToInt32(item[2]), item[3].ToString());
               
 
@@ -623,7 +639,53 @@ namespace Woom.DataAccess.PlugIn
                     }
 
                     break;
+                case "테마그룹별요청":
+                    using (ClsColumnSets oBasicDataType = new ClsColumnSets())
+                    {
+                        foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column90002Index)))
+                        {
+                            int j = 0;
+                            j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(ClsColumnSets.Column90002Index), i));
+                            // _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)i));
+                            dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
+                        }
+                    };
+                    handler = AxKH_90002_OnReceived;
 
+                    if (nCnt == 0)
+                    {
+                        if (handler != null)
+                        {
+                            //_OptStatus.InitOptCallingStatus();
+                            AxKH_90002_OnReceived(_kthCode90002, null, 0);
+                            return;
+                        }
+                    }
+
+                    for (int i = 0; i < nCnt; i++)
+                    {
+                        DataRow dr = dt.NewRow();
+                        for (int intColumName = 0; intColumName < dt.Columns.Count; intColumName++)
+                        {
+                            var type = dt.Columns[intColumName].DataType;
+                            dr[dt.Columns[intColumName].ColumnName.ToString()] = Convert.ChangeType(ClsAxKH.AxKH.GetCommData(e.sTrCode, e.sRQName, i, dt.Columns[intColumName].ColumnName.ToString()).ToString().Trim(), type);
+                        }
+
+                        dt.Rows.Add(dr);
+                    }
+
+                    if (handler != null)
+                    {
+                        if (Convert.ToInt32(e.sPrevNext) != 2)
+                        {
+                            //_OptStatus.InitOptCallingStatus();
+                        }
+
+                        AxKH_90002_OnReceived(_kthCode90002, dt, Convert.ToInt32(e.sPrevNext));
+                        return;
+                    }
+
+                    break;
                 default:
                     return;
             }

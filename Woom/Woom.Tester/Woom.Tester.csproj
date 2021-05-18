@@ -166,6 +166,12 @@
     <Compile Include="Forms\FrmOpt20068Caller.Designer.cs">
       <DependentUpon>FrmOpt20068Caller.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOpt90002Caller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOpt90002Caller.Designer.cs">
+      <DependentUpon>FrmOpt90002Caller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmOptCallerTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOpt20068Caller.resx">
       <DependentUpon>FrmOpt20068Caller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOpt90002Caller.resx">
+      <DependentUpon>FrmOpt90002Caller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOptCallerTest.resx">
       <DependentUpon>FrmOptCallerTest.cs</DependentUpon>

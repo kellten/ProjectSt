@@ -170,8 +170,9 @@ namespace Woom.Volume.Forms
             }
             else
             {
-
                 int row = 0;
+
+                dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
 
                 foreach (DataColumn dc in dt.Columns)
                 {
@@ -183,21 +184,23 @@ namespace Woom.Volume.Forms
 
                     dgvGiganUpDown.Columns.Add(dgvColumn);
                 }
-
+               
                 foreach (DataRow dr in dt.Rows)
                 {
                     dgvGiganUpDown.Rows.Add();
 
                     foreach (DataColumn dc in dt.Columns)
                     {
+                        if (dc.ColumnName.ToString() == "STOCK_CODE")
+                        {
+                            dgvGiganUpDown.Rows[row].Cells["STOCK_NAME"].Value = ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString());
+                        }
                         dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dr[dc.ColumnName.ToString()].ToString();
                     }
 
                     row = row + 1;
                 }
-            
             }
-            
         }
 
         #endregion

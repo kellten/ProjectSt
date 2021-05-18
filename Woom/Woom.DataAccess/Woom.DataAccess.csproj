@@ -96,6 +96,8 @@
     <Compile Include="OptCaller\Class\ClsOpt10081.cs" />
     <Compile Include="OptCaller\Class\ClsOpt10086.cs" />
     <Compile Include="OptCaller\Class\ClsOpt20068.cs" />
+    <Compile Include="OptCaller\Class\ClsOpt90001.cs" />
+    <Compile Include="OptCaller\Class\ClsOpt90002.cs" />
     <Compile Include="OptCaller\Class\ClsOptCallerMain.cs" />
     <Compile Include="OptCaller\Class\ClsOptStatus.cs" />
     <Compile Include="OptCaller\InterFace\IOptCaller.cs" />

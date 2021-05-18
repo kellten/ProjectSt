@@ -63,6 +63,11 @@ namespace Woom.DataDefine.OptData
             일자, 대차거래체결주수, 대차거래상환주수, 대차거래증감, 잔고주수, 잔고금액
         }
 
+        public enum Column90002Index
+        {
+            종목코드, 종목명
+        }
+
         public enum ColumnNameIndex
         {
             일자, 현재가, 대비기호, 전일대비, 등락율, 누적거래대금, 개인투자자,
