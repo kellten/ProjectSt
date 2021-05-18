@@ -269,7 +269,7 @@ namespace Woom.DataAccess.PlugIn
 
                     case OptType.Opt90002:
                         _kthCode90002 = "";
-                        _kthCode90002 = optCall[0].ToString();
+                        _kthCode90002 = optCall[1].ToString();
                         Opt90002(optCall[0].ToString(), optCall[1].ToString());
                         break;
                     default:

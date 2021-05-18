@@ -10,9 +10,9 @@ using Woom.DataDefine.OptData;
 using Woom.DataAccess.PlugIn;
 using static Woom.DataAccess.PlugIn.ClsAxKH;
 
-namespace Woom.DataAccess.OptCaller.Class
+namespace Woom.DataAccess.OptCaller.Class 
 {
-    public class ClsOpt90002
+    public class ClsOpt90002 : IDisposable, IOptCaller
     {
         #region IOptCaller 구현
         private const string ConScreenNoFooter = "02";
@@ -47,17 +47,10 @@ namespace Woom.DataAccess.OptCaller.Class
         }
         #endregion
 
-        #region Event
-
-        public delegate void OnReceivedEventHandler(string stockCode, DataTable dt, int sPreNext);
-
-        public event OnReceivedEventHandler Opt90002_OnReceived;
-
-        #endregion Event
 
         #region Const
 
-        private const string RqName = "테마그룹별요청 ";
+        private const string RqName = "테마그룹별요청";
         private const string OptName = "opt90002";
 
         #endregion Const
@@ -72,12 +65,13 @@ namespace Woom.DataAccess.OptCaller.Class
 
         #endregion 전역변수
 
-        public void JustRequest(string stock, string StockName, int nPrevNext)
+        public void JustRequest(string dateGb, string kthCode, int nPrevNext)
         {
 
             ArrayList SetInputValue = new ArrayList();
 
-            SetInputValue.Add(StockCode);
+            SetInputValue.Add(dateGb);
+            SetInputValue.Add(kthCode);
 
             SendCommRqData(PlugIn.ClsAxKH.OptType.Opt90002, SetInputValue, RqName, OptName, nPrevNext, _screenNo);
         }

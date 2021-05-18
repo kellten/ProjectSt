@@ -99,5 +99,11 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Tester.Forms.FrmOpt10015Caller();
             ShowChildForm(oform);
         }
+
+        private void opt90002ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmOpt90002Caller();
+            ShowChildForm(oform);
+        }
     }
 }

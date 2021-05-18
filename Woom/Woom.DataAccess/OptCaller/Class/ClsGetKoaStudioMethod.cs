@@ -40,6 +40,7 @@ namespace Woom.DataAccess.OptCaller.Class
             string[] ArrayStockCode;
 
             Dt.Columns.Add("STOCK_CODE", Type.GetType("System.String"));
+            Dt.Columns.Add("STOCK_NAME", Type.GetType("System.String"));
 
             if (stockGb != "999")
             {
@@ -56,6 +57,7 @@ namespace Woom.DataAccess.OptCaller.Class
                     {
                         dr = Dt.NewRow();
                         dr["STOCK_CODE"] = stockCode;
+                        dr["STOCK_NAME"] = ClsAxKH.GetMasterCodeName(stockCode);
 
                         Dt.Rows.Add(dr);
                     }

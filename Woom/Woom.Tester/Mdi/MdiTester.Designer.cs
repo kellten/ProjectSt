@@ -38,13 +38,14 @@
             this.opt10081ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt20068ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt10005ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.일별거래상세요청Opt10015ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종목관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.마켓분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbFrmStockList = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.일별거래상세요청Opt10015ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opt90002ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -86,7 +87,8 @@
             this.opt10081ToolStripMenuItem,
             this.opt20068ToolStripMenuItem,
             this.opt10005ToolStripMenuItem,
-            this.일별거래상세요청Opt10015ToolStripMenuItem});
+            this.일별거래상세요청Opt10015ToolStripMenuItem,
+            this.opt90002ToolStripMenuItem});
             this.optTestToolStripMenuItem.Name = "optTestToolStripMenuItem";
             this.optTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optTestToolStripMenuItem.Text = "OptTest";
@@ -94,37 +96,44 @@
             // mnuItem10059
             // 
             this.mnuItem10059.Name = "mnuItem10059";
-            this.mnuItem10059.Size = new System.Drawing.Size(233, 22);
-            this.mnuItem10059.Text = "Opt10059";
+            this.mnuItem10059.Size = new System.Drawing.Size(293, 22);
+            this.mnuItem10059.Text = "종목별투자자기관별요청(Opt10059)";
             this.mnuItem10059.Click += new System.EventHandler(this.mnuItem10059_Click);
             // 
             // opt10069ToolStripMenuItem
             // 
             this.opt10069ToolStripMenuItem.Name = "opt10069ToolStripMenuItem";
-            this.opt10069ToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.opt10069ToolStripMenuItem.Text = "Opt10069";
+            this.opt10069ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt10069ToolStripMenuItem.Text = "종목별투자자기관별차트요청(Opt10060)";
             this.opt10069ToolStripMenuItem.Click += new System.EventHandler(this.opt10069ToolStripMenuItem_Click);
             // 
             // opt10081ToolStripMenuItem
             // 
             this.opt10081ToolStripMenuItem.Name = "opt10081ToolStripMenuItem";
-            this.opt10081ToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.opt10081ToolStripMenuItem.Text = "Opt10081";
+            this.opt10081ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt10081ToolStripMenuItem.Text = "주식일봉차트조회요청(Opt10081)";
             this.opt10081ToolStripMenuItem.Click += new System.EventHandler(this.opt10081ToolStripMenuItem_Click);
             // 
             // opt20068ToolStripMenuItem
             // 
             this.opt20068ToolStripMenuItem.Name = "opt20068ToolStripMenuItem";
-            this.opt20068ToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.opt20068ToolStripMenuItem.Text = "Opt20068";
+            this.opt20068ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt20068ToolStripMenuItem.Text = "대차거래추이요청(종목별)(Opt20068)";
             this.opt20068ToolStripMenuItem.Click += new System.EventHandler(this.opt20068ToolStripMenuItem_Click);
             // 
             // opt10005ToolStripMenuItem
             // 
             this.opt10005ToolStripMenuItem.Name = "opt10005ToolStripMenuItem";
-            this.opt10005ToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.opt10005ToolStripMenuItem.Text = "Opt10005";
+            this.opt10005ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt10005ToolStripMenuItem.Text = "주식일주월시분요청(Opt10005)";
             this.opt10005ToolStripMenuItem.Click += new System.EventHandler(this.opt10005ToolStripMenuItem_Click);
+            // 
+            // 일별거래상세요청Opt10015ToolStripMenuItem
+            // 
+            this.일별거래상세요청Opt10015ToolStripMenuItem.Name = "일별거래상세요청Opt10015ToolStripMenuItem";
+            this.일별거래상세요청Opt10015ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.일별거래상세요청Opt10015ToolStripMenuItem.Text = "일별거래상세요청(Opt10015)";
+            this.일별거래상세요청Opt10015ToolStripMenuItem.Click += new System.EventHandler(this.일별거래상세요청Opt10015ToolStripMenuItem_Click);
             // 
             // 종목관리ToolStripMenuItem
             // 
@@ -144,7 +153,7 @@
             // tsbFrmStockList
             // 
             this.tsbFrmStockList.Name = "tsbFrmStockList";
-            this.tsbFrmStockList.Size = new System.Drawing.Size(162, 22);
+            this.tsbFrmStockList.Size = new System.Drawing.Size(180, 22);
             this.tsbFrmStockList.Text = "종목별 특이사항";
             this.tsbFrmStockList.Click += new System.EventHandler(this.tsbFrmStockList_Click);
             // 
@@ -165,12 +174,12 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(31, 17);
             this.toolStripStatusLabel.Text = "상태";
             // 
-            // 일별거래상세요청Opt10015ToolStripMenuItem
+            // opt90002ToolStripMenuItem
             // 
-            this.일별거래상세요청Opt10015ToolStripMenuItem.Name = "일별거래상세요청Opt10015ToolStripMenuItem";
-            this.일별거래상세요청Opt10015ToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-            this.일별거래상세요청Opt10015ToolStripMenuItem.Text = "일별거래상세요청(Opt10015)";
-            this.일별거래상세요청Opt10015ToolStripMenuItem.Click += new System.EventHandler(this.일별거래상세요청Opt10015ToolStripMenuItem_Click);
+            this.opt90002ToolStripMenuItem.Name = "opt90002ToolStripMenuItem";
+            this.opt90002ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt90002ToolStripMenuItem.Text = "테마구성종목요청(Opt90002)";
+            this.opt90002ToolStripMenuItem.Click += new System.EventHandler(this.opt90002ToolStripMenuItem_Click);
             // 
             // MdiTester
             // 
@@ -210,6 +219,7 @@
         private System.Windows.Forms.ToolStripMenuItem 종목관리ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opt10005ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 일별거래상세요청Opt10015ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem opt90002ToolStripMenuItem;
     }
 }
 
