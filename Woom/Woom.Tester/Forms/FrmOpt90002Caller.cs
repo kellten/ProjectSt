@@ -115,7 +115,7 @@ namespace Woom.Tester.Forms
 
         private string GetKthCode()
         {
-            string reValue;
+            string reValue; 
 
             if (_StockQueue.Count == 0)
             {

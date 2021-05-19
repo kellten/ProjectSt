@@ -278,3 +278,6 @@ CybosDa/
 
 #file
 *.zip
+Woom/Lib/AxInterop.KHOpenAPILib.dll
+Woom/Lib/AxInterop.KHOpenAPILib.dll
+*.dll
