@@ -105,5 +105,11 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Tester.Forms.FrmOpt90002Caller();
             ShowChildForm(oform);
         }
+
+        private void 엑셀가져오기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmCsvToDataGridView();
+            ShowChildForm(oform);
+        }
     }
 }

@@ -108,6 +108,12 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="SDataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\SDataAccess\Lib\SDataAccess.dll</HintPath>
@@ -124,6 +130,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FrmCsvToDataGridView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmCsvToDataGridView.Designer.cs">
+      <DependentUpon>FrmCsvToDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmExcelToDataGridView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmExcelToDataGridView.Designer.cs">
+      <DependentUpon>FrmExcelToDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmGetStockCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +207,12 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FrmCsvToDataGridView.resx">
+      <DependentUpon>FrmCsvToDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmExcelToDataGridView.resx">
+      <DependentUpon>FrmExcelToDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmGetStockCode.resx">
       <DependentUpon>FrmGetStockCode.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +245,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>

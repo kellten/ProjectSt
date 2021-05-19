@@ -175,7 +175,6 @@ namespace Woom.Tester.Forms
                 _FirstDate = "";
             }
 
-            _seqNo = _seqNo + 1;
 
             return reValue;
         }

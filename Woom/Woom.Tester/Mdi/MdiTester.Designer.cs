@@ -39,13 +39,14 @@
             this.opt20068ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt10005ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.일별거래상세요청Opt10015ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opt90002ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종목관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.마켓분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbFrmStockList = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.opt90002ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.엑셀가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +68,8 @@
             this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbConnectionInfo,
             this.optTestToolStripMenuItem,
-            this.종목관리ToolStripMenuItem});
+            this.종목관리ToolStripMenuItem,
+            this.엑셀가져오기ToolStripMenuItem});
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.testToolStripMenuItem.Text = "Test";
@@ -135,6 +137,13 @@
             this.일별거래상세요청Opt10015ToolStripMenuItem.Text = "일별거래상세요청(Opt10015)";
             this.일별거래상세요청Opt10015ToolStripMenuItem.Click += new System.EventHandler(this.일별거래상세요청Opt10015ToolStripMenuItem_Click);
             // 
+            // opt90002ToolStripMenuItem
+            // 
+            this.opt90002ToolStripMenuItem.Name = "opt90002ToolStripMenuItem";
+            this.opt90002ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt90002ToolStripMenuItem.Text = "테마구성종목요청(Opt90002)";
+            this.opt90002ToolStripMenuItem.Click += new System.EventHandler(this.opt90002ToolStripMenuItem_Click);
+            // 
             // 종목관리ToolStripMenuItem
             // 
             this.종목관리ToolStripMenuItem.Name = "종목관리ToolStripMenuItem";
@@ -153,7 +162,7 @@
             // tsbFrmStockList
             // 
             this.tsbFrmStockList.Name = "tsbFrmStockList";
-            this.tsbFrmStockList.Size = new System.Drawing.Size(180, 22);
+            this.tsbFrmStockList.Size = new System.Drawing.Size(162, 22);
             this.tsbFrmStockList.Text = "종목별 특이사항";
             this.tsbFrmStockList.Click += new System.EventHandler(this.tsbFrmStockList_Click);
             // 
@@ -174,12 +183,12 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(31, 17);
             this.toolStripStatusLabel.Text = "상태";
             // 
-            // opt90002ToolStripMenuItem
+            // 엑셀가져오기ToolStripMenuItem
             // 
-            this.opt90002ToolStripMenuItem.Name = "opt90002ToolStripMenuItem";
-            this.opt90002ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
-            this.opt90002ToolStripMenuItem.Text = "테마구성종목요청(Opt90002)";
-            this.opt90002ToolStripMenuItem.Click += new System.EventHandler(this.opt90002ToolStripMenuItem_Click);
+            this.엑셀가져오기ToolStripMenuItem.Name = "엑셀가져오기ToolStripMenuItem";
+            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
+            this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
             // 
             // MdiTester
             // 
@@ -220,6 +229,7 @@
         private System.Windows.Forms.ToolStripMenuItem opt10005ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 일별거래상세요청Opt10015ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opt90002ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 엑셀가져오기ToolStripMenuItem;
     }
 }
 
