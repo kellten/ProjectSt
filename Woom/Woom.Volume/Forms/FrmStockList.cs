@@ -34,7 +34,7 @@ namespace Woom.Volume.Forms
             /// 999 - 코스피, 코스닥
             _dt = _clsGetKoaStudioMethod.GetCodeListByMarketCallBackDataTable("0").Copy();
             //TestCode();
-            GetHighestUpRateBySector();
+           // GetHighestUpRateBySector();
 
             clsUtil = new DataDefine.Util.ClsUtil();
 
@@ -149,6 +149,7 @@ namespace Woom.Volume.Forms
         {
             SDataAccess.KiwoomQuery kiwoomQuery = new KiwoomQuery();
             DataTable dt = new DataTable();
+            DataTable dt2 = new DataTable();
 
             ClsColumnSets oBasicDataType = new ClsColumnSets();
 
@@ -164,6 +165,8 @@ namespace Woom.Volume.Forms
                  dt = kiwoomQuery.p_Opt10015DateQuery(query: "1", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
             }
 
+            dt2 = kiwoomQuery.p_Opt10015DateQuery(query: "3",  stockCode: "", stockDate: "", fromDate: "", toDate: "", upDownRate: 0, bln3tier: false).Tables[0].Copy();
+
             if (dt.Rows.Count < 1)
             {
                 dt = null;
@@ -173,6 +176,7 @@ namespace Woom.Volume.Forms
                 int row = 0;
 
                 dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
+                dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
 
                 foreach (DataColumn dc in dt.Columns)
                 {
@@ -198,8 +202,13 @@ namespace Woom.Volume.Forms
                         dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dr[dc.ColumnName.ToString()].ToString();
                     }
 
+                    DataTable dtSt = dt2.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == dr["STOCK_CODE"].ToString().Trim()).CopyToDataTable();
+
+                    dgvGiganUpDown.Rows[row].Cells["TODAY_DAEBI"].Value = clsUtil.StockRate(Math.Abs(Convert.ToInt32(dtSt.Rows[0]["LAST_PRICE"])), Math.Abs(Convert.ToInt32(dr["LAST_PRICE"]))).ToString();
+
                     row = row + 1;
                 }
+
             }
         }
 

@@ -31,6 +31,7 @@
             this.btn10081 = new System.Windows.Forms.Button();
             this.proBar10081 = new System.Windows.Forms.ProgressBar();
             this.lblStockName = new System.Windows.Forms.Label();
+            this.chk100 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btn10081
@@ -59,11 +60,22 @@
             this.lblStockName.TabIndex = 28;
             this.lblStockName.Text = "Opt10060";
             // 
+            // chk100
+            // 
+            this.chk100.AutoSize = true;
+            this.chk100.Location = new System.Drawing.Point(86, 45);
+            this.chk100.Name = "chk100";
+            this.chk100.Size = new System.Drawing.Size(152, 16);
+            this.chk100.TabIndex = 29;
+            this.chk100.Text = "현재일 기준(100거래일)";
+            this.chk100.UseVisualStyleBackColor = true;
+            // 
             // FrmOpt10081Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 67);
+            this.Controls.Add(this.chk100);
             this.Controls.Add(this.lblStockName);
             this.Controls.Add(this.btn10081);
             this.Controls.Add(this.proBar10081);
@@ -79,5 +91,6 @@
         private System.Windows.Forms.Button btn10081;
         private System.Windows.Forms.ProgressBar proBar10081;
         private System.Windows.Forms.Label lblStockName;
+        private System.Windows.Forms.CheckBox chk100;
     }
 }

@@ -15,7 +15,7 @@ namespace Woom.DataDefine.Util
         /// <param name="prevPrice">이전일자가격</param>
         /// <param name="curPrice">현재가 가격</param>
         /// <returns></returns>
-        public double StockRate(int prevPrice, int curPrice)
+        public double StockRate(double prevPrice, double curPrice)
         {
             double varStockRate = 0.00d;
             // 전일가 - 현재가 / 전일가 * 100 * -1

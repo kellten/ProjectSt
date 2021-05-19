@@ -90,7 +90,7 @@ namespace Woom.Tester.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
-            _clsDataAccessUtil.Delay(3000);
+            _clsDataAccessUtil.Delay(3500);
             tcs.SetResult(true);
         }
 
@@ -224,37 +224,11 @@ namespace Woom.Tester.Forms
                 foreach (DataRow dr in dt.Rows)
                 {
                     WriteTextSafe(stockCode + "(일자별상세)" + "[" + dr["일자"].ToString() + "] 작업중");
-                    if (_LastDate == dr["일자"].ToString().Trim())
+
+                    // 최근 거래일 100일을 가져오는걸로 한다면,
+                    if (chk100.Checked == true)
                     {
-                        if (_FirstDate == _FirstStockDate)
-                        {
-                            _opt10015.Dispose();
-
-                            tcs.SetResult(true);
-
-                            OnGetStockCode();
-
-                            return;
-                        }
-                        else
-                        {
-                            tcs.SetResult(true);
-
-                            WaitTime();
-
-                            _opt10015.SetInit(_FormId);
-
-                            //e, string StartDate, string StockName, int nPrevNext
-                            _opt10015.JustRequest(StockCode: stockCode, StartDate: _FirstDate.ToString(), StockName:"",   nPrevNext: 0);
-                            return;
-
-                        }
-                    }
-                    else
-                    {
-                   
                         arrParam.Clear();
-
                         arrParam.Add("@ACTION_GB", "A");
                         arrParam.Add("@STOCK_CODE", stockCode);
                         arrParam.Add("@STOCK_DATE", dr["일자"].ToString());
@@ -283,32 +257,111 @@ namespace Woom.Tester.Forms
                         arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
                         oSql.ExecuteNonQuery("p_Opt10015Add", CommandType.StoredProcedure, arrParam);
-
-                        _LastDate = dr["일자"].ToString();
-
-
                     }
+                    else
+                    {
+                        if (_LastDate == dr["일자"].ToString().Trim())
+                        {
+                            if (_FirstDate == _FirstStockDate)
+                            {
+                                _opt10015.Dispose();
+
+                                tcs.SetResult(true);
+
+                                OnGetStockCode();
+
+                                return;
+                            }
+                            else
+                            {
+                                tcs.SetResult(true);
+
+                                WaitTime();
+
+                                _opt10015.SetInit(_FormId);
+
+                                //e, string StartDate, string StockName, int nPrevNext
+                                _opt10015.JustRequest(StockCode: stockCode, StartDate: _FirstDate.ToString(), StockName: "", nPrevNext: 0);
+                                return;
+
+                            }
+                        }
+                        else
+                        {
+
+                            arrParam.Clear();
+
+                            arrParam.Add("@ACTION_GB", "A");
+                            arrParam.Add("@STOCK_CODE", stockCode);
+                            arrParam.Add("@STOCK_DATE", dr["일자"].ToString());
+                            arrParam.Add("@LAST_PRICE", dr["종가"]);
+                            arrParam.Add("@OAGO_DAEBI_SYMBOL", dr["전일대비기호"]);
+                            arrParam.Add("@OAGO_DAEBI", dr["전일대비"]);
+                            arrParam.Add("@UPDOWN_RATE", dr["등락율"]);
+                            arrParam.Add("@TRADE_QTY", dr["거래량"]);
+                            arrParam.Add("@TRADE_DAEGUM", dr["거래대금"]);
+                            arrParam.Add("@BETRADE_QTY", dr["장전거래량"]);
+                            arrParam.Add("@BETRADE_BIJUNG", dr["장전거래비중"]);
+                            arrParam.Add("@INTRADE_QTY", dr["장중거래량"]);
+                            arrParam.Add("@INTRADE_BIJUNG", dr["장중거래비중"]);
+                            arrParam.Add("@AFTRADE_QTY", dr["장후거래량"]);
+                            arrParam.Add("@AFTRADE_BIJUNG", dr["장후거래비중"]);
+                            arrParam.Add("@SUM3", dr["합계3"]);
+                            arrParam.Add("@GITRADE_QTY", dr["기간중거래량"]);
+                            arrParam.Add("@BETRADE_DAEGUM", dr["장전거래대금"]);
+                            arrParam.Add("@BETRADE_DBIJUNG", dr["장전거래대금비중"]);
+                            arrParam.Add("@INTRADE_DAEGUM", dr["장중거래대금"]);
+                            arrParam.Add("@INTRADE_DBIJUNG", dr["장중거래대금비중"]);
+                            arrParam.Add("@AFTRADE_DAEGUM", dr["장후거래대금"]);
+                            arrParam.Add("@AFTRADE_DBIJUNG", dr["장후거래대금비중"]);
+                            arrParam.Add("@DEUNG_DATE", "");
+                            arrParam.Add("@DEUNG_TIME", "");
+                            arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
+
+                            oSql.ExecuteNonQuery("p_Opt10015Add", CommandType.StoredProcedure, arrParam);
+
+                            _LastDate = dr["일자"].ToString();
+
+
+                        }
+                    }
+                    
                 }
             }
-            if (sPreNext == 2)
-            {
-                int minDate = Convert.ToInt32(dt.Compute("min([일자])", string.Empty));
 
-                tcs.SetResult(true);
-
-                WaitTime();
-
-                _opt10015.SetInit(_FormId);
-                _opt10015.JustRequest(StockCode: stockCode, StartDate: minDate.ToString(), StockName: "", nPrevNext: 2);
-
-            }
-            else
+            // 최근 거래일 100일을 가져오는걸로 한다면
+            if (chk100.Checked == true)
             {
                 _opt10015.Dispose();
 
                 tcs.SetResult(true);
 
                 OnGetStockCode();
+
+            }
+            else
+            {
+                if (sPreNext == 2)
+                {
+                    int minDate = Convert.ToInt32(dt.Compute("min([일자])", string.Empty));
+
+                    tcs.SetResult(true);
+
+                    WaitTime();
+
+                    _opt10015.SetInit(_FormId);
+                    _opt10015.JustRequest(StockCode: stockCode, StartDate: minDate.ToString(), StockName: "", nPrevNext: 2);
+
+                }
+                else
+                {
+                    _opt10015.Dispose();
+
+                    tcs.SetResult(true);
+
+                    OnGetStockCode();
+
+                }
             }
 
             
