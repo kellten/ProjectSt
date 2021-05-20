@@ -90,7 +90,7 @@ namespace Woom.Tester.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
-            _clsDataAccessUtil.Delay(3500);
+            _clsDataAccessUtil.Delay(3600);
             tcs.SetResult(true);
         }
 
@@ -144,7 +144,6 @@ namespace Woom.Tester.Forms
             }
         }
 
-        private string _MaxStockDate10015 = "";
 
         private string GetStockCode()
         {
