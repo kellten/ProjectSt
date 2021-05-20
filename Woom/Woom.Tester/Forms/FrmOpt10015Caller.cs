@@ -12,7 +12,7 @@ namespace Woom.Tester.Forms
 {
     public partial class FrmOpt10015Caller : Form
     {
-        public FrmOpt10015Caller()
+        public FrmOpt10015Caller(DataTable dt)
         {
  
             InitializeComponent();
@@ -21,14 +21,28 @@ namespace Woom.Tester.Forms
 
             ClsAxKH.AxKH_10015_OnReceived += new ClsAxKH.OnReceivedEventHandler(Opt10015_OnReceived);
 
-            Func<DataTable> funcGetStockData = () =>
+            if (dt == null)
             {
-                RichQuery oRichQuery = new RichQuery();
-                return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
-            };
+                Func<DataTable> funcGetStockData = () =>
+                {
+                    RichQuery oRichQuery = new RichQuery();
+                    return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+                };
 
-            _dtStockCode = funcGetStockData();
+                _dtStockCode = funcGetStockData();
+            }
+            else
+            {
+                Func<DataTable> funcGetStockData = () =>
+                {
+                    RichQuery oRichQuery = new RichQuery();
+                    return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+                };
 
+                _dtStockCode = dt.Copy();
+                dt = null;
+            }
+                     
             foreach (DataRow dr in _dtStockCode.Rows)
             {
                 if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
@@ -155,8 +169,6 @@ namespace Woom.Tester.Forms
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();
-
-            _MaxStockDate10015 = "";
 
             KiwoomQuery kiwoomQuery = new KiwoomQuery();
             DataTable dt = new DataTable();

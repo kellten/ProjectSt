@@ -40,13 +40,13 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ChkOption1 = new System.Windows.Forms.CheckBox();
             this.BtnGiganUpDowndSearch = new System.Windows.Forms.Button();
             this.numUpDownRate = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.ChkOption1 = new System.Windows.Forms.CheckBox();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -169,6 +169,18 @@
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
+            // ChkOption1
+            // 
+            this.ChkOption1.AutoSize = true;
+            this.ChkOption1.Checked = true;
+            this.ChkOption1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkOption1.Location = new System.Drawing.Point(532, 13);
+            this.ChkOption1.Name = "ChkOption1";
+            this.ChkOption1.Size = new System.Drawing.Size(84, 16);
+            this.ChkOption1.TabIndex = 40;
+            this.ChkOption1.Text = "상승단위로";
+            this.ChkOption1.UseVisualStyleBackColor = true;
+            // 
             // BtnGiganUpDowndSearch
             // 
             this.BtnGiganUpDowndSearch.Location = new System.Drawing.Point(451, 9);
@@ -223,16 +235,6 @@
             this.dgvGiganUpDown.RowTemplate.Height = 23;
             this.dgvGiganUpDown.Size = new System.Drawing.Size(1624, 899);
             this.dgvGiganUpDown.TabIndex = 0;
-            // 
-            // ChkOption1
-            // 
-            this.ChkOption1.AutoSize = true;
-            this.ChkOption1.Location = new System.Drawing.Point(532, 13);
-            this.ChkOption1.Name = "ChkOption1";
-            this.ChkOption1.Size = new System.Drawing.Size(84, 16);
-            this.ChkOption1.TabIndex = 40;
-            this.ChkOption1.Text = "상승단위로";
-            this.ChkOption1.UseVisualStyleBackColor = true;
             // 
             // FrmStockList
             // 

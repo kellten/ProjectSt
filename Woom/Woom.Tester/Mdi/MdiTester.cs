@@ -96,7 +96,7 @@ namespace Woom.Tester.Mdi
 
         private void 일별거래상세요청Opt10015ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form oform = new Woom.Tester.Forms.FrmOpt10015Caller();
+            Form oform = new Woom.Tester.Forms.FrmOpt10015Caller(null);
             ShowChildForm(oform);
         }
 
