@@ -150,11 +150,19 @@ namespace Woom.Volume.Forms
             SDataAccess.KiwoomQuery kiwoomQuery = new KiwoomQuery();
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
+            DataTable dt3 = new DataTable();
 
             ClsColumnSets oBasicDataType = new ClsColumnSets();
 
             RemoveGridViewRow(dgvGiganUpDown);
             RemoveGridViewColumn(dgvGiganUpDown);
+
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+            if (tcs == null || tcs.Task.IsCompleted)
+            {
+                return;
+            }
 
             if (ChkOption1.Checked == true)
             {
@@ -174,7 +182,7 @@ namespace Woom.Volume.Forms
             else
             {
                 int row = 0;
-
+                dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
                 dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
                 dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
 
@@ -206,8 +214,39 @@ namespace Woom.Volume.Forms
 
                     dgvGiganUpDown.Rows[row].Cells["TODAY_DAEBI"].Value = clsUtil.StockRate(Math.Abs(Convert.ToInt32(dtSt.Rows[0]["LAST_PRICE"])), Math.Abs(Convert.ToInt32(dr["LAST_PRICE"]))).ToString();
 
+                    dt3 = kiwoomQuery.p_KIFSTQuery(query: "1", kifgpCode: "", stockCode: dr["STOCK_CODE"].ToString().Trim(), bln3tier: false).Tables[0].Copy();
+
+                    if (dt3 != null)
+                    {
+
+                        string kifgp_name = "";
+
+                        foreach (DataRow dr2th in dt3.Rows)
+                        {
+                            if (kifgp_name == "")
+                            {
+                                kifgp_name =dr2th["KIFGP_NAME"].ToString().Trim();
+                            }
+                            else
+                            {
+                                kifgp_name = kifgp_name + "," + dr2th["KIFGP_NAME"].ToString().Trim();
+                            }
+                        }
+
+                        dgvGiganUpDown.Rows[row].Cells["KIFGP_NAME"].Value = kifgp_name;
+                    }
+                    else
+                    {
+                        dgvGiganUpDown.Rows[row].Cells["KIFGP_NAME"].Value = "";
+
+                    }
+
+                    dt3 = null;
+
                     row = row + 1;
                 }
+
+                tcs.SetResult(true);
 
             }
         }
@@ -250,5 +289,7 @@ namespace Woom.Volume.Forms
         {
             GetOpt10015Data();
         }
+
+        
     }
 }

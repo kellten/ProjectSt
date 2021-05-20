@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data;
+using System.ComponentModel;
 
 namespace Woom.DataDefine.Util
 {
@@ -145,6 +148,98 @@ namespace Woom.DataDefine.Util
             return sReturn;
         }
 
+        /// <summary>
+        /// Datagridview를 Datatable로 변환(https://www.codeproject.com/Questions/649440/How-can-I-get-DataTable-from-DataGridView)
+        /// </summary>
+        /// <param name="_DataGridView"></param>
+        /// <returns></returns>
+        public static DataTable GetDataGridViewAsDataTable(DataGridView _DataGridView)
+        {
+            try
+            {
+                if (_DataGridView.ColumnCount == 0) return null;
+                DataTable dtSource = new DataTable();
+                //////create columns
+                foreach (DataGridViewColumn col in _DataGridView.Columns)
+                {
+                    if (col.ValueType == null)
+                        dtSource.Columns.Add(col.Name, typeof(string));
+                    else
+                        dtSource.Columns.Add(col.Name, col.ValueType);
+                    dtSource.Columns[col.Name].Caption = col.HeaderText;
+                }
+                ///////insert row data
+                foreach (DataGridViewRow row in _DataGridView.Rows)
+                {
+                    DataRow drNewRow = dtSource.NewRow();
+                    foreach (DataColumn col in dtSource.Columns)
+                    {
+                        drNewRow[col.ColumnName] = row.Cells[col.ColumnName].Value;
+                    }
+                    dtSource.Rows.Add(drNewRow);
+                }
+                return dtSource;
+            }
+            catch { return null; }
+        }
 
+        /// <summary>
+        /// Datagridview를 Datatable로 변환(https://www.codeproject.com/Questions/649440/How-can-I-get-DataTable-from-DataGridView)
+        /// </summary>
+        /// <param name="_DataGridView"></param>
+        /// <returns></returns>
+        public static DataTable GetDataGridViewAsDataTableColumName(DataGridView _DataGridView)
+        {
+            try
+            {
+                if (_DataGridView.ColumnCount == 0) return null;
+                DataTable dtSource = new DataTable();
+                //////create columns
+                foreach (DataGridViewColumn col in _DataGridView.Columns)
+                {
+                    if (col.ValueType == null)
+                        dtSource.Columns.Add(col.HeaderText, typeof(string));
+                    else
+                        dtSource.Columns.Add(col.HeaderText, col.ValueType);
+                    dtSource.Columns[col.HeaderText].Caption = col.Name.ToString();
+                }
+                ///////insert row data
+                foreach (DataGridViewRow row in _DataGridView.Rows)
+                {
+                    DataRow drNewRow = dtSource.NewRow();
+                    foreach (DataColumn col in dtSource.Columns)
+                    {
+                        drNewRow[col.ColumnName] = row.Cells[col.Caption].Value;
+                    }
+                    dtSource.Rows.Add(drNewRow);
+                }
+                return dtSource;
+            }
+            catch { return null; }
+        }
+        /// <summary>
+        /// Datagridview를 Datatable로 변환(https://www.codeproject.com/Questions/649440/How-can-I-get-DataTable-from-DataGridView)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public static DataTable ToDataTable<T>(IList<T> list)
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+            object[] values = new object[props.Count];
+            foreach (T item in list)
+            {
+                for (int i = 0; i < values.Length; i++)
+                    values[i] = props[i].GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(values);
+            }
+            return table;
+        }
     }
 }

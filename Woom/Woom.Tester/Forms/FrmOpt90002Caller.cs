@@ -185,8 +185,6 @@ namespace Woom.Tester.Forms
                         oSql.ExecuteNonQuery("p_KthstAdd", CommandType.StoredProcedure, arrParam);
 
                         WriteTextSafe("(" + stockCode + ")" + dr["종목코드"].ToString().Trim());
-
-
                 }
             }
             
@@ -195,8 +193,6 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 OnGetKthCode();
-            
-
 
         }
         private void btn90002_Click(object sender, EventArgs e)
