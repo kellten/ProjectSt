@@ -156,7 +156,7 @@ namespace Woom.Tester.Forms
             }
             reValue = _StockQueue.Dequeue().ToString();
 
-            _MaxStockDate10015 = "";
+            //_MaxStockDate10015 = "";
 
             KiwoomQuery kiwoomQuery = new KiwoomQuery();
             DataTable dt = new DataTable();
