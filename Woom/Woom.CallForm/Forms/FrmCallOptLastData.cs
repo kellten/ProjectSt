@@ -111,11 +111,11 @@ namespace Woom.CallForm.Forms
             string reDate = "";
             ClsUtil clsUtil = new ClsUtil();
 
-            reDate = clsUtil.Mid(_stdDate, 1, 4) + "-" + clsUtil.Mid(_stdDate, 5, 2) + clsUtil.Mid(_stdDate, 7, 2);
+            reDate = clsUtil.Mid(_stdDate, 1, 4) + "-" + clsUtil.Mid(_stdDate, 5, 2) + "-" + clsUtil.Mid(_stdDate, 7, 2);
 
             DateTime dtDate = Convert.ToDateTime(reDate);
 
-            _minDate = dtDate.AddDays(Convert.ToInt32(DayOfWeek.Monday) - Convert.ToInt32(dtDate.DayOfWeek)).ToString("yyyyMMdd");
+            _minDate = dtDate.AddMonths(-3).ToString("yyyyMMdd");
 
             proBar10015.Value = _StockQueue.Count;
             proBar10081.Value = _StockQueue.Count;
@@ -342,7 +342,7 @@ namespace Woom.CallForm.Forms
             {
                 if (dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim() != "" && dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim() != "")
                 {
-                    if (dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim() == _stdDate && Convert.ToInt16(dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim()) < Convert.ToInt16(_minDate))
+                    if (dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim() == _stdDate && Convert.ToInt32(dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim()) < Convert.ToInt32(_minDate))
                     {
                         _NoJob10015 = true;
                     }
@@ -372,9 +372,12 @@ namespace Woom.CallForm.Forms
             {
                 if (dt.Rows[0]["MAESU_PRICE"].ToString().Trim() != "19990101" && dt.Rows[0]["MEADO_PRICE"].ToString().Trim() != "19990101" && dt.Rows[0]["MAESU_QTY"].ToString().Trim() != "19990101" && dt.Rows[0]["MAEDO_QTY"].ToString().Trim() != "19990101")
                 {
-                    if (Convert.ToInt16(dt.Rows[0]["MAESU_PRICE"].ToString().Trim()) < Convert.ToInt16(_minDate) && Convert.ToInt16(dt.Rows[0]["MEADO_PRICE"].ToString().Trim()) < Convert.ToInt16(_minDate) && Convert.ToInt16(dt.Rows[0]["MAESU_QTY"].ToString().Trim()) < Convert.ToInt16(_minDate) && Convert.ToInt16(dt.Rows[0]["MAEDO_QTY"].ToString().Trim()) < Convert.ToInt16(_minDate))
+                    if (Convert.ToInt32(dt.Rows[0]["MAESU_PRICE"].ToString().Trim()) < Convert.ToInt32(_minDate) && Convert.ToInt32(dt.Rows[0]["MEADO_PRICE"].ToString().Trim()) < Convert.ToInt32(_minDate) && Convert.ToInt32(dt.Rows[0]["MAESU_QTY"].ToString().Trim()) < Convert.ToInt32(_minDate) && Convert.ToInt32(dt.Rows[0]["MAEDO_QTY"].ToString().Trim()) < Convert.ToInt32(_minDate))
                     {
-                        _NoJob10060 = true;
+                        //_NoJob10060 = true;
+
+                        _NoJob10060 = false;
+
                     }
                 }
             }
@@ -387,9 +390,9 @@ namespace Woom.CallForm.Forms
             {
                 if (dt.Rows[0]["MAESU_PRICE"].ToString().Trim() != "19990101" && dt.Rows[0]["MEADO_PRICE"].ToString().Trim() != "19990101" && dt.Rows[0]["MAESU_QTY"].ToString().Trim() != "19990101" && dt.Rows[0]["MAEDO_QTY"].ToString().Trim() != "19990101")
                 {
-                    if (Convert.ToInt16(dt.Rows[0]["MAESU_PRICE"].ToString().Trim()) < Convert.ToInt16(_minDate) && Convert.ToInt16(dt.Rows[0]["MEADO_PRICE"].ToString().Trim()) < Convert.ToInt16(_minDate) && Convert.ToInt16(dt.Rows[0]["MAESU_QTY"].ToString().Trim()) < Convert.ToInt16(_minDate) && Convert.ToInt16(dt.Rows[0]["MAEDO_QTY"].ToString().Trim()) < Convert.ToInt16(_minDate))
+                    if (Convert.ToInt32(dt.Rows[0]["MAESU_PRICE"].ToString().Trim()) < Convert.ToInt32(_minDate) && Convert.ToInt32(dt.Rows[0]["MEADO_PRICE"].ToString().Trim()) < Convert.ToInt32(_minDate) && Convert.ToInt32(dt.Rows[0]["MAESU_QTY"].ToString().Trim()) < Convert.ToInt32(_minDate) && Convert.ToInt32(dt.Rows[0]["MAEDO_QTY"].ToString().Trim()) < Convert.ToInt32(_minDate))
                     {
-                        _NoJob10060 = true;
+                      //  _NoJob10060 = true;
                     }
                 }
             }
@@ -402,7 +405,7 @@ namespace Woom.CallForm.Forms
             {
                 if (dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim() != "" && dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim() != "")
                 {
-                    if (dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim() == _stdDate && Convert.ToInt16(dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim()) < Convert.ToInt16(_minDate))
+                    if (dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim() == _stdDate && Convert.ToInt32(dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim()) < Convert.ToInt32(_minDate))
                     {
                         _NoJob10081 = true;
                     }
@@ -513,7 +516,7 @@ namespace Woom.CallForm.Forms
 
             _opt10081.Dispose();
             tcs.SetResult(true);
-            OnGetStockCode();
+            GetOpt10060Caller(Opt10060TransType.PriceMaesu, stockCode: stockCode, MaxDate: "", MinDate: "");
         }
         private void OnReceiveTrData_Opt10060PriceMaeSu(string stockCode, DataTable dt, int sPreNext)
         {

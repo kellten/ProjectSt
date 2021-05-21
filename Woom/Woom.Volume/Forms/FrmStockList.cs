@@ -312,6 +312,51 @@ namespace Woom.Volume.Forms
         {
             DataGridView.HitTestInfo hti = dgvGiganUpDown.HitTest(e.X, e.Y);
 
-        
+        }
+
+        private void BtnGetOpt_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            DataRow dr;
+
+            dt.Columns.Add("STOCK_CODE");
+                      
+
+            for (int i = 0; i < dgvGiganUpDown.RowCount - 1; i++)
+            {
+                if (dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim() == "")
+                {
+                    continue;
+                }
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    var rows = dt.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim());
+
+                    foreach (DataRow dr2th in rows)
+                    {
+                        continue;
+                    }
+                    
+                }
+
+                dr = dt.NewRow();
+
+                dr["STOCK_CODE"] = dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim();
+
+                dt.Rows.Add(dr);
+            }
+
+            if (dt != null)
+            {
+                Form oform = new Woom.CallForm.Forms.FrmCallOptLastData(dt, "");
+                oform.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("작업할 내역이 없습니다.");
+            }
+        }
     }
 }

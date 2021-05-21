@@ -47,7 +47,7 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.btnGetOpt = new System.Windows.Forms.Button();
+            this.BtnGetOpt = new System.Windows.Forms.Button();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -156,7 +156,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.btnGetOpt);
+            this.splitContainer1.Panel1.Controls.Add(this.BtnGetOpt);
             this.splitContainer1.Panel1.Controls.Add(this.ChkOption1);
             this.splitContainer1.Panel1.Controls.Add(this.BtnGiganUpDowndSearch);
             this.splitContainer1.Panel1.Controls.Add(this.numUpDownRate);
@@ -239,15 +239,15 @@
             this.dgvGiganUpDown.TabIndex = 0;
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
-            // btnGetOpt
+            // BtnGetOpt
             // 
-            this.btnGetOpt.Location = new System.Drawing.Point(1498, 6);
-            this.btnGetOpt.Name = "btnGetOpt";
-            this.btnGetOpt.Size = new System.Drawing.Size(123, 23);
-            this.btnGetOpt.TabIndex = 41;
-            this.btnGetOpt.Text = "최신자료 가져오기";
-            this.btnGetOpt.UseVisualStyleBackColor = true;
-            this.btnGetOpt.Click += new System.EventHandler(this.btnGetOpt_Click);
+            this.BtnGetOpt.Location = new System.Drawing.Point(1440, 9);
+            this.BtnGetOpt.Name = "BtnGetOpt";
+            this.BtnGetOpt.Size = new System.Drawing.Size(181, 23);
+            this.BtnGetOpt.TabIndex = 41;
+            this.BtnGetOpt.Text = "최신 Opt내역 가져오기";
+            this.BtnGetOpt.UseVisualStyleBackColor = true;
+            this.BtnGetOpt.Click += new System.EventHandler(this.BtnGetOpt_Click);
             // 
             // FrmStockList
             // 
@@ -293,6 +293,6 @@
         private System.Windows.Forms.NumericUpDown numUpDownRate;
         private System.Windows.Forms.Button BtnGiganUpDowndSearch;
         private System.Windows.Forms.CheckBox ChkOption1;
-        private System.Windows.Forms.Button btnGetOpt;
+        private System.Windows.Forms.Button BtnGetOpt;
     }
 }
