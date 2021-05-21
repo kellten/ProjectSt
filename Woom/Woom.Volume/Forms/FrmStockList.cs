@@ -185,7 +185,7 @@ namespace Woom.Volume.Forms
                 dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
                 dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
                 dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
-
+                
                 foreach (DataColumn dc in dt.Columns)
                 {
                     System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
@@ -212,7 +212,7 @@ namespace Woom.Volume.Forms
 
                     DataTable dtSt = dt2.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == dr["STOCK_CODE"].ToString().Trim()).CopyToDataTable();
 
-                    dgvGiganUpDown.Rows[row].Cells["TODAY_DAEBI"].Value = clsUtil.StockRate(Math.Abs(Convert.ToInt32(dtSt.Rows[0]["LAST_PRICE"])), Math.Abs(Convert.ToInt32(dr["LAST_PRICE"]))).ToString();
+                    dgvGiganUpDown.Rows[row].Cells["TODAY_DAEBI"].Value = clsUtil.StockRate(Math.Abs(Convert.ToInt32(dtSt.Rows[0]["LAST_PRICE"])), Math.Abs(Convert.ToInt32(dr["LAST_PRICE"])));
 
                     dt3 = kiwoomQuery.p_KIFSTQuery(query: "1", kifgpCode: "", stockCode: dr["STOCK_CODE"].ToString().Trim(), bln3tier: false).Tables[0].Copy();
 
@@ -246,13 +246,29 @@ namespace Woom.Volume.Forms
                     row = row + 1;
                 }
 
+                SetDataGridView();
+
                 tcs.SetResult(true);
 
             }
         }
+        #endregion
 
+        #region SetDataGridView
+        private void SetDataGridView()
+        {
+            for (int i = 0; i < dgvGiganUpDown.Rows.Count - 1; i++)
+            {
+                if (dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Value.ToString().Contains("-") == true)
+                {
+
+                    dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Style.ForeColor = Color.Red;
+                }
+
+                
+            } 
         
-
+        }
         #endregion
 
         private void RemoveGridViewRow(DataGridView dgv)
@@ -291,7 +307,17 @@ namespace Woom.Volume.Forms
         {
             GetOpt10015Data();
         }
+        int OldRow = 0;
+        private void dgvGiganUpDown_MouseMove(object sender, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo hti = dgvGiganUpDown.HitTest(e.X, e.Y);
 
-        
+            if (hti.RowIndex >= 0 && hti.RowIndex != OldRow)
+            {
+                dgvGiganUpDown.Rows[OldRow].Selected = false;
+                dgvGiganUpDown.Rows[hti.RowIndex].Selected = true;
+                OldRow = hti.RowIndex;
+            }
+        }
     }
 }

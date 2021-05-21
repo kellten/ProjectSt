@@ -281,3 +281,11 @@ CybosDa/
 Woom/Lib/AxInterop.KHOpenAPILib.dll
 Woom/Lib/AxInterop.KHOpenAPILib.dll
 *.dll
+Woom/Lib/AxInterop.KHOpenAPILib.dll
+Woom/Lib/Interop.KHOpenAPILib.dll
+Woom/Lib/SDataAccess.dll
+Woom/Lib/Woom.DataAccess.dll
+Woom/Lib/Woom.DataDefine.dll
+Woom/Lib/Woom.dll
+Woom/Lib/Woom.Tester.exe
+Woom/Lib/Woom.Volume.dll

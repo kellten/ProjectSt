@@ -235,6 +235,7 @@
             this.dgvGiganUpDown.RowTemplate.Height = 23;
             this.dgvGiganUpDown.Size = new System.Drawing.Size(1624, 899);
             this.dgvGiganUpDown.TabIndex = 0;
+            this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
             // FrmStockList
             // 
