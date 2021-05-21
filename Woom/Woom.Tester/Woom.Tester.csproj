@@ -196,6 +196,12 @@
     <Compile Include="Forms\FrmOptCallerTest.Designer.cs">
       <DependentUpon>FrmOptCallerTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOptDayJobCaller.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOptDayJobCaller.Designer.cs">
+      <DependentUpon>FrmOptDayJobCaller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mdi\MdiTester.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -240,6 +246,9 @@
     <EmbeddedResource Include="Forms\FrmOptCallerTest.resx">
       <DependentUpon>FrmOptCallerTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOptDayJobCaller.resx">
+      <DependentUpon>FrmOptDayJobCaller.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mdi\MdiTester.resx">
       <DependentUpon>MdiTester.cs</DependentUpon>
     </EmbeddedResource>
@@ -264,6 +273,10 @@
     <ProjectReference Include="..\Woom.DataAccess\Woom.DataAccess.csproj">
       <Project>{b69864e4-2cec-4f50-8615-d902e820a4a5}</Project>
       <Name>Woom.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Woom.DataDefine\Woom.DataDefine.csproj">
+      <Project>{ba0aa315-266f-4828-8366-bd100d13a6d1}</Project>
+      <Name>Woom.DataDefine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Woom.Volume\Woom.Volume.csproj">
       <Project>{d3650d5a-b44c-4b7e-86d4-6d061070da43}</Project>

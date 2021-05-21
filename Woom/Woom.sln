@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31229.75
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom", "Woom\Woom.csproj", "{EB08D764-03B6-4250-83BF-5E802E35E4FF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Volume", "Woom.Volume\Woom.Volume.csproj", "{D3650D5A-B44C-4B7E-86D4-6D061070DA43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.CallForm", "Woom.CallForm\Woom.CallForm.csproj", "{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +96,18 @@ Global
 		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|x64.Build.0 = Release|x64
 		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|x86.ActiveCfg = Release|Any CPU
 		{D3650D5A-B44C-4B7E-86D4-6D061070DA43}.Release|x86.Build.0 = Release|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Debug|x64.Build.0 = Debug|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Debug|x86.Build.0 = Debug|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Release|x64.ActiveCfg = Release|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Release|x64.Build.0 = Release|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF263689-BCB2-4752-AE74-8AC4EC4D0C1D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

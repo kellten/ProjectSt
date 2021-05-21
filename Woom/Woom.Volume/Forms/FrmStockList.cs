@@ -312,12 +312,6 @@ namespace Woom.Volume.Forms
         {
             DataGridView.HitTestInfo hti = dgvGiganUpDown.HitTest(e.X, e.Y);
 
-            if (hti.RowIndex >= 0 && hti.RowIndex != OldRow)
-            {
-                dgvGiganUpDown.Rows[OldRow].Selected = false;
-                dgvGiganUpDown.Rows[hti.RowIndex].Selected = true;
-                OldRow = hti.RowIndex;
-            }
-        }
+        
     }
 }
