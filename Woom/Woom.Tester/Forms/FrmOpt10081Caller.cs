@@ -183,6 +183,8 @@ namespace Woom.Tester.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
 
+            string MinDate = "";
+
             if (tcs == null || tcs.Task.IsCompleted)
             {
                 return;
@@ -195,6 +197,7 @@ namespace Woom.Tester.Forms
 
                 foreach (DataRow dr in dt.Rows)
                 {
+                    MinDate = dr["일자"].ToString().Trim();
                     if (_MaxStockDate10081 == dr["일자"].ToString().Trim())
                     {
                         _opt10081.Dispose();
@@ -233,7 +236,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 _opt10081.SetInit(_FormId);
-                _opt10081.Opt10081(StockCode: stockCode, StockName: "", StdDate: _stdDate, ModifyJugaGb: "1",nextCall: true); ;
+                _opt10081.Opt10081(StockCode: stockCode, StockName: "", StdDate: MinDate, ModifyJugaGb: "1",nextCall: true); ;
 
             }
             else
