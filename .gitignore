@@ -275,6 +275,8 @@ ZabisProgram/
 디자인패턴/
 Backup/
 CybosDa/
+Lib/
+Lib_Debug/
 
 #file
 *.zip
