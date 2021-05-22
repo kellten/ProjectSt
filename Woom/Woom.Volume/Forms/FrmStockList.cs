@@ -157,13 +157,6 @@ namespace Woom.Volume.Forms
             RemoveGridViewRow(dgvGiganUpDown);
             RemoveGridViewColumn(dgvGiganUpDown);
 
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-            if (tcs == null || tcs.Task.IsCompleted)
-            {
-                return;
-            }
-
             if (ChkOption1.Checked == true)
             {
                  dt = kiwoomQuery.p_Opt10015DateQuery(query: "2", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
@@ -248,8 +241,6 @@ namespace Woom.Volume.Forms
 
                 SetDataGridView();
 
-                tcs.SetResult(true);
-
             }
         }
         #endregion
@@ -263,11 +254,8 @@ namespace Woom.Volume.Forms
                 {
 
                     dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Style.ForeColor = Color.Red;
-                }
-
-                
+                }                
             } 
-        
         }
         #endregion
 
@@ -305,7 +293,16 @@ namespace Woom.Volume.Forms
 
         private void BtnGiganUpDowndSearch_Click(object sender, EventArgs e)
         {
+
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+            if (tcs == null || tcs.Task.IsCompleted)
+            {
+                return;
+            }
             GetOpt10015Data();
+
+            tcs.SetResult(true);
         }
         int OldRow = 0;
         private void dgvGiganUpDown_MouseMove(object sender, MouseEventArgs e)

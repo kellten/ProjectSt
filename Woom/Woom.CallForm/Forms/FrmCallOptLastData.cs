@@ -416,8 +416,11 @@ namespace Woom.CallForm.Forms
 
             return reValue;
         }
-        private void Opt10015_OnReceived(string stockCode, DataTable dt, int sPreNext)
+        private void Opt10015_OnReceived(string sRQName, DataTable dt, int sPreNext)
         {
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
@@ -474,8 +477,12 @@ namespace Woom.CallForm.Forms
 
             GetOpt10081Caller(stockCode: stockCode);
         }
-        private void Opt10081_OnReceived(string stockCode, DataTable dt, int sPreNext)
+        private void Opt10081_OnReceived(string sRQName, DataTable dt, int sPreNext)
         {
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
@@ -518,10 +525,13 @@ namespace Woom.CallForm.Forms
             tcs.SetResult(true);
             GetOpt10060Caller(Opt10060TransType.PriceMaesu, stockCode: stockCode, MaxDate: "", MinDate: "");
         }
-        private void OnReceiveTrData_Opt10060PriceMaeSu(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060PriceMaeSu(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             DataTable dtDate = new DataTable();
             KiwoomQuery kiwoom = new KiwoomQuery();
@@ -573,10 +583,15 @@ namespace Woom.CallForm.Forms
             GetOpt10060Caller(Opt10060TransType.PriceMaedo, stockCode, "", "");
 
         }
-        private void OnReceiveTrData_Opt10060PriceMaedo(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060PriceMaedo(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
+
 
             DataTable dtDate = new DataTable();
             KiwoomQuery kiwoom = new KiwoomQuery();
@@ -630,10 +645,14 @@ namespace Woom.CallForm.Forms
             GetOpt10060Caller(Opt10060TransType.QtyMaesu, stockCode, "", "");
 
         }
-        private void OnReceiveTrData_Opt10060MaeSu(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060MaeSu(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             DataTable dtDate = new DataTable();
             KiwoomQuery kiwoom = new KiwoomQuery();
@@ -693,10 +712,14 @@ namespace Woom.CallForm.Forms
             GetOpt10060Caller(Opt10060TransType.QtyMaeDo, stockCode, "", "");
 
         }
-        private void OnReceiveTrData_Opt10060Maedo(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060Maedo(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             DataTable dtDate = new DataTable();
             KiwoomQuery kiwoom = new KiwoomQuery();

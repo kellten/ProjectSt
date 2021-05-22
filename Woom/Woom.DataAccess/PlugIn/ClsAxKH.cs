@@ -188,6 +188,47 @@ namespace Woom.DataAccess.PlugIn
         private static int _sendCommRqDataCount = 0;
         private static DateTime firstSendTime;
 
+        public static string RetStockCodeBysRqName(OptType optType, string sRQName)
+        {
+            string[] sRQNameArray = sRQName.ToString().Trim().Split(',');
+            string stockCode = "";
+
+            switch (optType)
+            {
+                case OptType.Opt10001:
+                    stockCode = sRQNameArray[1];
+                    break;
+                case OptType.Opt10005:
+                    stockCode = sRQNameArray[1];
+                    break;
+                case OptType.Opt10015:
+                    stockCode = sRQNameArray[1];
+                    break;
+                case OptType.Opt10081:
+                    stockCode = sRQNameArray[1];
+                    break;
+                case OptType.Opt10060:
+                    stockCode = sRQNameArray[2];
+                    break;
+                case OptType.Opt10014:
+                    stockCode = sRQNameArray[1];
+                    break;
+                case OptType.Opt20068:
+                    stockCode = sRQNameArray[4];
+                    break;
+                case OptType.Opt10086:
+                    stockCode = sRQNameArray[1];
+                    break;
+                case OptType.Opt90002:
+                    stockCode = sRQNameArray[2];
+                    break;
+                default:
+                    break;
+            }
+
+            return stockCode;
+        }
+
         public static void SendCommRqData(OptType optType, ArrayList optCall, string sRQName, string sTrCode, int nPrevNext, string sScreenNo)
         {
             lock (lockObject)
@@ -224,6 +265,8 @@ namespace Woom.DataAccess.PlugIn
 
                 _sendCommRqDataCount = _sendCommRqDataCount + 1;
 
+                string sRQNameSet = "";
+
                 switch (optType)
                 {
                     case OptType.Opt10001:
@@ -232,6 +275,7 @@ namespace Woom.DataAccess.PlugIn
                         //_stockCode10001 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
                         Opt10001(stockCode:optCall[0].ToString());
+
                         break;
                     case OptType.Opt10005:
                         //_stockCode10005 = "";
@@ -254,41 +298,53 @@ namespace Woom.DataAccess.PlugIn
 
                         //_stockCode10081 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
-                        Opt10081(optCall[0].ToString(), optCall[1].ToString(), optCall[2].ToString());
+                        Opt10081(stockCode:optCall[0].ToString(),stdDate: optCall[1].ToString(), modifyJugaGb:optCall[2].ToString());
                         break;
                     case OptType.Opt10086:
                        // _stockCode10086 = "";
 
                         //_stockCode10086 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
-                        Opt10086(optCall[0].ToString(), optCall[1].ToString(), optCall[2].ToString());
+                        Opt10086(stockCode: optCall[0].ToString(), stdDate: optCall[1].ToString(), displayGb:optCall[2].ToString());
                         break;
 
                     case OptType.Opt10060:
                        // _stockCode10060 = "";
                         //_stockCode10060 = optCall[1].ToString();
                         stockCode = optCall[1].ToString();
-                        Opt10060(optCall[0].ToString(), optCall[1].ToString(), optCall[2].ToString(), optCall[3].ToString(), optCall[4].ToString());
+                        Opt10060(startDate:optCall[0].ToString(), stockCode:optCall[1].ToString(), amountQtyGb:optCall[2].ToString(), maeMaeGb:optCall[3].ToString(), unitGb:optCall[4].ToString());
                         break;
 
                     case OptType.Opt20068:
                         //_stockCode20068 = "";
                         //_stockCode20068 = optCall[3].ToString();
                         stockCode = optCall[3].ToString();
-                        Opt20068(optCall[0].ToString(), optCall[1].ToString(), optCall[2].ToString(), optCall[3].ToString());
+                        Opt20068(startDate: optCall[0].ToString(), endDate:optCall[1].ToString(), allGb:optCall[2].ToString(),  stockCode:optCall[3].ToString());
                         break;
 
                     case OptType.Opt90002:
                         //_kthCode90002 = "";
                         //_kthCode90002 = optCall[1].ToString();
                         stockCode = optCall[1].ToString();
-                        Opt90002(optCall[0].ToString(), optCall[1].ToString());
+                        Opt90002(dateGb:optCall[0].ToString(), kthCode:optCall[1].ToString());
                         break;
                     default:
                         return;
                 }
-                             
-                int  nRet = AxKH.CommRqData(stockCode + "_" + item[0].ToString(), item[1].ToString(), Convert.ToInt32(item[2]), item[3].ToString());
+
+                for (int i = 0; i < optCall.Count - 1; i++)
+                {
+                    if (sRQNameSet == "")
+                    {
+                        sRQNameSet = optCall[i].ToString();
+                    }
+                    else
+                    {
+                        sRQNameSet = sRQNameSet + "," + optCall[i].ToString();
+                    }
+                }
+
+                int  nRet = AxKH.CommRqData( sRQName:item[0].ToString() + "," + sRQNameSet, sTrCode: item[1].ToString(), nPrevNext: Convert.ToInt32(item[2]), sScreenNo:item[3].ToString());
               
 
                 if (ClsWoomErrorCode.GetErrorMessage(nRet) == true)
@@ -326,15 +382,15 @@ namespace Woom.DataAccess.PlugIn
             int nCnt = 0;
 
             nCnt = ClsAxKH.AxKH.GetRepeatCnt(e.sTrCode, e.sRQName);
-
-            string sRQName = "";
-            string stockCode = "";
+            
             ClsUtil clsUtil = new ClsUtil();
 
-            stockCode = clsUtil.Mid(e.sRQName, 1, 6);
-            sRQName = e.sRQName.ToString().Replace(stockCode + "_", "");
+            //stockCode = clsUtil.Mid(e.sRQName, 1, 6);
+            //sRQName = e.sRQName.ToString().Replace(stockCode + "_", "");
 
-            switch (sRQName)
+            string[] sRQNameArray = e.sRQName.ToString().Trim().Split(',');
+
+            switch (sRQNameArray[0].ToString().Trim())
             {
                 case "주식기본정보요청":
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
@@ -366,7 +422,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
                         //AxKH_10081_OnReceived(e.sTrCode, dt, Convert.ToInt32(e.sPrevNext));
-                        AxKH_10001_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10001_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -390,7 +446,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_10005_OnReceived(stockCode, null, 0);
+                            AxKH_10005_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -414,7 +470,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
 
-                        AxKH_10005_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10005_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -438,7 +494,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_10015_OnReceived(stockCode, null, 0);
+                            AxKH_10015_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -462,7 +518,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
                         //AxKH_10015_OnReceived(e.sTrCode, dt, Convert.ToInt32(e.sPrevNext));
-                        AxKH_10015_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10015_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -486,7 +542,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_10014_OnReceived(stockCode, null, 0);
+                            AxKH_10014_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -510,7 +566,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
 
-                        AxKH_10014_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10014_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -533,7 +589,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_10081_OnReceived(stockCode, null, 0);
+                            AxKH_10081_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -557,7 +613,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
                         //AxKH_10081_OnReceived(e.sTrCode, dt, Convert.ToInt32(e.sPrevNext));
-                        AxKH_10081_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10081_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -581,7 +637,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_10060_OnReceived(stockCode, null, 0);
+                            AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -605,7 +661,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
                         
-                        AxKH_10060_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -629,7 +685,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_20068_OnReceived(stockCode, null, 0);
+                            AxKH_20068_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -653,7 +709,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
 
-                        AxKH_20068_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_20068_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 
@@ -676,7 +732,7 @@ namespace Woom.DataAccess.PlugIn
                         if (handler != null)
                         {
                             //_OptStatus.InitOptCallingStatus();
-                            AxKH_90002_OnReceived(stockCode, null, 0);
+                            AxKH_90002_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                             return;
                         }
                     }
@@ -700,7 +756,7 @@ namespace Woom.DataAccess.PlugIn
                             //_OptStatus.InitOptCallingStatus();
                         }
 
-                        AxKH_90002_OnReceived(stockCode, dt, Convert.ToInt32(e.sPrevNext));
+                        AxKH_90002_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                         return;
                     }
 

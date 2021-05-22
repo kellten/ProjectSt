@@ -184,11 +184,15 @@ namespace Woom.Tester.Forms
 
         }
 
-        private void Opt20068_OnReceived(string stockCode, DataTable dt, int sPreNext)
+        private void Opt20068_OnReceived(string sRQName, DataTable dt, int sPreNext)
         {
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt20068, sRQName);
 
             if (tcs == null || tcs.Task.IsCompleted)
             {
@@ -236,7 +240,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 _opt20068.SetInit(_FormId);
-                _opt20068.JustRequest(startDate: dtpStartDate.Value.ToString("yyyyMMdd"), endDate: dtpEndDate.Value.ToString("yyyyMMdd"), allGb: "0", stockCode: stockCode, nPrevNext: 1);
+                _opt20068.JustRequest(startDate: sRQNameArray[1].ToString().Trim(), endDate: sRQNameArray[2].ToString().Trim(), allGb: sRQNameArray[3].ToString().Trim(), stockCode: sRQNameArray[4].ToString().Trim(), nPrevNext: 2);
             }
             else
             {

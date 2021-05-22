@@ -325,7 +325,7 @@ namespace Woom.Tester.Forms
         }
 
 
-        private void OnReceiveTrData_Opt10060PriceMaeSu(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060PriceMaeSu(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
@@ -335,6 +335,10 @@ namespace Woom.Tester.Forms
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
+            
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             if (dt != null)
             {
@@ -425,7 +429,7 @@ namespace Woom.Tester.Forms
                 WaitTime();
 
                 _ClsOpt10060.SetInit(_FormId);
-                _ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "1", UnitG: "", nPrevNext: 2);
+                _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
             }
             else
             {
@@ -452,7 +456,7 @@ namespace Woom.Tester.Forms
                 GetOpt10060Caller(Opt10060TransType.PriceMaedo, stockCode, _LastPdDate, _FirstPdDate);
             }
         }
-        private void OnReceiveTrData_Opt10060PriceMaedo(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060PriceMaedo(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
@@ -462,6 +466,10 @@ namespace Woom.Tester.Forms
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             if (dt != null)
             {
@@ -552,7 +560,8 @@ namespace Woom.Tester.Forms
                 WaitTime();
 
                 _ClsOpt10060.SetInit(_FormId);
-                _ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "2", UnitG: "", nPrevNext: 2);
+                //_ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "2", UnitG: "", nPrevNext: 2);
+                _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
             }
             else
             {
@@ -583,7 +592,7 @@ namespace Woom.Tester.Forms
             }
         }
 
-        private void OnReceiveTrData_Opt10060MaeSu(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060MaeSu(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
@@ -593,6 +602,10 @@ namespace Woom.Tester.Forms
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             if (tcs == null || tcs.Task.IsCompleted)
             {
@@ -684,7 +697,8 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
                 WaitTime();
                 _ClsOpt10060.SetInit(_FormId);
-                _ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "1", UnitG: "", nPrevNext: 2);
+                //_ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "1", UnitG: "", nPrevNext: 2);
+                _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
             }
             else
             {
@@ -716,7 +730,7 @@ namespace Woom.Tester.Forms
             }
 
         }
-        private void OnReceiveTrData_Opt10060Maedo(string stockCode, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060Maedo(string sRQName, DataTable dt, int sPreNext)
         {
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
@@ -727,6 +741,9 @@ namespace Woom.Tester.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
 
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10060, sRQName);
 
             if (dt != null)
             {
@@ -807,7 +824,8 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
                 WaitTime();
                 _ClsOpt10060.SetInit(_FormId);
-                _ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "2", UnitG: "", nPrevNext: 2);
+                //_ClsOpt10060.JustRequest(StartDate: minDate.ToString(), StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "2", UnitG: "", nPrevNext: 2);
+                _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
             }
             else
             {

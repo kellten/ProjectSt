@@ -33,7 +33,7 @@ namespace Woom.Tester.Forms
 
         private ClsDataAccessUtil _clsDataAccessUtil;
 
-
+        
         public FrmOpt10081Caller()
         {
             InitializeComponent();
@@ -177,13 +177,17 @@ namespace Woom.Tester.Forms
 
         }
 
-        private  void Opt10081_OnReceived(string stockCode, DataTable dt, int sPreNext)
+        private  void Opt10081_OnReceived(string sRQName, DataTable dt, int sPreNext)
         {
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
 
             string MinDate = "";
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
 
             if (tcs == null || tcs.Task.IsCompleted)
             {
@@ -236,7 +240,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 _opt10081.SetInit(_FormId);
-                _opt10081.Opt10081(StockCode: stockCode, StockName: "", StdDate: MinDate, ModifyJugaGb: "1",nextCall: true); ;
+                _opt10081.Opt10081(StockCode: sRQNameArray[1].ToString().Trim(), StockName: "", StdDate: sRQNameArray[2].ToString().Trim(), ModifyJugaGb: sRQNameArray[2].ToString().Trim(), nextCall: true); ;
 
             }
             else

@@ -154,16 +154,21 @@ namespace Woom.Tester.Forms
 
         }
 
-        private void Opt90002_OnReceived(string stockCode, DataTable dt, int sPreNext)
+        private void Opt90002_OnReceived(string sRQName, DataTable dt, int sPreNext)
         {
 
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
-
+            
             if (tcs == null || tcs.Task.IsCompleted)
             {
                 return;
             }
+
+
+            string[] sRQNameArray = sRQName.Split(',');
+
+            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt90002, sRQName);
 
             if (dt != null)
             {
