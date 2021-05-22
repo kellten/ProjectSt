@@ -94,33 +94,51 @@ namespace Woom.DataAccess.OptCaller.Class
         /// <param name="StockCode">종목코드</param>
         /// <param name="StartDate">일자</param>
         /// <param name="ModifyJugaGb"> 수정주가구분 : 0 or 1, 수신데이터 1:유상증자, 2:무상증자, 4:배당락, 8:액면분할, 16:액면병합, 32:기업합병, 64:감자, 256:권리락</param>
-        public  void Opt10081(string StockCode, string StockName, string StdDate, string ModifyJugaGb, bool nextCall = false)
+        //public  void Opt10081(string StockCode, string StockName, string StdDate, string ModifyJugaGb, bool nextCall = false)
+        //{
+        //    ArrayList SetInputValue = new ArrayList();
+
+        //    SetInputValue.Add(StockCode);
+        //    SetInputValue.Add(StdDate);
+        //    SetInputValue.Add(ModifyJugaGb);
+
+        //    if (nextCall == false)
+        //    {
+        //         JustRequest(SetInputValue);
+        //    }
+        //    else
+        //    {
+        //         ReJustRequest(SetInputValue);
+        //    }
+        //}
+
+        //private void JustRequest(ArrayList arrayL)
+        //{
+        //    SendCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 0, _screenNo);
+        //}
+
+        //private void ReJustRequest(ArrayList arrayL)
+        //{
+        //    SendCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 2, _screenNo);
+
+        //}
+        /// <summary>
+        /// SetValue
+        /// </summary>
+        /// <param name="StockCode">종목코드</param>
+        /// <param name="StartDate">일자</param>
+        /// <param name="ModifyJugaGb"> 수정주가구분 : 0 or 1, 수신데이터 1:유상증자, 2:무상증자, 4:배당락, 8:액면분할, 16:액면병합, 32:기업합병, 64:감자, 256:권리락</param>
+        /// <param name="nPrevNext">0 - 조회 2 - 연속조회</param>
+        public void JustRequest(string StockCode, string StockName, string StdDate, string ModifyJugaGb, int nPrevNext)
         {
+
             ArrayList SetInputValue = new ArrayList();
 
             SetInputValue.Add(StockCode);
             SetInputValue.Add(StdDate);
             SetInputValue.Add(ModifyJugaGb);
 
-            if (nextCall == false)
-            {
-                 JustRequest(SetInputValue);
-            }
-            else
-            {
-                 ReJustRequest(SetInputValue);
-            }
-        }
-
-        private void JustRequest(ArrayList arrayL)
-        {
-            SendCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 0, _screenNo);
-        }
-
-        private void ReJustRequest(ArrayList arrayL)
-        {
-            SendCommRqData(OptType.Opt10081, arrayL, RqName, OptName, 2, _screenNo);
-
+            SendCommRqData(PlugIn.ClsAxKH.OptType.Opt10081, SetInputValue, RqName, OptName, nPrevNext, _screenNo);
         }
 
         private void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)

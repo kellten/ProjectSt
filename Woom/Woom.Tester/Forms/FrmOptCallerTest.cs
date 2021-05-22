@@ -77,7 +77,7 @@ namespace Woom.Tester.Forms
 
             if (sPreNext == 2)
             {
-                _opt10081.Opt10081(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1");
+                _opt10081.JustRequest(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1", nPrevNext:2);
             }
             else
             {
@@ -89,7 +89,7 @@ namespace Woom.Tester.Forms
         {
             _opt10081.SetInit("01");
      
-            _opt10081.Opt10081(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1");
+            _opt10081.JustRequest(StockCode: "088910", StockName: "동우팜투테이블", StdDate: "20170101", ModifyJugaGb: "1", nPrevNext:0);
         }
 
         private void button3_Click(object sender, EventArgs e)

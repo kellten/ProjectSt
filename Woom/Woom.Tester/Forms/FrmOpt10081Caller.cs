@@ -171,7 +171,7 @@ namespace Woom.Tester.Forms
             }
 
             _opt10081.SetInit(_FormId);
-            _opt10081.Opt10081(stockCode, "", _stdDate, "1");
+            _opt10081.JustRequest(StockCode: stockCode, StockName: "", StdDate: _stdDate, ModifyJugaGb: "1", nPrevNext: 0);
 
             tcs.SetResult(true);
 
@@ -240,7 +240,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 _opt10081.SetInit(_FormId);
-                _opt10081.Opt10081(StockCode: sRQNameArray[1].ToString().Trim(), StockName: "", StdDate: sRQNameArray[2].ToString().Trim(), ModifyJugaGb: sRQNameArray[2].ToString().Trim(), nextCall: true); ;
+                _opt10081.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StockName: "", StdDate: sRQNameArray[2].ToString().Trim(), ModifyJugaGb: sRQNameArray[2].ToString().Trim(),nPrevNext:2); 
 
             }
             else
