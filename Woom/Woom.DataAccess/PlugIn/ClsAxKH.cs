@@ -332,7 +332,7 @@ namespace Woom.DataAccess.PlugIn
                         return;
                 }
 
-                for (int i = 0; i < optCall.Count - 1; i++)
+                for (int i = 0; i < optCall.Count; i++)
                 {
                     if (sRQNameSet == "")
                     {
