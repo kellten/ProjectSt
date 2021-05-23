@@ -196,11 +196,16 @@ namespace Woom.Tester.Forms
 
             if (dt != null)
             {
+                
+
                 ArrayParam arrParam = new ArrayParam();
                 Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
                 foreach (DataRow dr in dt.Rows)
                 {
+
+                    WriteTextSafe(stockCode + "(" + dr["일자"] + ")");
+
                     MinDate = dr["일자"].ToString().Trim();
                     if (_MaxStockDate10081 == dr["일자"].ToString().Trim())
                     {

@@ -12,7 +12,7 @@ namespace Woom.Tester.Forms
             InitializeComponent();
             _opt10059.Opt10059_OnReceived += Opt10059_OnReceived;
             _opt100592.Opt10059_OnReceived += Opt10059_OnReceived2;
-            _opt10081.Opt10081_OnReceived += Opt10081_OnReceived;
+            //_opt10081.Opt10081_OnReceived += Opt10081_OnReceived;
         }
         private ClsOpt10059 _opt10059 = new ClsOpt10059();
 

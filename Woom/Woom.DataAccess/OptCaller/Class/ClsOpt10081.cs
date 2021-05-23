@@ -79,14 +79,6 @@ namespace Woom.DataAccess.OptCaller.Class
 
         #endregion Const
 
-        #region Event
-
-        public delegate void OnReceivedEventHandler(string stockCode, DataTable dt, int sPreNext);
-
-        public event OnReceivedEventHandler Opt10081_OnReceived;
-
-        #endregion Event
-
         
         /// <summary>
         /// SetValue
@@ -141,51 +133,51 @@ namespace Woom.DataAccess.OptCaller.Class
             SendCommRqData(PlugIn.ClsAxKH.OptType.Opt10081, SetInputValue, RqName, OptName, nPrevNext, _screenNo);
         }
 
-        private void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
-        {
-            if (e.sScrNo != _screenNo || e.sRQName != RqName)
-            {
-                return;
-            }
+        //private void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
+        //{
+        //    if (e.sScrNo != _screenNo || e.sRQName != RqName)
+        //    {
+        //        return;
+        //    }
 
-            MakeDataTable();
+        //    MakeDataTable();
 
-            var handler = Opt10081_OnReceived;
+        //    var handler = Opt10081_OnReceived;
 
-            int nCnt = AxKH.GetRepeatCnt(e.sTrCode, e.sRQName);
+        //    int nCnt = AxKH.GetRepeatCnt(e.sTrCode, e.sRQName);
 
-            if (nCnt == 0)
-            {
-                if (handler != null)
-                {
-                    //_OptStatus.InitOptCallingStatus();
-                    Opt10081_OnReceived(_stockCode, null, 0);
-                    return;
-                }
-            }
+        //    if (nCnt == 0)
+        //    {
+        //        if (handler != null)
+        //        {
+        //            //_OptStatus.InitOptCallingStatus();
+        //            Opt10081_OnReceived(_stockCode, null, 0);
+        //            return;
+        //        }
+        //    }
 
-            for (int i = 0; i < nCnt; i++)
-            {
-                DataRow dr = _dt.NewRow();
-                for (int intColumName = 0; intColumName < _dt.Columns.Count; intColumName++)
-                {
-                    var type = _dt.Columns[intColumName].DataType;
-                    dr[_dt.Columns[intColumName].ColumnName.ToString()] = Convert.ChangeType(AxKH.GetCommData(e.sTrCode, e.sRQName, i, _dt.Columns[intColumName].ColumnName.ToString()).ToString().Trim(), type);
-                }
+        //    for (int i = 0; i < nCnt; i++)
+        //    {
+        //        DataRow dr = _dt.NewRow();
+        //        for (int intColumName = 0; intColumName < _dt.Columns.Count; intColumName++)
+        //        {
+        //            var type = _dt.Columns[intColumName].DataType;
+        //            dr[_dt.Columns[intColumName].ColumnName.ToString()] = Convert.ChangeType(AxKH.GetCommData(e.sTrCode, e.sRQName, i, _dt.Columns[intColumName].ColumnName.ToString()).ToString().Trim(), type);
+        //        }
 
-                _dt.Rows.Add(dr);
-            }
+        //        _dt.Rows.Add(dr);
+        //    }
 
-            if (handler != null)
-            {
-                if (Convert.ToInt32(e.sPrevNext) != 2)
-                {
-                    //_OptStatus.InitOptCallingStatus();
-                }
-                Opt10081_OnReceived(_stockCode, _dt, Convert.ToInt32(e.sPrevNext));
-                return;
-            }
-        }
+        //    if (handler != null)
+        //    {
+        //        if (Convert.ToInt32(e.sPrevNext) != 2)
+        //        {
+        //            //_OptStatus.InitOptCallingStatus();
+        //        }
+        //        Opt10081_OnReceived(_stockCode, _dt, Convert.ToInt32(e.sPrevNext));
+        //        return;
+        //    }
+        //}
 
         #region IDispose 구현
 
