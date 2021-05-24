@@ -32,6 +32,7 @@
             this.proBar10081 = new System.Windows.Forms.ProgressBar();
             this.lblStockName = new System.Windows.Forms.Label();
             this.chk100 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btn10081
@@ -70,11 +71,22 @@
             this.chk100.Text = "현재일 기준(100거래일)";
             this.chk100.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(399, 42);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(104, 16);
+            this.checkBox1.TabIndex = 30;
+            this.checkBox1.Text = "종목 순환 방식";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // FrmOpt10081Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 67);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chk100);
             this.Controls.Add(this.lblStockName);
             this.Controls.Add(this.btn10081);
@@ -92,5 +104,6 @@
         private System.Windows.Forms.ProgressBar proBar10081;
         private System.Windows.Forms.Label lblStockName;
         private System.Windows.Forms.CheckBox chk100;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
