@@ -244,6 +244,8 @@ namespace Woom.Tester.Forms
             {
                 tcs.SetResult(true);
 
+                _clsDataAccessUtil.Delay(3600);
+
                 _opt10081.SetInit(_FormId);
                 _opt10081.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StockName: "", StdDate: sRQNameArray[2].ToString().Trim(), ModifyJugaGb: sRQNameArray[3].ToString().Trim(),nPrevNext:2); 
 

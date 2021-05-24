@@ -320,7 +320,7 @@ namespace Woom.Tester.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
-            _clsDataAccessUtil.Delay(3000);
+            _clsDataAccessUtil.Delay(3600);
             tcs.SetResult(true);
         }
 

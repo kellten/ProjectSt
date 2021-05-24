@@ -27,7 +27,6 @@ namespace Woom.DataAccess.ErrorManage.Class
         public static bool GetErrorMessage(int nErrorCode)
         {
             bool bRet = false;
-            string errorMessage = "";
             switch (nErrorCode)
             {
                 case KOAErrorCode.OP_ERR_NONE:
@@ -94,6 +93,10 @@ namespace Woom.DataAccess.ErrorManage.Class
             if (bRet == false)
             {
                 MessageBox.Show(errorMessage);
+            }
+            else
+            { 
+                
             }
 
             return bRet;

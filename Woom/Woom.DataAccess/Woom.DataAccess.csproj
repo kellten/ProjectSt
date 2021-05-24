@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="ClsDataAccessUtil.cs" />
     <Compile Include="EventManage\Class\ClsOnReceiveTrData.cs" />
+    <Compile Include="Logger\ClsDbLogger.cs" />
     <Compile Include="OptCaller\Class\ClsGetKoaStudioMethod.cs" />
     <Compile Include="OptCaller\Class\ClsOpt10001.cs" />
     <Compile Include="OptCaller\Class\ClsOpt10005.cs" />

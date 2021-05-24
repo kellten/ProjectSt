@@ -8,6 +8,7 @@ using Woom.DataDefine.OptData;
 using Woom.DataDefine.Util;
 using System.Threading.Tasks;
 using Woom.DataAccess;
+using Woom.DataAccess.Logger;
 
 namespace Woom.DataAccess.PlugIn
 {
@@ -269,6 +270,7 @@ namespace Woom.DataAccess.PlugIn
 
                 switch (optType)
                 {
+                  
                     case OptType.Opt10001:
                         //_stockCode10001 = "";
 
@@ -332,6 +334,8 @@ namespace Woom.DataAccess.PlugIn
                         return;
                 }
 
+                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "SetInputValue", transText: sRQName );
+
                 for (int i = 0; i < optCall.Count; i++)
                 {
                     if (sRQNameSet == "")
@@ -344,16 +348,35 @@ namespace Woom.DataAccess.PlugIn
                     }
                 }
 
+                string sCommRqData = "";
+
+                for (int i = 0; i < item.Count; i++)
+                {
+                    if (sCommRqData == "")
+                    {
+                        sCommRqData = item[i].ToString();
+                    }
+                    else
+                    {
+                        sCommRqData = sCommRqData + "," + item[i].ToString();
+                    }
+                }
+                               
+                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "CommRqData", transText:sRQName + "@" + sCommRqData);
+
                 int  nRet = AxKH.CommRqData( sRQName:item[0].ToString() + "," + sRQNameSet, sTrCode: item[1].ToString(), nPrevNext: Convert.ToInt32(item[2]), sScreenNo:item[3].ToString());
               
-
                 if (ClsWoomErrorCode.GetErrorMessage(nRet) == true)
                 {
+
+                    
                     //   Logger(Log.일반, "[OPT10081] : " + lsWoomErrorCode.GetErrorMessage());
                 }
                 else
                 {
-                    MessageBox.Show(ClsWoomErrorCode.GetErrorMessage());
+                    string erroText = ClsWoomErrorCode.GetErrorMessage();
+                    ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.ErrorLoger, optCallNo: item[0].ToString(), transText: erroText);
+
                     // Logger(Log.에러, "[OPT10081] : " + Error.GetErrorMessage());
                 }
             }
@@ -389,6 +412,8 @@ namespace Woom.DataAccess.PlugIn
             //sRQName = e.sRQName.ToString().Replace(stockCode + "_", "");
 
             string[] sRQNameArray = e.sRQName.ToString().Trim().Split(',');
+
+            ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.RecieveLoger, optCallNo: "AxKH_OnReceiveTrData", transText: e.sTrCode.ToString().Trim() + "@" + e.sRQName.ToString().Trim());
 
             switch (sRQNameArray[0].ToString().Trim())
             {
