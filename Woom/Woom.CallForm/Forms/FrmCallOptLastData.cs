@@ -131,7 +131,11 @@ namespace Woom.CallForm.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
-            _clsDataAccessUtil.Delay(3600);
+            if (ClsAxKH.SPEED_CALL == true)
+            { _clsDataAccessUtil.Delay(200); }
+            else
+            { _clsDataAccessUtil.Delay(3600); }
+            
             tcs.SetResult(true);
         }
         private void WriteTextSafe(string strMessage)

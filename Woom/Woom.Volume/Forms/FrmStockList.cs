@@ -145,8 +145,12 @@ namespace Woom.Volume.Forms
         #endregion
 
         #region 기간별상승종목
+
+        private bool _firstCall = false;
+
         private void GetOpt10015Data()
         {
+
             SDataAccess.KiwoomQuery kiwoomQuery = new KiwoomQuery();
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
@@ -155,11 +159,11 @@ namespace Woom.Volume.Forms
             ClsColumnSets oBasicDataType = new ClsColumnSets();
 
             RemoveGridViewRow(dgvGiganUpDown);
-            RemoveGridViewColumn(dgvGiganUpDown);
+            //RemoveGridViewColumn(dgvGiganUpDown);            
 
             if (ChkOption1.Checked == true)
             {
-                 dt = kiwoomQuery.p_Opt10015DateQuery(query: "2", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
+                 dt = kiwoomQuery.p_Opt10015DateQuery(query: "4", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
             }
             else
             {
@@ -174,21 +178,36 @@ namespace Woom.Volume.Forms
             }
             else
             {
-                int row = 0;
-                dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
-                dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
-                dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
-                
-                foreach (DataColumn dc in dt.Columns)
+                if (_firstCall == false)
                 {
-                    System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
-                    System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
-                    dgvColumn.CellTemplate = cell;
-                    dgvColumn.HeaderText = oBasicDataType.ColumnToKoreanOpt10015(dc.ColumnName.ToString()).ToString();
-                    dgvColumn.Name = dc.ColumnName.ToString();
 
-                    dgvGiganUpDown.Columns.Add(dgvColumn);
+                    DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
+                    dataGridViewButtonColumn.Name = "WEB_VIEW";
+                    dataGridViewButtonColumn.HeaderText = "View";
+                    dataGridViewButtonColumn.ReadOnly = false;
+                    
+                    dgvGiganUpDown.Columns.Add(dataGridViewButtonColumn);
+                    dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
+                    dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
+                    dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
+
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
+                        System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
+                        dgvColumn.CellTemplate = cell;
+                        dgvColumn.HeaderText = oBasicDataType.ColumnToKoreanOpt10015(dc.ColumnName.ToString()).ToString();
+                        dgvColumn.Name = dc.ColumnName.ToString();
+
+                        dgvGiganUpDown.Columns.Add(dgvColumn);
+                    }
+
                 }
+
+                _firstCall = true;
+
+                int row = 0;
+                                              
                
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -313,6 +332,7 @@ namespace Woom.Volume.Forms
 
         private void BtnGetOpt_Click(object sender, EventArgs e)
         {
+            ClsAxKH.SPEED_CALL = true;
             DataTable dt = new DataTable();
             DataRow dr;
 
@@ -349,11 +369,21 @@ namespace Woom.Volume.Forms
             {
                 Form oform = new Woom.CallForm.Forms.FrmCallOptLastData(dt, "");
                 oform.ShowDialog();
+                ClsAxKH.SPEED_CALL = false;
             }
             else
             {
                 MessageBox.Show("작업할 내역이 없습니다.");
             }
+        }
+        private void dgvGiganUpDown_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                System.Diagnostics.Process.Start("https://finance.naver.com/item/coinfo.nhn?code=" + dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
+            }
+            
+
         }
     }
 }

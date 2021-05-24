@@ -40,6 +40,7 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.BtnGetOpt = new System.Windows.Forms.Button();
             this.ChkOption1 = new System.Windows.Forms.CheckBox();
             this.BtnGiganUpDowndSearch = new System.Windows.Forms.Button();
             this.numUpDownRate = new System.Windows.Forms.NumericUpDown();
@@ -47,7 +48,6 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.BtnGetOpt = new System.Windows.Forms.Button();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -171,6 +171,16 @@
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
+            // BtnGetOpt
+            // 
+            this.BtnGetOpt.Location = new System.Drawing.Point(1440, 9);
+            this.BtnGetOpt.Name = "BtnGetOpt";
+            this.BtnGetOpt.Size = new System.Drawing.Size(181, 23);
+            this.BtnGetOpt.TabIndex = 41;
+            this.BtnGetOpt.Text = "최신 Opt내역 가져오기";
+            this.BtnGetOpt.UseVisualStyleBackColor = true;
+            this.BtnGetOpt.Click += new System.EventHandler(this.BtnGetOpt_Click);
+            // 
             // ChkOption1
             // 
             this.ChkOption1.AutoSize = true;
@@ -237,17 +247,8 @@
             this.dgvGiganUpDown.RowTemplate.Height = 23;
             this.dgvGiganUpDown.Size = new System.Drawing.Size(1624, 899);
             this.dgvGiganUpDown.TabIndex = 0;
+            this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
-            // 
-            // BtnGetOpt
-            // 
-            this.BtnGetOpt.Location = new System.Drawing.Point(1440, 9);
-            this.BtnGetOpt.Name = "BtnGetOpt";
-            this.BtnGetOpt.Size = new System.Drawing.Size(181, 23);
-            this.BtnGetOpt.TabIndex = 41;
-            this.BtnGetOpt.Text = "최신 Opt내역 가져오기";
-            this.BtnGetOpt.UseVisualStyleBackColor = true;
-            this.BtnGetOpt.Click += new System.EventHandler(this.BtnGetOpt_Click);
             // 
             // FrmStockList
             // 

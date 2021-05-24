@@ -28,9 +28,6 @@ namespace Woom.DataAccess.PlugIn
         //private static string _stockCode20068 = "";
         //private static string _kthCode90002 = "";
 
-        private static DateTime _limitTime;
-        private static int count = 1000;
-
         public static void AddOnReceivedEventHandler()
         {
             AxKH.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(AxKH_OnReceiveTrData);
@@ -189,8 +186,8 @@ namespace Woom.DataAccess.PlugIn
         private static object lockObject = new object();
 
         private static DateTime _SendDateTime = DateTime.Now;
-        private static int _sendCommRqDataCount = 0;
-        private static DateTime firstSendTime;
+        //private static int _sendCommRqDataCount = 0;
+        //private static DateTime firstSendTime;
 
         public static string RetStockCodeBysRqName(OptType optType, string sRQName)
         {
@@ -233,10 +230,89 @@ namespace Woom.DataAccess.PlugIn
             return stockCode;
         }
 
+        private static void RegularSpandTime()
+        {
+            DateTime nowDate = DateTime.Now;
+
+            TimeSpan dateDiff = nowDate - _SendDateTime;
+            // 호출 횟수가 1시간에 천회가 넘어가면 에러 발생
+            if (Convert.ToInt16(dateDiff.TotalSeconds) < 4)
+            {
+                Delay(((4 - Convert.ToInt16(dateDiff.TotalSeconds)) * 1000) + 600);
+            }
+
+            _SendDateTime = nowDate;
+
+            //if (_sendCommRqDataCount == 0)
+            //{
+            //    firstSendTime = DateTime.Now;
+            //}
+
+            //_sendCommRqDataCount = _sendCommRqDataCount + 1;
+        }
+
+        public static bool SPEED_CALL = false;
+
+        private static DateTime _limitTime;
+        private static bool _firstCall = false;
+        private static int _limitCount = 999;
+        private static void SpeedSpendTime()
+        {
+            // 1시간 동안 1천회 전송 가능하므로 초기 값을 1천회 세팅
+            if (_firstCall == false)
+            {
+                _firstCall = true;
+
+                _limitTime = DateTime.Now.AddHours(1);
+                _limitCount = 999;
+            }
+            else
+            {
+                DateTime nowDate = DateTime.Now;
+
+                TimeSpan dateDiff = nowDate - _SendDateTime;
+                // 호출 횟수가 1시간에 천회가 넘어가면 에러 발생
+                if (Convert.ToInt16(dateDiff.TotalSeconds) < 1)
+                {
+                    Delay(200);
+                }
+
+                _SendDateTime = nowDate;
+            }
+            // 1천회 세팅한 값보다 현재 시간이 같거나 많으면 다시 리미트 타임을 1시간 뒤로 세팅
+            if (DateTime.Now >= _limitTime)
+            {
+                _limitTime = DateTime.Now.AddHours(1);
+                _limitCount = 999;
+            }
+            else
+            {
+                _limitCount = _limitCount - 1;
+            }
+
+            if (_limitCount == 0)
+            {
+                TimeSpan dateDiff = _limitTime - DateTime.Now;
+                Delay(Convert.ToInt16(dateDiff.TotalSeconds) * 1000);
+            }
+        }
+
+   
         public static void SendCommRqData(OptType optType, ArrayList optCall, string sRQName, string sTrCode, int nPrevNext, string sScreenNo)
         {
             lock (lockObject)
             {
+
+
+                if (SPEED_CALL == true)
+                {
+                    SpeedSpendTime();
+                }
+                else
+                {
+                    RegularSpandTime();
+                }
+
                 string stockCode = "";
 
                 ArrayList arrlist = new ArrayList();
@@ -249,25 +325,7 @@ namespace Woom.DataAccess.PlugIn
 
                 ArrayList item;
 
-                AxKHQueueList.TryDequeue(out item);
-
-                DateTime nowDate = DateTime.Now;
-
-                TimeSpan dateDiff = nowDate - _SendDateTime;
-                // 호출 횟수가 1시간에 천회가 넘어가면 에러 발생
-                if (Convert.ToInt16(dateDiff.TotalSeconds) < 4)
-                {
-                    Delay(((4 - Convert.ToInt16(dateDiff.TotalSeconds)) * 1000) + 600);
-                }
-
-                _SendDateTime = nowDate;
-
-                if (_sendCommRqDataCount == 0)
-                {
-                    firstSendTime = DateTime.Now;
-                }
-
-                _sendCommRqDataCount = _sendCommRqDataCount + 1;
+                AxKHQueueList.TryDequeue(out item);              
 
                 string sRQNameSet = "";
 
