@@ -28,6 +28,9 @@ namespace Woom.DataAccess.PlugIn
         //private static string _stockCode20068 = "";
         //private static string _kthCode90002 = "";
 
+        private static DateTime _limitTime;
+        private static int count = 1000;
+
         public static void AddOnReceivedEventHandler()
         {
             AxKH.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(AxKH_OnReceiveTrData);
@@ -346,7 +349,7 @@ namespace Woom.DataAccess.PlugIn
                     }
                 }
 
-                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "SetInputValue", transText: sRQName);
+                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "SetInputValue", transText: sRQNameSet);
 
                 string sCommRqData = "";
 
@@ -362,7 +365,7 @@ namespace Woom.DataAccess.PlugIn
                     }
                 }
                                
-                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "CommRqData", transText:sRQName + "@" + sCommRqData);
+                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "CommRqData", transText: sRQNameSet + "@" + sCommRqData);
 
                 int  nRet = AxKH.CommRqData( sRQName:item[0].ToString() + "," + sRQNameSet, sTrCode: item[1].ToString(), nPrevNext: Convert.ToInt32(item[2]), sScreenNo:item[3].ToString());
               

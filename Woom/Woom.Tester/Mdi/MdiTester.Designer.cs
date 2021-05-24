@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbConnectionInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.optTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuItem10059 = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,12 +41,12 @@
             this.일별거래상세요청Opt10015ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt90002ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종목관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.엑셀가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.마켓분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbFrmStockList = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.OptCallPer1hour = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.엑셀가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem,
+            this.optToolStripMenuItem,
             this.마켓분석ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -63,16 +63,16 @@
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
-            // testToolStripMenuItem
+            // optToolStripMenuItem
             // 
-            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbConnectionInfo,
             this.optTestToolStripMenuItem,
             this.종목관리ToolStripMenuItem,
             this.엑셀가져오기ToolStripMenuItem});
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.testToolStripMenuItem.Text = "Test";
+            this.optToolStripMenuItem.Name = "optToolStripMenuItem";
+            this.optToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.optToolStripMenuItem.Text = "Opt작업";
             // 
             // tsbConnectionInfo
             // 
@@ -151,6 +151,13 @@
             this.종목관리ToolStripMenuItem.Text = "종목관리";
             this.종목관리ToolStripMenuItem.Click += new System.EventHandler(this.종목관리ToolStripMenuItem_Click);
             // 
+            // 엑셀가져오기ToolStripMenuItem
+            // 
+            this.엑셀가져오기ToolStripMenuItem.Name = "엑셀가져오기ToolStripMenuItem";
+            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
+            this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
+            // 
             // 마켓분석ToolStripMenuItem
             // 
             this.마켓분석ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -169,7 +176,7 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
+            this.OptCallPer1hour});
             this.statusStrip.Location = new System.Drawing.Point(0, 396);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
@@ -177,18 +184,11 @@
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
-            // toolStripStatusLabel
+            // OptCallPer1hour
             // 
-            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(31, 17);
-            this.toolStripStatusLabel.Text = "상태";
-            // 
-            // 엑셀가져오기ToolStripMenuItem
-            // 
-            this.엑셀가져오기ToolStripMenuItem.Name = "엑셀가져오기ToolStripMenuItem";
-            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
-            this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
+            this.OptCallPer1hour.Name = "OptCallPer1hour";
+            this.OptCallPer1hour.Size = new System.Drawing.Size(31, 17);
+            this.OptCallPer1hour.Text = "상태";
             // 
             // MdiTester
             // 
@@ -200,7 +200,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MdiTester";
-            this.Text = "MdiTester";
+            this.Text = "분석툴";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
@@ -214,9 +214,9 @@
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel OptCallPer1hour;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsbConnectionInfo;
         private System.Windows.Forms.ToolStripMenuItem optTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuItem10059;
