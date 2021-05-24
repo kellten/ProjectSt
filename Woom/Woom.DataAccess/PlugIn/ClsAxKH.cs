@@ -334,8 +334,6 @@ namespace Woom.DataAccess.PlugIn
                         return;
                 }
 
-                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "SetInputValue", transText: sRQName );
-
                 for (int i = 0; i < optCall.Count; i++)
                 {
                     if (sRQNameSet == "")
@@ -347,6 +345,8 @@ namespace Woom.DataAccess.PlugIn
                         sRQNameSet = sRQNameSet + "," + optCall[i].ToString();
                     }
                 }
+
+                ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "SetInputValue", transText: sRQName);
 
                 string sCommRqData = "";
 

@@ -46,6 +46,7 @@ namespace Woom.DataAccess.Logger
             arrParam.Add("@TRANS_TEXT", transText);
             arrParam.Add("@DEUNG_DATE", "");
             arrParam.Add("@DEUNG_TIME", "");
+            arrParam.Add("@WORK_COM", System.Windows.Forms.SystemInformation.ComputerName);
             arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
             oSql.ExecuteNonQuery("p_OPTCA_LOGAdd", CommandType.StoredProcedure, arrParam);
