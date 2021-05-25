@@ -175,7 +175,15 @@ namespace Woom.Tester.Forms
             }
             else
             {
+                var rows = _dtOptCalMagam.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == reValue);
 
+                foreach (DataRow dr2th in rows)
+                {
+                    if (dr2th["JOB_ING_GB"].ToString().Trim() == "E")
+                    {
+                        return "";
+                    }
+                }
             }
 
             return reValue;
