@@ -199,6 +199,7 @@ namespace Woom.Tester.Forms
                 return;
             }
 
+            SetFormId();
             _opt10081.SetInit(_FormId);
             _opt10081.JustRequest(StockCode: stockCode, StockName: "", StdDate: _stdDate, ModifyJugaGb: "1", nPrevNext: 0);
 
