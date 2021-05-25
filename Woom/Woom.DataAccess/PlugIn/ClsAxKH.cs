@@ -230,6 +230,39 @@ namespace Woom.DataAccess.PlugIn
             return stockCode;
         }
 
+        public static string RetStdDateBysRqName(OptType optType, string sRQName)
+        {
+            string[] sRQNameArray = sRQName.ToString().Trim().Split(',');
+            string stdDate = "";
+
+            switch (optType)
+            {
+              
+                case OptType.Opt10015:
+                    stdDate = sRQNameArray[2];
+                    break;
+                case OptType.Opt10081:
+                    stdDate = sRQNameArray[2];
+                    break;
+                case OptType.Opt10060:
+                    stdDate = sRQNameArray[1];
+                    break;
+                case OptType.Opt10014:
+                    stdDate = sRQNameArray[3];
+                    break;
+                case OptType.Opt20068:
+                    stdDate = sRQNameArray[1];
+                    break;
+                case OptType.Opt10086:
+                    stdDate = sRQNameArray[2];
+                    break;
+                default:
+                    break;
+            }
+
+            return stdDate;
+        }
+
         private static void RegularSpandTime()
         {
             DateTime nowDate = DateTime.Now;

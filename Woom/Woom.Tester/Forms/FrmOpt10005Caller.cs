@@ -178,11 +178,12 @@ namespace Woom.Tester.Forms
             string[] sRQNameArray = sRQName.Split(',');
 
             string stockCode = ClsAxKH.RetStockCodeBysRqName( ClsAxKH.OptType.Opt10005, sRQName);
-
+            
             if (tcs == null || tcs.Task.IsCompleted)
             {
                 return;
             }
+                        
 
             if (dt != null)
             {

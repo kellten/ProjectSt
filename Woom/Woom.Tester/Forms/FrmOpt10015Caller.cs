@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using Woom.DataAccess;
 using Woom.DataAccess.OptCaller.Class;
 using Woom.DataAccess.PlugIn;
+using Woom.DataAccess.Logger;
+using Woom.DataDefine.Util;
 
 namespace Woom.Tester.Forms
 {
@@ -42,7 +44,7 @@ namespace Woom.Tester.Forms
                 _dtStockCode = dt.Copy();
                 dt = null;
             }
-                     
+
             foreach (DataRow dr in _dtStockCode.Rows)
             {
                 if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
@@ -81,13 +83,27 @@ namespace Woom.Tester.Forms
         }
 
         private Queue _StockQueue = new Queue();
+        private DataTable _dtOptCalMagam;
+
+        private void GetOptCallMagamaData(string stdDate)
+        {
+            if (_dtOptCalMagam != null)
+            {
+                _dtOptCalMagam = null;
+                _dtOptCalMagam = new DataTable();
+            }
+
+            KiwoomQuery kiwoomQuery = new KiwoomQuery();
+            _dtOptCalMagam = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OPT10015", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+        }
 
         #region 전역변수
 
         private DataTable _dtStockCode;
         private int _seqNo = 0;
         private string _stdDate = "";
-        private string _FormId = "15";
+        private string _FormId = "";
+        private int _ScreenNo = 100;
         private string _FirstStockDate = ""; // 상장일
 
         private ClsOpt10015 _opt10015 = new ClsOpt10015();
@@ -104,7 +120,11 @@ namespace Woom.Tester.Forms
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
-            _clsDataAccessUtil.Delay(3600);
+            if (ClsAxKH.SPEED_CALL == true)
+            { _clsDataAccessUtil.Delay(500); }
+            else
+            { _clsDataAccessUtil.Delay(3600); }
+            
             tcs.SetResult(true);
         }
 
@@ -122,7 +142,6 @@ namespace Woom.Tester.Forms
             {
                 OnGetStockCode();
                 return;
-
             }
 
             WaitTime();
@@ -157,8 +176,6 @@ namespace Woom.Tester.Forms
                 lblStockName.Text = strMessage;
             }
         }
-
-
         private string GetStockCode()
         {
             string reValue;
@@ -170,24 +187,41 @@ namespace Woom.Tester.Forms
             }
             reValue = _StockQueue.Dequeue().ToString();
 
-            KiwoomQuery kiwoomQuery = new KiwoomQuery();
-            DataTable dt = new DataTable();
+            //KiwoomQuery kiwoomQuery = new KiwoomQuery();
+            //DataTable dt = new DataTable();
 
-            dt = kiwoomQuery.p_Opt10015Query("3", reValue.ToString().Trim(), "","", "", false).Tables[0].Copy();
+            //dt = kiwoomQuery.p_Opt10015Query("3", reValue.ToString().Trim(), "","", "", false).Tables[0].Copy();
 
-            if (dt.Rows.Count > 0)
+            //if (dt.Rows.Count > 0)
+            //{
+            //    _LastDate = dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim();
+            //    _FirstDate = dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim();
+            //}
+            //else
+            //{
+            //    _LastDate = "";
+            //    _FirstDate = "";
+            //}
+
+            if (chk100.Checked == true)
             {
-                _LastDate = dt.Rows[0]["MAX_STOCK_DATE"].ToString().Trim();
-                _FirstDate = dt.Rows[0]["MIN_STOCK_DATE"].ToString().Trim();
+               var rows = _dtOptCalMagam.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == reValue);
+                
+                foreach (DataRow dr2th in rows)
+                {
+                    if (dr2th["JOB_ING_GB"].ToString().Trim() == "C")
+                    {
+                        return "";
+                    }
+                }
             }
             else
-            {
-                _LastDate = "";
-                _FirstDate = "";
+            { 
+            
             }
 
-
             return reValue;
+
         }
 
         private void GetOpt10015Caller(string stockCode, string MaxDate, string MinDate)
@@ -208,11 +242,21 @@ namespace Woom.Tester.Forms
                 return;
             }
 
+            SetFormId();
+
             _opt10015.SetInit(_FormId);
             _opt10015.JustRequest(stockCode, _stdDate, "", 0);
 
             tcs.SetResult(true);
 
+        }
+
+        private void SetFormId()
+        {
+            ClsUtil clsUtil = new ClsUtil();
+            _FormId = clsUtil.Right(_ScreenNo.ToString(), 2);
+
+            _ScreenNo = _ScreenNo + 1;
         }
 
         private void Opt10015_OnReceived(string sRQName, DataTable dt, int sPreNext)
@@ -224,11 +268,16 @@ namespace Woom.Tester.Forms
             if (tcs == null || tcs.Task.IsCompleted)
             {
                 return;
-            }
+            }          
             
             string[] sRQNameArray = sRQName.Split(',');
 
             string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
+            string stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
+            string maxDate = dt.Compute("max([일자])",  string.Empty).ToString().Trim();
+            string minDate = dt.Compute("min([일자])",string.Empty).ToString().Trim();
+
+            ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "");
 
             if (dt != null)
             {
@@ -292,6 +341,8 @@ namespace Woom.Tester.Forms
 
                                 WaitTime();
 
+                                SetFormId();
+
                                 _opt10015.SetInit(_FormId);
 
                                 //e, string StartDate, string StockName, int nPrevNext
@@ -346,6 +397,8 @@ namespace Woom.Tester.Forms
             // 최근 거래일 100일을 가져오는걸로 한다면
             if (chk100.Checked == true)
             {
+                ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C");
+
                 _opt10015.Dispose();
 
                 tcs.SetResult(true);
@@ -357,11 +410,13 @@ namespace Woom.Tester.Forms
             {
                 if (sPreNext == 2)
                 {
-                    int minDate = Convert.ToInt32(dt.Compute("min([일자])", string.Empty));
+                    //int minDate = Convert.ToInt32(dt.Compute("min([일자])", string.Empty));
+
+                    ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S");
 
                     tcs.SetResult(true);
 
-                    _clsDataAccessUtil.Delay(3600);
+                    WaitTime();
 
                     _opt10015.SetInit(_FormId);
                     _opt10015.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StartDate: sRQNameArray[2].ToString().Trim(), StockName: "", nPrevNext: 2);
@@ -369,6 +424,9 @@ namespace Woom.Tester.Forms
                 }
                 else
                 {
+
+                    ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "E");
+
                     _opt10015.Dispose();
 
                     tcs.SetResult(true);
@@ -377,13 +435,25 @@ namespace Woom.Tester.Forms
 
                 }
             }
-
-            
+        
         }
 
         private void btn10015_Click(object sender, EventArgs e)
         {
+            GetOptCallMagamaData(_stdDate);
             OnGetStockCode();
+        }
+
+        private void chkSpeedOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSpeedOn.Checked == true)
+            {
+                ClsAxKH.SPEED_CALL = true;
+            }
+            else
+            {
+                ClsAxKH.SPEED_CALL = false;
+            }
         }
     }
 }

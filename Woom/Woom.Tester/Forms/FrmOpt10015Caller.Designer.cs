@@ -32,6 +32,7 @@
             this.btn10015 = new System.Windows.Forms.Button();
             this.proBar10015 = new System.Windows.Forms.ProgressBar();
             this.chk100 = new System.Windows.Forms.CheckBox();
+            this.chkSpeedOn = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblStockName
@@ -70,11 +71,23 @@
             this.chk100.Text = "현재일 기준(100거래일)";
             this.chk100.UseVisualStyleBackColor = true;
             // 
+            // chkSpeedOn
+            // 
+            this.chkSpeedOn.AutoSize = true;
+            this.chkSpeedOn.Location = new System.Drawing.Point(574, 45);
+            this.chkSpeedOn.Name = "chkSpeedOn";
+            this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
+            this.chkSpeedOn.TabIndex = 33;
+            this.chkSpeedOn.Text = "스피드온";
+            this.chkSpeedOn.UseVisualStyleBackColor = true;
+            this.chkSpeedOn.CheckedChanged += new System.EventHandler(this.chkSpeedOn_CheckedChanged);
+            // 
             // FrmOpt10015Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 76);
+            this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.chk100);
             this.Controls.Add(this.lblStockName);
             this.Controls.Add(this.btn10015);
@@ -92,5 +105,6 @@
         private System.Windows.Forms.Button btn10015;
         private System.Windows.Forms.ProgressBar proBar10015;
         private System.Windows.Forms.CheckBox chk100;
+        private System.Windows.Forms.CheckBox chkSpeedOn;
     }
 }

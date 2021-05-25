@@ -24,7 +24,7 @@ namespace Woom.Volume.Forms
         private DataTable _dt;
         private Woom.DataAccess.OptCaller.Class.ClsGetKoaStudioMethod _clsGetKoaStudioMethod = new DataAccess.OptCaller.Class.ClsGetKoaStudioMethod();
         private ClsOpt10001 _clsOpt10001;
-        private const string _FormId = "20";
+        private int _FormId = 100;
         private int _rowIndex = 0;
         private Woom.DataDefine.Util.ClsUtil clsUtil;
         public FrmStockList()
@@ -115,10 +115,13 @@ namespace Woom.Volume.Forms
 
             _rowIndex = i;
 
-            _clsOpt10001.SetInit(_FormId);
+            _clsOpt10001.SetInit(clsUtil.Right(_FormId.ToString(), 2));
             _clsOpt10001.JustRequest(dgv0.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim(), "", 0);
 
             tcs.SetResult(true);
+
+            _FormId = _FormId + 1;
+
 
         }
 
@@ -323,7 +326,7 @@ namespace Woom.Volume.Forms
 
             tcs.SetResult(true);
         }
-        int OldRow = 0;
+        
         private void dgvGiganUpDown_MouseMove(object sender, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hti = dgvGiganUpDown.HitTest(e.X, e.Y);
