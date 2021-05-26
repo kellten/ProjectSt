@@ -224,7 +224,7 @@ namespace Woom.Tester.Forms
             }
 
             KiwoomQuery kiwoomQuery = new KiwoomQuery();
-            _dtOptCalMagam = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OPT10015", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+            _dtOptCalMagam = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OPT10081", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
         }
 
 
@@ -238,13 +238,20 @@ namespace Woom.Tester.Forms
 
             string[] sRQNameArray = sRQName.Split(',');
 
-            string stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
-            string stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
-            string maxDate = dt.Compute("max([일자])", string.Empty).ToString().Trim();
-            string minDate = dt.Compute("min([일자])", string.Empty).ToString().Trim();
+            string stockCode = "";
+            string stdDate = "";
+            string maxDate = "";
+            string minDate = "";
+
+            if (dt != null)
+            { 
+             stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
+             stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
+             maxDate = dt.Compute("max([일자])", string.Empty).ToString().Trim();
+             minDate = dt.Compute("min([일자])", string.Empty).ToString().Trim();
 
             ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "");
-
+            }
             if (tcs == null || tcs.Task.IsCompleted)
             {
                 return;
@@ -326,7 +333,14 @@ namespace Woom.Tester.Forms
                 else
                 {
 
-                    ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "E");
+                    if (dt != null)
+                    {
+                        ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "E");
+                    }
+                    else
+                    {
+                        ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F");
+                    }                    
 
                     _opt10081.Dispose();
 
