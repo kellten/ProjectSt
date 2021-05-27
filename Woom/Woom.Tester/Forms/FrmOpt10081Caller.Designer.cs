@@ -33,6 +33,7 @@
             this.lblStockName = new System.Windows.Forms.Label();
             this.chk100 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkSpeedOn = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btn10081
@@ -81,11 +82,23 @@
             this.checkBox1.Text = "종목 순환 방식";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // chkSpeedOn
+            // 
+            this.chkSpeedOn.AutoSize = true;
+            this.chkSpeedOn.Location = new System.Drawing.Point(294, 42);
+            this.chkSpeedOn.Name = "chkSpeedOn";
+            this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
+            this.chkSpeedOn.TabIndex = 31;
+            this.chkSpeedOn.Text = "스피드온";
+            this.chkSpeedOn.UseVisualStyleBackColor = true;
+            this.chkSpeedOn.CheckedChanged += new System.EventHandler(this.chkSpeedOn_CheckedChanged);
+            // 
             // FrmOpt10081Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 67);
+            this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chk100);
             this.Controls.Add(this.lblStockName);
@@ -105,5 +118,6 @@
         private System.Windows.Forms.Label lblStockName;
         private System.Windows.Forms.CheckBox chk100;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkSpeedOn;
     }
 }

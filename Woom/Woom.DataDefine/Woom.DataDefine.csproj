@@ -68,6 +68,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SDataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\SDataAccess\Lib\SDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -80,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OptData\ClsCollectOptDataFunc.cs" />
     <Compile Include="OptData\ClsColumnSets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ClsUtil.cs" />

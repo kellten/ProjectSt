@@ -8,6 +8,7 @@ using Woom.DataAccess;
 using Woom.DataAccess.OptCaller.Class;
 using Woom.DataAccess.PlugIn;
 using Woom.DataDefine.Util;
+using Woom.DataDefine.OptData;
 using Woom.DataAccess.Logger;
 
 namespace Woom.Tester.Forms
@@ -35,8 +36,8 @@ namespace Woom.Tester.Forms
         #endregion 전역변수
 
         private ClsDataAccessUtil _clsDataAccessUtil;
+        private ClsCollectOptDataFunc _clsCollectOptDataFunc;
 
-        
         public FrmOpt10081Caller()
         {
             InitializeComponent();
@@ -65,29 +66,8 @@ namespace Woom.Tester.Forms
 
             proBar10081.Maximum = _dtStockCode.Rows.Count;
 
-            if (System.DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
-            {
-                _stdDate = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
-            }
-            else if (System.DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
-            {
-                _stdDate = DateTime.Today.AddDays(-2).ToString("yyyyMMdd");
-            }
-            else
-            {
-                int i = Int32.Parse(System.DateTime.Now.ToString("HH") + System.DateTime.Now.ToString("ss"));
+            _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
 
-                if (i > 1600)
-                { _stdDate = CDateTime.FormatDate(System.DateTime.Now.Date.ToShortDateString()); }
-                else if (System.DateTime.Now.DayOfWeek == DayOfWeek.Monday)
-                {
-                    _stdDate = DateTime.Today.AddDays(-3).ToString("yyyyMMdd");
-                }
-                else
-                {
-                    _stdDate = DateTime.Today.AddDays(-1).ToString("yyyyMMdd");
-                }
-            }
         }
 
         private void SetFormId()
@@ -97,7 +77,18 @@ namespace Woom.Tester.Forms
 
             _ScreenNo = _ScreenNo + 1;
         }
+        private void WaitTime()
+        {
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+            //Task.Delay(3000).Wait();
+            if (ClsAxKH.SPEED_CALL == true)
+            { _clsDataAccessUtil.Delay(500); }
+            else
+            { _clsDataAccessUtil.Delay(3600); }
 
+            tcs.SetResult(true);
+        }
 
         private void OnGetStockCode()
         {
@@ -105,7 +96,8 @@ namespace Woom.Tester.Forms
             tcs = new TaskCompletionSource<bool>();
 
             //Task.Delay(3000).Wait();
-            _clsDataAccessUtil.Delay(3000);
+
+            WaitTime();
 
             tcs.SetResult(true);
 
@@ -243,6 +235,9 @@ namespace Woom.Tester.Forms
             string maxDate = "";
             string minDate = "";
 
+            try
+            {
+
             if (dt != null)
             { 
              stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
@@ -259,8 +254,6 @@ namespace Woom.Tester.Forms
 
             if (dt != null)
             {
-                
-
                 ArrayParam arrParam = new ArrayParam();
                 Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
@@ -270,8 +263,10 @@ namespace Woom.Tester.Forms
                     WriteTextSafe(stockCode + "(" + dr["일자"] + ")");
 
                     MinDate = dr["일자"].ToString().Trim();
+
                     if (_MaxStockDate10081 == dr["일자"].ToString().Trim())
                     {
+                        ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C");
                         _opt10081.Dispose();
 
                         tcs.SetResult(true);
@@ -349,11 +344,36 @@ namespace Woom.Tester.Forms
                     OnGetStockCode();
                 }
             }
+
+            }
+            catch (Exception ex)
+            {
+                _opt10081.Dispose();
+
+                tcs.SetResult(true);
+
+                OnGetStockCode();
+
+                MessageBox.Show(ex.Message.ToString());
+                throw;
+            }
         }
         private void btn10081_Click(object sender, EventArgs e)
         {
             GetOptCallMagamaData(_stdDate);
             OnGetStockCode();
+        }
+
+        private void chkSpeedOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSpeedOn.Checked == true)
+            {
+                ClsAxKH.SPEED_CALL = true;
+            }
+            else
+            {
+                ClsAxKH.SPEED_CALL = false;
+            }
         }
     }
 }
