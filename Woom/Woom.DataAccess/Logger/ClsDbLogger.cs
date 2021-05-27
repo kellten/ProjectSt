@@ -53,7 +53,7 @@ namespace Woom.DataAccess.Logger
             }
         }
 
-        public static bool OptCallMagamStoredData(string optCaller, string stockCode, string stdDate, string maxDate, string minDate, string jobIngGb)
+        public static bool OptCallMagamStoredData(string actionGb, string optCaller, string stockCode, string stdDate, string maxDate, string minDate, string jobIngGb, string chainCompGb, string chainMaxDate, string chainMinDate)
         {
 
             try
@@ -65,7 +65,7 @@ namespace Woom.DataAccess.Logger
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");
 
             arrParam.Clear();
-            arrParam.Add("@ACTION_GB", "A");
+            arrParam.Add("@ACTION_GB", actionGb);
             arrParam.Add("@STD_DATE", stdDate);
             arrParam.Add("@STOCK_CODE", stockCode);
             arrParam.Add("@OPT_CALL", optCaller);
@@ -73,6 +73,9 @@ namespace Woom.DataAccess.Logger
             arrParam.Add("@MAX_DATE", maxDate);
             arrParam.Add("@MIN_DATE", minDate);
             arrParam.Add("@JOB_ING_GB", jobIngGb);
+            arrParam.Add("@CHAIN_COMP_GB", chainCompGb);
+            arrParam.Add("@CHAIN_MAX_DATE", chainMaxDate);
+            arrParam.Add("@CHAIN_MIN_DATE", chainMinDate);
             arrParam.Add("@R_ErrorCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
             oSql.ExecuteNonQuery("p_OPTCA_MAGAMAdd", CommandType.StoredProcedure, arrParam);

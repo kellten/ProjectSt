@@ -28,13 +28,8 @@ namespace Woom.DataDefine.OptData
             { return OptPeriod.END_NOT_EXISTS; }
             else
             {
-                DataTable dt2 = new DataTable();
-
-                dt2 = kiwoom.p_OptCaMagamStockCodeQuery(query: "1", stdDate: "", stockCode: stockCode, optcall: optCall, jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-
-                if (dt2 != null)
-                {
-                    if (Convert.ToInt32(dt.Rows[0]["MAX_DATE"].ToString().Trim()) >= Convert.ToInt32(AvailableTradingDate()))
+                
+                    if (Convert.ToInt32(dt.Rows[0]["CHAIN_MAX_DATE"].ToString().Trim()) >= Convert.ToInt32(AvailableTradingDate()))
                     {
                         return OptPeriod.FULL;
                     }
@@ -42,12 +37,6 @@ namespace Woom.DataDefine.OptData
                     {
                         return OptPeriod.EMPTY;
                     }
-                }
-                else
-                {
-                    return OptPeriod.EMPTY;
-                }
-
             }
         }
 

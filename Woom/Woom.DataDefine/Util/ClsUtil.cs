@@ -33,13 +33,25 @@ namespace Woom.DataDefine.Util
         {
             string reDate = "";
 
-            reDate = Mid(valueDate, 1, 4) + "-" + Mid(valueDate, 5, 2) + Mid(valueDate, 7, 2);
+            reDate = Mid(valueDate, 1, 4) + "-" + Mid(valueDate, 5, 2) + "-" + Mid(valueDate, 7, 2);
 
             DateTime dtDate =  Convert.ToDateTime( reDate);
 
            reDate = dtDate.AddDays(Convert.ToInt32(DayOfWeek.Monday) - Convert.ToInt32(dtDate.DayOfWeek)).ToString("yyyyMMdd");
 
             return reDate;
+
+        }
+
+        public DateTime StringToDateTime(string valueDate)
+        {
+            string reDate = "";
+
+            reDate = Mid(valueDate, 1, 4) + "-" + Mid(valueDate, 5, 2) + "-" + Mid(valueDate, 7, 2);
+
+            DateTime dtDate = Convert.ToDateTime(reDate);
+
+            return dtDate;
 
         }
 

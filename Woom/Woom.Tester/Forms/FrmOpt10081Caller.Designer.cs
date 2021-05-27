@@ -34,6 +34,9 @@
             this.chk100 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.chkSpeedOn = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtpStdDate = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // btn10081
@@ -58,9 +61,9 @@
             this.lblStockName.AutoSize = true;
             this.lblStockName.Location = new System.Drawing.Point(0, 46);
             this.lblStockName.Name = "lblStockName";
-            this.lblStockName.Size = new System.Drawing.Size(54, 12);
+            this.lblStockName.Size = new System.Drawing.Size(81, 12);
             this.lblStockName.TabIndex = 28;
-            this.lblStockName.Text = "Opt10060";
+            this.lblStockName.Text = "종목 진행사항";
             // 
             // chk100
             // 
@@ -93,11 +96,39 @@
             this.chkSpeedOn.UseVisualStyleBackColor = true;
             this.chkSpeedOn.CheckedChanged += new System.EventHandler(this.chkSpeedOn_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 32;
+            this.label1.Text = "기준일자 : ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(71, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 12);
+            this.label2.TabIndex = 33;
+            // 
+            // dtpStdDate
+            // 
+            this.dtpStdDate.Location = new System.Drawing.Point(77, 72);
+            this.dtpStdDate.Name = "dtpStdDate";
+            this.dtpStdDate.Size = new System.Drawing.Size(175, 21);
+            this.dtpStdDate.TabIndex = 34;
+            this.dtpStdDate.ValueChanged += new System.EventHandler(this.dtpStdDate_ValueChanged);
+            // 
             // FrmOpt10081Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 67);
+            this.ClientSize = new System.Drawing.Size(694, 102);
+            this.Controls.Add(this.dtpStdDate);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chk100);
@@ -119,5 +150,8 @@
         private System.Windows.Forms.CheckBox chk100;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox chkSpeedOn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dtpStdDate;
     }
 }
