@@ -277,7 +277,7 @@ namespace Woom.Tester.Forms
             string maxDate = dt.Compute("max([일자])",  string.Empty).ToString().Trim();
             string minDate = dt.Compute("min([일자])",string.Empty).ToString().Trim();
 
-            ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "");
+          //  ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "");
 
             if (dt != null)
             {
@@ -397,7 +397,7 @@ namespace Woom.Tester.Forms
             // 최근 거래일 100일을 가져오는걸로 한다면
             if (chk100.Checked == true)
             {
-                ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C");
+              //  ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C");
 
                 _opt10015.Dispose();
 
@@ -412,7 +412,7 @@ namespace Woom.Tester.Forms
                 {
                     //int minDate = Convert.ToInt32(dt.Compute("min([일자])", string.Empty));
 
-                    ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S");
+                 //   ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S");
 
                     tcs.SetResult(true);
 
@@ -425,7 +425,7 @@ namespace Woom.Tester.Forms
                 else
                 {
 
-                    ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "E");
+                  //  ClsDbLogger.OptCallMagamStoredData(optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "E");
 
                     _opt10015.Dispose();
 
