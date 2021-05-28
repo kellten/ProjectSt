@@ -33,6 +33,8 @@
             this.proBar10015 = new System.Windows.Forms.ProgressBar();
             this.chk100 = new System.Windows.Forms.CheckBox();
             this.chkSpeedOn = new System.Windows.Forms.CheckBox();
+            this.dtpStdDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblStockName
@@ -64,7 +66,7 @@
             // chk100
             // 
             this.chk100.AutoSize = true;
-            this.chk100.Location = new System.Drawing.Point(416, 45);
+            this.chk100.Location = new System.Drawing.Point(535, 46);
             this.chk100.Name = "chk100";
             this.chk100.Size = new System.Drawing.Size(152, 16);
             this.chk100.TabIndex = 32;
@@ -74,7 +76,7 @@
             // chkSpeedOn
             // 
             this.chkSpeedOn.AutoSize = true;
-            this.chkSpeedOn.Location = new System.Drawing.Point(574, 45);
+            this.chkSpeedOn.Location = new System.Drawing.Point(457, 46);
             this.chkSpeedOn.Name = "chkSpeedOn";
             this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
             this.chkSpeedOn.TabIndex = 33;
@@ -82,11 +84,30 @@
             this.chkSpeedOn.UseVisualStyleBackColor = true;
             this.chkSpeedOn.CheckedChanged += new System.EventHandler(this.chkSpeedOn_CheckedChanged);
             // 
+            // dtpStdDate
+            // 
+            this.dtpStdDate.Location = new System.Drawing.Point(89, 68);
+            this.dtpStdDate.Name = "dtpStdDate";
+            this.dtpStdDate.Size = new System.Drawing.Size(175, 21);
+            this.dtpStdDate.TabIndex = 36;
+            this.dtpStdDate.ValueChanged += new System.EventHandler(this.dtpStdDate_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "기준일자 : ";
+            // 
             // FrmOpt10015Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 76);
+            this.ClientSize = new System.Drawing.Size(721, 98);
+            this.Controls.Add(this.dtpStdDate);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.chk100);
             this.Controls.Add(this.lblStockName);
@@ -106,5 +127,7 @@
         private System.Windows.Forms.ProgressBar proBar10015;
         private System.Windows.Forms.CheckBox chk100;
         private System.Windows.Forms.CheckBox chkSpeedOn;
+        private System.Windows.Forms.DateTimePicker dtpStdDate;
+        private System.Windows.Forms.Label label1;
     }
 }

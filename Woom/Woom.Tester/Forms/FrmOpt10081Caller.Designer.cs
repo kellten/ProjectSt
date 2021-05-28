@@ -127,8 +127,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 102);
             this.Controls.Add(this.dtpStdDate);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chk100);

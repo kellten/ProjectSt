@@ -66,7 +66,6 @@ namespace Woom.DataAccess.Logger
 
             arrParam.Clear();
             arrParam.Add("@ACTION_GB", actionGb);
-            arrParam.Add("@STD_DATE", stdDate);
             arrParam.Add("@STOCK_CODE", stockCode);
             arrParam.Add("@OPT_CALL", optCaller);
             arrParam.Add("@JOB_DATE", jobDate);
