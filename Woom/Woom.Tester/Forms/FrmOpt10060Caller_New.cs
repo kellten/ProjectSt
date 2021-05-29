@@ -42,22 +42,8 @@ namespace Woom.Tester.Forms
         private ClsOpt10060 _ClsOpt10060;
         private DataTable _UserDt;
 
-        private ClsUtil _clsUtil;
-        private ClsCollectOptDataFunc _clsCollectOptDataFunc;
-
-        // 마지막으로 돌린 일자
-        private string _LastPsDate = "";
-        private string _LastPdDate = "";
-        private string _LastQsDate = "";
-        private string _LastQdDate = "";
-
-        private string _FirstPsDate = "";
-        private string _FirstPdDate = "";
-        private string _FirstQsDate = "";
-        private string _FirstQdDate = "";
-
-        private string _FirstStockDate = ""; // 상장일
-
+        private ClsUtil _clsUtil = new ClsUtil();
+        private ClsCollectOptDataFunc _clsCollectOptDataFunc = new ClsCollectOptDataFunc();
         
 
         private enum Opt10060TransType
@@ -102,6 +88,7 @@ namespace Woom.Tester.Forms
             proBar10060.Maximum = _StockQueue.Count;
             _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
             dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
+            GetOptCallMagamaData(_stdDate);
         }
         private void SetFormId()
         {
@@ -164,15 +151,23 @@ namespace Woom.Tester.Forms
             switch (opt10060TransType)
             {
                 case Opt10060TransType.PriceMaesu:
+                    if (_dtOptCalMagamPs == null)
+                    { return true; }
                     rows = _dtOptCalMagamPs.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == stockCode);
                     break;
                 case Opt10060TransType.PriceMaedo:
+                    if (_dtOptCalMagamPd == null)
+                    { return true; }
                     rows = _dtOptCalMagamPd.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == stockCode);
                     break;
                 case Opt10060TransType.QtyMaesu:
+                    if (_dtOptCalMagamQs == null)
+                    { return true; }
                     rows = _dtOptCalMagamQs.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == stockCode);
                     break;
                 case Opt10060TransType.QtyMaeDo:
+                    if (_dtOptCalMagamQd == null)
+                    { return true; }
                     rows = _dtOptCalMagamQd.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == stockCode);
                     break;
                 default:
@@ -247,10 +242,10 @@ namespace Woom.Tester.Forms
             }
 
             KiwoomQuery kiwoomQuery = new KiwoomQuery();
-            _dtOptCalMagamPs = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OPS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-            _dtOptCalMagamPd = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OPD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-            _dtOptCalMagamQs = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OQS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-            _dtOptCalMagamQd = kiwoomQuery.p_OptCaMagamStdDateQuery(query: "1", stdDate: stdDate, stockCode: "", optcall: "OQD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+            _dtOptCalMagamPs = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1",  stockCode: "", optcall: "OPS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+            _dtOptCalMagamPd = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1",  stockCode: "", optcall: "OPD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+            _dtOptCalMagamQs = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1",  stockCode: "", optcall: "OQS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+            _dtOptCalMagamQd = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OQD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
         }
 
         private void WriteTextSafe(string strMessage)
