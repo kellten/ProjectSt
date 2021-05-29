@@ -351,6 +351,7 @@ namespace Woom.Tester.Forms
                     tcs.SetResult(true);
 
                     OnGetStockCode();
+                    return;
 
                 }
                 else

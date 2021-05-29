@@ -29,45 +29,28 @@
         private void InitializeComponent()
         {
             this.lblStdDate = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.chkLastDay = new System.Windows.Forms.CheckBox();
             this.lblStockName = new System.Windows.Forms.Label();
             this.btn10060All = new System.Windows.Forms.Button();
             this.proBar10060 = new System.Windows.Forms.ProgressBar();
+            this.chkSpeedOn = new System.Windows.Forms.CheckBox();
+            this.chk100 = new System.Windows.Forms.CheckBox();
+            this.dtpStdDate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblStdDate
             // 
             this.lblStdDate.AutoSize = true;
-            this.lblStdDate.Location = new System.Drawing.Point(148, 44);
+            this.lblStdDate.Location = new System.Drawing.Point(282, 44);
             this.lblStdDate.Name = "lblStdDate";
             this.lblStdDate.Size = new System.Drawing.Size(38, 12);
             this.lblStdDate.TabIndex = 35;
             this.lblStdDate.Text = "label2";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(95, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
-            this.label1.TabIndex = 34;
-            this.label1.Text = "기준일";
-            // 
-            // chkLastDay
-            // 
-            this.chkLastDay.AutoSize = true;
-            this.chkLastDay.Location = new System.Drawing.Point(19, 44);
-            this.chkLastDay.Name = "chkLastDay";
-            this.chkLastDay.Size = new System.Drawing.Size(60, 16);
-            this.chkLastDay.TabIndex = 33;
-            this.chkLastDay.Text = "최근일";
-            this.chkLastDay.UseVisualStyleBackColor = true;
-            // 
             // lblStockName
             // 
             this.lblStockName.AutoSize = true;
-            this.lblStockName.Location = new System.Drawing.Point(242, 45);
+            this.lblStockName.Location = new System.Drawing.Point(376, 45);
             this.lblStockName.Name = "lblStockName";
             this.lblStockName.Size = new System.Drawing.Size(54, 12);
             this.lblStockName.TabIndex = 32;
@@ -90,19 +73,57 @@
             this.proBar10060.Size = new System.Drawing.Size(556, 21);
             this.proBar10060.TabIndex = 30;
             // 
+            // chkSpeedOn
+            // 
+            this.chkSpeedOn.AutoSize = true;
+            this.chkSpeedOn.Location = new System.Drawing.Point(488, 45);
+            this.chkSpeedOn.Name = "chkSpeedOn";
+            this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
+            this.chkSpeedOn.TabIndex = 37;
+            this.chkSpeedOn.Text = "스피드온";
+            this.chkSpeedOn.UseVisualStyleBackColor = true;
+            // 
+            // chk100
+            // 
+            this.chk100.AutoSize = true;
+            this.chk100.Location = new System.Drawing.Point(579, 44);
+            this.chk100.Name = "chk100";
+            this.chk100.Size = new System.Drawing.Size(152, 16);
+            this.chk100.TabIndex = 36;
+            this.chk100.Text = "현재일 기준(100거래일)";
+            this.chk100.UseVisualStyleBackColor = true;
+            // 
+            // dtpStdDate
+            // 
+            this.dtpStdDate.Location = new System.Drawing.Point(82, 65);
+            this.dtpStdDate.Name = "dtpStdDate";
+            this.dtpStdDate.Size = new System.Drawing.Size(175, 21);
+            this.dtpStdDate.TabIndex = 39;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 38;
+            this.label1.Text = "기준일자 : ";
+            // 
             // FrmOpt10060Caller_New
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 72);
-            this.Controls.Add(this.lblStdDate);
+            this.ClientSize = new System.Drawing.Size(737, 97);
+            this.Controls.Add(this.dtpStdDate);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.chkLastDay);
+            this.Controls.Add(this.chkSpeedOn);
+            this.Controls.Add(this.chk100);
+            this.Controls.Add(this.lblStdDate);
             this.Controls.Add(this.lblStockName);
             this.Controls.Add(this.btn10060All);
             this.Controls.Add(this.proBar10060);
             this.Name = "FrmOpt10060Caller_New";
-            this.Text = "FrmOpt10060Caller_New";
+            this.Text = "종목별 투자자기관별차트요청(FrmOpt10060Caller_New)";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,10 +132,12 @@
         #endregion
 
         private System.Windows.Forms.Label lblStdDate;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkLastDay;
         private System.Windows.Forms.Label lblStockName;
         private System.Windows.Forms.Button btn10060All;
         private System.Windows.Forms.ProgressBar proBar10060;
+        private System.Windows.Forms.CheckBox chkSpeedOn;
+        private System.Windows.Forms.CheckBox chk100;
+        private System.Windows.Forms.DateTimePicker dtpStdDate;
+        private System.Windows.Forms.Label label1;
     }
 }
