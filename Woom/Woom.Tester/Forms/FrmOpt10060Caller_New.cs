@@ -278,6 +278,7 @@ namespace Woom.Tester.Forms
                 return;
             }
 
+            SetFormId();
             _ClsOpt10060.SetInit(_FormId);
 
             switch (opt10060TransType)
@@ -296,13 +297,13 @@ namespace Woom.Tester.Forms
                 case Opt10060TransType.QtyMaesu:
                     WaitTime();
                     WriteTextSafe(stockCode + " QTY(매수)_" + _StockQueue.Count.ToString());
-                    ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060MaeSu);
+                    ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
                     _ClsOpt10060.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "1", UnitG: "", nPrevNext: 0);
                     break;
                 case Opt10060TransType.QtyMaeDo:
                     WaitTime();
                     WriteTextSafe(stockCode + " QTY(매도)_" + _StockQueue.Count.ToString());
-                    ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060Maedo);
+                    ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
                     _ClsOpt10060.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "2", UnitG: "", nPrevNext: 0);
                     break;
                 default:
@@ -439,6 +440,8 @@ namespace Woom.Tester.Forms
                     ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     _ClsOpt10060.Dispose();
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
                     tcs.SetResult(true);
 
@@ -479,6 +482,8 @@ namespace Woom.Tester.Forms
                         }
 
                         _ClsOpt10060.Dispose();
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
                         tcs.SetResult(true);
 
@@ -498,6 +503,8 @@ namespace Woom.Tester.Forms
             catch (Exception ex)
             {
                 _ClsOpt10060.Dispose();
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
                 tcs.SetResult(true);
 
@@ -600,6 +607,8 @@ namespace Woom.Tester.Forms
                             {
                                 ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
                                 _ClsOpt10060.Dispose();
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
 
                                 tcs.SetResult(true);
                                 
@@ -623,7 +632,8 @@ namespace Woom.Tester.Forms
                     ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     _ClsOpt10060.Dispose();
-
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
                     tcs.SetResult(true);
 
                     OnGetStockCode();
@@ -656,7 +666,8 @@ namespace Woom.Tester.Forms
                         }
 
                         _ClsOpt10060.Dispose();
-
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
                         tcs.SetResult(true);
 
 
@@ -674,7 +685,8 @@ namespace Woom.Tester.Forms
             catch (Exception ex)
             {
                 _ClsOpt10060.Dispose();
-
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
                 tcs.SetResult(true);
 
                 if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
@@ -688,8 +700,7 @@ namespace Woom.Tester.Forms
                 throw;
             }
         }
-
-        private void OnReceiveTrData_Opt10060MaeSu(string sRQName, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060QtyMaeSu(string sRQName, DataTable dt, int sPreNext)
         {
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
@@ -775,6 +786,8 @@ namespace Woom.Tester.Forms
                             {
                                 ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
                                 _ClsOpt10060.Dispose();
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
 
                                 tcs.SetResult(true);
 
@@ -796,7 +809,8 @@ namespace Woom.Tester.Forms
                     ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     _ClsOpt10060.Dispose();
-
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
                     tcs.SetResult(true);
 
                     if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
@@ -832,6 +846,8 @@ namespace Woom.Tester.Forms
                         }
 
                         _ClsOpt10060.Dispose();
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
 
                         tcs.SetResult(true);
 
@@ -847,6 +863,8 @@ namespace Woom.Tester.Forms
             catch (Exception ex)
             {
                 _ClsOpt10060.Dispose();
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
 
                 tcs.SetResult(true);
 
@@ -860,7 +878,7 @@ namespace Woom.Tester.Forms
             }
 
         }
-        private void OnReceiveTrData_Opt10060Maedo(string sRQName, DataTable dt, int sPreNext)
+        private void OnReceiveTrData_Opt10060QtyMaedo(string sRQName, DataTable dt, int sPreNext)
         {
             TaskCompletionSource<bool> tcs = null;
             tcs = new TaskCompletionSource<bool>();
@@ -883,7 +901,7 @@ namespace Woom.Tester.Forms
                     maxDate = dt.Compute("max([일자])", string.Empty).ToString().Trim();
                     minDate = dt.Compute("min([일자])", string.Empty).ToString().Trim();
 
-                    ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     var rows = _dtOptCalMagamQd.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == stockCode);
 
@@ -944,8 +962,10 @@ namespace Woom.Tester.Forms
                         {
                             if (chainMaxDate == dr["일자"].ToString().Trim())
                             {
-                                ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
+                                ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
                                 _ClsOpt10060.Dispose();
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
                                 tcs.SetResult(true);
 
@@ -960,9 +980,11 @@ namespace Woom.Tester.Forms
                 // 최근 거래일 100일을 가져오는걸로 한다면
                 if (chk100.Checked == true)
                 {
-                    ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     _ClsOpt10060.Dispose();
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
                     tcs.SetResult(true);
 
@@ -977,7 +999,7 @@ namespace Woom.Tester.Forms
                     {
                         tcs.SetResult(true);
 
-                        ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
+                        ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                         _clsDataAccessUtil.Delay(3600);
 
@@ -990,14 +1012,16 @@ namespace Woom.Tester.Forms
 
                         if (dt != null)
                         {
-                            ClsDbLogger.OptCallMagamStoredData(actionGb: "CE", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+                            ClsDbLogger.OptCallMagamStoredData(actionGb: "CE", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
                         }
                         else
                         {
-                            ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+                            ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
                         }
 
                         _ClsOpt10060.Dispose();
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+                        ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
                         tcs.SetResult(true);
 
@@ -1012,6 +1036,8 @@ namespace Woom.Tester.Forms
             catch (Exception ex)
             {
                 _ClsOpt10060.Dispose();
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
                 tcs.SetResult(true);
 

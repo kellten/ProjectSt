@@ -35,6 +35,8 @@
             this.chkSpeedOn = new System.Windows.Forms.CheckBox();
             this.dtpStdDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblTimePerCount = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblStockName
@@ -101,11 +103,31 @@
             this.label1.TabIndex = 35;
             this.label1.Text = "기준일자 : ";
             // 
+            // lblTimePerCount
+            // 
+            this.lblTimePerCount.AutoSize = true;
+            this.lblTimePerCount.Location = new System.Drawing.Point(311, 77);
+            this.lblTimePerCount.Name = "lblTimePerCount";
+            this.lblTimePerCount.Size = new System.Drawing.Size(38, 12);
+            this.lblTimePerCount.TabIndex = 37;
+            this.lblTimePerCount.Text = "label2";
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Location = new System.Drawing.Point(311, 108);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(38, 12);
+            this.lblTime.TabIndex = 38;
+            this.lblTime.Text = "label2";
+            // 
             // FrmOpt10015Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 98);
+            this.ClientSize = new System.Drawing.Size(721, 129);
+            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.lblTimePerCount);
             this.Controls.Add(this.dtpStdDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkSpeedOn);
@@ -129,5 +151,7 @@
         private System.Windows.Forms.CheckBox chkSpeedOn;
         private System.Windows.Forms.DateTimePicker dtpStdDate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTimePerCount;
+        private System.Windows.Forms.Label lblTime;
     }
 }

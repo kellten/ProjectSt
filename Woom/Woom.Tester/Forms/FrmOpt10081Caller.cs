@@ -105,7 +105,7 @@ namespace Woom.Tester.Forms
                 return;
             }
 
-            WaitTime();
+            //WaitTime();
 
             GetOpt10081Caller(strStockCode);
 
@@ -335,7 +335,7 @@ namespace Woom.Tester.Forms
 
                         ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
-                        _clsDataAccessUtil.Delay(3600);
+                        //_clsDataAccessUtil.Delay(3600);
 
                         _opt10081.SetInit(_FormId);
                         _opt10081.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StockName: "", StdDate: sRQNameArray[2].ToString().Trim(), ModifyJugaGb: sRQNameArray[3].ToString().Trim(), nPrevNext: 2);

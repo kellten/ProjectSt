@@ -286,9 +286,9 @@ namespace Woom.DataAccess.PlugIn
 
         public static bool SPEED_CALL = false;
 
-        private static DateTime _limitTime;
+        public static DateTime _limitTime;
         private static bool _firstCall = false;
-        private static int _limitCount = 999;
+        public static int _limitCount = 999;
         private static void SpeedSpendTime()
         {
             // 1시간 동안 1천회 전송 가능하므로 초기 값을 1천회 세팅
@@ -307,7 +307,7 @@ namespace Woom.DataAccess.PlugIn
                 // 호출 횟수가 1시간에 천회가 넘어가면 에러 발생
                 if (Convert.ToInt16(dateDiff.TotalSeconds) < 1)
                 {
-                    Delay(200);
+                    Delay(600);
                 }
 
                 _SendDateTime = nowDate;

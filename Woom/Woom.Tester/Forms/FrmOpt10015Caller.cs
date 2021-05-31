@@ -25,10 +25,6 @@ namespace Woom.Tester.Forms
 
         private ClsOpt10015 _opt10015 = new ClsOpt10015();
 
-        // 마지막으로 돌린 일자
-        private string _LastDate = "";
-        // 마지막으로 돌린 일자
-        private string _FirstDate = "";
         private Queue _StockQueue = new Queue();
 
         private DataTable _dtOptCalMagam;
@@ -132,7 +128,7 @@ namespace Woom.Tester.Forms
                 return;
             }
 
-            WaitTime();
+             WaitTime();
 
             GetOpt10015Caller( strStockCode);
 
@@ -234,6 +230,9 @@ namespace Woom.Tester.Forms
             _opt10015.SetInit(_FormId);
             _opt10015.JustRequest(stockCode, _stdDate, "", 0);
 
+            lblTimePerCount.Text = ClsAxKH._limitCount.ToString();
+            lblTime.Text = ClsAxKH._limitTime.ToString();
+
             tcs.SetResult(true);
 
         }
@@ -253,13 +252,15 @@ namespace Woom.Tester.Forms
             string minDate = "";
             string chainMaxDate = "";
 
+            stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
+            stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
+
             try
             {
 
                 if (dt != null)
                 {
-                    stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
-                    stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10015, sRQName);
+                   
                     maxDate = dt.Compute("max([일자])", string.Empty).ToString().Trim();
                     minDate = dt.Compute("min([일자])", string.Empty).ToString().Trim();
 
@@ -362,10 +363,13 @@ namespace Woom.Tester.Forms
 
                         ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
-                        _clsDataAccessUtil.Delay(3600);
+                        WaitTime();
 
                         _opt10015.SetInit(_FormId);
                         _opt10015.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StartDate: sRQNameArray[2].ToString().Trim(), StockName: "", nPrevNext: 2);
+
+                        lblTimePerCount.Text = ClsAxKH._limitCount.ToString();
+                        lblTime.Text = ClsAxKH._limitTime.ToString();
 
                         return;
                     }
