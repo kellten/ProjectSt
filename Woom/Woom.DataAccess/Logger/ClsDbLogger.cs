@@ -79,24 +79,7 @@ namespace Woom.DataAccess.Logger
 
             oSql.ExecuteNonQuery("p_OPTCA_MAGAMAdd", CommandType.StoredProcedure, arrParam);
 
-                if (jobIngGb == "E")
-                {
-                    // 마감 되어 있는 내역
-                    arrParam.Clear();
-                    arrParam.Add("@ACTION_GB", "A");
-                    arrParam.Add("@STD_DATE", stdDate);
-                    arrParam.Add("@STOCK_CODE", stockCode);
-                    arrParam.Add("@OPT_CALL", optCaller);
-                    arrParam.Add("@JOB_DATE", jobDate);
-                    arrParam.Add("@MAX_DATE", maxDate);
-                    arrParam.Add("@MIN_DATE", minDate);
-                    arrParam.Add("@JOB_ING_GB", jobIngGb);
-                    arrParam.Add("@R_ErrorCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
-
-                    oSql.ExecuteNonQuery("p_OPTCA_EndMAGAMAdd", CommandType.StoredProcedure, arrParam);
-
-                }
-
+               
                 return true;
 
             }

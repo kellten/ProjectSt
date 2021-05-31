@@ -189,7 +189,8 @@ namespace Woom.Tester.Forms
 
                 foreach (DataRow dr2th in rows)
                 {
-                    if (dr2th["CHAIN_COMP_GB"].ToString().Trim() == "Y")
+                    // Y - 연속조회 완료  E - 에러 (DT값이 NULL반환)
+                    if (dr2th["CHAIN_COMP_GB"].ToString().Trim() == "Y" || dr2th["CHAIN_COMP_GB"].ToString().Trim() == "E")
                     {
                         if (_stdDate == dr2th["CHAIN_MAX_DATE"].ToString().Trim())
                         {
@@ -382,7 +383,7 @@ namespace Woom.Tester.Forms
                         }
                         else
                         {
-                            ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+                            ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OPT10015", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
                         }
 
                         _opt10015.Dispose();

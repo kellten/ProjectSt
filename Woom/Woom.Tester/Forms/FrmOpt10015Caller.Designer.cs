@@ -68,7 +68,7 @@
             // chk100
             // 
             this.chk100.AutoSize = true;
-            this.chk100.Location = new System.Drawing.Point(535, 46);
+            this.chk100.Location = new System.Drawing.Point(551, 39);
             this.chk100.Name = "chk100";
             this.chk100.Size = new System.Drawing.Size(152, 16);
             this.chk100.TabIndex = 32;
@@ -78,7 +78,7 @@
             // chkSpeedOn
             // 
             this.chkSpeedOn.AutoSize = true;
-            this.chkSpeedOn.Location = new System.Drawing.Point(457, 46);
+            this.chkSpeedOn.Location = new System.Drawing.Point(473, 39);
             this.chkSpeedOn.Name = "chkSpeedOn";
             this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
             this.chkSpeedOn.TabIndex = 33;

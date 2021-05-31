@@ -237,13 +237,14 @@ namespace Woom.Tester.Forms
             string minDate = "";
             string chainMaxDate = "";
 
+            stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
+            stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
+
             try
             {
 
                 if (dt != null)
                 {
-                    stockCode = ClsAxKH.RetStockCodeBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
-                    stdDate = ClsAxKH.RetStdDateBysRqName(ClsAxKH.OptType.Opt10081, sRQName);
                     maxDate = dt.Compute("max([일자])", string.Empty).ToString().Trim();
                     minDate = dt.Compute("min([일자])", string.Empty).ToString().Trim();
 
@@ -350,7 +351,7 @@ namespace Woom.Tester.Forms
                         }
                         else
                         {
-                            ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+                            ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
                         }
 
                         _opt10081.Dispose();
