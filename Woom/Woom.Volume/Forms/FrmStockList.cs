@@ -48,13 +48,13 @@ namespace Woom.Volume.Forms
 
             int i = 0;
 
-            //TaskCompletionSource<bool> tcs = null;
-            //tcs = new TaskCompletionSource<bool>();
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
 
-            //if (tcs == null || tcs.Task.IsCompleted)
-            //{
-            //    return true;
-            //}
+            if (tcs == null || tcs.Task.IsCompleted)
+            {
+                return true;
+            }
 
             ClsColumnSets oBasicDataType = new ClsColumnSets();
 
@@ -86,6 +86,8 @@ namespace Woom.Volume.Forms
             _rowIndex = dgv0.RowCount - 1;
 
             GetOpt10001Caller(0);
+
+            tcs.SetResult(true);
 
             return true;
         }
@@ -159,7 +161,19 @@ namespace Woom.Volume.Forms
             DataTable dt2 = new DataTable();
             DataTable dt3 = new DataTable();
 
+            int i = 0;
+
+            string tradeDate = "";
+
             ClsColumnSets oBasicDataType = new ClsColumnSets();
+
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+
+            if (tcs == null || tcs.Task.IsCompleted)
+            {
+                return;
+            }
 
             RemoveGridViewRow(dgvGiganUpDown);
             //RemoveGridViewColumn(dgvGiganUpDown);            
@@ -193,6 +207,7 @@ namespace Woom.Volume.Forms
                     dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
                     dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
                     dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
+                    dgvGiganUpDown.Columns.Add(columnName: "SEQ_NO", headerText: "일수");
 
                     foreach (DataColumn dc in dt.Columns)
                     {
@@ -211,10 +226,25 @@ namespace Woom.Volume.Forms
 
                 int row = 0;
                                               
-               
                 foreach (DataRow dr in dt.Rows)
                 {
                     dgvGiganUpDown.Rows.Add();
+
+                    if (tradeDate == "")
+                    {
+                        tradeDate = dr["STOCK_DATE"].ToString().Trim();
+                    }
+                    else
+                    {
+                        if (tradeDate != dr["STOCK_DATE"].ToString().Trim())
+                        {
+
+                            tradeDate = dr["STOCK_DATE"].ToString().Trim();
+                            i = i - 1;
+                        }
+                    }
+
+                    dgvGiganUpDown.Rows[row].Cells["SEQ_NO"].Value = i.ToString() + " 전";
 
                     foreach (DataColumn dc in dt.Columns)
                     {
@@ -261,11 +291,16 @@ namespace Woom.Volume.Forms
                     row = row + 1;
                 }
 
-                SetDataGridView();
+                SetDataGridView();                
+
+                tcs.SetResult(true);
 
             }
         }
         #endregion
+
+        
+
 
         #region SetDataGridView
         private void SetDataGridView()
@@ -277,8 +312,15 @@ namespace Woom.Volume.Forms
 
                     dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Style.ForeColor = Color.Red;
                 }                
-            } 
+            }
+
+            dgvGiganUpDown.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
         }
+        #endregion
+
+        #region GetOpt10060Data
+        
         #endregion
 
         private void RemoveGridViewRow(DataGridView dgv)
@@ -385,7 +427,6 @@ namespace Woom.Volume.Forms
             {
                 System.Diagnostics.Process.Start("https://finance.naver.com/item/coinfo.nhn?code=" + dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
             }
-            
 
         }
     }

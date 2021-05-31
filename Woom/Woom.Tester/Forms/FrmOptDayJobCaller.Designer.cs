@@ -36,6 +36,7 @@
             this.proBar10081 = new System.Windows.Forms.ProgressBar();
             this.BtnStart = new System.Windows.Forms.Button();
             this.lblStockName = new System.Windows.Forms.Label();
+            this.chkSpeedOn = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // proBar10015
@@ -105,11 +106,22 @@
             this.lblStockName.TabIndex = 37;
             this.lblStockName.Text = "Opt10060";
             // 
+            // chkSpeedOn
+            // 
+            this.chkSpeedOn.AutoSize = true;
+            this.chkSpeedOn.Location = new System.Drawing.Point(14, 86);
+            this.chkSpeedOn.Name = "chkSpeedOn";
+            this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
+            this.chkSpeedOn.TabIndex = 38;
+            this.chkSpeedOn.Text = "스피드온";
+            this.chkSpeedOn.UseVisualStyleBackColor = true;
+            // 
             // FrmOptDayJobCaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(846, 117);
+            this.ClientSize = new System.Drawing.Size(846, 171);
+            this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.lblStockName);
             this.Controls.Add(this.BtnStart);
             this.Controls.Add(this.proBar10081);
@@ -135,5 +147,6 @@
         private System.Windows.Forms.ProgressBar proBar10081;
         private System.Windows.Forms.Button BtnStart;
         private System.Windows.Forms.Label lblStockName;
+        private System.Windows.Forms.CheckBox chkSpeedOn;
     }
 }

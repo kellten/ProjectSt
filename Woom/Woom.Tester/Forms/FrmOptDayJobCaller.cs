@@ -150,6 +150,14 @@ namespace Woom.Tester.Forms
         }
         private void OnGetStockCode()
         {
+            TaskCompletionSource<bool> tcs = null;
+            tcs = new TaskCompletionSource<bool>();
+
+            if (tcs == null || tcs.Task.IsCompleted)
+            {
+                return;
+            }
+
             string strStockCode = "";
 
             strStockCode = GetStockCode();
@@ -157,6 +165,7 @@ namespace Woom.Tester.Forms
             if (strStockCode == "End")
             {
                 BtnStart.Text = "작업 완료";
+                tcs.SetResult(true);
                 return;
             }
 
@@ -168,6 +177,7 @@ namespace Woom.Tester.Forms
             if (strStockCode == "")
             {
                 OnGetStockCode();
+                tcs.SetResult(true);
                 return;
             }
 
@@ -179,6 +189,7 @@ namespace Woom.Tester.Forms
             if (stockName == "")
             {
                 OnGetStockCode();
+                tcs.SetResult(true);
                 return;
             }
 
@@ -200,7 +211,7 @@ namespace Woom.Tester.Forms
             }
 
             WriteTextSafe(strStockCode + " 작업 중");
-            //   tcs.SetResult(true);
+             tcs.SetResult(true);
         }
         private void GetOpt10015Caller(string stockCode, string MaxDate, string MinDate)
         {
