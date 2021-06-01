@@ -219,52 +219,52 @@ namespace Woom.Tester.Forms
                    
                         arrParam.Clear();
                         arrParam.Add("@ACTION_GB", "A");
-                        arrParam.Add("@STOCK_CODE", dr["STOCK_CODE"]);
+                        arrParam.Add("@STOCK_CODE", dr["종목코드"]);
                         arrParam.Add("@CALL_DATE", "");
                         arrParam.Add("@CALL_TIME", "");
                         arrParam.Add("@결산월", dr["결산월"]);
-                        arrParam.Add("@액면가", dr["액면가"]);
-                        arrParam.Add("@자본금", dr["자본금"]);
-                        arrParam.Add("@상장주식", dr["상장주식"]);
-                        arrParam.Add("@신용비율", dr["신용비율"]);
-                        arrParam.Add("@연중최고", dr["연중최고"]);
-                        arrParam.Add("@연중최저", dr["연중최저"]);
-                        arrParam.Add("@시가총액", dr["시가총액"]);
-                        arrParam.Add("@시가총액비중", dr["시가총액비중"]);
-                        arrParam.Add("@외인소진률", dr["외인소진률"]);
-                        arrParam.Add("@대용가", dr["대용가"]);
-                        arrParam.Add("@PER", dr["PER"]);
-                        arrParam.Add("@EPS", dr["EPS"]);
-                        arrParam.Add("@ROE", dr["ROE"]);
-                        arrParam.Add("@PBR", dr["PBR"]);
-                        arrParam.Add("@EV", dr["EV"]);
-                        arrParam.Add("@BPS", dr["BPS"]);
-                        arrParam.Add("@매출액", dr["매출액"]);
-                        arrParam.Add("@영업이익", dr["영업이익"]);
-                        arrParam.Add("@당기순이익", dr["당기순이익"]);
-                        arrParam.Add("@최고250", dr["최고250"]);
-                        arrParam.Add("@최저250", dr["최저250"]);
-                        arrParam.Add("@시가", dr["시가"]);
-                        arrParam.Add("@고가", dr["고가"]);
-                        arrParam.Add("@저가", dr["저가"]);
-                        arrParam.Add("@상한가", dr["상한가"]);
-                        arrParam.Add("@하한가", dr["하한가"]);
-                        arrParam.Add("@기준가", dr["기준가"]);
-                        arrParam.Add("@예상체결가", dr["예상체결가"]);
-                        arrParam.Add("@예상체결수량", dr["예상체결수량"]);
-                        arrParam.Add("@최고가일250", dr["최고가일250"]);
-                        arrParam.Add("@최고가대비율250", dr["최고가대비율250"]);
-                        arrParam.Add("@최저가일250", dr["최저가일250"]);
-                        arrParam.Add("@최저가대비율250", dr["최저가대비율250"]);
-                        arrParam.Add("@현재가", dr["현재가"]);
-                        arrParam.Add("@대비기호", dr["대비기호"]);
-                        arrParam.Add("@전일대비", dr["전일대비"]);
-                        arrParam.Add("@등락율", dr["등락율"]);
-                        arrParam.Add("@거래량", dr["거래량"]);
-                        arrParam.Add("@거래대비액", dr["거래대비액"]);
-                        arrParam.Add("@액면가단위", dr["액면가단위"]);
-                        arrParam.Add("@유통주식", dr["유통주식"]);
-                        arrParam.Add("@유통비율", dr["유통비율"]);
+                        arrParam.Add("@액면가", ConvertInt32ToString(dr["액면가"].ToString()));
+                        arrParam.Add("@자본금", ConvertInt32ToString(dr["자본금"].ToString()));
+                        arrParam.Add("@상장주식", ConvertInt32ToString(dr["상장주식"].ToString()));
+                        arrParam.Add("@신용비율", ConvertDecimalToString(dr["신용비율"].ToString()));
+                        arrParam.Add("@연중최고", ConvertInt32ToString(dr["연중최고"].ToString()));
+                        arrParam.Add("@연중최저", ConvertInt32ToString(dr["연중최저"].ToString()));
+                        arrParam.Add("@시가총액", ConvertInt32ToString(dr["시가총액"].ToString()));
+                        arrParam.Add("@시가총액비중", dr["시가총액비중"].ToString());
+                        arrParam.Add("@외인소진률", ConvertDecimalToString(dr["외인소진률"].ToString()));
+                        arrParam.Add("@대용가", ConvertInt32ToString(dr["대용가"].ToString()));
+                        arrParam.Add("@PER", ConvertDecimalToString(dr["PER"].ToString()));
+                        arrParam.Add("@EPS", ConvertInt32ToString(dr["EPS"].ToString()));
+                        arrParam.Add("@ROE", ConvertDecimalToString(dr["ROE"].ToString()));
+                        arrParam.Add("@PBR", ConvertDecimalToString(dr["PBR"].ToString()));
+                        arrParam.Add("@EV", ConvertDecimalToString(dr["EV"].ToString()));
+                        arrParam.Add("@BPS", ConvertInt32ToString(dr["BPS"].ToString()));
+                        arrParam.Add("@매출액", ConvertInt32ToString(dr["매출액"].ToString()));
+                        arrParam.Add("@영업이익", ConvertDecimalToString(dr["영업이익"].ToString()));
+                        arrParam.Add("@당기순이익", ConvertDecimalToString(dr["당기순이익"].ToString()));
+                        arrParam.Add("@최고250", ConvertInt32ToString(dr["250최고"].ToString()));
+                        arrParam.Add("@최저250", ConvertInt32ToString(dr["250최저"].ToString()));
+                        arrParam.Add("@시가", ConvertInt32ToString(dr["시가"].ToString()));
+                        arrParam.Add("@고가", ConvertInt32ToString(dr["고가"].ToString()));
+                        arrParam.Add("@저가", ConvertInt32ToString(dr["저가"].ToString()));
+                        arrParam.Add("@상한가", ConvertInt32ToString(dr["상한가"].ToString()));
+                        arrParam.Add("@하한가", ConvertInt32ToString(dr["하한가"].ToString()));
+                        arrParam.Add("@기준가", ConvertInt32ToString(dr["기준가"].ToString()));
+                        arrParam.Add("@예상체결가", ConvertInt32ToString(dr["예상체결가"].ToString()));
+                        arrParam.Add("@예상체결수량", ConvertInt32ToString(dr["예상체결수량"].ToString()));
+                        arrParam.Add("@최고가일250", dr["250최고가일"].ToString());
+                        arrParam.Add("@최고가대비율250", ConvertDecimalToString(dr["250최고가대비율"].ToString()));
+                        arrParam.Add("@최저가일250", dr["250최저가일"].ToString());
+                        arrParam.Add("@최저가대비율250", ConvertDecimalToString(dr["250최저가대비율"].ToString()));
+                        arrParam.Add("@현재가", ConvertInt32ToString(dr["현재가"].ToString()));
+                        arrParam.Add("@대비기호", dr["대비기호"].ToString());
+                        arrParam.Add("@전일대비", ConvertDecimalToString(dr["전일대비"].ToString()));
+                        arrParam.Add("@등락율", ConvertDecimalToString(dr["등락율"].ToString()));
+                        arrParam.Add("@거래량", ConvertInt32ToString(dr["거래량"].ToString()));
+                        arrParam.Add("@거래대비액", ConvertDecimalToString(dr["거래대비"].ToString()));
+                        arrParam.Add("@액면가단위", dr["액면가단위"].ToString());
+                        arrParam.Add("@유통주식", ConvertInt32ToString(dr["유통주식"].ToString()));
+                        arrParam.Add("@유통비율", ConvertDecimalToString(dr["유통비율"].ToString()));
                         arrParam.Add("@R_ErrorCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
                         oSql.ExecuteNonQuery("p_Opt10001Add", CommandType.StoredProcedure, arrParam);
@@ -280,20 +280,43 @@ namespace Woom.Tester.Forms
             OnGetStockCode();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+
+                MessageBox.Show(ex.ToString());
                 _opt10001.Dispose();
 
                 tcs.SetResult(true);
 
                 OnGetStockCode();
-                tcs.SetResult(true);
+                
                 return;
                 throw;
             }
         }
 
+        private int ConvertInt32ToString(string str)
+        {
+            if (str == "")
+            { return 0; }
+            else
+            { return Convert.ToInt32(str); }
+        }
+
+        private decimal ConvertDecimalToString(string str)
+        {
+            if (str == "")
+            { return 0; }
+            else
+            { return Convert.ToDecimal(str); }
+        }
+
         private void btn10001_Click_1(object sender, EventArgs e)
+        {
+            OnGetStockCode();
+        }
+
+        private void btn10001_Click(object sender, EventArgs e)
         {
             OnGetStockCode();
         }

@@ -83,7 +83,7 @@ namespace Woom.DataDefine.OptData
             날짜, 전일비, 등락률, 금액백만, 신용비, 개인, 기관, 외인수량, 외국계, 프로그램, 외인비, 체결강도, 기관순매수, 외인보유, 외인비중, 외인순매수, 개인순매수, 신용잔고율, 대비,
             장전거래량, 장전거래비중, 장중거래량, 장중거래비중, 장후거래량, 장후거래비중
            , 합계3, 기간중거래량, 장전거래대금, 장전거래대금비중
-           , 장중거래대금, 장중거래대금비중, 장후거래대금, 장후거래대금비중
+           , 장중거래대금, 장중거래대금비중, 장후거래대금, 장후거래대금비중, 유통주식, 유통비율
         }
 
         public DataColumn GetDataColumn(ColumnNameIndex ci)
@@ -103,6 +103,10 @@ namespace Woom.DataDefine.OptData
 
                 case "최고가일250":
                     dc.ColumnName = "250최고가일";
+                    break;
+
+                case "최저가일250":
+                    dc.ColumnName = "250최저가일";
                     break;
 
                 case "최고가대비율250":
@@ -565,7 +569,12 @@ namespace Woom.DataDefine.OptData
                 case ColumnNameIndex.장후거래대금비중:
                     dc.DataType = typeof(string);
                     break;
-
+                case ColumnNameIndex.유통주식:
+                    dc.DataType = typeof(int);
+                    break;
+                case ColumnNameIndex.유통비율:
+                    dc.DataType = typeof(decimal);
+                    break;
                 default:
                     break;
             }
@@ -763,6 +772,10 @@ namespace Woom.DataDefine.OptData
 
                 case "최고가일250":
                     dc.ColumnName = "250최고가일";
+                    break;
+
+                case "최저가일250":
+                    dc.ColumnName = "250최저가일";
                     break;
 
                 case "최고가대비율250":

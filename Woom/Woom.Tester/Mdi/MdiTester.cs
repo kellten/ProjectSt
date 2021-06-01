@@ -111,5 +111,11 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Tester.Forms.FrmCsvToDataGridView();
             ShowChildForm(oform);
         }
+
+        private void 주식기본정보요청Opt10001ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmOpt10001Caller();
+            ShowChildForm(oform);
+        }
     }
 }

@@ -83,6 +83,7 @@ namespace Woom.Tester.Forms
             this.btn10001.TabIndex = 41;
             this.btn10001.Text = "Opt10001 시작";
             this.btn10001.UseVisualStyleBackColor = true;
+            this.btn10001.Click += new System.EventHandler(this.btn10001_Click);
             // 
             // proBar10001
             // 

@@ -47,6 +47,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.OptCallPer1hour = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.주식기본정보요청Opt10001ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +91,8 @@
             this.opt20068ToolStripMenuItem,
             this.opt10005ToolStripMenuItem,
             this.일별거래상세요청Opt10015ToolStripMenuItem,
-            this.opt90002ToolStripMenuItem});
+            this.opt90002ToolStripMenuItem,
+            this.주식기본정보요청Opt10001ToolStripMenuItem});
             this.optTestToolStripMenuItem.Name = "optTestToolStripMenuItem";
             this.optTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optTestToolStripMenuItem.Text = "OptTest";
@@ -190,6 +192,13 @@
             this.OptCallPer1hour.Size = new System.Drawing.Size(31, 17);
             this.OptCallPer1hour.Text = "상태";
             // 
+            // 주식기본정보요청Opt10001ToolStripMenuItem
+            // 
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Name = "주식기본정보요청Opt10001ToolStripMenuItem";
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Text = "주식기본정보요청(Opt10001)";
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Click += new System.EventHandler(this.주식기본정보요청Opt10001ToolStripMenuItem_Click);
+            // 
             // MdiTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -230,6 +239,7 @@
         private System.Windows.Forms.ToolStripMenuItem 일별거래상세요청Opt10015ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opt90002ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 엑셀가져오기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 주식기본정보요청Opt10001ToolStripMenuItem;
     }
 }
 
