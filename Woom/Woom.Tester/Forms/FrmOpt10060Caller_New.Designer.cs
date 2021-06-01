@@ -99,6 +99,7 @@
             this.dtpStdDate.Name = "dtpStdDate";
             this.dtpStdDate.Size = new System.Drawing.Size(175, 21);
             this.dtpStdDate.TabIndex = 39;
+            this.dtpStdDate.ValueChanged += new System.EventHandler(this.dtpStdDate_ValueChanged);
             // 
             // label1
             // 

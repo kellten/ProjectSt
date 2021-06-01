@@ -1053,5 +1053,10 @@ namespace Woom.Tester.Forms
         {
             OnGetStockCode();
         }
+
+        private void dtpStdDate_ValueChanged(object sender, EventArgs e)
+        {
+            _stdDate = dtpStdDate.Value.ToString("yyyyMMdd");
+        }
     }
 }

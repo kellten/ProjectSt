@@ -210,7 +210,7 @@
             this.numUpDownRate.Size = new System.Drawing.Size(43, 21);
             this.numUpDownRate.TabIndex = 38;
             this.numUpDownRate.Value = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});

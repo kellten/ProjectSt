@@ -298,10 +298,7 @@ namespace Woom.Volume.Forms
             }
         }
         #endregion
-
-        
-
-
+              
         #region SetDataGridView
         private void SetDataGridView()
         {

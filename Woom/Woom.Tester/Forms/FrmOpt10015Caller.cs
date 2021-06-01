@@ -34,7 +34,6 @@ namespace Woom.Tester.Forms
 
         #endregion 전역변수
 
-
         public FrmOpt10015Caller(DataTable dt)
         {
  
@@ -69,7 +68,6 @@ namespace Woom.Tester.Forms
             dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
 
         }
-
 
         private void GetOptCallMagamaData(string stdDate)
         {
