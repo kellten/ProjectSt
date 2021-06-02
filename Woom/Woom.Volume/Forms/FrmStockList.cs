@@ -160,6 +160,7 @@ namespace Woom.Volume.Forms
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
             DataTable dt3 = new DataTable();
+            DataTable dt4 = new DataTable();
 
             int i = 0;
 
@@ -223,13 +224,70 @@ namespace Woom.Volume.Forms
                     }
 
                 }
-
-                _firstCall = true;
+                                
 
                 int row = 0;
-                                              
+
                 foreach (DataRow dr in dt.Rows)
                 {
+                    dt4 = kiwoomQuery.p_Opt10001Query(query: "1", stockCode: dr["STOCK_CODE"].ToString().Trim(), callDate: "", bln3tier: false).Tables[0].Copy();
+
+                    if (dt4 != null)
+                    {
+                        if (dt4.Rows.Count > 0)
+                        {
+
+                            if (_firstCall == false)
+                            { 
+                                foreach (DataColumn dc in dt.Columns)
+                                {
+                                    System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
+                                    System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
+
+                                    if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME"
+                                        || dc.ColumnName.ToString() == "상한가" || dc.ColumnName.ToString() == "하한가" || dc.ColumnName.ToString() == "기준가"
+                                        || dc.ColumnName.ToString() == "시가총액비중" 
+                                        || dc.ColumnName.ToString() == "예상체결가" || dc.ColumnName.ToString() == "예상체결수량" || dc.ColumnName.ToString() == "액면가단위" 
+                                        || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "현재가" || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "등락율" || dc.ColumnName.ToString() == "거래량")
+                                    {
+                                        continue;
+                                    }
+
+                                    if (dc.ColumnName.ToString() == "CALL_DATE")
+                                    {
+                                        dgvColumn.CellTemplate = cell;
+                                        dgvColumn.HeaderText = "기준일자";
+                                        dgvColumn.Name = "OPT10001_CALL_DATE";
+
+                                        dgvGiganUpDown.Columns.Add(dgvColumn);
+
+                                        continue;
+                                    }
+
+                         
+                                    dgvColumn.CellTemplate = cell;
+                                    dgvColumn.HeaderText = dc.ColumnName.ToString();
+                                    dgvColumn.Name = dc.ColumnName.ToString();
+
+                                    dgvGiganUpDown.Columns.Add(dgvColumn);
+                                }
+
+                                _firstCall = true;
+                            }
+
+                            foreach (DataColumn dc in dt4.Columns)
+                            {
+                                if (dc.ColumnName.ToString() == "CALL_DATE")
+                                {
+                                    dgvGiganUpDown.Rows[row].Cells["OPT10001_CALL_DATE"].Value = dr["CALL_DATE"].ToString();
+                                }
+                                dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dr[dc.ColumnName.ToString()].ToString();
+                            }
+
+                        }
+                    
+                    }
+
                     dgvGiganUpDown.Rows.Add();
 
                     if (tradeDate == "")
@@ -292,6 +350,8 @@ namespace Woom.Volume.Forms
 
                     row = row + 1;
                 }
+
+                _firstCall = true;
 
                 SetDataGridView();                
 
