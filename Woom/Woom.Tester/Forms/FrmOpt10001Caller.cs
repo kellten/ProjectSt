@@ -297,6 +297,11 @@ namespace Woom.Tester.Forms
 
         private int ConvertInt32ToString(string str)
         {
+            if (str.Contains(".") == true)
+            {
+                return Convert.ToInt32(Convert.ToDecimal(str));
+            }
+
             if (str == "")
             { return 0; }
             else

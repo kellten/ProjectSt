@@ -209,6 +209,8 @@ namespace Woom.Volume.Forms
                     dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
                     dgvGiganUpDown.Columns.Add(columnName: "SEQ_NO", headerText: "일수");
 
+                    dgvGiganUpDown.Columns.Add(columnName: "SEQ_NO", headerText: "일수");
+
                     foreach (DataColumn dc in dt.Columns)
                     {
                         System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
@@ -423,7 +425,10 @@ namespace Woom.Volume.Forms
             if (e.ColumnIndex == 0)
             {
                 System.Diagnostics.Process.Start("https://finance.naver.com/item/coinfo.nhn?code=" + dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
+                System.Diagnostics.Process.Start("https://finance.naver.com/item/fchart.nhn?code=" + dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
             }
+
+
 
         }
     }

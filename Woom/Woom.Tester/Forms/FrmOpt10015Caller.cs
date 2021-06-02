@@ -95,7 +95,7 @@ namespace Woom.Tester.Forms
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
             if (ClsAxKH.SPEED_CALL == true)
-            { _clsDataAccessUtil.Delay(600); }
+            { _clsDataAccessUtil.Delay(500); }
             else
             { _clsDataAccessUtil.Delay(3600); }
             

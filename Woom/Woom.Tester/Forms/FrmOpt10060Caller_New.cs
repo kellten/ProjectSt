@@ -131,13 +131,13 @@ namespace Woom.Tester.Forms
             WaitTime();
 
             if (HaveToJob10060_Job_Gb(Opt10060TransType.PriceMaesu, strStockCode) == true)
-            { GetOpt10060Caller(Opt10060TransType.PriceMaesu, strStockCode); }
+            { GetOpt10060Caller(Opt10060TransType.PriceMaesu, strStockCode); return; }
             else if (HaveToJob10060_Job_Gb(Opt10060TransType.PriceMaedo, strStockCode) == true)
-            { GetOpt10060Caller(Opt10060TransType.PriceMaedo, strStockCode); }
+            { GetOpt10060Caller(Opt10060TransType.PriceMaedo, strStockCode); return; }
             else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, strStockCode) == true)
-            { GetOpt10060Caller(Opt10060TransType.QtyMaesu, strStockCode); }
+            { GetOpt10060Caller(Opt10060TransType.QtyMaesu, strStockCode); return; }
             else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, strStockCode) == true)
-            { GetOpt10060Caller(Opt10060TransType.QtyMaeDo, strStockCode); }
+            { GetOpt10060Caller(Opt10060TransType.QtyMaeDo, strStockCode); return; }
             else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
             { OnGetStockCode(); return; }
 
@@ -416,6 +416,9 @@ namespace Woom.Tester.Forms
                             {
                                 ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
                                 _ClsOpt10060.Dispose();
+
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+                                ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
                                 tcs.SetResult(true);
 
