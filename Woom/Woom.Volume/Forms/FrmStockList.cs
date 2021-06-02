@@ -214,12 +214,29 @@ namespace Woom.Volume.Forms
 
                     foreach (DataColumn dc in dt.Columns)
                     {
+
                         System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
                         System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
+
+                        if (dc.ColumnName.ToString() == "TRADE_DAEGUM")
+                        {
+                            dgvColumn.CellTemplate = cell;
+                            dgvColumn.HeaderText = "대금대비시총";
+                            dgvColumn.Name = "대금대비시총";
+
+                            dgvGiganUpDown.Columns.Add(dgvColumn);
+
+                            dgvColumn = null;
+                            cell = null;
+
+                            dgvColumn = new System.Windows.Forms.DataGridViewColumn();
+                            cell = new System.Windows.Forms.DataGridViewTextBoxCell();
+                        }
+                        
                         dgvColumn.CellTemplate = cell;
                         dgvColumn.HeaderText = oBasicDataType.ColumnToKoreanOpt10015(dc.ColumnName.ToString()).ToString();
                         dgvColumn.Name = dc.ColumnName.ToString();
-
+                  
                         dgvGiganUpDown.Columns.Add(dgvColumn);
                     }
 
@@ -230,6 +247,13 @@ namespace Woom.Volume.Forms
 
                 foreach (DataRow dr in dt.Rows)
                 {
+                    dgvGiganUpDown.Rows.Add();
+
+                    if (dt4 != null)
+                    {
+                        dt4 = null;
+                    }
+
                     dt4 = kiwoomQuery.p_Opt10001Query(query: "1", stockCode: dr["STOCK_CODE"].ToString().Trim(), callDate: "", bln3tier: false).Tables[0].Copy();
 
                     if (dt4 != null)
@@ -239,7 +263,7 @@ namespace Woom.Volume.Forms
 
                             if (_firstCall == false)
                             { 
-                                foreach (DataColumn dc in dt.Columns)
+                                foreach (DataColumn dc in dt4.Columns)
                                 {
                                     System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
                                     System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
@@ -274,21 +298,32 @@ namespace Woom.Volume.Forms
 
                                 _firstCall = true;
                             }
-
+                            
                             foreach (DataColumn dc in dt4.Columns)
                             {
+
+                                if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME"
+                                       || dc.ColumnName.ToString() == "상한가" || dc.ColumnName.ToString() == "하한가" || dc.ColumnName.ToString() == "기준가"
+                                       || dc.ColumnName.ToString() == "시가총액비중"
+                                       || dc.ColumnName.ToString() == "예상체결가" || dc.ColumnName.ToString() == "예상체결수량" || dc.ColumnName.ToString() == "액면가단위"
+                                       || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "현재가" || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "등락율" || dc.ColumnName.ToString() == "거래량")
+                                {
+                                    continue;
+                                }
+
                                 if (dc.ColumnName.ToString() == "CALL_DATE")
                                 {
-                                    dgvGiganUpDown.Rows[row].Cells["OPT10001_CALL_DATE"].Value = dr["CALL_DATE"].ToString();
+                                    dgvGiganUpDown.Rows[row].Cells["OPT10001_CALL_DATE"].Value = dt4.Rows[0][dc.ColumnName.ToString()].ToString();
                                 }
-                                dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dr[dc.ColumnName.ToString()].ToString();
+                                else
+                                { 
+                                dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dt4.Rows[0][dc.ColumnName.ToString()].ToString();
+                                }
                             }
 
                         }
                     
                     }
-
-                    dgvGiganUpDown.Rows.Add();
 
                     if (tradeDate == "")
                     {
@@ -298,10 +333,15 @@ namespace Woom.Volume.Forms
                     {
                         if (tradeDate != dr["STOCK_DATE"].ToString().Trim())
                         {
-
                             tradeDate = dr["STOCK_DATE"].ToString().Trim();
                             i = i - 1;
                         }
+
+                        if (((i * -1) % 2) == 0)
+                        {
+                            dgvGiganUpDown.Rows[row].DefaultCellStyle.BackColor = Color.AliceBlue;
+                        }
+                        
                     }
 
                     dgvGiganUpDown.Rows[row].Cells["SEQ_NO"].Value = i.ToString() + " 전";
@@ -364,13 +404,49 @@ namespace Woom.Volume.Forms
         #region SetDataGridView
         private void SetDataGridView()
         {
+
+            int intValue = 0;
+
             for (int i = 0; i < dgvGiganUpDown.Rows.Count - 1; i++)
             {
+                dgvGiganUpDown.Rows[i].Cells["시가총액"].Value = Convert.ToInt32((Convert.ToInt32(dgvGiganUpDown.Rows[i].Cells["상장주식"].Value) * Math.Abs(Convert.ToInt32(dgvGiganUpDown.Rows[i].Cells["LAST_PRICE"].Value))) / 100000) ;
+
                 if (dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Value.ToString().Contains("-") == true)
                 {
 
                     dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Style.ForeColor = Color.Red;
-                }                
+                }
+
+                intValue = (int)clsUtil.CalPercent((double) Convert.ToInt32(dgvGiganUpDown.Rows[i].Cells["TRADE_DAEGUM"].Value), (double) Convert.ToInt32(dgvGiganUpDown.Rows[i].Cells["시가총액"].Value));
+
+                dgvGiganUpDown.Rows[i].Cells["대금대비시총"].Value = intValue.ToString();
+
+                // 시총보다 거래대금이 큰 경우 옐로우
+                if (intValue > 30)
+                {
+                    dgvGiganUpDown.Rows[i].Cells["TRADE_DAEGUM"].Style.ForeColor = Color.Green;
+                }
+
+                // 시총보다 거래대금이 큰 경우 빨간색
+                if (intValue > 100)
+                {
+                    dgvGiganUpDown.Rows[i].Cells["TRADE_DAEGUM"].Style.ForeColor = Color.Red;
+                }
+                               
+                // 영익이 흑자이면, 빨간색
+                if (dgvGiganUpDown.Rows[i].Cells["영업이익"].Value.ToString().Contains("-") == false)
+                {
+
+                    dgvGiganUpDown.Rows[i].Cells["영업이익"].Style.ForeColor = Color.Red;
+                }
+
+                if (dgvGiganUpDown.Rows[i].Cells["당기순이익"].Value.ToString().Contains("-") == false)
+                {
+
+                    dgvGiganUpDown.Rows[i].Cells["당기순이익"].Style.ForeColor = Color.Red;
+                }
+
+
             }
 
             dgvGiganUpDown.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);

@@ -29,6 +29,11 @@ namespace Woom.DataDefine.Util
 
         }
 
+        public double CalPercent(double a, double b)
+        {
+            return (a / b * 100);
+        }
+
         public string MondayDateOnWeekTypeString(string valueDate)
         {
             string reDate = "";
