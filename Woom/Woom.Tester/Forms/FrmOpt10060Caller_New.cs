@@ -423,11 +423,11 @@ namespace Woom.Tester.Forms
                                 tcs.SetResult(true);
 
                                 if (HaveToJob10060_Job_Gb(Opt10060TransType.PriceMaedo, stockCode) == true)
-                                { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; } }
+                                { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; }
                                 else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                                 else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                                 else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                                 { OnGetStockCode(); return; }
 
@@ -448,11 +448,11 @@ namespace Woom.Tester.Forms
                     tcs.SetResult(true);
 
                     if (HaveToJob10060_Job_Gb(Opt10060TransType.PriceMaedo, stockCode) == true)
-                    { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; } }
+                    { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; }
                     else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                    { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                    { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                     else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                    { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                    { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                     else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                     { OnGetStockCode(); return; }
 
@@ -490,11 +490,11 @@ namespace Woom.Tester.Forms
                         tcs.SetResult(true);
 
                         if (HaveToJob10060_Job_Gb(Opt10060TransType.PriceMaedo, stockCode) == true)
-                        { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; } }
+                        { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; }
                         else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                        { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                        { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                         else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                        { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                        { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                         else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                         { OnGetStockCode(); return; }
                     }
@@ -511,11 +511,11 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 if (HaveToJob10060_Job_Gb(Opt10060TransType.PriceMaedo, stockCode) == true)
-                { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; } }
+                { GetOpt10060Caller(Opt10060TransType.PriceMaedo,  stockCode); return; }
                 else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                 else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                 else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                 { OnGetStockCode(); return; }
 
@@ -614,9 +614,9 @@ namespace Woom.Tester.Forms
                                 tcs.SetResult(true);
                                 
                                 if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                                 else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                                 else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                                 { OnGetStockCode(); return; }
 
@@ -670,9 +670,9 @@ namespace Woom.Tester.Forms
                         tcs.SetResult(true);
 
                         if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                        { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                        { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                         else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                        { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                        { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                         else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                         { OnGetStockCode(); return; }
                     }
@@ -688,9 +688,9 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaesu, stockCode) == true)
-                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; } }
+                { GetOpt10060Caller(Opt10060TransType.QtyMaesu,  stockCode); return; }
                 else if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                 else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                 { OnGetStockCode(); return; }
 
@@ -789,7 +789,7 @@ namespace Woom.Tester.Forms
                                 tcs.SetResult(true);
 
                                 if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                                 else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                                 { OnGetStockCode(); return; }
 
@@ -810,7 +810,7 @@ namespace Woom.Tester.Forms
                     tcs.SetResult(true);
 
                     if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                    { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                    { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                     else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                     { OnGetStockCode(); return; }
 
@@ -848,7 +848,7 @@ namespace Woom.Tester.Forms
                         tcs.SetResult(true);
 
                         if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                        { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                        { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                         else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                         { OnGetStockCode(); return; }
                     }
@@ -865,7 +865,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 if (HaveToJob10060_Job_Gb(Opt10060TransType.QtyMaeDo, stockCode) == true)
-                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; } }
+                { GetOpt10060Caller(Opt10060TransType.QtyMaeDo,  stockCode); return; }
                 else // 다 돌린 종목이면, 다시 OnGetStockCode로 재귀호출
                 { OnGetStockCode(); return; }
 
