@@ -41,6 +41,7 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtStockCode = new System.Windows.Forms.TextBox();
             this.BtnGetOpt = new System.Windows.Forms.Button();
             this.ChkOption1 = new System.Windows.Forms.CheckBox();
             this.BtnGiganUpDowndSearch = new System.Windows.Forms.Button();
@@ -49,8 +50,8 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.txtStockCode = new System.Windows.Forms.TextBox();
             this.AutoSCode = new SDataAccess.AutoCompleteText(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -159,6 +160,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.txtStockCode);
             this.splitContainer1.Panel1.Controls.Add(this.BtnGetOpt);
             this.splitContainer1.Panel1.Controls.Add(this.ChkOption1);
@@ -174,6 +176,15 @@
             this.splitContainer1.Size = new System.Drawing.Size(1628, 945);
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // txtStockCode
+            // 
+            this.txtStockCode.Location = new System.Drawing.Point(620, 8);
+            this.txtStockCode.Name = "txtStockCode";
+            this.txtStockCode.Size = new System.Drawing.Size(147, 21);
+            this.txtStockCode.TabIndex = 42;
+            this.txtStockCode.TextChanged += new System.EventHandler(this.txtStockCode_TextChanged);
+            this.txtStockCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtStockCode_KeyDown);
             // 
             // BtnGetOpt
             // 
@@ -254,22 +265,25 @@
             this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
-            // txtStockCode
-            // 
-            this.txtStockCode.Location = new System.Drawing.Point(620, 8);
-            this.txtStockCode.Name = "txtStockCode";
-            this.txtStockCode.Size = new System.Drawing.Size(100, 21);
-            this.txtStockCode.TabIndex = 42;
-            this.txtStockCode.TextChanged += new System.EventHandler(this.txtStockCode_TextChanged);
-            this.txtStockCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtStockCode_KeyDown);
-            // 
             // AutoSCode
             // 
+            this.AutoSCode.AutoCompCode = "STOCK_CODE";
+            this.AutoSCode.AutoCompString = "STOCK_NAME";
             this.AutoSCode.AutoTextColor = true;
             this.AutoSCode.ConTextColor = System.Drawing.Color.Empty;
             this.AutoSCode.FirstCharSearch = "False";
-            this.AutoSCode.SetViewControl = SDataAccess.AutoCompleteText.ViewControl.ListBox;
+            this.AutoSCode.SetViewControl = SDataAccess.AutoCompleteText.ViewControl.DataGridView;
             this.AutoSCode.StoredProcParam = null;
+            this.AutoSCode.UserDataView = true;
+            // 
+            // label2
+            // 
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label2.Location = new System.Drawing.Point(773, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 23);
+            this.label2.TabIndex = 43;
+            this.label2.Text = "label2";
             // 
             // FrmStockList
             // 
@@ -318,5 +332,6 @@
         private System.Windows.Forms.Button BtnGetOpt;
         private System.Windows.Forms.TextBox txtStockCode;
         private SDataAccess.AutoCompleteText AutoSCode;
+        private System.Windows.Forms.Label label2;
     }
 }

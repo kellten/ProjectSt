@@ -46,6 +46,10 @@ namespace Woom.Volume.Forms
 
             AutoSCode.Dv = new DataView(dt);
             AutoSCode.OCon = txtStockCode;
+            
+            AutoSCode.AutoCompCode = "STOCK_CODE";
+            AutoSCode.AutoCompString = "STOCK_NAME";
+
         }
 
         #region
@@ -574,7 +578,9 @@ namespace Woom.Volume.Forms
 
         private void txtStockCode_TextChanged(object sender, EventArgs e)
         {
-
+            if ((txtStockCode.Text.Trim()) == "")
+            { return; }
+            AutoSCode.SendData = txtStockCode.Text;
         }
 
         private void txtStockCode_KeyDown(object sender, KeyEventArgs e)
@@ -583,6 +589,8 @@ namespace Woom.Volume.Forms
             { 
               
             }
+
+           
         }
     }
 }
