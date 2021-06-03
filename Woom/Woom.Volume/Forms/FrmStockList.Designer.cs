@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgv1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgv0 = new System.Windows.Forms.DataGridView();
@@ -48,6 +49,8 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
+            this.txtStockCode = new System.Windows.Forms.TextBox();
+            this.AutoSCode = new SDataAccess.AutoCompleteText(this.components);
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -156,6 +159,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtStockCode);
             this.splitContainer1.Panel1.Controls.Add(this.BtnGetOpt);
             this.splitContainer1.Panel1.Controls.Add(this.ChkOption1);
             this.splitContainer1.Panel1.Controls.Add(this.BtnGiganUpDowndSearch);
@@ -250,6 +254,23 @@
             this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
+            // txtStockCode
+            // 
+            this.txtStockCode.Location = new System.Drawing.Point(620, 8);
+            this.txtStockCode.Name = "txtStockCode";
+            this.txtStockCode.Size = new System.Drawing.Size(100, 21);
+            this.txtStockCode.TabIndex = 42;
+            this.txtStockCode.TextChanged += new System.EventHandler(this.txtStockCode_TextChanged);
+            this.txtStockCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtStockCode_KeyDown);
+            // 
+            // AutoSCode
+            // 
+            this.AutoSCode.AutoTextColor = true;
+            this.AutoSCode.ConTextColor = System.Drawing.Color.Empty;
+            this.AutoSCode.FirstCharSearch = "False";
+            this.AutoSCode.SetViewControl = SDataAccess.AutoCompleteText.ViewControl.ListBox;
+            this.AutoSCode.StoredProcParam = null;
+            // 
             // FrmStockList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -295,5 +316,7 @@
         private System.Windows.Forms.Button BtnGiganUpDowndSearch;
         private System.Windows.Forms.CheckBox ChkOption1;
         private System.Windows.Forms.Button BtnGetOpt;
+        private System.Windows.Forms.TextBox txtStockCode;
+        private SDataAccess.AutoCompleteText AutoSCode;
     }
 }

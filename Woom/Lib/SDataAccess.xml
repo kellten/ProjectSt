@@ -63,5 +63,75 @@ SDataAccess
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="P:SDataAccess.AutoCompleteText.OCon">
+ <summary>
+ 검색 명칭을 반환받을 컨트롤
+ </summary>
+ <value>Control Type</value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.OConReceiveCode">
+ <summary>
+ 검색 코드를 반환받을 컨트롤
+ </summary>
+ <value>Control Type</value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.SendData">
+ <summary>
+ 자동완성 검색 지정된 컨트롤의 
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.SpreadXPoint">
+ <summary>
+ 스프레드의 CellClick Event의 X position(X-coordinate of the pointer position
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.SpreadYPoint">
+ <summary>
+ 스프레드의 CellClick Event의 Y position(Y-coordinate of the pointer position
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.NameRowIndex">
+ <summary>
+ 스프레드의 Cellclick Event의 명칭을 입력받을 e.Row
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.NameColumnIndex">
+ <summary>
+ 스프레드의 CellClick Event의 명칭을 입력받을 e.Column
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.CodeRowIndex">
+ <summary>
+ 스프레드의 Cellclick Event의 코드를 입력받을 e.Row
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.CodeColumnIndex">
+ <summary>
+ 스프레드의 CellClick Event의 코드를 입력받을 e.Column
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
+<member name="P:SDataAccess.AutoCompleteText.Dv">
+ <summary>
+ 자동완성 검색 데이터뷰(DataView)
+ </summary>
+ <value></value>
+ <remarks></remarks>
+</member>
 </members>
 </doc>

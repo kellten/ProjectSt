@@ -40,6 +40,12 @@ namespace Woom.Volume.Forms
 
             dtpStartDate.Value = clsUtil.MondayDateOnWeekTypeDateTime(dtpEndDate.Value.AddMonths(-3));
 
+            RichQuery richQuery = new RichQuery();
+
+            DataTable dt = richQuery.p_ScodeQuery(query: "1", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
+
+            AutoSCode.Dv = new DataView(dt);
+            AutoSCode.OCon = txtStockCode;
         }
 
         #region
@@ -564,8 +570,19 @@ namespace Woom.Volume.Forms
                 System.Diagnostics.Process.Start("https://finance.naver.com/item/fchart.nhn?code=" + dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
             }
 
+        }
 
+        private void txtStockCode_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void txtStockCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control == true && e.KeyCode == Keys.Space)
+            { 
+              
+            }
         }
     }
 }
