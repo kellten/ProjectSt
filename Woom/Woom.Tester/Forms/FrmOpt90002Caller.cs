@@ -148,7 +148,7 @@ namespace Woom.Tester.Forms
             }
 
             _opt90002.SetInit(_FormId);
-            _opt90002.JustRequest(dateGb: "1", kthCode: kthCode, 0);
+            _opt90002.JustRequest(dateGb: "1", kthCode: kthCode, nPrevNext: 0);
 
             tcs.SetResult(true);
 
