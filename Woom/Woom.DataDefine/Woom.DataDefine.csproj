@@ -84,9 +84,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\ClsVolumeAttribute.cs" />
     <Compile Include="OptData\ClsCollectOptDataFunc.cs" />
     <Compile Include="OptData\ClsColumnSets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetData\ClsDgvSetData.cs" />
     <Compile Include="Util\ClsUtil.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>

@@ -54,11 +54,23 @@
     <Compile Include="Forms\FrmCallOptLastData.Designer.cs">
       <DependentUpon>FrmCallOptLastData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmThemaManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmThemaManage.Designer.cs">
+      <DependentUpon>FrmThemaManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\UcOpt10060PerStockCode.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Uc\UcOpt10060PerStockCode.Designer.cs">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Uc\UcStockList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\UcStockList.Designer.cs">
+      <DependentUpon>UcStockList.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
@@ -84,8 +96,14 @@
     <EmbeddedResource Include="Forms\FrmCallOptLastData.resx">
       <DependentUpon>FrmCallOptLastData.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmThemaManage.resx">
+      <DependentUpon>FrmThemaManage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcOpt10060PerStockCode.resx">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\UcStockList.resx">
+      <DependentUpon>UcStockList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
