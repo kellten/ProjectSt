@@ -11,6 +11,10 @@ namespace Woom.DataDefine.SetData
 {
     public class ClsDgvSetData
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dgv"></param>
         public void GetFCode(ref DataGridView dgv)
         {
             DataTable dt = new DataTable();

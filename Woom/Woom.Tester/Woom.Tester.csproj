@@ -279,6 +279,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Woom.CallForm\Woom.CallForm.csproj">
+      <Project>{cf263689-bcb2-4752-ae74-8ac4ec4d0c1d}</Project>
+      <Name>Woom.CallForm</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Woom.DataAccess\Woom.DataAccess.csproj">
       <Project>{b69864e4-2cec-4f50-8615-d902e820a4a5}</Project>
       <Name>Woom.DataAccess</Name>

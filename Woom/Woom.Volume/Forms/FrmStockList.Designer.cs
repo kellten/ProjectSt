@@ -41,6 +41,7 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtStockCode = new System.Windows.Forms.TextBox();
             this.BtnGetOpt = new System.Windows.Forms.Button();
             this.ChkOption1 = new System.Windows.Forms.CheckBox();
@@ -50,8 +51,7 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.AutoSCode = new SDataAccess.AutoCompleteText(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.AutoSCode = new SDataAccess.AutoCompleteText();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -177,6 +177,16 @@
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label2.Location = new System.Drawing.Point(773, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(88, 23);
+            this.label2.TabIndex = 43;
+            this.label2.Text = "label2";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // txtStockCode
             // 
             this.txtStockCode.Location = new System.Drawing.Point(620, 8);
@@ -275,15 +285,6 @@
             this.AutoSCode.SetViewControl = SDataAccess.AutoCompleteText.ViewControl.DataGridView;
             this.AutoSCode.StoredProcParam = null;
             this.AutoSCode.UserDataView = true;
-            // 
-            // label2
-            // 
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(773, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 23);
-            this.label2.TabIndex = 43;
-            this.label2.Text = "label2";
             // 
             // FrmStockList
             // 

@@ -63,6 +63,29 @@ SDataAccess
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="M:SDataAccess.RichQuery.p_THEMA_GroupQuery(System.String,System.String,System.Boolean,System.Data.DataSet,System.String)">
+ <summary>
+ 테마그룹내역 질의
+ </summary>
+ <param name="query"></param>
+ <param name="tgpseqNo"></param>
+ <param name="bln3tier"></param>
+ <param name="ds"></param>
+ <param name="tableName"></param>
+ <returns></returns>
+</member>
+<member name="M:SDataAccess.RichQuery.p_Thema_GroupQuery2(System.String,System.String,System.String,System.Boolean,System.Data.DataSet,System.String)">
+ <summary>
+ 테마그룹별 테마 내역 질의
+ </summary>
+ <param name="query"></param>
+ <param name="themaCode"></param>
+ <param name="tgpseqNo"></param>
+ <param name="bln3tier"></param>
+ <param name="ds"></param>
+ <param name="tableName"></param>
+ <returns></returns>
+</member>
 <member name="P:SDataAccess.AutoCompleteText.OCon">
  <summary>
  검색 명칭을 반환받을 컨트롤

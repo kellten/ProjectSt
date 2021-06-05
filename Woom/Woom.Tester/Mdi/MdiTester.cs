@@ -117,5 +117,11 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Tester.Forms.FrmOpt10001Caller();
             ShowChildForm(oform);
         }
+
+        private void 테마그룹관리ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oForm = new Woom.CallForm.Forms.FrmThemaManage();
+            ShowChildForm(oForm);
+        }
     }
 }

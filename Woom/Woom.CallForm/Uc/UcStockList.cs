@@ -7,18 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SDataAccess;
 
 namespace Woom.CallForm.Uc
 {
     public partial class UcStockList : UserControl
     {
 
-        public event OnChangeFsa01EventHandler OnChangeFsa01;
-        public delegate void OnChangeFsa01EventHandler();
+        public event OnSelectedStockCodeEventHandler OnSelectedStockCode;
+        public delegate void OnSelectedStockCodeEventHandler(string stockCode);
 
         public UcStockList()
         {
             InitializeComponent();
+
+            DataTable dt = new DataTable();
+            RichQuery richQuery = new RichQuery();
+            int row = 0;
+
+
+            dt = richQuery.p_ScodeQuery(query: "2", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+
+                dgvAllStockList.Rows.Add();
+                dgvAllStockList.Rows[row].Cells["STOCK_CODE"].Value = dr["STOCK_CODE"].ToString().Trim();
+                dgvAllStockList.Rows[row].Cells["STOCK_NAME"].Value = dr["STOCK_NAME"].ToString().Trim();
+
+                row = row + 1;
+
+            }
+
         }
 
         private void dgvAllStockList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -30,29 +50,11 @@ namespace Woom.CallForm.Uc
                 return;
             }
 
-            //stockAttribute.StockName = dgvAllStockList.Rows[e.RowIndex].Cells["STOCK_NAME"].Value.ToString().Trim();
-            //stockAttribute.StockCode = dgvAllStockList.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim();
-
-            //if (chkEditMode.Checked == true)
-            //{
-            //    if (_sGroupCode != "")
-            //    {
-            //        Favorite.Class.ClsFavFunc clsFavFunc = new Favorite.Class.ClsFavFunc();
-            //        clsFavFunc.Fsa01Add(_sGroupCode, dgvAllStockList.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
-
-            //        var handler = OnChangeFsa01;
-            //        if (handler != null)
-            //        {
-            //            this.OnChangeFsa01();
-            //        }
-
-            //    }
-            //}
-            //else
-            //{
-            //    clsPassingStockCode.StockName = dgvAllStockList.Rows[e.RowIndex].Cells["STOCK_NAME"].Value.ToString().Trim();
-            //    clsPassingStockCode.StockCode = dgvAllStockList.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim();
-            //}
+            var handler = OnSelectedStockCode;
+            if (handler != null)
+            {
+                OnSelectedStockCode(dgvAllStockList.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString().Trim());
+            }            
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -62,5 +64,7 @@ namespace Woom.CallForm.Uc
             bs.Filter = string.Format("CONVERT(" + dgvAllStockList.Columns["STOCK_NAME"].DataPropertyName +
                                       ", System.String) like '%" + txtSearch.Text.Replace("'", "''") + "%'");
         }
+
+        
     }
 }

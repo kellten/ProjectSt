@@ -25,7 +25,6 @@ namespace Woom.DataDefine.Util
             varStockRate = (((curPrice - prevPrice) / curPrice) * 100) * -1;
             
            return Math.Round(varStockRate, 2, MidpointRounding.AwayFromZero); 
-           
 
         }
 

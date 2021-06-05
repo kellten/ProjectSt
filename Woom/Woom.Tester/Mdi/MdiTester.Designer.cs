@@ -40,6 +40,7 @@
             this.opt10005ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.일별거래상세요청Opt10015ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt90002ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.주식기본정보요청Opt10001ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종목관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.엑셀가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.마켓분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +48,8 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.OptCallPer1hour = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.주식기본정보요청Opt10001ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.기본정보관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.테마그룹관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +58,8 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optToolStripMenuItem,
-            this.마켓분석ToolStripMenuItem});
+            this.마켓분석ToolStripMenuItem,
+            this.기본정보관리ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -146,6 +149,13 @@
             this.opt90002ToolStripMenuItem.Text = "테마구성종목요청(Opt90002)";
             this.opt90002ToolStripMenuItem.Click += new System.EventHandler(this.opt90002ToolStripMenuItem_Click);
             // 
+            // 주식기본정보요청Opt10001ToolStripMenuItem
+            // 
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Name = "주식기본정보요청Opt10001ToolStripMenuItem";
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Text = "주식기본정보요청(Opt10001)";
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Click += new System.EventHandler(this.주식기본정보요청Opt10001ToolStripMenuItem_Click);
+            // 
             // 종목관리ToolStripMenuItem
             // 
             this.종목관리ToolStripMenuItem.Name = "종목관리ToolStripMenuItem";
@@ -192,12 +202,20 @@
             this.OptCallPer1hour.Size = new System.Drawing.Size(31, 17);
             this.OptCallPer1hour.Text = "상태";
             // 
-            // 주식기본정보요청Opt10001ToolStripMenuItem
+            // 기본정보관리ToolStripMenuItem
             // 
-            this.주식기본정보요청Opt10001ToolStripMenuItem.Name = "주식기본정보요청Opt10001ToolStripMenuItem";
-            this.주식기본정보요청Opt10001ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
-            this.주식기본정보요청Opt10001ToolStripMenuItem.Text = "주식기본정보요청(Opt10001)";
-            this.주식기본정보요청Opt10001ToolStripMenuItem.Click += new System.EventHandler(this.주식기본정보요청Opt10001ToolStripMenuItem_Click);
+            this.기본정보관리ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.테마그룹관리ToolStripMenuItem});
+            this.기본정보관리ToolStripMenuItem.Name = "기본정보관리ToolStripMenuItem";
+            this.기본정보관리ToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.기본정보관리ToolStripMenuItem.Text = "기본정보관리";
+            // 
+            // 테마그룹관리ToolStripMenuItem
+            // 
+            this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
+            this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
             // MdiTester
             // 
@@ -240,6 +258,8 @@
         private System.Windows.Forms.ToolStripMenuItem opt90002ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 엑셀가져오기ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 주식기본정보요청Opt10001ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 기본정보관리ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 테마그룹관리ToolStripMenuItem;
     }
 }
 
