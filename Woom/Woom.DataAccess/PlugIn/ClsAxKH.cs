@@ -512,6 +512,10 @@ namespace Woom.DataAccess.PlugIn
             switch (sRQNameArray[0].ToString().Trim())
             {
                 case "주식기본정보요청":
+
+                    try
+                    {
+
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                     {
                         foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10001Index)))
@@ -546,6 +550,13 @@ namespace Woom.DataAccess.PlugIn
                     }
 
                     break;
+                    }
+                    catch (Exception)
+                    {
+                        AxKH_10001_OnReceived(e.sRQName.ToString().Trim(), null, Convert.ToInt32(e.sPrevNext));
+                        throw;
+                    }
+                    
                 case "주식일주월시분요청":
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                     {
@@ -739,6 +750,10 @@ namespace Woom.DataAccess.PlugIn
                     break;
 
                 case "종목별투자자기관별차트요청":
+                    try
+                    {
+
+                    
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                     {
                         foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10060Index)))
@@ -785,6 +800,17 @@ namespace Woom.DataAccess.PlugIn
                     }
 
                     break;
+
+                    }
+                    catch (Exception)
+                    {
+                        AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), null, 0);
+                        break;
+                        throw;
+                        
+                    }
+
+                    
 
                 case "대차거래추이요청(종목별)":
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
