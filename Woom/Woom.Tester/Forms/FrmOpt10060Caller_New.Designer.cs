@@ -36,6 +36,7 @@
             this.chk100 = new System.Windows.Forms.CheckBox();
             this.dtpStdDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkDesc = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblStdDate
@@ -110,11 +111,22 @@
             this.label1.TabIndex = 38;
             this.label1.Text = "기준일자 : ";
             // 
+            // chkDesc
+            // 
+            this.chkDesc.AutoSize = true;
+            this.chkDesc.Location = new System.Drawing.Point(488, 73);
+            this.chkDesc.Name = "chkDesc";
+            this.chkDesc.Size = new System.Drawing.Size(57, 16);
+            this.chkDesc.TabIndex = 40;
+            this.chkDesc.Text = "DESC";
+            this.chkDesc.UseVisualStyleBackColor = true;
+            // 
             // FrmOpt10060Caller_New
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 97);
+            this.Controls.Add(this.chkDesc);
             this.Controls.Add(this.dtpStdDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkSpeedOn);
@@ -140,5 +152,6 @@
         private System.Windows.Forms.CheckBox chk100;
         private System.Windows.Forms.DateTimePicker dtpStdDate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkDesc;
     }
 }

@@ -61,13 +61,28 @@ namespace Woom.Tester.Forms
 
             if (_dtStockCode == null)
             {
-                Func<DataTable> funcGetStockData = () =>
-                {
-                    RichQuery oRichQuery = new RichQuery();
-                    return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
-                };
 
-                _dtStockCode = funcGetStockData();
+                if (chkDesc.Checked == true)
+                {
+                    Func<DataTable> funcGetStockData = () =>
+                    {
+                        RichQuery oRichQuery = new RichQuery();
+                        return oRichQuery.p_ScodeQuery("4", "", "", false).Tables[0].Copy();
+                    };
+
+                    _dtStockCode = funcGetStockData();
+                }
+                else
+                {
+                    Func<DataTable> funcGetStockData = () =>
+                    {
+                        RichQuery oRichQuery = new RichQuery();
+                        return oRichQuery.p_ScodeQuery("5", "", "", false).Tables[0].Copy();
+                    };
+
+                    _dtStockCode = funcGetStockData();
+                }
+                                
             }
 
             foreach (DataRow dr in _dtStockCode.Rows)
