@@ -68,7 +68,7 @@ namespace Woom.CallForm.Forms
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
-            arrParam.Add("@ACTION_GB", "A");
+            arrParam.Add("@ACTION_GB", actionGb);
             arrParam.Add("@STOCK_CODE", stockCode);
             arrParam.Add("@THEMA_CODE", lblThemaGroup.Text);
             arrParam.Add("@DESC_TEXT", "");
@@ -169,16 +169,14 @@ namespace Woom.CallForm.Forms
 
                             if (_firstCall == false)
                             {
+                                
+
                                 foreach (DataColumn dc in dt4.Columns)
                                 {
                                     System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
                                     System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
 
-                                    if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME"
-                                        || dc.ColumnName.ToString() == "상한가" || dc.ColumnName.ToString() == "하한가" || dc.ColumnName.ToString() == "기준가"
-                                        || dc.ColumnName.ToString() == "시가총액비중"
-                                        || dc.ColumnName.ToString() == "예상체결가" || dc.ColumnName.ToString() == "예상체결수량" || dc.ColumnName.ToString() == "액면가단위"
-                                        || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "현재가" || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "등락율" || dc.ColumnName.ToString() == "거래량")
+                                    if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME")
                                     {
                                         continue;
                                     }
@@ -188,6 +186,16 @@ namespace Woom.CallForm.Forms
                                         dgvColumn.CellTemplate = cell;
                                         dgvColumn.HeaderText = "기준일자";
                                         dgvColumn.Name = "OPT10001_CALL_DATE";
+
+                                        dgvThemaPerStock.Columns.Add(dgvColumn);
+
+                                        dgvColumn = null;
+
+                                        dgvColumn = new DataGridViewColumn();
+
+                                        dgvColumn.CellTemplate = cell;
+                                        dgvColumn.HeaderText = "대금대비시총";
+                                        dgvColumn.Name = "대금대비시총";
 
                                         dgvThemaPerStock.Columns.Add(dgvColumn);
 
@@ -203,16 +211,12 @@ namespace Woom.CallForm.Forms
                                 }
 
                                 _firstCall = true;
-                            }
+                            }                            
 
                             foreach (DataColumn dc in dt4.Columns)
                             {
 
-                                if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME"
-                                       || dc.ColumnName.ToString() == "상한가" || dc.ColumnName.ToString() == "하한가" || dc.ColumnName.ToString() == "기준가"
-                                       || dc.ColumnName.ToString() == "시가총액비중"
-                                       || dc.ColumnName.ToString() == "예상체결가" || dc.ColumnName.ToString() == "예상체결수량" || dc.ColumnName.ToString() == "액면가단위"
-                                       || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "등락율" || dc.ColumnName.ToString() == "거래량")
+                                if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME")
                                 {
                                     continue;
                                 }
@@ -231,6 +235,8 @@ namespace Woom.CallForm.Forms
 
                     }
 
+                    dt = null;
+                    dt = new DataTable();
 
                     row = row + 1;
                 }
@@ -244,7 +250,7 @@ namespace Woom.CallForm.Forms
         #region SetDataGridView
         private void SetDataGridView()
         {
-
+            ClsUtil clsUtil = new ClsUtil();
             int intValue = 0;
 
             for (int i = 0; i < dgvThemaPerStock.Rows.Count - 1; i++)
@@ -361,6 +367,21 @@ namespace Woom.CallForm.Forms
             }
         }
 
-        
+        private void dgvThemaPerStock_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dgvThemaPerStock_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && e.Modifiers == Keys.Control)
+            {
+                //if (MessageBox.Show("Delete row?", "Confirmation", MessageBoxButtons.YesNo) !=
+                //  DialogResult.Yes)
+                //    return;
+
+                ThemstStoreRecord("D", dgvThemaPerStock.Rows[dgvThemaPerStock.CurrentRow.Index].Cells["STOCK_CODE"].ToString());
+            }
+        }
     }
 }
