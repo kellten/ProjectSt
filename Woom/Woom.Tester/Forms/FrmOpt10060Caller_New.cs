@@ -59,43 +59,6 @@ namespace Woom.Tester.Forms
 
             //ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060MaeSu);
 
-            if (_dtStockCode == null)
-            {
-
-                if (chkDesc.Checked == true)
-                {
-                    Func<DataTable> funcGetStockData = () =>
-                    {
-                        RichQuery oRichQuery = new RichQuery();
-                        return oRichQuery.p_ScodeQuery("4", "", "", false).Tables[0].Copy();
-                    };
-
-                    _dtStockCode = funcGetStockData();
-                }
-                else
-                {
-                    Func<DataTable> funcGetStockData = () =>
-                    {
-                        RichQuery oRichQuery = new RichQuery();
-                        return oRichQuery.p_ScodeQuery("5", "", "", false).Tables[0].Copy();
-                    };
-
-                    _dtStockCode = funcGetStockData();
-                }
-                                
-            }
-
-            foreach (DataRow dr in _dtStockCode.Rows)
-            {
-                if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
-                { continue; }
-
-                _StockQueue.Enqueue(dr["STOCK_CODE"].ToString());
-
-            }
-
-            InitData();
-
         }
 
         private void InitData()
@@ -1067,6 +1030,48 @@ namespace Woom.Tester.Forms
         private void dtpStdDate_ValueChanged(object sender, EventArgs e)
         {
             _stdDate = dtpStdDate.Value.ToString("yyyyMMdd");
+        }
+
+        private void btnGetStockCode_Click(object sender, EventArgs e)
+        {
+            if (_dtStockCode == null)
+            {
+
+                if (chkDesc.Checked == true)
+                {
+                    Func<DataTable> funcGetStockData = () =>
+                    {
+                        RichQuery oRichQuery = new RichQuery();
+                        return oRichQuery.p_ScodeQuery("4", "", "", false).Tables[0].Copy();
+                    };
+
+                    _dtStockCode = funcGetStockData();
+                }
+                else
+                {
+                    Func<DataTable> funcGetStockData = () =>
+                    {
+                        RichQuery oRichQuery = new RichQuery();
+                        return oRichQuery.p_ScodeQuery("5", "", "", false).Tables[0].Copy();
+                    };
+
+                    _dtStockCode = funcGetStockData();
+                }
+
+            }
+
+            foreach (DataRow dr in _dtStockCode.Rows)
+            {
+                if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
+                { continue; }
+
+                _StockQueue.Enqueue(dr["STOCK_CODE"].ToString());
+
+            }
+
+            InitData();
+
+            btn10060All.Enabled = true;
         }
     }
 }

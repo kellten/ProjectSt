@@ -161,6 +161,46 @@ namespace Woom.Volume.Forms
 
         #region 기간별상승종목
 
+        private void SetDgvGiganUpDown()
+        {
+             string[] strArray = new string[] {"결산월","매출액","영업이익","당기순이익", "상장주식", "연중최고","연중최저"
+                                              ,"시가총액","시가총액비중","외인소진률","대용가","PER","EPS","ROE"
+                                              ,"PBR","EV","BPS","최고250"
+                                              ,"최저250","최고가일250","최고가대비율250","최저가일250","최저가대비율250"
+                                              ,"유통주식","유통비율"};
+
+            KiwoomQuery kiwoomQuery = new KiwoomQuery();
+            DataTable dt = new DataTable();
+
+            System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
+            System.Windows.Forms.DataGridViewCell cellTextBoxCell = new System.Windows.Forms.DataGridViewTextBoxCell();
+
+            for (int i = 0; i < strArray.Length - 1; i++)
+            {
+
+            }
+
+            dt = kiwoomQuery.p_TableDescQuery("OPT10001", bln3tier:false).Tables[0].Copy();
+
+            if (dt != null)
+            {
+                f
+
+                foreach (DataRow dr in strArray[ )
+                {
+                    dgvColumn.CellTemplate = cellTextBoxCell;
+                    dgvColumn.HeaderText = dr["COLUMN_DESCRIPTION"].ToString();
+                    dgvColumn.Name = dr["COLUMN_NAME"].ToString();
+
+                    dgvGiganUpDown.Columns.Add(dgvColumn);
+
+                }
+            
+            }
+            
+        
+        }
+
         private bool _firstCall = false;
 
         private void GetOpt10015Data()
@@ -218,8 +258,6 @@ namespace Woom.Volume.Forms
                     dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
                     dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
                     dgvGiganUpDown.Columns.Add(columnName: "TODAY_DAEBI", headerText: "현재가대비");
-                    dgvGiganUpDown.Columns.Add(columnName: "SEQ_NO", headerText: "일수");
-
                     dgvGiganUpDown.Columns.Add(columnName: "SEQ_NO", headerText: "일수");
 
                     foreach (DataColumn dc in dt.Columns)
@@ -589,8 +627,11 @@ namespace Woom.Volume.Forms
             { 
               
             }
+        }
 
-           
+        private void BtnExcelExport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

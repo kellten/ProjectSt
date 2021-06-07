@@ -37,6 +37,7 @@
             this.dtpStdDate = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.chkDesc = new System.Windows.Forms.CheckBox();
+            this.btnGetStockCode = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblStdDate
@@ -59,6 +60,7 @@
             // 
             // btn10060All
             // 
+            this.btn10060All.Enabled = false;
             this.btn10060All.Location = new System.Drawing.Point(574, 12);
             this.btn10060All.Name = "btn10060All";
             this.btn10060All.Size = new System.Drawing.Size(114, 23);
@@ -114,6 +116,8 @@
             // chkDesc
             // 
             this.chkDesc.AutoSize = true;
+            this.chkDesc.Checked = true;
+            this.chkDesc.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDesc.Location = new System.Drawing.Point(488, 73);
             this.chkDesc.Name = "chkDesc";
             this.chkDesc.Size = new System.Drawing.Size(57, 16);
@@ -121,11 +125,22 @@
             this.chkDesc.Text = "DESC";
             this.chkDesc.UseVisualStyleBackColor = true;
             // 
+            // btnGetStockCode
+            // 
+            this.btnGetStockCode.Location = new System.Drawing.Point(574, 70);
+            this.btnGetStockCode.Name = "btnGetStockCode";
+            this.btnGetStockCode.Size = new System.Drawing.Size(139, 23);
+            this.btnGetStockCode.TabIndex = 41;
+            this.btnGetStockCode.Text = "작업할 내역 가져오기";
+            this.btnGetStockCode.UseVisualStyleBackColor = true;
+            this.btnGetStockCode.Click += new System.EventHandler(this.btnGetStockCode_Click);
+            // 
             // FrmOpt10060Caller_New
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(737, 97);
+            this.Controls.Add(this.btnGetStockCode);
             this.Controls.Add(this.chkDesc);
             this.Controls.Add(this.dtpStdDate);
             this.Controls.Add(this.label1);
@@ -153,5 +168,6 @@
         private System.Windows.Forms.DateTimePicker dtpStdDate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkDesc;
+        private System.Windows.Forms.Button btnGetStockCode;
     }
 }

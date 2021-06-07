@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.dgv1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgv0 = new System.Windows.Forms.DataGridView();
@@ -51,7 +50,7 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.AutoSCode = new SDataAccess.AutoCompleteText();
+            this.BtnExcelExport = new System.Windows.Forms.Button();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -160,6 +159,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.BtnExcelExport);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.txtStockCode);
             this.splitContainer1.Panel1.Controls.Add(this.BtnGetOpt);
@@ -275,16 +275,15 @@
             this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
-            // AutoSCode
+            // BtnExcelExport
             // 
-            this.AutoSCode.AutoCompCode = "STOCK_CODE";
-            this.AutoSCode.AutoCompString = "STOCK_NAME";
-            this.AutoSCode.AutoTextColor = true;
-            this.AutoSCode.ConTextColor = System.Drawing.Color.Empty;
-            this.AutoSCode.FirstCharSearch = "False";
-            this.AutoSCode.SetViewControl = SDataAccess.AutoCompleteText.ViewControl.DataGridView;
-            this.AutoSCode.StoredProcParam = null;
-            this.AutoSCode.UserDataView = true;
+            this.BtnExcelExport.Location = new System.Drawing.Point(867, 6);
+            this.BtnExcelExport.Name = "BtnExcelExport";
+            this.BtnExcelExport.Size = new System.Drawing.Size(181, 23);
+            this.BtnExcelExport.TabIndex = 44;
+            this.BtnExcelExport.Text = "Excel Export";
+            this.BtnExcelExport.UseVisualStyleBackColor = true;
+            this.BtnExcelExport.Click += new System.EventHandler(this.BtnExcelExport_Click);
             // 
             // FrmStockList
             // 
@@ -334,5 +333,6 @@
         private System.Windows.Forms.TextBox txtStockCode;
         private SDataAccess.AutoCompleteText AutoSCode;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button BtnExcelExport;
     }
 }
