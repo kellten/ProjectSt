@@ -45,11 +45,12 @@
             this.엑셀가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.마켓분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbFrmStockList = new System.Windows.Forms.ToolStripMenuItem();
+            this.기본정보관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.테마그룹관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.OptCallPer1hour = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.기본정보관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.테마그룹관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +90,7 @@
             // 
             this.optTestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuItem10059,
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem,
             this.opt10069ToolStripMenuItem,
             this.opt10081ToolStripMenuItem,
             this.opt20068ToolStripMenuItem,
@@ -103,56 +105,56 @@
             // mnuItem10059
             // 
             this.mnuItem10059.Name = "mnuItem10059";
-            this.mnuItem10059.Size = new System.Drawing.Size(293, 22);
+            this.mnuItem10059.Size = new System.Drawing.Size(323, 22);
             this.mnuItem10059.Text = "종목별투자자기관별요청(Opt10059)";
             this.mnuItem10059.Click += new System.EventHandler(this.mnuItem10059_Click);
             // 
             // opt10069ToolStripMenuItem
             // 
             this.opt10069ToolStripMenuItem.Name = "opt10069ToolStripMenuItem";
-            this.opt10069ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt10069ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.opt10069ToolStripMenuItem.Text = "종목별투자자기관별차트요청(Opt10060)";
             this.opt10069ToolStripMenuItem.Click += new System.EventHandler(this.opt10069ToolStripMenuItem_Click);
             // 
             // opt10081ToolStripMenuItem
             // 
             this.opt10081ToolStripMenuItem.Name = "opt10081ToolStripMenuItem";
-            this.opt10081ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt10081ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.opt10081ToolStripMenuItem.Text = "주식일봉차트조회요청(Opt10081)";
             this.opt10081ToolStripMenuItem.Click += new System.EventHandler(this.opt10081ToolStripMenuItem_Click);
             // 
             // opt20068ToolStripMenuItem
             // 
             this.opt20068ToolStripMenuItem.Name = "opt20068ToolStripMenuItem";
-            this.opt20068ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt20068ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.opt20068ToolStripMenuItem.Text = "대차거래추이요청(종목별)(Opt20068)";
             this.opt20068ToolStripMenuItem.Click += new System.EventHandler(this.opt20068ToolStripMenuItem_Click);
             // 
             // opt10005ToolStripMenuItem
             // 
             this.opt10005ToolStripMenuItem.Name = "opt10005ToolStripMenuItem";
-            this.opt10005ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt10005ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.opt10005ToolStripMenuItem.Text = "주식일주월시분요청(Opt10005)";
             this.opt10005ToolStripMenuItem.Click += new System.EventHandler(this.opt10005ToolStripMenuItem_Click);
             // 
             // 일별거래상세요청Opt10015ToolStripMenuItem
             // 
             this.일별거래상세요청Opt10015ToolStripMenuItem.Name = "일별거래상세요청Opt10015ToolStripMenuItem";
-            this.일별거래상세요청Opt10015ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.일별거래상세요청Opt10015ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.일별거래상세요청Opt10015ToolStripMenuItem.Text = "일별거래상세요청(Opt10015)";
             this.일별거래상세요청Opt10015ToolStripMenuItem.Click += new System.EventHandler(this.일별거래상세요청Opt10015ToolStripMenuItem_Click);
             // 
             // opt90002ToolStripMenuItem
             // 
             this.opt90002ToolStripMenuItem.Name = "opt90002ToolStripMenuItem";
-            this.opt90002ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.opt90002ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.opt90002ToolStripMenuItem.Text = "테마구성종목요청(Opt90002)";
             this.opt90002ToolStripMenuItem.Click += new System.EventHandler(this.opt90002ToolStripMenuItem_Click);
             // 
             // 주식기본정보요청Opt10001ToolStripMenuItem
             // 
             this.주식기본정보요청Opt10001ToolStripMenuItem.Name = "주식기본정보요청Opt10001ToolStripMenuItem";
-            this.주식기본정보요청Opt10001ToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
+            this.주식기본정보요청Opt10001ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
             this.주식기본정보요청Opt10001ToolStripMenuItem.Text = "주식기본정보요청(Opt10001)";
             this.주식기본정보요청Opt10001ToolStripMenuItem.Click += new System.EventHandler(this.주식기본정보요청Opt10001ToolStripMenuItem_Click);
             // 
@@ -185,6 +187,21 @@
             this.tsbFrmStockList.Text = "종목별 특이사항";
             this.tsbFrmStockList.Click += new System.EventHandler(this.tsbFrmStockList_Click);
             // 
+            // 기본정보관리ToolStripMenuItem
+            // 
+            this.기본정보관리ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.테마그룹관리ToolStripMenuItem});
+            this.기본정보관리ToolStripMenuItem.Name = "기본정보관리ToolStripMenuItem";
+            this.기본정보관리ToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.기본정보관리ToolStripMenuItem.Text = "기본정보관리";
+            // 
+            // 테마그룹관리ToolStripMenuItem
+            // 
+            this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
+            this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
+            // 
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -202,20 +219,12 @@
             this.OptCallPer1hour.Size = new System.Drawing.Size(31, 17);
             this.OptCallPer1hour.Text = "상태";
             // 
-            // 기본정보관리ToolStripMenuItem
+            // 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem
             // 
-            this.기본정보관리ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.테마그룹관리ToolStripMenuItem});
-            this.기본정보관리ToolStripMenuItem.Name = "기본정보관리ToolStripMenuItem";
-            this.기본정보관리ToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
-            this.기본정보관리ToolStripMenuItem.Text = "기본정보관리";
-            // 
-            // 테마그룹관리ToolStripMenuItem
-            // 
-            this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
-            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
-            this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Name = "종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem";
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Text = "종목별투자자기관별차트요청(Opt10060)_Ver2";
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Click += new System.EventHandler(this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem_Click);
             // 
             // MdiTester
             // 
@@ -260,6 +269,7 @@
         private System.Windows.Forms.ToolStripMenuItem 주식기본정보요청Opt10001ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 기본정보관리ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 테마그룹관리ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem;
     }
 }
 

@@ -123,5 +123,11 @@ namespace Woom.Tester.Mdi
             Form oForm = new Woom.CallForm.Forms.FrmThemaManage();
             ShowChildForm(oForm);
         }
+
+        private void 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Tester.Forms.FrmOpt10060CallerPer();
+            ShowChildForm(oform);
+        }
     }
 }

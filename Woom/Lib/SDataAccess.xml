@@ -39,16 +39,6 @@ SDataAccess
  <returns>Boolean</returns>
  <remarks></remarks>
 </member>
-<member name="M:SDataAccess.KiwoomQuery.p_TableDescQuery(System.String,System.Boolean,System.Data.DataSet,System.String)">
- <summary>
- 테이블 설명을 가져온다.
- </summary>
- <param name="TABLE_NAME"></param>
- <param name="bln3tier"></param>
- <param name="ds"></param>
- <param name="tableName"></param>
- <returns></returns>
-</member>
 <member name="M:SDataAccess.KiwoomQuery.CommandTextQuery(System.String,System.Data.CommandType,System.Boolean,System.Data.DataSet,System.String)">
  <summary>
  TextQuery

@@ -40,6 +40,7 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.BtnRealData = new System.Windows.Forms.Button();
             this.BtnExcelExport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtStockCode = new System.Windows.Forms.TextBox();
@@ -51,7 +52,9 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.BtnRealData = new System.Windows.Forms.Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.dgvOptInfoStock = new System.Windows.Forms.DataGridView();
+            this.chkTradeDaegum = new System.Windows.Forms.CheckBox();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -62,6 +65,11 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiganUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOptInfoStock)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv1
@@ -160,6 +168,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.chkTradeDaegum);
             this.splitContainer1.Panel1.Controls.Add(this.BtnRealData);
             this.splitContainer1.Panel1.Controls.Add(this.BtnExcelExport);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -174,14 +183,24 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgvGiganUpDown);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1628, 945);
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
+            // BtnRealData
+            // 
+            this.BtnRealData.Location = new System.Drawing.Point(1348, 7);
+            this.BtnRealData.Name = "BtnRealData";
+            this.BtnRealData.Size = new System.Drawing.Size(75, 23);
+            this.BtnRealData.TabIndex = 45;
+            this.BtnRealData.Text = "실시간";
+            this.BtnRealData.UseVisualStyleBackColor = true;
+            this.BtnRealData.Click += new System.EventHandler(this.BtnRealData_Click);
+            // 
             // BtnExcelExport
             // 
-            this.BtnExcelExport.Location = new System.Drawing.Point(867, 6);
+            this.BtnExcelExport.Location = new System.Drawing.Point(1161, 7);
             this.BtnExcelExport.Name = "BtnExcelExport";
             this.BtnExcelExport.Size = new System.Drawing.Size(181, 23);
             this.BtnExcelExport.TabIndex = 44;
@@ -192,7 +211,7 @@
             // label2
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(773, 7);
+            this.label2.Location = new System.Drawing.Point(1067, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 23);
             this.label2.TabIndex = 43;
@@ -200,7 +219,7 @@
             // 
             // txtStockCode
             // 
-            this.txtStockCode.Location = new System.Drawing.Point(620, 8);
+            this.txtStockCode.Location = new System.Drawing.Point(914, 9);
             this.txtStockCode.Name = "txtStockCode";
             this.txtStockCode.Size = new System.Drawing.Size(147, 21);
             this.txtStockCode.TabIndex = 42;
@@ -281,20 +300,50 @@
             this.dgvGiganUpDown.Location = new System.Drawing.Point(0, 0);
             this.dgvGiganUpDown.Name = "dgvGiganUpDown";
             this.dgvGiganUpDown.RowTemplate.Height = 23;
-            this.dgvGiganUpDown.Size = new System.Drawing.Size(1624, 899);
+            this.dgvGiganUpDown.Size = new System.Drawing.Size(1022, 899);
             this.dgvGiganUpDown.TabIndex = 0;
             this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
-            // BtnRealData
+            // splitContainer2
             // 
-            this.BtnRealData.Location = new System.Drawing.Point(1054, 6);
-            this.BtnRealData.Name = "BtnRealData";
-            this.BtnRealData.Size = new System.Drawing.Size(75, 23);
-            this.BtnRealData.TabIndex = 45;
-            this.BtnRealData.Text = "실시간";
-            this.BtnRealData.UseVisualStyleBackColor = true;
-            this.BtnRealData.Click += new System.EventHandler(this.BtnRealData_Click);
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.dgvGiganUpDown);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.dgvOptInfoStock);
+            this.splitContainer2.Size = new System.Drawing.Size(1628, 903);
+            this.splitContainer2.SplitterDistance = 1026;
+            this.splitContainer2.TabIndex = 0;
+            // 
+            // dgvOptInfoStock
+            // 
+            this.dgvOptInfoStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOptInfoStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvOptInfoStock.Location = new System.Drawing.Point(0, 0);
+            this.dgvOptInfoStock.Name = "dgvOptInfoStock";
+            this.dgvOptInfoStock.RowTemplate.Height = 23;
+            this.dgvOptInfoStock.Size = new System.Drawing.Size(594, 899);
+            this.dgvOptInfoStock.TabIndex = 0;
+            // 
+            // chkTradeDaegum
+            // 
+            this.chkTradeDaegum.AutoSize = true;
+            this.chkTradeDaegum.Checked = true;
+            this.chkTradeDaegum.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTradeDaegum.Location = new System.Drawing.Point(622, 13);
+            this.chkTradeDaegum.Name = "chkTradeDaegum";
+            this.chkTradeDaegum.Size = new System.Drawing.Size(72, 16);
+            this.chkTradeDaegum.TabIndex = 46;
+            this.chkTradeDaegum.Text = "거래대금";
+            this.chkTradeDaegum.UseVisualStyleBackColor = true;
             // 
             // FrmStockList
             // 
@@ -315,6 +364,11 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiganUpDown)).EndInit();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOptInfoStock)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,5 +400,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnExcelExport;
         private System.Windows.Forms.Button BtnRealData;
+        private System.Windows.Forms.CheckBox chkTradeDaegum;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridView dgvOptInfoStock;
     }
 }

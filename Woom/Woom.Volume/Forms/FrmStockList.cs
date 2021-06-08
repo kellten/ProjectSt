@@ -33,8 +33,6 @@ namespace Woom.Volume.Forms
             _dt = new DataTable();
             /// 999 - 코스피, 코스닥
             _dt = _clsGetKoaStudioMethod.GetCodeListByMarketCallBackDataTable("0").Copy();
-            //TestCode();
-           // GetHighestUpRateBySector();
 
             clsUtil = new DataDefine.Util.ClsUtil();
 
@@ -43,12 +41,6 @@ namespace Woom.Volume.Forms
             RichQuery richQuery = new RichQuery();
 
             DataTable dt = richQuery.p_ScodeQuery(query: "1", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
-
-            //AutoSCode.Dv = new DataView(dt);
-            //AutoSCode.OCon = txtStockCode;
-            
-            //AutoSCode.AutoCompCode = "STOCK_CODE";
-            //AutoSCode.AutoCompString = "STOCK_NAME";
 
         }
 
@@ -213,7 +205,6 @@ namespace Woom.Volume.Forms
             }
 
             RemoveGridViewRow(dgvGiganUpDown);
-            //RemoveGridViewColumn(dgvGiganUpDown);            
 
             if (ChkOption1.Checked == true)
             {
@@ -479,10 +470,7 @@ namespace Woom.Volume.Forms
         }
         #endregion
 
-        #region GetOpt10060Data
-        
-        #endregion
-
+ 
         private void RemoveGridViewRow(DataGridView dgv)
         {
             do
