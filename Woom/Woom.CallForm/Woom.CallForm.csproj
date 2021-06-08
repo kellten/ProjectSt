@@ -60,6 +60,12 @@
     <Compile Include="Forms\FrmThemaManage.Designer.cs">
       <DependentUpon>FrmThemaManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmThemaTimeTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmThemaTimeTable.Designer.cs">
+      <DependentUpon>FrmThemaTimeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\UcOpt10060PerStockCode.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmThemaManage.resx">
       <DependentUpon>FrmThemaManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmThemaTimeTable.resx">
+      <DependentUpon>FrmThemaTimeTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcOpt10060PerStockCode.resx">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>

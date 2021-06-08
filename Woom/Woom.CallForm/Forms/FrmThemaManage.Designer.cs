@@ -169,7 +169,6 @@
             this.lblThemaGroup.Name = "lblThemaGroup";
             this.lblThemaGroup.Size = new System.Drawing.Size(84, 21);
             this.lblThemaGroup.TabIndex = 44;
-            this.lblThemaGroup.Text = "label2";
             this.lblThemaGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnThemaGroupStore
@@ -288,7 +287,6 @@
             this.lblThema.Name = "lblThema";
             this.lblThema.Size = new System.Drawing.Size(88, 23);
             this.lblThema.TabIndex = 47;
-            this.lblThema.Text = "label3";
             this.lblThema.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4

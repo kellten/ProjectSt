@@ -28,6 +28,7 @@ namespace Woom.DataAccess.Forms
             RegEventMethod();
             Connection();
             AddOnReceivedEventHandler();
+            AddOnReceiveRealDataEventHandler();
         }
         private void RegEventMethod()
         {

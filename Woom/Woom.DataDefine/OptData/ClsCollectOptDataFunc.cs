@@ -14,7 +14,6 @@ namespace Woom.DataDefine.OptData
         public enum OptPeriod
         { 
            END_NOT_EXISTS, FULL, EMPTY
-             
         }
         public OptPeriod CheckValidationOptPeriod(string stockCode, string optCall)
         {

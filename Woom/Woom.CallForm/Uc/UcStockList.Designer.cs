@@ -34,8 +34,6 @@
             this.chkEditMode = new System.Windows.Forms.CheckBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.dgvAllStockList = new System.Windows.Forms.DataGridView();
-            this.STOCK_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitConA)).BeginInit();
             this.splitConA.Panel1.SuspendLayout();
             this.splitConA.Panel2.SuspendLayout();
@@ -109,9 +107,6 @@
             // dgvAllStockList
             // 
             this.dgvAllStockList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAllStockList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.STOCK_NAME,
-            this.STOCK_CODE});
             this.dgvAllStockList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAllStockList.Location = new System.Drawing.Point(0, 0);
             this.dgvAllStockList.Name = "dgvAllStockList";
@@ -119,17 +114,6 @@
             this.dgvAllStockList.Size = new System.Drawing.Size(567, 843);
             this.dgvAllStockList.TabIndex = 0;
             this.dgvAllStockList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAllStockList_CellDoubleClick);
-            // 
-            // STOCK_NAME
-            // 
-            this.STOCK_NAME.HeaderText = "종목명";
-            this.STOCK_NAME.Name = "STOCK_NAME";
-            this.STOCK_NAME.Width = 200;
-            // 
-            // STOCK_CODE
-            // 
-            this.STOCK_CODE.HeaderText = "종목코드";
-            this.STOCK_CODE.Name = "STOCK_CODE";
             // 
             // UcStockList
             // 
@@ -157,7 +141,5 @@
         private System.Windows.Forms.CheckBox chkEditMode;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridView dgvAllStockList;
-        private System.Windows.Forms.DataGridViewTextBoxColumn STOCK_NAME;
-        private System.Windows.Forms.DataGridViewTextBoxColumn STOCK_CODE;
     }
 }

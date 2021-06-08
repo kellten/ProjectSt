@@ -70,7 +70,7 @@ namespace Woom.CallForm.Forms
 
             arrParam.Add("@ACTION_GB", actionGb);
             arrParam.Add("@STOCK_CODE", stockCode);
-            arrParam.Add("@THEMA_CODE", lblThemaGroup.Text);
+            arrParam.Add("@THEMA_CODE", lblThema.Text);
             arrParam.Add("@DESC_TEXT", "");
             arrParam.Add("@WORK_ID", "ADMIN00000");
             arrParam.Add("@R_ErrorCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
@@ -306,6 +306,13 @@ namespace Woom.CallForm.Forms
             {
                 return;
             }
+
+            if (lblThema.Text == "")
+            {
+                return;
+            }
+
+
             ThemstStoreRecord("A", stockCode);
         }
             

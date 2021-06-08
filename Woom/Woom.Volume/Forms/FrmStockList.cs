@@ -44,11 +44,11 @@ namespace Woom.Volume.Forms
 
             DataTable dt = richQuery.p_ScodeQuery(query: "1", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
 
-            AutoSCode.Dv = new DataView(dt);
-            AutoSCode.OCon = txtStockCode;
+            //AutoSCode.Dv = new DataView(dt);
+            //AutoSCode.OCon = txtStockCode;
             
-            AutoSCode.AutoCompCode = "STOCK_CODE";
-            AutoSCode.AutoCompString = "STOCK_NAME";
+            //AutoSCode.AutoCompCode = "STOCK_CODE";
+            //AutoSCode.AutoCompString = "STOCK_NAME";
 
         }
 
@@ -163,9 +163,9 @@ namespace Woom.Volume.Forms
 
         private void SetDgvGiganUpDown()
         {
-             string[] strArray = new string[] {"결산월","매출액","영업이익","당기순이익", "상장주식", "연중최고","연중최저"
-                                              ,"시가총액","시가총액비중","외인소진률","대용가","PER","EPS","ROE"
-                                              ,"PBR","EV","BPS","최고250"
+             string[] strArray = new string[] {"결산월","매출액","영업이익","당기순이익","PER","EPS","ROE"
+                                              ,"PBR","EV","BPS", "상장주식", "연중최고","연중최저"
+                                              ,"시가총액","시가총액비중","외인소진률","대용가","최고250"
                                               ,"최저250","최고가일250","최고가대비율250","최저가일250","최저가대비율250"
                                               ,"유통주식","유통비율"};
 
@@ -175,30 +175,17 @@ namespace Woom.Volume.Forms
             System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
             System.Windows.Forms.DataGridViewCell cellTextBoxCell = new System.Windows.Forms.DataGridViewTextBoxCell();
 
-            for (int i = 0; i < strArray.Length - 1; i++)
+            for (int i = 0; i < strArray.Length ; i++)
             {
+                dgvColumn = null;
+                dgvColumn = new DataGridViewColumn();
 
+                dgvColumn.CellTemplate = cellTextBoxCell;
+                dgvColumn.HeaderText = strArray[i].ToString();
+                dgvColumn.Name = strArray[i].ToString();
+
+                dgvGiganUpDown.Columns.Add(dgvColumn);
             }
-
-            dt = kiwoomQuery.p_TableDescQuery("OPT10001", bln3tier:false).Tables[0].Copy();
-
-            if (dt != null)
-            {
-                f
-
-                foreach (DataRow dr in strArray[ )
-                {
-                    dgvColumn.CellTemplate = cellTextBoxCell;
-                    dgvColumn.HeaderText = dr["COLUMN_DESCRIPTION"].ToString();
-                    dgvColumn.Name = dr["COLUMN_NAME"].ToString();
-
-                    dgvGiganUpDown.Columns.Add(dgvColumn);
-
-                }
-            
-            }
-            
-        
         }
 
         private bool _firstCall = false;
@@ -210,7 +197,6 @@ namespace Woom.Volume.Forms
             DataTable dt = new DataTable();
             DataTable dt2 = new DataTable();
             DataTable dt3 = new DataTable();
-            DataTable dt4 = new DataTable();
 
             int i = 0;
 
@@ -231,14 +217,14 @@ namespace Woom.Volume.Forms
 
             if (ChkOption1.Checked == true)
             {
-                 dt = kiwoomQuery.p_Opt10015DateQuery(query: "4", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
+                dt = kiwoomQuery.p_Opt10015DateQuery(query: "4", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
             }
             else
             {
-                 dt = kiwoomQuery.p_Opt10015DateQuery(query: "1", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
+                dt = kiwoomQuery.p_Opt10015DateQuery(query: "1", stockCode: "", stockDate: "", fromDate: clsUtil.MondayDateOnWeekTypeDateTime(dtpStartDate.Value).ToString("yyyyMMdd"), toDate: dtpEndDate.Value.ToString("yyyyMMdd"), upDownRate: numUpDownRate.Value, bln3tier: false).Tables[0].Copy();
             }
 
-            dt2 = kiwoomQuery.p_Opt10015DateQuery(query: "3",  stockCode: "", stockDate: "", fromDate: "", toDate: "", upDownRate: 0, bln3tier: false).Tables[0].Copy();
+            dt2 = kiwoomQuery.p_Opt10015DateQuery(query: "3", stockCode: "", stockDate: "", fromDate: "", toDate: "", upDownRate: 0, bln3tier: false).Tables[0].Copy();
 
             if (dt.Rows.Count < 1)
             {
@@ -253,7 +239,7 @@ namespace Woom.Volume.Forms
                     dataGridViewButtonColumn.Name = "WEB_VIEW";
                     dataGridViewButtonColumn.HeaderText = "View";
                     dataGridViewButtonColumn.ReadOnly = false;
-                    
+
                     dgvGiganUpDown.Columns.Add(dataGridViewButtonColumn);
                     dgvGiganUpDown.Columns.Add(columnName: "KIFGP_NAME", headerText: "테마명");
                     dgvGiganUpDown.Columns.Add(columnName: "STOCK_NAME", headerText: "종목명");
@@ -280,98 +266,23 @@ namespace Woom.Volume.Forms
                             dgvColumn = new System.Windows.Forms.DataGridViewColumn();
                             cell = new System.Windows.Forms.DataGridViewTextBoxCell();
                         }
-                        
+
                         dgvColumn.CellTemplate = cell;
                         dgvColumn.HeaderText = oBasicDataType.ColumnToKoreanOpt10015(dc.ColumnName.ToString()).ToString();
                         dgvColumn.Name = dc.ColumnName.ToString();
-                  
+
                         dgvGiganUpDown.Columns.Add(dgvColumn);
                     }
 
+                    SetDgvGiganUpDown();
+
                 }
-                                
 
                 int row = 0;
 
                 foreach (DataRow dr in dt.Rows)
                 {
                     dgvGiganUpDown.Rows.Add();
-
-                    if (dt4 != null)
-                    {
-                        dt4 = null;
-                    }
-
-                    dt4 = kiwoomQuery.p_Opt10001Query(query: "1", stockCode: dr["STOCK_CODE"].ToString().Trim(), callDate: "", bln3tier: false).Tables[0].Copy();
-
-                    if (dt4 != null)
-                    {
-                        if (dt4.Rows.Count > 0)
-                        {
-
-                            if (_firstCall == false)
-                            { 
-                                foreach (DataColumn dc in dt4.Columns)
-                                {
-                                    System.Windows.Forms.DataGridViewColumn dgvColumn = new System.Windows.Forms.DataGridViewColumn();
-                                    System.Windows.Forms.DataGridViewCell cell = new System.Windows.Forms.DataGridViewTextBoxCell();
-
-                                    if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME"
-                                        || dc.ColumnName.ToString() == "상한가" || dc.ColumnName.ToString() == "하한가" || dc.ColumnName.ToString() == "기준가"
-                                        || dc.ColumnName.ToString() == "시가총액비중" 
-                                        || dc.ColumnName.ToString() == "예상체결가" || dc.ColumnName.ToString() == "예상체결수량" || dc.ColumnName.ToString() == "액면가단위" 
-                                        || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "현재가" || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "등락율" || dc.ColumnName.ToString() == "거래량")
-                                    {
-                                        continue;
-                                    }
-
-                                    if (dc.ColumnName.ToString() == "CALL_DATE")
-                                    {
-                                        dgvColumn.CellTemplate = cell;
-                                        dgvColumn.HeaderText = "기준일자";
-                                        dgvColumn.Name = "OPT10001_CALL_DATE";
-
-                                        dgvGiganUpDown.Columns.Add(dgvColumn);
-
-                                        continue;
-                                    }
-
-                         
-                                    dgvColumn.CellTemplate = cell;
-                                    dgvColumn.HeaderText = dc.ColumnName.ToString();
-                                    dgvColumn.Name = dc.ColumnName.ToString();
-
-                                    dgvGiganUpDown.Columns.Add(dgvColumn);
-                                }
-
-                                _firstCall = true;
-                            }
-                            
-                            foreach (DataColumn dc in dt4.Columns)
-                            {
-
-                                if (dc.ColumnName.ToString() == "STOCK_CODE" || dc.ColumnName.ToString() == "CALL_TIME"
-                                       || dc.ColumnName.ToString() == "상한가" || dc.ColumnName.ToString() == "하한가" || dc.ColumnName.ToString() == "기준가"
-                                       || dc.ColumnName.ToString() == "시가총액비중"
-                                       || dc.ColumnName.ToString() == "예상체결가" || dc.ColumnName.ToString() == "예상체결수량" || dc.ColumnName.ToString() == "액면가단위"
-                                       || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "현재가" || dc.ColumnName.ToString() == "전일대비" || dc.ColumnName.ToString() == "등락율" || dc.ColumnName.ToString() == "거래량")
-                                {
-                                    continue;
-                                }
-
-                                if (dc.ColumnName.ToString() == "CALL_DATE")
-                                {
-                                    dgvGiganUpDown.Rows[row].Cells["OPT10001_CALL_DATE"].Value = dt4.Rows[0][dc.ColumnName.ToString()].ToString();
-                                }
-                                else
-                                { 
-                                dgvGiganUpDown.Rows[row].Cells[columnName: dc.ColumnName.ToString()].Value = dt4.Rows[0][dc.ColumnName.ToString()].ToString();
-                                }
-                            }
-
-                        }
-                    
-                    }
 
                     if (tradeDate == "")
                     {
@@ -389,10 +300,12 @@ namespace Woom.Volume.Forms
                         {
                             dgvGiganUpDown.Rows[row].DefaultCellStyle.BackColor = Color.AliceBlue;
                         }
-                        
+
                     }
 
                     dgvGiganUpDown.Rows[row].Cells["SEQ_NO"].Value = i.ToString() + " 전";
+
+                    GetOpt10001ondgvGiganUpDown(row, dr["STOCK_CODE"].ToString());
 
                     foreach (DataColumn dc in dt.Columns)
                     {
@@ -418,7 +331,7 @@ namespace Woom.Volume.Forms
                         {
                             if (kifgp_name == "")
                             {
-                                kifgp_name =dr2th["KIFGP_NAME"].ToString().Trim();
+                                kifgp_name = dr2th["KIFGP_NAME"].ToString().Trim();
                             }
                             else
                             {
@@ -441,14 +354,59 @@ namespace Woom.Volume.Forms
 
                 _firstCall = true;
 
-                SetDataGridView();                
+                SetDataGridView();
 
                 tcs.SetResult(true);
 
             }
         }
         #endregion
-              
+
+        #region OPT10001
+        private void GetOpt10001ondgvGiganUpDown(int row, string stockCode)
+        {
+            SDataAccess.KiwoomQuery kiwoomQuery = new KiwoomQuery();
+            DataTable dt4 = new DataTable();
+
+            if (dt4 != null)
+            {
+                dt4 = null;
+            }
+
+            dt4 = kiwoomQuery.p_Opt10001Query(query: "1", stockCode: stockCode, callDate: "", bln3tier: false).Tables[0].Copy();
+
+            if (dt4.Rows.Count > 0)
+            {
+                dgvGiganUpDown.Rows[row].Cells["결산월"].Value = dt4.Rows[0]["결산월"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["매출액"].Value = dt4.Rows[0]["매출액"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["영업이익"].Value = dt4.Rows[0]["영업이익"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["당기순이익"].Value = dt4.Rows[0]["당기순이익"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["PER"].Value = dt4.Rows[0]["PER"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["EPS"].Value = dt4.Rows[0]["EPS"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["ROE"].Value = dt4.Rows[0]["ROE"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["PBR"].Value = dt4.Rows[0]["PBR"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["EV"].Value = dt4.Rows[0]["EV"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["BPS"].Value = dt4.Rows[0]["BPS"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["상장주식"].Value = dt4.Rows[0]["상장주식"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["연중최고"].Value = dt4.Rows[0]["연중최고"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["연중최저"].Value = dt4.Rows[0]["연중최저"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["시가총액"].Value = dt4.Rows[0]["시가총액"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["시가총액비중"].Value = dt4.Rows[0]["시가총액비중"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["외인소진률"].Value = dt4.Rows[0]["외인소진률"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["대용가"].Value = dt4.Rows[0]["대용가"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["최고250"].Value = dt4.Rows[0]["최고250"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["최저250"].Value = dt4.Rows[0]["최저250"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["최고가일250"].Value = dt4.Rows[0]["최고가일250"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["최고가대비율250"].Value = dt4.Rows[0]["최고가대비율250"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["최저가일250"].Value = dt4.Rows[0]["최저가일250"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["최저가대비율250"].Value = dt4.Rows[0]["최저가대비율250"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["유통주식"].Value = dt4.Rows[0]["유통주식"].ToString();
+                dgvGiganUpDown.Rows[row].Cells["유통비율"].Value = dt4.Rows[0]["유통비율"].ToString();
+
+            }
+        }
+        #endregion
+
         #region SetDataGridView
         private void SetDataGridView()
         {
@@ -457,6 +415,16 @@ namespace Woom.Volume.Forms
 
             for (int i = 0; i < dgvGiganUpDown.Rows.Count - 1; i++)
             {
+                if (dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value == null)
+                {
+                    continue;
+                }
+
+                if (dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim() =="")
+                {
+                    continue;
+                }
+
                 dgvGiganUpDown.Rows[i].Cells["시가총액"].Value = Convert.ToInt32((Convert.ToInt32(dgvGiganUpDown.Rows[i].Cells["상장주식"].Value) * Math.Abs(Convert.ToInt32(dgvGiganUpDown.Rows[i].Cells["LAST_PRICE"].Value))) / 100000) ;
 
                 if (dgvGiganUpDown.Rows[i].Cells["TODAY_DAEBI"].Value.ToString().Contains("-") == true)
@@ -480,7 +448,16 @@ namespace Woom.Volume.Forms
                 {
                     dgvGiganUpDown.Rows[i].Cells["TRADE_DAEGUM"].Style.ForeColor = Color.Red;
                 }
-                               
+
+                if (dgvGiganUpDown.Rows[i].Cells["영업이익"].Value == null)
+                {
+                    continue;
+                }
+
+                if (dgvGiganUpDown.Rows[i].Cells["영업이익"].Value.ToString().Trim() == "")
+                {
+                    continue;
+                }
                 // 영익이 흑자이면, 빨간색
                 if (dgvGiganUpDown.Rows[i].Cells["영업이익"].Value.ToString().Contains("-") == false)
                 {
@@ -632,6 +609,43 @@ namespace Woom.Volume.Forms
         private void BtnExcelExport_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnRealData_Click(object sender, EventArgs e)
+        {
+            StartRealData();
+        }
+
+        private void StartRealData()
+        {
+            string strStockCode = "";
+
+            for (int i = 0; i < dgvGiganUpDown.Rows.Count  - 1; i++)
+            {
+                if (dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim() != "")
+                {
+                    if (strStockCode != "")
+                    {
+                        strStockCode = strStockCode + ";" + dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim();
+                    }
+                    else
+                    {
+                        strStockCode = dgvGiganUpDown.Rows[i].Cells["STOCK_CODE"].Value.ToString().Trim();
+                    }
+                  
+                }
+                
+            }
+
+            ClsAxKH.SetRealReg("9998", strStockCode, "9001;302;10;11;25;12;13", "0");
+
+        }
+
+
+        private void OnRealData(string data)
+        { 
+        
+        
         }
     }
 }

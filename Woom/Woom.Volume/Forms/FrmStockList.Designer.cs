@@ -40,6 +40,7 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.BtnExcelExport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtStockCode = new System.Windows.Forms.TextBox();
             this.BtnGetOpt = new System.Windows.Forms.Button();
@@ -50,7 +51,7 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
-            this.BtnExcelExport = new System.Windows.Forms.Button();
+            this.BtnRealData = new System.Windows.Forms.Button();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -159,6 +160,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.BtnRealData);
             this.splitContainer1.Panel1.Controls.Add(this.BtnExcelExport);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.txtStockCode);
@@ -177,6 +179,16 @@
             this.splitContainer1.SplitterDistance = 38;
             this.splitContainer1.TabIndex = 0;
             // 
+            // BtnExcelExport
+            // 
+            this.BtnExcelExport.Location = new System.Drawing.Point(867, 6);
+            this.BtnExcelExport.Name = "BtnExcelExport";
+            this.BtnExcelExport.Size = new System.Drawing.Size(181, 23);
+            this.BtnExcelExport.TabIndex = 44;
+            this.BtnExcelExport.Text = "Excel Export";
+            this.BtnExcelExport.UseVisualStyleBackColor = true;
+            this.BtnExcelExport.Click += new System.EventHandler(this.BtnExcelExport_Click);
+            // 
             // label2
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -184,7 +196,6 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 23);
             this.label2.TabIndex = 43;
-            this.label2.Text = "label2";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtStockCode
@@ -275,15 +286,15 @@
             this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
-            // BtnExcelExport
+            // BtnRealData
             // 
-            this.BtnExcelExport.Location = new System.Drawing.Point(867, 6);
-            this.BtnExcelExport.Name = "BtnExcelExport";
-            this.BtnExcelExport.Size = new System.Drawing.Size(181, 23);
-            this.BtnExcelExport.TabIndex = 44;
-            this.BtnExcelExport.Text = "Excel Export";
-            this.BtnExcelExport.UseVisualStyleBackColor = true;
-            this.BtnExcelExport.Click += new System.EventHandler(this.BtnExcelExport_Click);
+            this.BtnRealData.Location = new System.Drawing.Point(1054, 6);
+            this.BtnRealData.Name = "BtnRealData";
+            this.BtnRealData.Size = new System.Drawing.Size(75, 23);
+            this.BtnRealData.TabIndex = 45;
+            this.BtnRealData.Text = "실시간";
+            this.BtnRealData.UseVisualStyleBackColor = true;
+            this.BtnRealData.Click += new System.EventHandler(this.BtnRealData_Click);
             // 
             // FrmStockList
             // 
@@ -334,5 +345,6 @@
         private SDataAccess.AutoCompleteText AutoSCode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button BtnExcelExport;
+        private System.Windows.Forms.Button BtnRealData;
     }
 }

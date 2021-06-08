@@ -18,16 +18,7 @@ namespace Woom.DataAccess.PlugIn
         public static ConcurrentQueue<ArrayList> AxKHQueueList = new ConcurrentQueue<ArrayList>();
 
         public delegate void OnReceivedEventHandler(string stockCode, DataTable dt, int sPreNext);
-        //private static string _stockCode10001 = "";
-        //private static string _stockCode10005 = "";
-        //private static string _stockCode10015 = "";
-        //private static string _stockCode10014 = "";
-        //private static string _stockCode10081 = "";
-        //private static string _stockCode10086 = "";
-        //private static string _stockCode10060 = "";
-        //private static string _stockCode20068 = "";
-        //private static string _kthCode90002 = "";
-
+  
         public static void AddOnReceivedEventHandler()
         {
             AxKH.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(AxKH_OnReceiveTrData);
@@ -84,13 +75,13 @@ namespace Woom.DataAccess.PlugIn
         /// <param name="timeGb">시간구분 = 0:시작일, 1:기간</param>
         /// <param name="startDate">시작일자 = YYYYMMDD (20160101 연도4자리, 월 2자리, 일 2자리 형식)</param>
         /// <param name="endDate">종료일자 = YYYYMMDD (20160101 연도4자리, 월 2자리, 일 2자리 형식)</param>
-        public static void Opt10014(string stockCode, string timeGb, string startDate, string endDate )
+        public static void Opt10014(string stockCode, string timeGb, string startDate, string endDate)
         {
             ClsAxKH.AxKH.SetInputValue("종목코드", stockCode);
             ClsAxKH.AxKH.SetInputValue("시간구분", timeGb);
             ClsAxKH.AxKH.SetInputValue("시작일자", startDate);
             ClsAxKH.AxKH.SetInputValue("종료일자", endDate);
-            
+
         }
         public static void Opt10081(string stockCode, string stdDate, string modifyJugaGb)
         {
@@ -237,7 +228,7 @@ namespace Woom.DataAccess.PlugIn
 
             switch (optType)
             {
-              
+
                 case OptType.Opt10015:
                     stdDate = sRQNameArray[2];
                     break;
@@ -329,8 +320,6 @@ namespace Woom.DataAccess.PlugIn
                 Delay(Convert.ToInt16(dateDiff.TotalSeconds) * 1000);
             }
         }
-
-   
         public static void SendCommRqData(OptType optType, ArrayList optCall, string sRQName, string sTrCode, int nPrevNext, string sScreenNo)
         {
             lock (lockObject)
@@ -358,19 +347,19 @@ namespace Woom.DataAccess.PlugIn
 
                 ArrayList item;
 
-                AxKHQueueList.TryDequeue(out item);              
+                AxKHQueueList.TryDequeue(out item);
 
                 string sRQNameSet = "";
 
                 switch (optType)
                 {
-                  
+
                     case OptType.Opt10001:
                         //_stockCode10001 = "";
 
                         //_stockCode10001 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
-                        Opt10001(stockCode:optCall[0].ToString());
+                        Opt10001(stockCode: optCall[0].ToString());
 
                         break;
                     case OptType.Opt10005:
@@ -387,42 +376,42 @@ namespace Woom.DataAccess.PlugIn
 
                         //_stockCode10015 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
-                        Opt10015(stockCode: optCall[0].ToString(), startDate:optCall[1].ToString());
+                        Opt10015(stockCode: optCall[0].ToString(), startDate: optCall[1].ToString());
                         break;
                     case OptType.Opt10081:
                         //_stockCode10081 = "";
 
                         //_stockCode10081 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
-                        Opt10081(stockCode:optCall[0].ToString(),stdDate: optCall[1].ToString(), modifyJugaGb:optCall[2].ToString());
+                        Opt10081(stockCode: optCall[0].ToString(), stdDate: optCall[1].ToString(), modifyJugaGb: optCall[2].ToString());
                         break;
                     case OptType.Opt10086:
-                       // _stockCode10086 = "";
+                        // _stockCode10086 = "";
 
                         //_stockCode10086 = optCall[0].ToString();
                         stockCode = optCall[0].ToString();
-                        Opt10086(stockCode: optCall[0].ToString(), stdDate: optCall[1].ToString(), displayGb:optCall[2].ToString());
+                        Opt10086(stockCode: optCall[0].ToString(), stdDate: optCall[1].ToString(), displayGb: optCall[2].ToString());
                         break;
 
                     case OptType.Opt10060:
-                       // _stockCode10060 = "";
+                        // _stockCode10060 = "";
                         //_stockCode10060 = optCall[1].ToString();
                         stockCode = optCall[1].ToString();
-                        Opt10060(startDate:optCall[0].ToString(), stockCode:optCall[1].ToString(), amountQtyGb:optCall[2].ToString(), maeMaeGb:optCall[3].ToString(), unitGb:optCall[4].ToString());
+                        Opt10060(startDate: optCall[0].ToString(), stockCode: optCall[1].ToString(), amountQtyGb: optCall[2].ToString(), maeMaeGb: optCall[3].ToString(), unitGb: optCall[4].ToString());
                         break;
 
                     case OptType.Opt20068:
                         //_stockCode20068 = "";
                         //_stockCode20068 = optCall[3].ToString();
                         stockCode = optCall[3].ToString();
-                        Opt20068(startDate: optCall[0].ToString(), endDate:optCall[1].ToString(), allGb:optCall[2].ToString(),  stockCode:optCall[3].ToString());
+                        Opt20068(startDate: optCall[0].ToString(), endDate: optCall[1].ToString(), allGb: optCall[2].ToString(), stockCode: optCall[3].ToString());
                         break;
 
                     case OptType.Opt90002:
                         //_kthCode90002 = "";
                         //_kthCode90002 = optCall[1].ToString();
                         stockCode = optCall[1].ToString();
-                        Opt90002(dateGb:optCall[0].ToString(), kthCode:optCall[1].ToString());
+                        Opt90002(dateGb: optCall[0].ToString(), kthCode: optCall[1].ToString());
                         break;
                     default:
                         return;
@@ -455,15 +444,15 @@ namespace Woom.DataAccess.PlugIn
                         sCommRqData = sCommRqData + "," + item[i].ToString();
                     }
                 }
-                               
+
                 ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "CommRqData", transText: sRQNameSet + "@" + sCommRqData);
 
-                int  nRet = AxKH.CommRqData( sRQName:item[0].ToString() + "," + sRQNameSet, sTrCode: item[1].ToString(), nPrevNext: Convert.ToInt32(item[2]), sScreenNo:item[3].ToString());
-              
+                int nRet = AxKH.CommRqData(sRQName: item[0].ToString() + "," + sRQNameSet, sTrCode: item[1].ToString(), nPrevNext: Convert.ToInt32(item[2]), sScreenNo: item[3].ToString());
+
                 if (ClsWoomErrorCode.GetErrorMessage(nRet) == true)
                 {
 
-                    
+
                     //   Logger(Log.일반, "[OPT10081] : " + lsWoomErrorCode.GetErrorMessage());
                 }
                 else
@@ -499,7 +488,7 @@ namespace Woom.DataAccess.PlugIn
             int nCnt = 0;
 
             nCnt = ClsAxKH.AxKH.GetRepeatCnt(e.sTrCode, e.sRQName);
-            
+
             ClsUtil clsUtil = new ClsUtil();
 
             //stockCode = clsUtil.Mid(e.sRQName, 1, 6);
@@ -516,17 +505,17 @@ namespace Woom.DataAccess.PlugIn
                     try
                     {
 
-                    using (ClsColumnSets oBasicDataType = new ClsColumnSets())
-                    {
-                        foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10001Index)))
+                        using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                         {
-                            int j = 0;
-                            j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(ClsColumnSets.Column10001Index), i));
-                            dt.Columns.Add(oBasicDataType.GetDataColumn10001((ClsColumnSets.ColumnNameIndex)j));
-                        }
-                    };
+                            foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10001Index)))
+                            {
+                                int j = 0;
+                                j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(ClsColumnSets.Column10001Index), i));
+                                dt.Columns.Add(oBasicDataType.GetDataColumn10001((ClsColumnSets.ColumnNameIndex)j));
+                            }
+                        };
 
-                    handler = AxKH_10001_OnReceived;
+                        handler = AxKH_10001_OnReceived;
 
                         DataRow dr2th = dt.NewRow();
                         for (int intColumName = 0; intColumName < dt.Columns.Count; intColumName++)
@@ -537,26 +526,26 @@ namespace Woom.DataAccess.PlugIn
                         }
 
                         dt.Rows.Add(dr2th);
-                    
-                    if (handler != null)
-                    {
-                        if (Convert.ToInt32(e.sPrevNext) != 2)
-                        {
-                            //_OptStatus.InitOptCallingStatus();
-                        }
-                        //AxKH_10081_OnReceived(e.sTrCode, dt, Convert.ToInt32(e.sPrevNext));
-                        AxKH_10001_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
-                        return;
-                    }
 
-                    break;
+                        if (handler != null)
+                        {
+                            if (Convert.ToInt32(e.sPrevNext) != 2)
+                            {
+                                //_OptStatus.InitOptCallingStatus();
+                            }
+                            //AxKH_10081_OnReceived(e.sTrCode, dt, Convert.ToInt32(e.sPrevNext));
+                            AxKH_10001_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
+                            return;
+                        }
+
+                        break;
                     }
                     catch (Exception)
                     {
                         AxKH_10001_OnReceived(e.sRQName.ToString().Trim(), null, Convert.ToInt32(e.sPrevNext));
                         throw;
                     }
-                    
+
                 case "주식일주월시분요청":
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                     {
@@ -607,7 +596,7 @@ namespace Woom.DataAccess.PlugIn
 
                     break;
                 case "일별거래상세요청":
-                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
+                    using (ClsColumnSets oBasicDataType = new ClsColumnSets())
                     {
                         foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10015Index)))
                         {
@@ -753,53 +742,53 @@ namespace Woom.DataAccess.PlugIn
                     try
                     {
 
-                    
-                    using (ClsColumnSets oBasicDataType = new ClsColumnSets())
-                    {
-                        foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10060Index)))
-                        {
-                            int j = 0;
-                            j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(ClsColumnSets.Column10060Index), i));
-                            // _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)i));
-                            dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
-                        }
-                    };
-                    handler = AxKH_10060_OnReceived;
 
-                    if (nCnt == 0)
-                    {
+                        using (ClsColumnSets oBasicDataType = new ClsColumnSets())
+                        {
+                            foreach (int i in Enum.GetValues(typeof(ClsColumnSets.Column10060Index)))
+                            {
+                                int j = 0;
+                                j = (int)Enum.Parse(typeof(ClsColumnSets.ColumnNameIndex), Enum.GetName(typeof(ClsColumnSets.Column10060Index), i));
+                                // _dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)i));
+                                dt.Columns.Add(oBasicDataType.GetDataColumn((ClsColumnSets.ColumnNameIndex)j));
+                            }
+                        };
+                        handler = AxKH_10060_OnReceived;
+
+                        if (nCnt == 0)
+                        {
+                            if (handler != null)
+                            {
+                                //_OptStatus.InitOptCallingStatus();
+                                AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), null, 0);
+                                return;
+                            }
+                        }
+
+                        for (int i = 0; i < nCnt; i++)
+                        {
+                            DataRow dr = dt.NewRow();
+                            for (int intColumName = 0; intColumName < dt.Columns.Count; intColumName++)
+                            {
+                                var type = dt.Columns[intColumName].DataType;
+                                dr[dt.Columns[intColumName].ColumnName.ToString()] = Convert.ChangeType(ClsAxKH.AxKH.GetCommData(e.sTrCode, e.sRQName, i, dt.Columns[intColumName].ColumnName.ToString()).ToString().Trim(), type);
+                            }
+
+                            dt.Rows.Add(dr);
+                        }
+
                         if (handler != null)
                         {
-                            //_OptStatus.InitOptCallingStatus();
-                            AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), null, 0);
+                            if (Convert.ToInt32(e.sPrevNext) != 2)
+                            {
+                                //_OptStatus.InitOptCallingStatus();
+                            }
+
+                            AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
                             return;
                         }
-                    }
 
-                    for (int i = 0; i < nCnt; i++)
-                    {
-                        DataRow dr = dt.NewRow();
-                        for (int intColumName = 0; intColumName < dt.Columns.Count; intColumName++)
-                        {
-                            var type = dt.Columns[intColumName].DataType;
-                            dr[dt.Columns[intColumName].ColumnName.ToString()] = Convert.ChangeType(ClsAxKH.AxKH.GetCommData(e.sTrCode, e.sRQName, i, dt.Columns[intColumName].ColumnName.ToString()).ToString().Trim(), type);
-                        }
-
-                        dt.Rows.Add(dr);
-                    }
-
-                    if (handler != null)
-                    {
-                        if (Convert.ToInt32(e.sPrevNext) != 2)
-                        {
-                            //_OptStatus.InitOptCallingStatus();
-                        }
-                        
-                        AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), dt, Convert.ToInt32(e.sPrevNext));
-                        return;
-                    }
-
-                    break;
+                        break;
 
                     }
                     catch (Exception)
@@ -807,10 +796,10 @@ namespace Woom.DataAccess.PlugIn
                         AxKH_10060_OnReceived(e.sRQName.ToString().Trim(), null, 0);
                         break;
                         throw;
-                        
+
                     }
 
-                    
+
 
                 case "대차거래추이요청(종목별)":
                     using (ClsColumnSets oBasicDataType = new ClsColumnSets())
@@ -916,7 +905,17 @@ namespace Woom.DataAccess.PlugIn
 
         }
 
+        public static void SetRealReg(string screenNo, string codeList, string fidList, string realType)
+        {
+            AxKH.SetRealReg(screenNo, codeList, fidList, realType);
+        }
 
+        public static void DisconnectRealData(string ScreenNo)
+        {
+            AxKH.DisconnectRealData(ScreenNo);
+        }
+    
+   
         #region "화면번호관리"
 
         #endregion

@@ -17,6 +17,8 @@ namespace Woom.CallForm.Uc
         public event OnSelectedStockCodeEventHandler OnSelectedStockCode;
         public delegate void OnSelectedStockCodeEventHandler(string stockCode);
 
+        private DataTable _dt;
+
         public UcStockList()
         {
             InitializeComponent();
@@ -24,20 +26,23 @@ namespace Woom.CallForm.Uc
             DataTable dt = new DataTable();
             RichQuery richQuery = new RichQuery();
             int row = 0;
+            
+            _dt = new DataTable();
+            _dt = richQuery.p_ScodeQuery(query: "2", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
 
+            //foreach (DataRow dr in dt.Rows)
+            //{
 
-            dt = richQuery.p_ScodeQuery(query: "2", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
+            //    dgvAllStockList.Rows.Add();
+            //    dgvAllStockList.Rows[row].Cells["STOCK_CODE"].Value = dr["STOCK_CODE"].ToString().Trim();
+            //    dgvAllStockList.Rows[row].Cells["STOCK_NAME"].Value = dr["STOCK_NAME"].ToString().Trim();
 
-            foreach (DataRow dr in dt.Rows)
-            {
+            //    row = row + 1;
 
-                dgvAllStockList.Rows.Add();
-                dgvAllStockList.Rows[row].Cells["STOCK_CODE"].Value = dr["STOCK_CODE"].ToString().Trim();
-                dgvAllStockList.Rows[row].Cells["STOCK_NAME"].Value = dr["STOCK_NAME"].ToString().Trim();
+            //}
 
-                row = row + 1;
-
-            }
+            dgvAllStockList.DataSource = _dt.DefaultView;
+            dgvAllStockList.SuspendLayout();
 
         }
 
