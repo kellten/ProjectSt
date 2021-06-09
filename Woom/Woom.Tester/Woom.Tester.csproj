@@ -309,6 +309,10 @@
       <Project>{ba0aa315-266f-4828-8366-bd100d13a6d1}</Project>
       <Name>Woom.DataDefine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Woom.Selenium\Woom.Selenium.csproj">
+      <Project>{0276a724-a201-4f04-85bc-6e4224bba3e4}</Project>
+      <Name>Woom.Selenium</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Woom.Volume\Woom.Volume.csproj">
       <Project>{d3650d5a-b44c-4b7e-86d4-6d061070da43}</Project>
       <Name>Woom.Volume</Name>

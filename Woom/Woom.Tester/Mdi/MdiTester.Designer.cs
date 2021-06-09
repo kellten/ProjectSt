@@ -59,6 +59,7 @@
             this.toolStripButton_IR = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.크롤링테스트ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -83,7 +84,8 @@
             this.tsbConnectionInfo,
             this.optTestToolStripMenuItem,
             this.종목관리ToolStripMenuItem,
-            this.엑셀가져오기ToolStripMenuItem});
+            this.엑셀가져오기ToolStripMenuItem,
+            this.크롤링테스트ToolStripMenuItem});
             this.optToolStripMenuItem.Name = "optToolStripMenuItem";
             this.optToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.optToolStripMenuItem.Text = "Opt작업";
@@ -91,7 +93,7 @@
             // tsbConnectionInfo
             // 
             this.tsbConnectionInfo.Name = "tsbConnectionInfo";
-            this.tsbConnectionInfo.Size = new System.Drawing.Size(146, 22);
+            this.tsbConnectionInfo.Size = new System.Drawing.Size(180, 22);
             this.tsbConnectionInfo.Text = "접속정보";
             this.tsbConnectionInfo.Click += new System.EventHandler(this.tsbConnectionInfo_Click);
             // 
@@ -108,7 +110,7 @@
             this.opt90002ToolStripMenuItem,
             this.주식기본정보요청Opt10001ToolStripMenuItem});
             this.optTestToolStripMenuItem.Name = "optTestToolStripMenuItem";
-            this.optTestToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.optTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optTestToolStripMenuItem.Text = "OptTest";
             // 
             // mnuItem10059
@@ -177,14 +179,14 @@
             // 종목관리ToolStripMenuItem
             // 
             this.종목관리ToolStripMenuItem.Name = "종목관리ToolStripMenuItem";
-            this.종목관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.종목관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.종목관리ToolStripMenuItem.Text = "종목관리";
             this.종목관리ToolStripMenuItem.Click += new System.EventHandler(this.종목관리ToolStripMenuItem_Click);
             // 
             // 엑셀가져오기ToolStripMenuItem
             // 
             this.엑셀가져오기ToolStripMenuItem.Name = "엑셀가져오기ToolStripMenuItem";
-            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
             this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
             // 
@@ -199,7 +201,7 @@
             // tsbFrmStockList
             // 
             this.tsbFrmStockList.Name = "tsbFrmStockList";
-            this.tsbFrmStockList.Size = new System.Drawing.Size(162, 22);
+            this.tsbFrmStockList.Size = new System.Drawing.Size(180, 22);
             this.tsbFrmStockList.Text = "종목별 특이사항";
             this.tsbFrmStockList.Click += new System.EventHandler(this.tsbFrmStockList_Click);
             // 
@@ -214,7 +216,7 @@
             // 테마그룹관리ToolStripMenuItem
             // 
             this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
-            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
             this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
@@ -312,6 +314,13 @@
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 6;
             // 
+            // 크롤링테스트ToolStripMenuItem
+            // 
+            this.크롤링테스트ToolStripMenuItem.Name = "크롤링테스트ToolStripMenuItem";
+            this.크롤링테스트ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.크롤링테스트ToolStripMenuItem.Text = "크롤링테스트";
+            this.크롤링테스트ToolStripMenuItem.Click += new System.EventHandler(this.크롤링테스트ToolStripMenuItem_Click);
+            // 
             // MdiTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -367,6 +376,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_DartNew;
         private System.Windows.Forms.ToolStripButton toolStripButton_IR;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ToolStripMenuItem 크롤링테스트ToolStripMenuItem;
     }
 }
 

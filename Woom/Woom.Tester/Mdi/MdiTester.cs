@@ -154,5 +154,11 @@ namespace Woom.Tester.Mdi
         {
             System.Diagnostics.Process.Start("https://www.kirs.or.kr/information/broadcast.html");
         }
+
+        private void 크롤링테스트ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Selenium.Forms.FrmExam();
+            ShowChildForm(oform);
+        }
     }
 }
