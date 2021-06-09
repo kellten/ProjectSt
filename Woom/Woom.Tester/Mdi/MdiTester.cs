@@ -129,5 +129,30 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Tester.Forms.FrmOpt10060CallerPer();
             ShowChildForm(oform);
         }
+
+        private void toolStripButton_finviz_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://finviz.com/map.ashx?t=sec");
+        }
+
+        private void toolStripButton_일정_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kind.krx.co.kr/common/stockschedule.do?method=StockScheduleMain&index=11");
+        }
+
+        private void toolStripButton_Dart_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://dart.fss.or.kr/");
+        }
+
+        private void toolStripButton_DartNew_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://newdart.fss.or.kr/");
+        }
+
+        private void toolStripButton_IR_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.kirs.or.kr/information/broadcast.html");
+        }
     }
 }

@@ -52,6 +52,7 @@
             this.dtpStdDate.Name = "dtpStdDate";
             this.dtpStdDate.Size = new System.Drawing.Size(175, 21);
             this.dtpStdDate.TabIndex = 49;
+            this.dtpStdDate.ValueChanged += new System.EventHandler(this.dtpStdDate_ValueChanged);
             // 
             // label1
             // 
@@ -71,6 +72,7 @@
             this.chkSpeedOn.TabIndex = 47;
             this.chkSpeedOn.Text = "스피드온";
             this.chkSpeedOn.UseVisualStyleBackColor = true;
+            this.chkSpeedOn.CheckedChanged += new System.EventHandler(this.chkSpeedOn_CheckedChanged);
             // 
             // chk100
             // 
@@ -102,7 +104,6 @@
             // 
             // btn10060PriceBuyJob
             // 
-            this.btn10060PriceBuyJob.Enabled = false;
             this.btn10060PriceBuyJob.Location = new System.Drawing.Point(690, 12);
             this.btn10060PriceBuyJob.Name = "btn10060PriceBuyJob";
             this.btn10060PriceBuyJob.Size = new System.Drawing.Size(169, 23);
@@ -141,7 +142,6 @@
             // 
             // Btn10060PriceSellJob
             // 
-            this.Btn10060PriceSellJob.Enabled = false;
             this.Btn10060PriceSellJob.Location = new System.Drawing.Point(690, 39);
             this.Btn10060PriceSellJob.Name = "Btn10060PriceSellJob";
             this.Btn10060PriceSellJob.Size = new System.Drawing.Size(169, 23);
@@ -152,7 +152,6 @@
             // 
             // Btn10060QtyBuyJob
             // 
-            this.Btn10060QtyBuyJob.Enabled = false;
             this.Btn10060QtyBuyJob.Location = new System.Drawing.Point(690, 68);
             this.Btn10060QtyBuyJob.Name = "Btn10060QtyBuyJob";
             this.Btn10060QtyBuyJob.Size = new System.Drawing.Size(169, 23);
@@ -163,7 +162,6 @@
             // 
             // Btn10060QtySellJob
             // 
-            this.Btn10060QtySellJob.Enabled = false;
             this.Btn10060QtySellJob.Location = new System.Drawing.Point(690, 97);
             this.Btn10060QtySellJob.Name = "Btn10060QtySellJob";
             this.Btn10060QtySellJob.Size = new System.Drawing.Size(169, 23);
@@ -213,6 +211,7 @@
             this.Controls.Add(this.proBar10060PriceBuy);
             this.Name = "FrmOpt10060CallerPer";
             this.Text = "FrmOpt10060PriceMaeSuCaller";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmOpt10060CallerPer_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

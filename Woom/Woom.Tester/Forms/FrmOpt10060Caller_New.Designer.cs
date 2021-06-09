@@ -60,7 +60,6 @@
             // 
             // btn10060All
             // 
-            this.btn10060All.Enabled = false;
             this.btn10060All.Location = new System.Drawing.Point(574, 12);
             this.btn10060All.Name = "btn10060All";
             this.btn10060All.Size = new System.Drawing.Size(114, 23);

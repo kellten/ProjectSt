@@ -40,14 +40,48 @@ namespace Woom.Tester.Forms
             InitializeComponent();
 
             _ClsOpt10060 = new ClsOpt10060();
+
+            _clsDataAccessUtil = new ClsDataAccessUtil();
+
+            Func<DataTable> funcGetStockData = () =>
+            {
+                RichQuery oRichQuery = new RichQuery();
+                return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+            };
+
+            _dtStockCode = funcGetStockData();
+
+            foreach (DataRow dr in _dtStockCode.Rows)
+            {
+                if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
+                {
+                    continue;
+                }
+
+                _StockQueue.Enqueue(dr["STOCK_CODE"].ToString());
+            }
+
+            _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
+
+            dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
+
+            GetOptCallMagamaData(_stdDate);
+
+            proBar10060PriceBuy.Maximum = _StockQueue.Count;
+
+            proBar10060PriceSell.Maximum = _StockQueue.Count;
+
+            proBar10060QtyBuy.Maximum = _StockQueue.Count;
+            proBar10060QtySell.Maximum = _StockQueue.Count;
+
         }
         private void InitDataPriceBuy()
         {
-            proBar10060PriceBuy.Maximum = _StockQueue.Count;
+            
 
             _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
             dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
-            GetOptCallMagamaData(_stdDate);
+            
         }
         private void SetFormId()
         {
@@ -94,7 +128,24 @@ namespace Woom.Tester.Forms
 
             _seqNo = _seqNo + 1;
 
-            proBar10060PriceBuy.Value = _seqNo;
+            switch (opt10060Trans)
+            {
+                case Opt10060TransType.PriceMaesu:
+                    proBar10060PriceBuy.Value = _seqNo;
+                    break;
+                case Opt10060TransType.PriceMaedo:
+                    proBar10060PriceSell.Value = _seqNo;
+                    break;
+                case Opt10060TransType.QtyMaesu:
+                    proBar10060QtyBuy.Value = _seqNo;
+                    break;
+                case Opt10060TransType.QtyMaeDo:
+                    proBar10060QtySell.Value = _seqNo;
+                    break;
+                default:
+                    break;
+            }
+            
 
             if (strStockCode == "")
             {
@@ -115,8 +166,6 @@ namespace Woom.Tester.Forms
             WaitTime();
 
             GetOpt10060PriceBuyCaller(opt10060Trans, strStockCode);
-
-            proBar10060PriceBuy.Value = _seqNo;
 
             WriteTextSafe(strStockCode + " 작업 중");
 
@@ -147,17 +196,14 @@ namespace Woom.Tester.Forms
                     _ClsOpt10060.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "1", UnitG: "", nPrevNext: 0);
                     break;
                 case Opt10060TransType.PriceMaedo:
-                    WaitTime();
                     WriteTextSafe(stockCode + " Price(매도)_" + _StockQueue.Count.ToString());
                     _ClsOpt10060.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "1", MaeMaeGb: "2", UnitG: "", nPrevNext: 0);
                     break;
                 case Opt10060TransType.QtyMaesu:
-                    WaitTime();
                     WriteTextSafe(stockCode + " QTY(매수)_" + _StockQueue.Count.ToString());
                     _ClsOpt10060.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "1", UnitG: "", nPrevNext: 0);
                     break;
                 case Opt10060TransType.QtyMaeDo:
-                    WaitTime();
                     WriteTextSafe(stockCode + " QTY(매도)_" + _StockQueue.Count.ToString());
                     _ClsOpt10060.JustRequest(StartDate: _stdDate, StockCode: stockCode, StockName: "", AmountQtyGb: "2", MaeMaeGb: "2", UnitG: "", nPrevNext: 0);
                     break;
@@ -380,6 +426,18 @@ namespace Woom.Tester.Forms
                         }
                     }
                 }
+                else
+                {
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+
+                    _ClsOpt10060.Dispose();
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.PriceMaesu);
+
+                    return;
+                }
+
 
                 // 최근 거래일 100일을 가져오는걸로 한다면
                 if (chk100.Checked == true)
@@ -387,9 +445,6 @@ namespace Woom.Tester.Forms
                     ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     _ClsOpt10060.Dispose();
-                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
-                    ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
-
 
                     tcs.SetResult(true);
 
@@ -444,8 +499,6 @@ namespace Woom.Tester.Forms
 
                 _ClsOpt10060.Dispose();
 
-                tcs.SetResult(true);
-
                 OnGetStockCode(Opt10060TransType.PriceMaesu);                
 
                 throw;
@@ -490,6 +543,11 @@ namespace Woom.Tester.Forms
 
                 if (tcs == null || tcs.Task.IsCompleted)
                 {
+                    _ClsOpt10060.Dispose();
+
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.PriceMaedo);
                     return;
                 }
 
@@ -537,14 +595,29 @@ namespace Woom.Tester.Forms
                             {
                                 ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
                                 _ClsOpt10060.Dispose();
-                                
 
-                              return;
+                                tcs.SetResult(true);
+
+                                OnGetStockCode(Opt10060TransType.PriceMaedo);
+
+                                return;
 
                             }
                         }
                     }
                 }
+                else
+                {
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OPD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+
+                    _ClsOpt10060.Dispose();
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.PriceMaedo);
+
+                    return;
+                }
+
 
                 // 최근 거래일 100일을 가져오는걸로 한다면
                 if (chk100.Checked == true)
@@ -568,7 +641,7 @@ namespace Woom.Tester.Forms
 
                         ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
-                        _clsDataAccessUtil.Delay(3600);
+                        WaitTime();
 
                         _ClsOpt10060.SetInit(_FormId);
                         _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
@@ -604,7 +677,6 @@ namespace Woom.Tester.Forms
             catch (Exception )
             {
                 _ClsOpt10060.Dispose();
-                tcs.SetResult(true);
 
                 OnGetStockCode(Opt10060TransType.PriceMaedo);
 
@@ -651,6 +723,11 @@ namespace Woom.Tester.Forms
 
                 if (tcs == null || tcs.Task.IsCompleted)
                 {
+                    _ClsOpt10060.Dispose();
+
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.QtyMaesu);
                     return;
                 }
 
@@ -709,6 +786,17 @@ namespace Woom.Tester.Forms
                         }
                     }
                 }
+                else
+                {
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OQS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+
+                    _ClsOpt10060.Dispose();
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.QtyMaesu);
+
+                    return;
+                }
 
                 // 최근 거래일 100일을 가져오는걸로 한다면
                 if (chk100.Checked == true)
@@ -730,7 +818,8 @@ namespace Woom.Tester.Forms
 
                         ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQS10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
-                        _clsDataAccessUtil.Delay(3600);
+                        //_clsDataAccessUtil.Delay(3600);
+                        WaitTime();
 
                         _ClsOpt10060.SetInit(_FormId);
                         _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
@@ -766,7 +855,6 @@ namespace Woom.Tester.Forms
             catch (Exception)
             {
                 _ClsOpt10060.Dispose();
-                tcs.SetResult(true);
 
                 OnGetStockCode(Opt10060TransType.QtyMaesu);
 
@@ -814,6 +902,10 @@ namespace Woom.Tester.Forms
 
                 if (tcs == null || tcs.Task.IsCompleted)
                 {
+                    _ClsOpt10060.Dispose();
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.QtyMaeDo);
                     return;
                 }
 
@@ -870,6 +962,18 @@ namespace Woom.Tester.Forms
                         }
                     }
                 }
+                else
+                {
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+
+                    _ClsOpt10060.Dispose();
+                    tcs.SetResult(true);
+
+                    OnGetStockCode(Opt10060TransType.QtyMaeDo);
+
+                    return;
+                }
+
 
                 // 최근 거래일 100일을 가져오는걸로 한다면
                 if (chk100.Checked == true)
@@ -892,7 +996,7 @@ namespace Woom.Tester.Forms
 
                         ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OQD10060", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
-                        _clsDataAccessUtil.Delay(3600);
+                        WaitTime();
 
                         _ClsOpt10060.SetInit(_FormId);
                         _ClsOpt10060.JustRequest(StartDate: sRQNameArray[1].ToString().Trim(), StockCode: sRQNameArray[2].ToString().Trim(), StockName: "", AmountQtyGb: sRQNameArray[3].ToString().Trim(), MaeMaeGb: sRQNameArray[4].ToString().Trim(), UnitG: sRQNameArray[5].ToString().Trim(), nPrevNext: 2);
@@ -928,7 +1032,6 @@ namespace Woom.Tester.Forms
             catch (Exception ex)
             {
                 _ClsOpt10060.Dispose();
-                tcs.SetResult(true);
 
                 OnGetStockCode(Opt10060TransType.QtyMaeDo);
 
@@ -939,41 +1042,77 @@ namespace Woom.Tester.Forms
 
         private void Btn10060QtySellJob_Click(object sender, EventArgs e)
         {
+            if (_ClsOpt10060 != null)
+            {
+                _ClsOpt10060.Dispose();
+            }
+            else
+            {
+                _ClsOpt10060 = new ClsOpt10060();
+            }
+
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
             
-            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+            ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
             OnGetStockCode(Opt10060TransType.QtyMaeDo);
         }
 
         private void Btn10060QtyBuyJob_Click(object sender, EventArgs e)
         {
+            if (_ClsOpt10060 != null)
+            {
+                _ClsOpt10060.Dispose();
+            }
+            else
+            {
+                _ClsOpt10060 = new ClsOpt10060();
+            }
+
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
-            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+            ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
 
             OnGetStockCode(Opt10060TransType.QtyMaesu);
         }
 
         private void Btn10060PriceSellJob_Click(object sender, EventArgs e)
         {
+            if (_ClsOpt10060 != null)
+            {
+                _ClsOpt10060.Dispose();
+            }
+            else
+            {
+                _ClsOpt10060 = new ClsOpt10060();
+            }
+
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
-            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+            ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
             OnGetStockCode( Opt10060TransType.PriceMaedo);
         }
 
         private void btn10060PriceBuyJob_Click(object sender, EventArgs e)
         {
+            if (_ClsOpt10060 != null)
+            {
+                _ClsOpt10060.Dispose();
+            }
+            else
+            {
+                _ClsOpt10060 = new ClsOpt10060();
+            }
+
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
@@ -982,6 +1121,38 @@ namespace Woom.Tester.Forms
             ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
 
             OnGetStockCode(Opt10060TransType.PriceMaesu);
+        }
+
+        private void dtpStdDate_ValueChanged(object sender, EventArgs e)
+        {
+            _stdDate = dtpStdDate.Value.ToString("yyyyMMdd");
+        }
+
+        private void chkSpeedOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSpeedOn.Checked == true)
+            {
+                ClsAxKH.SPEED_CALL = true;
+            }
+            else
+            {
+                ClsAxKH.SPEED_CALL = false;
+            }
+          
+        }
+
+        private void FrmOpt10060CallerPer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (ClsAxKH.SPEED_CALL == true)
+            { ClsAxKH.SPEED_CALL = false; }
+
+
+            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
+            ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+
+            _ClsOpt10060.Dispose();
         }
     }
 }

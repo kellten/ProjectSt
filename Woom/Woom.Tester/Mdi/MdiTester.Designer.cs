@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MdiTester));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.optToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbConnectionInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.optTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuItem10059 = new System.Windows.Forms.ToolStripMenuItem();
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt10069ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt10081ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opt20068ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,9 +52,15 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.OptCallPer1hour = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_finviz = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_일정 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_DartNew = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_IR = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -64,7 +72,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(737, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1168, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -108,6 +116,13 @@
             this.mnuItem10059.Size = new System.Drawing.Size(323, 22);
             this.mnuItem10059.Text = "종목별투자자기관별요청(Opt10059)";
             this.mnuItem10059.Click += new System.EventHandler(this.mnuItem10059_Click);
+            // 
+            // 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem
+            // 
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Name = "종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem";
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Text = "종목별투자자기관별차트요청(Opt10060)_Ver2";
+            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Click += new System.EventHandler(this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem_Click);
             // 
             // opt10069ToolStripMenuItem
             // 
@@ -198,7 +213,7 @@
             // 테마그룹관리ToolStripMenuItem
             // 
             this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
-            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
             this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
@@ -206,10 +221,10 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OptCallPer1hour});
-            this.statusStrip.Location = new System.Drawing.Point(0, 396);
+            this.statusStrip.Location = new System.Drawing.Point(0, 592);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip.Size = new System.Drawing.Size(737, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1168, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -219,18 +234,82 @@
             this.OptCallPer1hour.Size = new System.Drawing.Size(31, 17);
             this.OptCallPer1hour.Text = "상태";
             // 
-            // 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem
+            // toolStrip1
             // 
-            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Name = "종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem";
-            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Size = new System.Drawing.Size(323, 22);
-            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Text = "종목별투자자기관별차트요청(Opt10060)_Ver2";
-            this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem.Click += new System.EventHandler(this.종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem_Click);
+            this.toolStrip1.AutoSize = false;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_일정,
+            this.toolStripButton_finviz,
+            this.toolStripButton_DartNew,
+            this.toolStripButton_IR,
+            this.toolStripButton_Dart});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1168, 40);
+            this.toolStrip1.TabIndex = 4;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton_finviz
+            // 
+            this.toolStripButton_finviz.AutoSize = false;
+            this.toolStripButton_finviz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_finviz.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_finviz.Image")));
+            this.toolStripButton_finviz.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_finviz.Name = "toolStripButton_finviz";
+            this.toolStripButton_finviz.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_finviz.Text = "SP 500";
+            this.toolStripButton_finviz.Click += new System.EventHandler(this.toolStripButton_finviz_Click);
+            // 
+            // toolStripButton_일정
+            // 
+            this.toolStripButton_일정.AutoSize = false;
+            this.toolStripButton_일정.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_일정.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_일정.Image")));
+            this.toolStripButton_일정.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_일정.Name = "toolStripButton_일정";
+            this.toolStripButton_일정.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_일정.Text = "증시일정";
+            this.toolStripButton_일정.Click += new System.EventHandler(this.toolStripButton_일정_Click);
+            // 
+            // toolStripButton_Dart
+            // 
+            this.toolStripButton_Dart.AutoSize = false;
+            this.toolStripButton_Dart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_Dart.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Dart.Image")));
+            this.toolStripButton_Dart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Dart.Name = "toolStripButton_Dart";
+            this.toolStripButton_Dart.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_Dart.Text = "공시";
+            this.toolStripButton_Dart.Click += new System.EventHandler(this.toolStripButton_Dart_Click);
+            // 
+            // toolStripButton_DartNew
+            // 
+            this.toolStripButton_DartNew.AutoSize = false;
+            this.toolStripButton_DartNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_DartNew.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_DartNew.Image")));
+            this.toolStripButton_DartNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_DartNew.Name = "toolStripButton_DartNew";
+            this.toolStripButton_DartNew.Size = new System.Drawing.Size(60, 37);
+            this.toolStripButton_DartNew.Text = "공시(New)";
+            this.toolStripButton_DartNew.Click += new System.EventHandler(this.toolStripButton_DartNew_Click);
+            // 
+            // toolStripButton_IR
+            // 
+            this.toolStripButton_IR.AutoSize = false;
+            this.toolStripButton_IR.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_IR.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_IR.Image")));
+            this.toolStripButton_IR.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_IR.Name = "toolStripButton_IR";
+            this.toolStripButton_IR.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_IR.Text = "IR협의회";
+            this.toolStripButton_IR.Click += new System.EventHandler(this.toolStripButton_IR_Click);
             // 
             // MdiTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 418);
+            this.ClientSize = new System.Drawing.Size(1168, 614);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
@@ -241,6 +320,8 @@
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,6 +351,12 @@
         private System.Windows.Forms.ToolStripMenuItem 기본정보관리ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 테마그룹관리ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton_finviz;
+        private System.Windows.Forms.ToolStripButton toolStripButton_일정;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Dart;
+        private System.Windows.Forms.ToolStripButton toolStripButton_DartNew;
+        private System.Windows.Forms.ToolStripButton toolStripButton_IR;
     }
 }
 
