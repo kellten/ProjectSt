@@ -53,11 +53,12 @@
             this.OptCallPer1hour = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton_finviz = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_일정 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_finviz = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_DartNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_IR = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -90,7 +91,7 @@
             // tsbConnectionInfo
             // 
             this.tsbConnectionInfo.Name = "tsbConnectionInfo";
-            this.tsbConnectionInfo.Size = new System.Drawing.Size(180, 22);
+            this.tsbConnectionInfo.Size = new System.Drawing.Size(146, 22);
             this.tsbConnectionInfo.Text = "접속정보";
             this.tsbConnectionInfo.Click += new System.EventHandler(this.tsbConnectionInfo_Click);
             // 
@@ -107,7 +108,7 @@
             this.opt90002ToolStripMenuItem,
             this.주식기본정보요청Opt10001ToolStripMenuItem});
             this.optTestToolStripMenuItem.Name = "optTestToolStripMenuItem";
-            this.optTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optTestToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.optTestToolStripMenuItem.Text = "OptTest";
             // 
             // mnuItem10059
@@ -176,14 +177,14 @@
             // 종목관리ToolStripMenuItem
             // 
             this.종목관리ToolStripMenuItem.Name = "종목관리ToolStripMenuItem";
-            this.종목관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.종목관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.종목관리ToolStripMenuItem.Text = "종목관리";
             this.종목관리ToolStripMenuItem.Click += new System.EventHandler(this.종목관리ToolStripMenuItem_Click);
             // 
             // 엑셀가져오기ToolStripMenuItem
             // 
             this.엑셀가져오기ToolStripMenuItem.Name = "엑셀가져오기ToolStripMenuItem";
-            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
             this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
             // 
@@ -213,7 +214,7 @@
             // 테마그룹관리ToolStripMenuItem
             // 
             this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
-            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
             this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
@@ -249,17 +250,6 @@
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton_finviz
-            // 
-            this.toolStripButton_finviz.AutoSize = false;
-            this.toolStripButton_finviz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton_finviz.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_finviz.Image")));
-            this.toolStripButton_finviz.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_finviz.Name = "toolStripButton_finviz";
-            this.toolStripButton_finviz.Size = new System.Drawing.Size(50, 37);
-            this.toolStripButton_finviz.Text = "SP 500";
-            this.toolStripButton_finviz.Click += new System.EventHandler(this.toolStripButton_finviz_Click);
-            // 
             // toolStripButton_일정
             // 
             this.toolStripButton_일정.AutoSize = false;
@@ -271,16 +261,16 @@
             this.toolStripButton_일정.Text = "증시일정";
             this.toolStripButton_일정.Click += new System.EventHandler(this.toolStripButton_일정_Click);
             // 
-            // toolStripButton_Dart
+            // toolStripButton_finviz
             // 
-            this.toolStripButton_Dart.AutoSize = false;
-            this.toolStripButton_Dart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton_Dart.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Dart.Image")));
-            this.toolStripButton_Dart.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Dart.Name = "toolStripButton_Dart";
-            this.toolStripButton_Dart.Size = new System.Drawing.Size(50, 37);
-            this.toolStripButton_Dart.Text = "공시";
-            this.toolStripButton_Dart.Click += new System.EventHandler(this.toolStripButton_Dart_Click);
+            this.toolStripButton_finviz.AutoSize = false;
+            this.toolStripButton_finviz.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_finviz.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_finviz.Image")));
+            this.toolStripButton_finviz.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_finviz.Name = "toolStripButton_finviz";
+            this.toolStripButton_finviz.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_finviz.Text = "SP 500";
+            this.toolStripButton_finviz.Click += new System.EventHandler(this.toolStripButton_finviz_Click);
             // 
             // toolStripButton_DartNew
             // 
@@ -304,11 +294,30 @@
             this.toolStripButton_IR.Text = "IR협의회";
             this.toolStripButton_IR.Click += new System.EventHandler(this.toolStripButton_IR_Click);
             // 
+            // toolStripButton_Dart
+            // 
+            this.toolStripButton_Dart.AutoSize = false;
+            this.toolStripButton_Dart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_Dart.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Dart.Image")));
+            this.toolStripButton_Dart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Dart.Name = "toolStripButton_Dart";
+            this.toolStripButton_Dart.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_Dart.Text = "공시";
+            this.toolStripButton_Dart.Click += new System.EventHandler(this.toolStripButton_Dart_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1056, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 6;
+            // 
             // MdiTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 614);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
@@ -357,6 +366,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_Dart;
         private System.Windows.Forms.ToolStripButton toolStripButton_DartNew;
         private System.Windows.Forms.ToolStripButton toolStripButton_IR;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

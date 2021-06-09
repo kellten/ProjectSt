@@ -116,6 +116,67 @@ namespace Woom.Tester.Forms
                 lblStockName.Text = strMessage;
             }
         }
+
+        private void SafeProBar(Opt10060TransType opt10060Trans)
+        {
+            switch (opt10060Trans)
+            {
+                case Opt10060TransType.PriceMaesu:
+                    if (proBar10060PriceBuy.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)delegate ()
+                        {
+                            SafeProBar(opt10060Trans);
+                        });
+                    }
+                    else
+                    {
+                        proBar10060PriceBuy.Value = _seqNo;
+                    }
+                    break;
+                case Opt10060TransType.PriceMaedo:
+                    if (proBar10060PriceSell.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)delegate ()
+                        {
+                            SafeProBar(opt10060Trans);
+                        });
+                    }
+                    else
+                    {
+                        proBar10060PriceSell.Value = _seqNo;
+                    }
+                    break;
+                case Opt10060TransType.QtyMaesu:
+                    if (proBar10060QtyBuy.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)delegate ()
+                        {
+                            SafeProBar(opt10060Trans);
+                        });
+                    }
+                    else
+                    {
+                        proBar10060QtyBuy.Value = _seqNo;
+                    }
+                    break;
+                case Opt10060TransType.QtyMaeDo:
+                    if (proBar10060QtySell.InvokeRequired)
+                    {
+                        Invoke((MethodInvoker)delegate ()
+                        {
+                            SafeProBar(opt10060Trans);
+                        });
+                    }
+                    else
+                    {
+                        proBar10060QtySell.Value = _seqNo;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
         private void OnGetStockCode(Opt10060TransType opt10060Trans)
         {
 
@@ -128,24 +189,24 @@ namespace Woom.Tester.Forms
 
             _seqNo = _seqNo + 1;
 
-            switch (opt10060Trans)
-            {
-                case Opt10060TransType.PriceMaesu:
-                    proBar10060PriceBuy.Value = _seqNo;
-                    break;
-                case Opt10060TransType.PriceMaedo:
-                    proBar10060PriceSell.Value = _seqNo;
-                    break;
-                case Opt10060TransType.QtyMaesu:
-                    proBar10060QtyBuy.Value = _seqNo;
-                    break;
-                case Opt10060TransType.QtyMaeDo:
-                    proBar10060QtySell.Value = _seqNo;
-                    break;
-                default:
-                    break;
-            }
-            
+            //switch (opt10060Trans)
+            //{
+            //    case Opt10060TransType.PriceMaesu:
+            //        proBar10060PriceBuy.Value = _seqNo;
+            //        break;
+            //    case Opt10060TransType.PriceMaedo:
+            //        proBar10060PriceSell.Value = _seqNo;
+            //        break;
+            //    case Opt10060TransType.QtyMaesu:
+            //        proBar10060QtyBuy.Value = _seqNo;
+            //        break;
+            //    case Opt10060TransType.QtyMaeDo:
+            //        proBar10060QtySell.Value = _seqNo;
+            //        break;
+            //    default:
+            //        break;
+            //}
+            SafeProBar(opt10060Trans);
 
             if (strStockCode == "")
             {
