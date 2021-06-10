@@ -44,6 +44,7 @@
             this.Btn10060QtySellJob = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTimePerCount = new System.Windows.Forms.Label();
+            this.chkDesc = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // dtpStdDate
@@ -188,11 +189,24 @@
             this.lblTimePerCount.TabIndex = 56;
             this.lblTimePerCount.Text = "label2";
             // 
+            // chkDesc
+            // 
+            this.chkDesc.AutoSize = true;
+            this.chkDesc.Checked = true;
+            this.chkDesc.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDesc.Location = new System.Drawing.Point(490, 152);
+            this.chkDesc.Name = "chkDesc";
+            this.chkDesc.Size = new System.Drawing.Size(57, 16);
+            this.chkDesc.TabIndex = 58;
+            this.chkDesc.Text = "DESC";
+            this.chkDesc.UseVisualStyleBackColor = true;
+            // 
             // FrmOpt10060CallerPer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 274);
+            this.Controls.Add(this.chkDesc);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblTimePerCount);
             this.Controls.Add(this.Btn10060QtySellJob);
@@ -210,7 +224,7 @@
             this.Controls.Add(this.btn10060PriceBuyJob);
             this.Controls.Add(this.proBar10060PriceBuy);
             this.Name = "FrmOpt10060CallerPer";
-            this.Text = "FrmOpt10060PriceMaeSuCaller";
+            this.Text = "FrmOpt10060CallerPer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmOpt10060CallerPer_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -234,5 +248,6 @@
         private System.Windows.Forms.Button Btn10060QtySellJob;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblTimePerCount;
+        private System.Windows.Forms.CheckBox chkDesc;
     }
 }

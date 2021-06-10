@@ -43,45 +43,74 @@ namespace Woom.Tester.Forms
 
             _clsDataAccessUtil = new ClsDataAccessUtil();
 
-            Func<DataTable> funcGetStockData = () =>
-            {
-                RichQuery oRichQuery = new RichQuery();
-                return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
-            };
+            _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
+            dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
 
-            _dtStockCode = funcGetStockData();
+        }
+
+        private void GetJobData(Opt10060TransType opt10060Trans)
+        {
+            if (_dtStockCode != null)
+            {
+                _dtStockCode = null;
+                _dtStockCode = new DataTable();
+            }
+
+            if (chkDesc.Checked == true)
+            {
+                Func<DataTable> funcGetStockData = () =>
+                {
+                    RichQuery oRichQuery = new RichQuery();
+                    return oRichQuery.p_ScodeQuery("4", "", "", false).Tables[0].Copy();
+                };
+
+                _dtStockCode = funcGetStockData();
+            }
+            else
+            {
+                Func<DataTable> funcGetStockData = () =>
+                {
+                    RichQuery oRichQuery = new RichQuery();
+                    return oRichQuery.p_ScodeQuery("5", "", "", false).Tables[0].Copy();
+                };
+
+                _dtStockCode = funcGetStockData();
+            }
 
             foreach (DataRow dr in _dtStockCode.Rows)
             {
                 if (ClsAxKH.GetMasterCodeName(dr["STOCK_CODE"].ToString().Trim()) == "")
-                {
-                    continue;
-                }
+                { continue; }
 
                 _StockQueue.Enqueue(dr["STOCK_CODE"].ToString());
+
             }
 
-            _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
-
-            dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
-
-            GetOptCallMagamaData(_stdDate);
-
-            proBar10060PriceBuy.Maximum = _StockQueue.Count;
-
-            proBar10060PriceSell.Maximum = _StockQueue.Count;
-
-            proBar10060QtyBuy.Maximum = _StockQueue.Count;
-            proBar10060QtySell.Maximum = _StockQueue.Count;
+            InitData(opt10060Trans);
 
         }
-        private void InitDataPriceBuy()
+        private void InitData(Opt10060TransType opt10060Trans)
         {
             
+            switch (opt10060Trans)
+            {
+                case Opt10060TransType.PriceMaesu:
+                    proBar10060PriceBuy.Maximum = _StockQueue.Count;
+                    break;
+                case Opt10060TransType.PriceMaedo:
+                    proBar10060PriceSell.Maximum = _StockQueue.Count;
+                    break;
+                case Opt10060TransType.QtyMaesu:
+                    proBar10060QtyBuy.Maximum = _StockQueue.Count;
+                    break;
+                case Opt10060TransType.QtyMaeDo:
+                    proBar10060QtySell.Maximum = _StockQueue.Count;
+                    break;
+                default:
+                    break;
+            }
 
-            _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
-            dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
-            
+            GetOptCallMagamaData(_stdDate, opt10060Trans);
         }
         private void SetFormId()
         {
@@ -189,23 +218,6 @@ namespace Woom.Tester.Forms
 
             _seqNo = _seqNo + 1;
 
-            //switch (opt10060Trans)
-            //{
-            //    case Opt10060TransType.PriceMaesu:
-            //        proBar10060PriceBuy.Value = _seqNo;
-            //        break;
-            //    case Opt10060TransType.PriceMaedo:
-            //        proBar10060PriceSell.Value = _seqNo;
-            //        break;
-            //    case Opt10060TransType.QtyMaesu:
-            //        proBar10060QtyBuy.Value = _seqNo;
-            //        break;
-            //    case Opt10060TransType.QtyMaeDo:
-            //        proBar10060QtySell.Value = _seqNo;
-            //        break;
-            //    default:
-            //        break;
-            //}
             SafeProBar(opt10060Trans);
 
             if (strStockCode == "")
@@ -271,6 +283,9 @@ namespace Woom.Tester.Forms
                 default:
                     break;
             }
+
+            lblTimePerCount.Text = ClsAxKH._limitCount.ToString();
+            lblTime.Text = ClsAxKH._limitTime.ToString();
 
             tcs.SetResult(true);
 
@@ -374,21 +389,47 @@ namespace Woom.Tester.Forms
         private DataTable _dtOptCalMagamPd; // OPT10060_PRICE_매도
         private DataTable _dtOptCalMagamQs; // OPT10060_QTY_매수
         private DataTable _dtOptCalMagamQd; // OPT10060_QTY_매도
-        private void GetOptCallMagamaData(string stdDate)
+        private void GetOptCallMagamaData(string stdDate, Opt10060TransType opt10060Trans)
         {
-            if (_dtOptCalMagamPs != null)
-            {
-                _dtOptCalMagamPs = null;
-                _dtOptCalMagamPs = new DataTable();
-            }
-
             KiwoomQuery kiwoomQuery = new KiwoomQuery();
-            _dtOptCalMagamPs = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OPS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-            _dtOptCalMagamPd = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OPD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-            _dtOptCalMagamQs = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OQS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
-            _dtOptCalMagamQd = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OQD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+            switch (opt10060Trans)
+            {
+                case Opt10060TransType.PriceMaesu:
+                    if (_dtOptCalMagamPs != null)
+                    {
+                        _dtOptCalMagamPs = null;
+                        _dtOptCalMagamPs = new DataTable();
+                    }
+                    _dtOptCalMagamPs = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OPS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+                    break;
+                case Opt10060TransType.PriceMaedo:
+                    if (_dtOptCalMagamPd != null)
+                    {
+                        _dtOptCalMagamPd = null;
+                        _dtOptCalMagamPd = new DataTable();
+                    }
+                    _dtOptCalMagamPd = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OPD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+                    break;
+                case Opt10060TransType.QtyMaesu:
+                    if (_dtOptCalMagamQs != null)
+                    {
+                        _dtOptCalMagamQs = null;
+                        _dtOptCalMagamQs = new DataTable();
+                    }
+                    _dtOptCalMagamQs = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OQS10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+                    break;
+                case Opt10060TransType.QtyMaeDo:
+                    if (_dtOptCalMagamQd != null)
+                    {
+                        _dtOptCalMagamQd = null;
+                        _dtOptCalMagamQd = new DataTable();
+                    }
+                    _dtOptCalMagamQd = kiwoomQuery.p_OptCaMagamOptCallQuery(query: "1", stockCode: "", optcall: "OQD10060", jobDate: "", jobIngGb: "", bln3tier: false).Tables[0].Copy();
+                    break;
+                default:
+                    break;
+            }            
         }
-
 
         private void OnReceiveTrData_Opt10060PriceMaeSu(string sRQName, DataTable dt, int sPreNext)
         {
@@ -1100,7 +1141,6 @@ namespace Woom.Tester.Forms
             }
         }
 
-
         private void Btn10060QtySellJob_Click(object sender, EventArgs e)
         {
             if (_ClsOpt10060 != null)
@@ -1118,6 +1158,8 @@ namespace Woom.Tester.Forms
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
             
             ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
+
+            GetJobData(Opt10060TransType.QtyMaeDo);
 
             OnGetStockCode(Opt10060TransType.QtyMaeDo);
         }
@@ -1140,6 +1182,8 @@ namespace Woom.Tester.Forms
 
             ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
 
+            GetJobData(Opt10060TransType.QtyMaesu);
+
             OnGetStockCode(Opt10060TransType.QtyMaesu);
         }
 
@@ -1160,6 +1204,9 @@ namespace Woom.Tester.Forms
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
             ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
+
+            GetJobData(Opt10060TransType.PriceMaedo);
+
             OnGetStockCode( Opt10060TransType.PriceMaedo);
         }
 
@@ -1180,6 +1227,8 @@ namespace Woom.Tester.Forms
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaedo);
 
             ClsAxKH.AxKH_10060_OnReceived += new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
+
+            GetJobData(Opt10060TransType.PriceMaesu);
 
             OnGetStockCode(Opt10060TransType.PriceMaesu);
         }

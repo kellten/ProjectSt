@@ -40,6 +40,7 @@
             this.STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.chkTradeDaegum = new System.Windows.Forms.CheckBox();
             this.BtnRealData = new System.Windows.Forms.Button();
             this.BtnExcelExport = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,8 +54,11 @@
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dgvOptInfoStock = new System.Windows.Forms.DataGridView();
-            this.chkTradeDaegum = new System.Windows.Forms.CheckBox();
+            this.TbStockInfo = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.pnA = new System.Windows.Forms.Panel();
+            this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -69,7 +73,9 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOptInfoStock)).BeginInit();
+            this.TbStockInfo.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.pnA.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv1
@@ -80,7 +86,7 @@
             this.dgv1.Location = new System.Drawing.Point(0, 0);
             this.dgv1.Name = "dgv1";
             this.dgv1.SelectedIndex = 0;
-            this.dgv1.Size = new System.Drawing.Size(1642, 977);
+            this.dgv1.Size = new System.Drawing.Size(776, 973);
             this.dgv1.TabIndex = 0;
             // 
             // tabPage1
@@ -89,7 +95,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1634, 951);
+            this.tabPage1.Size = new System.Drawing.Size(768, 947);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "섹터별 상위상승 종목";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -109,7 +115,7 @@
             this.dgv0.Location = new System.Drawing.Point(3, 3);
             this.dgv0.Name = "dgv0";
             this.dgv0.RowTemplate.Height = 23;
-            this.dgv0.Size = new System.Drawing.Size(1628, 945);
+            this.dgv0.Size = new System.Drawing.Size(762, 941);
             this.dgv0.TabIndex = 0;
             // 
             // STOCK_NAME
@@ -153,7 +159,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1634, 951);
+            this.tabPage2.Size = new System.Drawing.Size(768, 947);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "기간별 상승 종목";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -183,10 +189,22 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1628, 945);
-            this.splitContainer1.SplitterDistance = 38;
+            this.splitContainer1.Panel2.Controls.Add(this.dgvGiganUpDown);
+            this.splitContainer1.Size = new System.Drawing.Size(762, 941);
+            this.splitContainer1.SplitterDistance = 37;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // chkTradeDaegum
+            // 
+            this.chkTradeDaegum.AutoSize = true;
+            this.chkTradeDaegum.Checked = true;
+            this.chkTradeDaegum.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTradeDaegum.Location = new System.Drawing.Point(622, 13);
+            this.chkTradeDaegum.Name = "chkTradeDaegum";
+            this.chkTradeDaegum.Size = new System.Drawing.Size(72, 16);
+            this.chkTradeDaegum.TabIndex = 46;
+            this.chkTradeDaegum.Text = "거래대금";
+            this.chkTradeDaegum.UseVisualStyleBackColor = true;
             // 
             // BtnRealData
             // 
@@ -300,9 +318,10 @@
             this.dgvGiganUpDown.Location = new System.Drawing.Point(0, 0);
             this.dgvGiganUpDown.Name = "dgvGiganUpDown";
             this.dgvGiganUpDown.RowTemplate.Height = 23;
-            this.dgvGiganUpDown.Size = new System.Drawing.Size(1022, 899);
+            this.dgvGiganUpDown.Size = new System.Drawing.Size(758, 896);
             this.dgvGiganUpDown.TabIndex = 0;
             this.dgvGiganUpDown.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellClick);
+            this.dgvGiganUpDown.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellDoubleClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
             // splitContainer2
@@ -314,43 +333,74 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.dgvGiganUpDown);
+            this.splitContainer2.Panel1.Controls.Add(this.dgv1);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.dgvOptInfoStock);
-            this.splitContainer2.Size = new System.Drawing.Size(1628, 903);
-            this.splitContainer2.SplitterDistance = 1026;
-            this.splitContainer2.TabIndex = 0;
+            this.splitContainer2.Panel2.Controls.Add(this.TbStockInfo);
+            this.splitContainer2.Size = new System.Drawing.Size(1642, 977);
+            this.splitContainer2.SplitterDistance = 780;
+            this.splitContainer2.TabIndex = 1;
             // 
-            // dgvOptInfoStock
+            // TbStockInfo
             // 
-            this.dgvOptInfoStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOptInfoStock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvOptInfoStock.Location = new System.Drawing.Point(0, 0);
-            this.dgvOptInfoStock.Name = "dgvOptInfoStock";
-            this.dgvOptInfoStock.RowTemplate.Height = 23;
-            this.dgvOptInfoStock.Size = new System.Drawing.Size(594, 899);
-            this.dgvOptInfoStock.TabIndex = 0;
+            this.TbStockInfo.Controls.Add(this.tabPage3);
+            this.TbStockInfo.Controls.Add(this.tabPage4);
+            this.TbStockInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TbStockInfo.Location = new System.Drawing.Point(0, 0);
+            this.TbStockInfo.Name = "TbStockInfo";
+            this.TbStockInfo.SelectedIndex = 0;
+            this.TbStockInfo.Size = new System.Drawing.Size(854, 973);
+            this.TbStockInfo.TabIndex = 0;
             // 
-            // chkTradeDaegum
+            // tabPage3
             // 
-            this.chkTradeDaegum.AutoSize = true;
-            this.chkTradeDaegum.Checked = true;
-            this.chkTradeDaegum.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTradeDaegum.Location = new System.Drawing.Point(622, 13);
-            this.chkTradeDaegum.Name = "chkTradeDaegum";
-            this.chkTradeDaegum.Size = new System.Drawing.Size(72, 16);
-            this.chkTradeDaegum.TabIndex = 46;
-            this.chkTradeDaegum.Text = "거래대금";
-            this.chkTradeDaegum.UseVisualStyleBackColor = true;
+            this.tabPage3.Controls.Add(this.pnA);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(846, 947);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "관련 뉴스";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(846, 947);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "수급분석";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // pnA
+            // 
+            this.pnA.AutoScroll = true;
+            this.pnA.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pnA.Controls.Add(this.ucNaverSearch1);
+            this.pnA.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnA.Location = new System.Drawing.Point(3, 3);
+            this.pnA.Name = "pnA";
+            this.pnA.Size = new System.Drawing.Size(840, 941);
+            this.pnA.TabIndex = 0;
+            // 
+            // ucNaverSearch1
+            // 
+            this.ucNaverSearch1.AutoScroll = true;
+            this.ucNaverSearch1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucNaverSearch1.Location = new System.Drawing.Point(0, 0);
+            this.ucNaverSearch1.Name = "ucNaverSearch1";
+            this.ucNaverSearch1.PropStockCode = null;
+            this.ucNaverSearch1.Size = new System.Drawing.Size(836, 937);
+            this.ucNaverSearch1.TabIndex = 0;
             // 
             // FrmStockList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1642, 977);
-            this.Controls.Add(this.dgv1);
+            this.Controls.Add(this.splitContainer2);
             this.Name = "FrmStockList";
             this.Text = "종목별 특징사항(FrmStockList)";
             this.dgv1.ResumeLayout(false);
@@ -368,7 +418,9 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOptInfoStock)).EndInit();
+            this.TbStockInfo.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.pnA.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -402,6 +454,10 @@
         private System.Windows.Forms.Button BtnRealData;
         private System.Windows.Forms.CheckBox chkTradeDaegum;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.DataGridView dgvOptInfoStock;
+        private System.Windows.Forms.TabControl TbStockInfo;
+        private System.Windows.Forms.TabPage tabPage3;
+        private CallForm.Uc.UcNaverSearch ucNaverSearch1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Panel pnA;
     }
 }

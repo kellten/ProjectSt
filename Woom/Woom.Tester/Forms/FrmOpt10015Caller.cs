@@ -229,7 +229,7 @@ namespace Woom.Tester.Forms
             _opt10015.SetInit(_FormId);
             _opt10015.JustRequest(stockCode, _stdDate, "", 0);
 
-            lblTimePerCount.Text = ClsAxKH._limitCount.ToString();
+            OPS10060.Text = ClsAxKH._limitCount.ToString();
             lblTime.Text = ClsAxKH._limitTime.ToString();
 
             tcs.SetResult(true);
@@ -367,7 +367,7 @@ namespace Woom.Tester.Forms
                         _opt10015.SetInit(_FormId);
                         _opt10015.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StartDate: sRQNameArray[2].ToString().Trim(), StockName: "", nPrevNext: 2);
 
-                        lblTimePerCount.Text = ClsAxKH._limitCount.ToString();
+                        OPS10060.Text = ClsAxKH._limitCount.ToString();
                         lblTime.Text = ClsAxKH._limitTime.ToString();
 
                         return;

@@ -629,11 +629,21 @@ namespace Woom.Volume.Forms
 
         }
 
+        private void OpenNaverNews(string stockCode)
+        {
+            ucNaverSearch1.PropStockCode = stockCode;
+        }
+
 
         private void OnRealData(string data)
         { 
         
         
+        }
+
+        private void dgvGiganUpDown_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            OpenNaverNews(dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_NAME"].Value.ToString());
         }
     }
 }

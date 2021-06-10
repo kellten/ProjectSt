@@ -302,7 +302,7 @@ namespace Woom.DataAccess.PlugIn
 
                 TimeSpan dateDiff = nowDate - _SendDateTime;
                 // 호출 횟수가 1시간에 천회가 넘어가면 에러 발생
-                if (Convert.ToInt16(dateDiff.TotalSeconds) < 1)
+                if (Convert.ToInt16(dateDiff.TotalMilliseconds) < 1000)
                 {
                     Delay(600);
                 }
@@ -331,15 +331,6 @@ namespace Woom.DataAccess.PlugIn
             lock (lockObject)
             {
 
-
-                if (SPEED_CALL == true)
-                {
-                    SpeedSpendTime();
-                }
-                else
-                {
-                    RegularSpandTime();
-                }
 
                 string stockCode = "";
 
@@ -451,6 +442,15 @@ namespace Woom.DataAccess.PlugIn
                     }
                 }
 
+                if (SPEED_CALL == true)
+                {
+                    SpeedSpendTime();
+                }
+                else
+                {
+                    RegularSpandTime();
+                }
+
                 ClsDbLogger.StoreLogger(loggergb: ClsDbLogger.LoggerGb.SendLoger, optCallNo: item[0].ToString() + " : " + "CommRqData", transText: sRQNameSet + "@" + sCommRqData);
 
                 int nRet = AxKH.CommRqData(sRQName: item[0].ToString() + "," + sRQNameSet, sTrCode: item[1].ToString(), nPrevNext: Convert.ToInt32(item[2]), sScreenNo: item[3].ToString());
@@ -459,10 +459,10 @@ namespace Woom.DataAccess.PlugIn
 
                 SendsRQName = item[0].ToString() + "," + sRQNameSet;
 
-                if (aTimer.Enabled == false)
-                {
-                    StartTimer();
-                }
+                //if (aTimer.Enabled == false)
+                //{
+                //    // StartTimer();
+                //}
 
                 if (ClsWoomErrorCode.GetErrorMessage(nRet) == true)
                 {
@@ -535,7 +535,7 @@ namespace Woom.DataAccess.PlugIn
 
         public static void AxKH_OnReceiveTrData(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEvent e)
         {
-            StopTimer();
+          //  StopTimer();
                  
             DataTable dt = new DataTable();
             object handler;
