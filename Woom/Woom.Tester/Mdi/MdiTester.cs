@@ -160,5 +160,11 @@ namespace Woom.Tester.Mdi
             Form oform = new Woom.Selenium.Forms.FrmExam();
             ShowChildForm(oform);
         }
+
+        private void 기술ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Form oform = new Woom.
+            //ShowChildForm(oform);
+        }
     }
 }

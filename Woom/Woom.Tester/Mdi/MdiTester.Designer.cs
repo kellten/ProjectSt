@@ -45,6 +45,7 @@
             this.주식기본정보요청Opt10001ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종목관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.엑셀가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.크롤링테스트ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.마켓분석ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsbFrmStockList = new System.Windows.Forms.ToolStripMenuItem();
             this.기본정보관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,8 @@
             this.toolStripButton_IR = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.크롤링테스트ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.섹터ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.기술ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -70,7 +72,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optToolStripMenuItem,
             this.마켓분석ToolStripMenuItem,
-            this.기본정보관리ToolStripMenuItem});
+            this.기본정보관리ToolStripMenuItem,
+            this.섹터ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -190,6 +193,13 @@
             this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
             this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
             // 
+            // 크롤링테스트ToolStripMenuItem
+            // 
+            this.크롤링테스트ToolStripMenuItem.Name = "크롤링테스트ToolStripMenuItem";
+            this.크롤링테스트ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.크롤링테스트ToolStripMenuItem.Text = "크롤링테스트";
+            this.크롤링테스트ToolStripMenuItem.Click += new System.EventHandler(this.크롤링테스트ToolStripMenuItem_Click);
+            // 
             // 마켓분석ToolStripMenuItem
             // 
             this.마켓분석ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -201,7 +211,7 @@
             // tsbFrmStockList
             // 
             this.tsbFrmStockList.Name = "tsbFrmStockList";
-            this.tsbFrmStockList.Size = new System.Drawing.Size(180, 22);
+            this.tsbFrmStockList.Size = new System.Drawing.Size(162, 22);
             this.tsbFrmStockList.Text = "종목별 특이사항";
             this.tsbFrmStockList.Click += new System.EventHandler(this.tsbFrmStockList_Click);
             // 
@@ -216,7 +226,7 @@
             // 테마그룹관리ToolStripMenuItem
             // 
             this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
-            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
             this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
@@ -314,12 +324,20 @@
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 6;
             // 
-            // 크롤링테스트ToolStripMenuItem
+            // 섹터ToolStripMenuItem
             // 
-            this.크롤링테스트ToolStripMenuItem.Name = "크롤링테스트ToolStripMenuItem";
-            this.크롤링테스트ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.크롤링테스트ToolStripMenuItem.Text = "크롤링테스트";
-            this.크롤링테스트ToolStripMenuItem.Click += new System.EventHandler(this.크롤링테스트ToolStripMenuItem_Click);
+            this.섹터ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.기술ToolStripMenuItem});
+            this.섹터ToolStripMenuItem.Name = "섹터ToolStripMenuItem";
+            this.섹터ToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.섹터ToolStripMenuItem.Text = "섹터";
+            // 
+            // 기술ToolStripMenuItem
+            // 
+            this.기술ToolStripMenuItem.Name = "기술ToolStripMenuItem";
+            this.기술ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.기술ToolStripMenuItem.Text = "반도체";
+            this.기술ToolStripMenuItem.Click += new System.EventHandler(this.기술ToolStripMenuItem_Click);
             // 
             // MdiTester
             // 
@@ -377,6 +395,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_IR;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripMenuItem 크롤링테스트ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 섹터ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 기술ToolStripMenuItem;
     }
 }
 

@@ -45,13 +45,13 @@ namespace Woom.DataAccess.ScreenNo.Class
 
     internal class ClsBaseScreenNoDataType
     {
-        public string FormId;
+        public string FormId = "";
     }
 
     internal class ClsRealScreenNoDataType
     {
-        public string ScreenNo;
-        public string StockCodes;
-        public string FormId;
+        public string ScreenNo = "";
+        public string StockCodes = "";
+        public string FormId = "";
     }
 }

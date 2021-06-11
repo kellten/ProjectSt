@@ -25,7 +25,7 @@ namespace Woom.Tester.Forms
         private Queue _StockQueue = new Queue();
         private ClsDataAccessUtil _clsDataAccessUtil = new ClsDataAccessUtil();
         private ClsOpt10060 _ClsOpt10060;
-        private DataTable _UserDt;
+        //private DataTable _UserDt;
 
         private ClsUtil _clsUtil = new ClsUtil();
         private ClsCollectOptDataFunc _clsCollectOptDataFunc = new ClsCollectOptDataFunc();
@@ -91,20 +91,21 @@ namespace Woom.Tester.Forms
         }
         private void InitData(Opt10060TransType opt10060Trans)
         {
+            lblTotalCount.Text = _dtStockCode.Rows.Count.ToString();
             
             switch (opt10060Trans)
             {
                 case Opt10060TransType.PriceMaesu:
-                    proBar10060PriceBuy.Maximum = _StockQueue.Count;
+                    proBar10060PriceBuy.Maximum = _dtStockCode.Rows.Count;
                     break;
                 case Opt10060TransType.PriceMaedo:
-                    proBar10060PriceSell.Maximum = _StockQueue.Count;
+                    proBar10060PriceSell.Maximum = _dtStockCode.Rows.Count;
                     break;
                 case Opt10060TransType.QtyMaesu:
-                    proBar10060QtyBuy.Maximum = _StockQueue.Count;
+                    proBar10060QtyBuy.Maximum = _dtStockCode.Rows.Count;
                     break;
                 case Opt10060TransType.QtyMaeDo:
-                    proBar10060QtySell.Maximum = _StockQueue.Count;
+                    proBar10060QtySell.Maximum = _dtStockCode.Rows.Count;
                     break;
                 default:
                     break;
@@ -216,16 +217,15 @@ namespace Woom.Tester.Forms
             if (strStockCode == "End")
             { return; }
 
-            _seqNo = _seqNo + 1;
-
             SafeProBar(opt10060Trans);
 
             if (strStockCode == "")
             {
                 OnGetStockCode(opt10060Trans);
+                _seqNo = _seqNo + 1;
                 return;
-
             }
+
 
             string stockName = ClsAxKH.GetMasterCodeName(stockCode: strStockCode);
 
@@ -233,8 +233,13 @@ namespace Woom.Tester.Forms
             if (stockName == "")
             {
                 OnGetStockCode(opt10060Trans);
+                _seqNo = _seqNo + 1;
                 return;
             }
+
+            _seqNo = _seqNo + 1;
+
+            lblIngCount.Text = "진행 종목 수 : " +  _seqNo.ToString();
 
             WaitTime();
 
@@ -301,8 +306,6 @@ namespace Woom.Tester.Forms
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();
-
-            _seqNo = _seqNo + 1;
 
             if (chk100.Checked == true)
             {
@@ -1255,7 +1258,6 @@ namespace Woom.Tester.Forms
         {
             if (ClsAxKH.SPEED_CALL == true)
             { ClsAxKH.SPEED_CALL = false; }
-
 
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);

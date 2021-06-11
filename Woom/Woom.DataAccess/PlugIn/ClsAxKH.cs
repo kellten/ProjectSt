@@ -302,7 +302,7 @@ namespace Woom.DataAccess.PlugIn
 
                 TimeSpan dateDiff = nowDate - _SendDateTime;
                 // 호출 횟수가 1시간에 천회가 넘어가면 에러 발생
-                if (Convert.ToInt16(dateDiff.TotalMilliseconds) < 1000)
+                if (Convert.ToInt32(dateDiff.TotalMilliseconds) < 1000)
                 {
                     Delay(600);
                 }

@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.chkSpeedOn = new System.Windows.Forms.CheckBox();
             this.chk100 = new System.Windows.Forms.CheckBox();
-            this.lblStdDate = new System.Windows.Forms.Label();
+            this.lblTotalCount = new System.Windows.Forms.Label();
             this.lblStockName = new System.Windows.Forms.Label();
             this.btn10060PriceBuyJob = new System.Windows.Forms.Button();
             this.proBar10060PriceBuy = new System.Windows.Forms.ProgressBar();
@@ -45,6 +45,7 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.lblTimePerCount = new System.Windows.Forms.Label();
             this.chkDesc = new System.Windows.Forms.CheckBox();
+            this.lblIngCount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dtpStdDate
@@ -85,14 +86,14 @@
             this.chk100.Text = "현재일 기준(100거래일)";
             this.chk100.UseVisualStyleBackColor = true;
             // 
-            // lblStdDate
+            // lblTotalCount
             // 
-            this.lblStdDate.AutoSize = true;
-            this.lblStdDate.Location = new System.Drawing.Point(275, 156);
-            this.lblStdDate.Name = "lblStdDate";
-            this.lblStdDate.Size = new System.Drawing.Size(38, 12);
-            this.lblStdDate.TabIndex = 45;
-            this.lblStdDate.Text = "label2";
+            this.lblTotalCount.AutoSize = true;
+            this.lblTotalCount.Location = new System.Drawing.Point(275, 127);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(38, 12);
+            this.lblTotalCount.TabIndex = 45;
+            this.lblTotalCount.Text = "label2";
             // 
             // lblStockName
             // 
@@ -201,11 +202,21 @@
             this.chkDesc.Text = "DESC";
             this.chkDesc.UseVisualStyleBackColor = true;
             // 
+            // lblIngCount
+            // 
+            this.lblIngCount.AutoSize = true;
+            this.lblIngCount.Location = new System.Drawing.Point(275, 147);
+            this.lblIngCount.Name = "lblIngCount";
+            this.lblIngCount.Size = new System.Drawing.Size(38, 12);
+            this.lblIngCount.TabIndex = 59;
+            this.lblIngCount.Text = "label2";
+            // 
             // FrmOpt10060CallerPer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 274);
+            this.Controls.Add(this.lblIngCount);
             this.Controls.Add(this.chkDesc);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblTimePerCount);
@@ -219,7 +230,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.chk100);
-            this.Controls.Add(this.lblStdDate);
+            this.Controls.Add(this.lblTotalCount);
             this.Controls.Add(this.lblStockName);
             this.Controls.Add(this.btn10060PriceBuyJob);
             this.Controls.Add(this.proBar10060PriceBuy);
@@ -236,7 +247,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkSpeedOn;
         private System.Windows.Forms.CheckBox chk100;
-        private System.Windows.Forms.Label lblStdDate;
+        private System.Windows.Forms.Label lblTotalCount;
         private System.Windows.Forms.Label lblStockName;
         private System.Windows.Forms.Button btn10060PriceBuyJob;
         private System.Windows.Forms.ProgressBar proBar10060PriceBuy;
@@ -249,5 +260,6 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblTimePerCount;
         private System.Windows.Forms.CheckBox chkDesc;
+        private System.Windows.Forms.Label lblIngCount;
     }
 }
