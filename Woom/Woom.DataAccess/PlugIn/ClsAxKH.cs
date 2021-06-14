@@ -20,11 +20,16 @@ namespace Woom.DataAccess.PlugIn
         public static ConcurrentQueue<ArrayList> AxKHQueueList = new ConcurrentQueue<ArrayList>();
 
         public delegate void OnReceivedEventHandler(string stockCode, DataTable dt, int sPreNext);
+        public delegate void OnReceiveConditionVerEventHandler(DataTable dt);
+        public delegate void OnReceiveTrConditionEventHandler(string sScrNo, string strCodeList, string strConditionName, int nIndex, int nNext);
+        public static event OnReceiveTrConditionEventHandler AxKH_RaisedOnReceiveTrCondition;
+        public static event OnReceiveConditionVerEventHandler AxKH_RaisedOnReceiveConditionVer;
 
         private static System.Timers.Timer aTimer;
 
         private static string SendsRQName = "";
-        
+
+        #region OnReceive Event
         public static void AddOnReceivedEventHandler()
         {
             AxKH.OnReceiveTrData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrDataEventHandler(AxKH_OnReceiveTrData);
@@ -40,6 +45,88 @@ namespace Woom.DataAccess.PlugIn
             AxKH.OnReceiveRealData += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealDataEventHandler(AxKH_OnReceiveRealData);
         }
 
+        public static void AddOnReceiveConditionVerEventHandler()
+        {
+            AxKH.OnReceiveConditionVer += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEventHandler(AxKH_OnReceiveConditionVer);
+        }
+        private static void AxKH_OnReceiveConditionVer(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveConditionVerEvent e)
+        {
+
+            object handler;
+            handler = AxKH_RaisedOnReceiveConditionVer;
+            if (e.lRet != 1)
+            {
+                AxKH_RaisedOnReceiveConditionVer(null);
+            }
+
+            string strList = AxKH.GetConditionNameList();
+
+            string[] strArray = strList.Split(';');
+            string[] strArrList;
+            DataTable dt = new DataTable();
+            DataRow dr;
+
+            dt.Columns.Add("순서");
+            dt.Columns.Add("조건식명");
+
+            for (int i = 0; i < strArray.Length; i++)
+            {
+                if (strArray[i].ToString().Trim() == "")
+                {
+                    continue;
+                }
+                dr = dt.Rows.Add();
+
+                strArrList = strArray[i].Split('^');
+
+                dr["순서"] = strArrList[0].ToString().Trim();
+                dr["조건식명"] = strArrList[1].ToString().Trim();
+
+                strArrList = null;
+
+            }
+
+            AxKH_RaisedOnReceiveConditionVer(dt);
+        }
+        public static void AddOnReceiveTrConditionEventHandler()
+        {
+            AxKH.OnReceiveTrCondition += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEventHandler(AxKH_OnReceiveTrCondition);
+        }
+        public static void AddOnReceiveRealConditionEventHandler()
+        {
+            AxKH.OnReceiveRealCondition += new AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealConditionEventHandler(AxKH_OnReceiveRealCondition);
+        }
+        /// <summary>
+        /// 조건검색 요청에대한 서버 응답 수신시 발생하는 이벤트입니다.   종목코드 리스트는 각 종목코드가 ';'로 구분되서 전달됩니다.
+        /// BSTR sScrNo,    // 화면번호
+        /// BSTR strCodeList,   // 종목코드 리스트
+        /// BSTR strConditionName,    // 조건식 이름
+        /// int nIndex,   // 조건 고유번호
+        /// int nNext   // 연속조회 여부
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void AxKH_OnReceiveTrCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveTrConditionEvent e)
+        {
+            object Handler;
+            Handler = AxKH_RaisedOnReceiveTrCondition;
+            if (e.strCodeList == "")
+            {
+                AxKH_RaisedOnReceiveTrCondition("", "", "", 0, 0);
+            }
+
+            AxKH_RaisedOnReceiveTrCondition(e.sScrNo, e.strCodeList, e.strConditionName, e.nIndex, e.nNext);
+        }
+
+        private static void AxKH_OnReceiveRealCondition(object sender, AxKHOpenAPILib._DKHOpenAPIEvents_OnReceiveRealConditionEvent e)
+        {
+
+        }
+
+
+        #endregion
+
+        #region OptCaller
         public enum OptType
         {
             Opt10001, Opt10005, Opt10015, Opt10081, Opt10060, Opt10014, Opt20068, Opt10086, Opt90002
@@ -140,6 +227,9 @@ namespace Woom.DataAccess.PlugIn
             ClsAxKH.AxKH.SetInputValue("날짜구분", dateGb);
             ClsAxKH.AxKH.SetInputValue("종목코드", kthCode);
         }
+        #endregion
+
+        #region 일반함수
         private static DateTime Delay(int MS)
 
         {
@@ -163,7 +253,14 @@ namespace Woom.DataAccess.PlugIn
             return DateTime.Now;
 
         }
+        #endregion
 
+        #region 종목정보관련함수
+        /// <summary>
+        ///  입력한 종목코드에 해당하는 종목 상장주식수를 전달합니다.
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
         public static string GetMasterListedStockDate(string stockCode)
         {
             string stockDate = "";
@@ -171,7 +268,11 @@ namespace Woom.DataAccess.PlugIn
 
             return stockDate;
         }
-
+        /// <summary>
+        /// 종목코드에 해당하는 종목명을 전달합니다.
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
         public static string GetMasterCodeName(string stockCode)
         {
             string stockName = "";
@@ -179,6 +280,53 @@ namespace Woom.DataAccess.PlugIn
 
             return stockName;
         }
+        /// <summary>
+        /// 입력한 종목의 증거금 비율, 거래정지, 관리종목, 감리종목, 투자융의종목, 담보대출, 액면분할, 신용가능 여부를 전달합니다.
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
+        public static string GetMasterStockState(string stockCode)
+        {
+            string stockName = "";
+            stockName = ClsAxKH.AxKH.GetMasterStockState(stockCode);
+
+            return stockName;
+        }
+        #endregion
+
+
+        #region 조건검색
+        public static void GetConditionLoad()
+        {
+            AxKH.GetConditionLoad();
+        }
+        /// <summary>
+        ///  서버에 조건검색을 요청하는 함수입니다.
+        /// 마지막 인자값으로 조건검색만 할것인지 실시간 조건검색도 수신할 것인지를 지정할 수 있습니다.
+        /// GetConditionNameList() 함수로 얻은 조건식 이름과 고유번호의 쌍을 맞춰서 사용해야 합니다.
+        /// 리턴값 1이면 성공이며, 0이면 실패입니다.
+        /// 요청한 조건식이 없거나 조건 고유번호와 조건명이 서로 안맞거나 조회횟수를 초과하는 경우 실패하게 됩니다.
+        /// </summary>
+        /// <param name="strScrNo">화면번호</param>
+        /// <param name="strConditionName">조건식 이름</param>
+        /// <param name="nIndex">조건식 고유번호</param>
+        /// <param name="nSearch">실시간옵션. 0:조건검색만, 1:조건검색+실시간 조건검색</param>
+        public static void GetSendCondition(string strScrNo, string strConditionName, int nIndex, int nSearch)
+        {
+            AxKH.SendCondition(strScrNo, strConditionName, nIndex, nSearch);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strScrNo"></param>
+        /// <param name="strConditionName"></param>
+        /// <param name="nIndex"></param>
+        public static void GetSendConditionStop(string strScrNo, string strConditionName, int nIndex)
+        {
+            AxKH.SendConditionStop(strScrNo, strConditionName, nIndex);
+        }
+        #endregion
+
 
         private static object lockObject = new object();
 

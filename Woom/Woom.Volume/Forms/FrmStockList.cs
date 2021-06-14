@@ -42,6 +42,7 @@ namespace Woom.Volume.Forms
 
             DataTable dt = richQuery.p_ScodeQuery(query: "1", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
 
+            GetConditionList();
         }
 
         #region
@@ -351,7 +352,7 @@ namespace Woom.Volume.Forms
 
             }
         }
-        #endregion
+    
 
         #region OPT10001
         private void GetOpt10001ondgvGiganUpDown(int row, string stockCode)
@@ -645,5 +646,64 @@ namespace Woom.Volume.Forms
         {
             OpenNaverNews(dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_NAME"].Value.ToString());
         }
+
+        #endregion
+
+        #region 조건검색
+        private void OnReceiveConditionVer(DataTable dt)
+        {
+            int row = 0;
+
+            RemoveGridViewRow(dgvCond);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                dgvCond.Rows.Add();
+
+                dgvCond.Rows[row].Cells["순서"].Value = dr["순서"];
+                dgvCond.Rows[row].Cells["조건식명"].Value = dr["조건식명"];
+
+                row = row + 1;
+            }
+        }
+
+        private void OnReceiveTrCondition(string sScrNo, string strCodeList, string strConditionName, int nIndex, int nNext)
+        {
+            if (strCodeList != "")
+            {
+                string[] strArrary = strCodeList.Split(';');
+
+                for (int i = 0; i < strArrary.Length; i++)
+                {
+                    if (strArrary[i].Trim() == "")
+                    {
+                        continue;
+                    }
+                    ucStockCodeOptInfoData1.StockCode = strArrary[i];
+                }
+
+            }
+        }
+
+        private void GetConditionList()
+        {
+            ClsAxKH.AxKH_RaisedOnReceiveConditionVer += new ClsAxKH.OnReceiveConditionVerEventHandler(OnReceiveConditionVer);
+            ClsAxKH.AxKH_RaisedOnReceiveTrCondition += new ClsAxKH.OnReceiveTrConditionEventHandler(OnReceiveTrCondition);
+            ClsAxKH.GetConditionLoad();
+        }
+        private void dgvCond_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvCond.Rows[e.RowIndex].Cells["순서"].ToString().Trim() == "")
+            {
+                return;
+            }
+
+            ClsAxKH.GetSendCondition("9999", dgvCond.Rows[e.RowIndex].Cells["조건식명"].Value.ToString().Trim(), Convert.ToInt32(dgvCond.Rows[e.RowIndex].Cells["순서"].Value), 0);
+        }
+
+
+        #endregion
+
+
     }
 }

@@ -53,13 +53,20 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.dgvGiganUpDown = new System.Windows.Forms.DataGridView();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.TbStockInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pnA = new System.Windows.Forms.Panel();
-            this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.dgvCond = new System.Windows.Forms.DataGridView();
+            this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.dgvConditionList = new System.Windows.Forms.DataGridView();
+            this.순서 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.조건식명 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ucStockCodeOptInfoData1 = new Woom.CallForm.Uc.UcStockCodeOptInfoData();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -70,6 +77,7 @@
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiganUpDown)).BeginInit();
+            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -77,6 +85,16 @@
             this.TbStockInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.pnA.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCond)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConditionList)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv1
@@ -326,6 +344,16 @@
             this.dgvGiganUpDown.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGiganUpDown_CellDoubleClick);
             this.dgvGiganUpDown.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvGiganUpDown_MouseMove);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.splitContainer3);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(768, 947);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "검색식별";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -377,16 +405,6 @@
             this.pnA.Size = new System.Drawing.Size(840, 941);
             this.pnA.TabIndex = 0;
             // 
-            // ucNaverSearch1
-            // 
-            this.ucNaverSearch1.AutoScroll = true;
-            this.ucNaverSearch1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucNaverSearch1.Location = new System.Drawing.Point(0, 0);
-            this.ucNaverSearch1.Name = "ucNaverSearch1";
-            this.ucNaverSearch1.PropStockCode = null;
-            this.ucNaverSearch1.Size = new System.Drawing.Size(836, 937);
-            this.ucNaverSearch1.TabIndex = 0;
-            // 
             // tabPage4
             // 
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -397,14 +415,97 @@
             this.tabPage4.Text = "수급분석";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // tabPage5
+            // dgvCond
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(768, 947);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "검색식별";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.dgvCond.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCond.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.순서,
+            this.조건식명});
+            this.dgvCond.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCond.Location = new System.Drawing.Point(0, 0);
+            this.dgvCond.Name = "dgvCond";
+            this.dgvCond.RowTemplate.Height = 23;
+            this.dgvCond.Size = new System.Drawing.Size(294, 254);
+            this.dgvCond.TabIndex = 0;
+            this.dgvCond.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCond_CellDoubleClick);
+            // 
+            // ucNaverSearch1
+            // 
+            this.ucNaverSearch1.AutoScroll = true;
+            this.ucNaverSearch1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucNaverSearch1.Location = new System.Drawing.Point(0, 0);
+            this.ucNaverSearch1.Name = "ucNaverSearch1";
+            this.ucNaverSearch1.PropStockCode = null;
+            this.ucNaverSearch1.Size = new System.Drawing.Size(836, 937);
+            this.ucNaverSearch1.TabIndex = 0;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer4);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.ucStockCodeOptInfoData1);
+            this.splitContainer3.Size = new System.Drawing.Size(768, 947);
+            this.splitContainer3.SplitterDistance = 256;
+            this.splitContainer3.TabIndex = 0;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.dgvCond);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.dgvConditionList);
+            this.splitContainer4.Size = new System.Drawing.Size(768, 256);
+            this.splitContainer4.SplitterDistance = 296;
+            this.splitContainer4.TabIndex = 0;
+            // 
+            // dgvConditionList
+            // 
+            this.dgvConditionList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvConditionList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvConditionList.Location = new System.Drawing.Point(0, 0);
+            this.dgvConditionList.Name = "dgvConditionList";
+            this.dgvConditionList.RowTemplate.Height = 23;
+            this.dgvConditionList.Size = new System.Drawing.Size(466, 254);
+            this.dgvConditionList.TabIndex = 0;
+            // 
+            // 순서
+            // 
+            this.순서.HeaderText = "순서";
+            this.순서.Name = "순서";
+            this.순서.Width = 50;
+            // 
+            // 조건식명
+            // 
+            this.조건식명.HeaderText = "조건식명";
+            this.조건식명.Name = "조건식명";
+            this.조건식명.Width = 200;
+            // 
+            // ucStockCodeOptInfoData1
+            // 
+            this.ucStockCodeOptInfoData1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucStockCodeOptInfoData1.Location = new System.Drawing.Point(0, 0);
+            this.ucStockCodeOptInfoData1.Name = "ucStockCodeOptInfoData1";
+            this.ucStockCodeOptInfoData1.Size = new System.Drawing.Size(766, 685);
+            this.ucStockCodeOptInfoData1.StockCode = null;
+            this.ucStockCodeOptInfoData1.TabIndex = 0;
             // 
             // FrmStockList
             // 
@@ -425,6 +526,7 @@
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGiganUpDown)).EndInit();
+            this.tabPage5.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -432,6 +534,16 @@
             this.TbStockInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.pnA.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCond)).EndInit();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvConditionList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -471,5 +583,12 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Panel pnA;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.DataGridView dgvCond;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.DataGridView dgvConditionList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 순서;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 조건식명;
+        private CallForm.Uc.UcStockCodeOptInfoData ucStockCodeOptInfoData1;
     }
 }

@@ -87,6 +87,12 @@
     <Compile Include="Uc\UcOpt10060PerStockCode.Designer.cs">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\UcStockCodeOptInfoData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\UcStockCodeOptInfoData.Designer.cs">
+      <DependentUpon>UcStockCodeOptInfoData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\UcStockList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcOpt10060PerStockCode.resx">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\UcStockCodeOptInfoData.resx">
+      <DependentUpon>UcStockCodeOptInfoData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcStockList.resx">
       <DependentUpon>UcStockList.cs</DependentUpon>
