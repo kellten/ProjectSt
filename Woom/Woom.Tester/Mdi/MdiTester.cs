@@ -14,7 +14,7 @@ namespace Woom.Tester.Mdi
 
         private string _openType = "1";
 
-        public void ShowChildForm(Form childForm)
+        public void ShowChildForm(Form childForm, bool openType = false)
         {
             Boolean isAlreadyContained = false;
             FormCollection fc = Application.OpenForms;
@@ -31,7 +31,7 @@ namespace Woom.Tester.Mdi
 
                 if (isAlreadyContained == false)
                 {
-                    if (_openType == "1")
+                    if (openType == true)
                     {
                         childForm.Show();
                     }
@@ -73,7 +73,7 @@ namespace Woom.Tester.Mdi
         private void tsbFrmStockList_Click(object sender, EventArgs e)
         {
             Form oform = new Woom.Volume.Forms.FrmStockList();
-            ShowChildForm(oform);
+            ShowChildForm(oform, true);
         }
 
         private void opt20068ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace Woom.Tester.Mdi
         private void 종목관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form oform = new Woom.Tester.Forms.FrmGetStockCode();
-            ShowChildForm(oform);
+            ShowChildForm(oform, true);
         }
 
         private void opt10005ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,13 +115,13 @@ namespace Woom.Tester.Mdi
         private void 주식기본정보요청Opt10001ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form oform = new Woom.Tester.Forms.FrmOpt10001Caller();
-            ShowChildForm(oform);
+            ShowChildForm(oform, true);
         }
 
         private void 테마그룹관리ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form oForm = new Woom.CallForm.Forms.FrmThemaManage();
-            ShowChildForm(oForm);
+            ShowChildForm(oForm, true);
         }
 
         private void 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem_Click(object sender, EventArgs e)

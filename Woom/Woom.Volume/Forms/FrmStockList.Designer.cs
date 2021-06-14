@@ -56,9 +56,10 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.TbStockInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.pnA = new System.Windows.Forms.Panel();
             this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -82,6 +83,7 @@
             // 
             this.dgv1.Controls.Add(this.tabPage1);
             this.dgv1.Controls.Add(this.tabPage2);
+            this.dgv1.Controls.Add(this.tabPage5);
             this.dgv1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv1.Location = new System.Drawing.Point(0, 0);
             this.dgv1.Name = "dgv1";
@@ -364,16 +366,6 @@
             this.tabPage3.Text = "관련 뉴스";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(846, 947);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "수급분석";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
             // pnA
             // 
             this.pnA.AutoScroll = true;
@@ -394,6 +386,25 @@
             this.ucNaverSearch1.PropStockCode = null;
             this.ucNaverSearch1.Size = new System.Drawing.Size(836, 937);
             this.ucNaverSearch1.TabIndex = 0;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(846, 947);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "수급분석";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(768, 947);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "검색식별";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // FrmStockList
             // 
@@ -459,5 +470,6 @@
         private CallForm.Uc.UcNaverSearch ucNaverSearch1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Panel pnA;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }

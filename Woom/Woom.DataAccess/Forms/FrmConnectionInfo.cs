@@ -37,12 +37,10 @@ namespace Woom.DataAccess.Forms
         }
         private void Connection()
         {
-            AxKH.CommConnect();
-            
+            AxKH.CommConnect();   
         }
         private void DisConnection()
         {
-
 
         }
         #endregion
