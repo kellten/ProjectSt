@@ -11,6 +11,8 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Net;
 using System.IO;
+using Woom.DataAccess.PlugIn;
+using Woom.DataDefine.Util;
 
 namespace Woom.CallForm.Uc
 {
@@ -28,13 +30,29 @@ namespace Woom.CallForm.Uc
         public UcNaverSearch()
         {
             InitializeComponent();
+            dgvNaverSearch.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            //dgvNaverSearch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvNaverSearch.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
         }
 
         private void SearchNews()
         {
             try
             {
-                textBoxKeyword.Text = _stockCode;
+
+                if (chkStockName.Checked == true)
+                {
+                    textBoxKeyword.Text = ClsAxKH.GetMasterCodeName(_stockCode);
+                }
+                else
+                {
+                    textBoxKeyword.Text = _stockCode; 
+                }
+
+                ClsDataGridViewUtil clsDataGridViewUtil = new ClsDataGridViewUtil();
+
+                clsDataGridViewUtil.RemoveGridViewRow(dgvNaverSearch);
 
                 string results = getResults();
                 results = results.Replace("<b>", "");
@@ -46,11 +64,10 @@ namespace Woom.CallForm.Uc
                 var countsOfDisplay = Convert.ToInt32(parseJson["display"]);
                 var countsOfResults = Convert.ToInt32(parseJson["total"]);
 
-                listViewResults.Items.Clear();
+                int row = 0;
+
                 for (int i = 0; i < countsOfDisplay; i++)
                 {
-                    ListViewItem item = new ListViewItem((i + 1).ToString());
-
                     var title = parseJson["items"][i]["title"].ToString();
                     title = title.Replace("&quot;", "\"");
 
@@ -59,12 +76,17 @@ namespace Woom.CallForm.Uc
 
                     var link = parseJson["items"][i]["link"].ToString();
 
-                    item.SubItems.Add(title);
-                    item.SubItems.Add(description);
-                    item.SubItems.Add(link);
+                    dgvNaverSearch.Rows.Add();
 
-                    listViewResults.Items.Add(item);
+                    dgvNaverSearch.Rows[row].Cells["No"].Value = (row + 1).ToString();
+                    dgvNaverSearch.Rows[row].Cells["제목"].Value = title;
+                    dgvNaverSearch.Rows[row].Cells["본문"].Value = description;
+                    dgvNaverSearch.Rows[row].Cells["링크"].Value = link;
+
+                    row = row + 1;
                 }
+
+                
             }
             catch (Exception exc)
             {
@@ -75,7 +97,16 @@ namespace Woom.CallForm.Uc
 
         private string getResults()
         {
-            string keyword = _stockCode;
+            string keyword;
+            if (txtAddWord.Text.ToString().Trim() == "")
+            {
+                keyword = textBoxKeyword.Text.ToString().Trim();
+            }
+            else
+            {
+                keyword = textBoxKeyword.Text.ToString().Trim() + " " + txtAddWord.Text.ToString().Trim();
+            }
+            
             string display = trackBarDisplayCounts.Value.ToString();
             string sort = "date";
                
@@ -100,14 +131,12 @@ namespace Woom.CallForm.Uc
             return requestResult;
         }
 
-        private void listViewResults_SelectedIndexChanged(object sender, EventArgs e)
+        private void dgvNaverSearch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (listViewResults.SelectedItems.Count > 0)
+            if (dgvNaverSearch.Rows[e.RowIndex].Cells["No"].Value.ToString().Trim() != "")
             {
-                int selectItemIndex = listViewResults.SelectedItems[0].Index;
-                System.Diagnostics.Process.Start(listViewResults.Items[selectItemIndex].SubItems[3].Text.ToString());
+                System.Diagnostics.Process.Start(dgvNaverSearch.Rows[e.RowIndex].Cells["링크"].Value.ToString().Trim());
             }
-            
         }
     }
 }

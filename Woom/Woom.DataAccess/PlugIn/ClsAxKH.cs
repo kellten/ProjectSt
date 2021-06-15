@@ -294,7 +294,6 @@ namespace Woom.DataAccess.PlugIn
         }
         #endregion
 
-
         #region 조건검색
         public static void GetConditionLoad()
         {
@@ -996,8 +995,6 @@ namespace Woom.DataAccess.PlugIn
                             return;
                         }
 
-
-                        break;
 
                     }
                     catch (Exception)

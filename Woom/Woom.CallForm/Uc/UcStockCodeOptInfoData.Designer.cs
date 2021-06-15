@@ -54,6 +54,7 @@
             this.dgvStockInfo.Size = new System.Drawing.Size(1402, 775);
             this.dgvStockInfo.TabIndex = 0;
             this.dgvStockInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockInfo_CellClick);
+            this.dgvStockInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockInfo_CellDoubleClick);
             // 
             // UcStockCodeOptInfoData
             // 

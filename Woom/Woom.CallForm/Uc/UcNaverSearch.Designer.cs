@@ -29,58 +29,21 @@ namespace Woom.CallForm.Uc
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewResults = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.trackBarDisplayCounts = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxKeyword = new System.Windows.Forms.TextBox();
+            this.chkStockName = new System.Windows.Forms.CheckBox();
+            this.txtAddWord = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgvNaverSearch = new System.Windows.Forms.DataGridView();
+            this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.제목 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.본문 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.링크 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDisplayCounts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNaverSearch)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listViewResults
-            // 
-            this.listViewResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listViewResults.FullRowSelect = true;
-            this.listViewResults.HideSelection = false;
-            this.listViewResults.Location = new System.Drawing.Point(5, 47);
-            this.listViewResults.MultiSelect = false;
-            this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(855, 629);
-            this.listViewResults.TabIndex = 7;
-            this.listViewResults.UseCompatibleStateImageBehavior = false;
-            this.listViewResults.View = System.Windows.Forms.View.Details;
-            this.listViewResults.SelectedIndexChanged += new System.EventHandler(this.listViewResults_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "No.";
-            this.columnHeader1.Width = 40;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "제목";
-            this.columnHeader2.Width = 200;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "본문";
-            this.columnHeader3.Width = 350;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "링크";
-            this.columnHeader4.Width = 188;
             // 
             // label3
             // 
@@ -119,33 +82,107 @@ namespace Woom.CallForm.Uc
             this.textBoxKeyword.TabIndex = 11;
             this.textBoxKeyword.Text = "속보 경제";
             // 
+            // chkStockName
+            // 
+            this.chkStockName.AutoSize = true;
+            this.chkStockName.Location = new System.Drawing.Point(748, 12);
+            this.chkStockName.Name = "chkStockName";
+            this.chkStockName.Size = new System.Drawing.Size(112, 16);
+            this.chkStockName.TabIndex = 12;
+            this.chkStockName.Text = "종목명으로 조회";
+            this.chkStockName.UseVisualStyleBackColor = true;
+            // 
+            // txtAddWord
+            // 
+            this.txtAddWord.Location = new System.Drawing.Point(509, 9);
+            this.txtAddWord.Name = "txtAddWord";
+            this.txtAddWord.Size = new System.Drawing.Size(100, 21);
+            this.txtAddWord.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(462, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "붙임글";
+            // 
+            // dgvNaverSearch
+            // 
+            this.dgvNaverSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvNaverSearch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dgvNaverSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNaverSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.No,
+            this.제목,
+            this.본문,
+            this.링크});
+            this.dgvNaverSearch.Location = new System.Drawing.Point(3, 60);
+            this.dgvNaverSearch.Name = "dgvNaverSearch";
+            this.dgvNaverSearch.RowTemplate.Height = 23;
+            this.dgvNaverSearch.Size = new System.Drawing.Size(857, 616);
+            this.dgvNaverSearch.TabIndex = 15;
+            this.dgvNaverSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNaverSearch_CellDoubleClick);
+            // 
+            // No
+            // 
+            this.No.HeaderText = "No.";
+            this.No.Name = "No";
+            this.No.Width = 30;
+            // 
+            // 제목
+            // 
+            this.제목.HeaderText = "제목";
+            this.제목.Name = "제목";
+            this.제목.Width = 300;
+            // 
+            // 본문
+            // 
+            this.본문.HeaderText = "본문";
+            this.본문.Name = "본문";
+            this.본문.Width = 600;
+            // 
+            // 링크
+            // 
+            this.링크.HeaderText = "링크";
+            this.링크.Name = "링크";
+            // 
             // UcNaverSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dgvNaverSearch);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtAddWord);
+            this.Controls.Add(this.chkStockName);
             this.Controls.Add(this.textBoxKeyword);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.trackBarDisplayCounts);
-            this.Controls.Add(this.listViewResults);
             this.Name = "UcNaverSearch";
             this.Size = new System.Drawing.Size(863, 679);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDisplayCounts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNaverSearch)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listViewResults;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trackBarDisplayCounts;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxKeyword;
+        private System.Windows.Forms.CheckBox chkStockName;
+        private System.Windows.Forms.TextBox txtAddWord;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgvNaverSearch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn No;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 제목;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 본문;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 링크;
     }
 }

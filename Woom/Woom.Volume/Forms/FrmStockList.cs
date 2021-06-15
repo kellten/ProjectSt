@@ -43,6 +43,8 @@ namespace Woom.Volume.Forms
             DataTable dt = richQuery.p_ScodeQuery(query: "1", stockCode: "", ybYongCode: "", bln3tier: false).Tables[0].Copy();
 
             GetConditionList();
+
+            ucStockCodeOptInfoData1.OnSelectedStockCode += new CallForm.Uc.UcStockCodeOptInfoData.OnSelectedStockCodeHandler(UcStockCodeOptInfo_OnSelected);
         }
 
         #region
@@ -701,6 +703,10 @@ namespace Woom.Volume.Forms
             ClsAxKH.GetSendCondition("9999", dgvCond.Rows[e.RowIndex].Cells["조건식명"].Value.ToString().Trim(), Convert.ToInt32(dgvCond.Rows[e.RowIndex].Cells["순서"].Value), 0);
         }
 
+        private void UcStockCodeOptInfo_OnSelected(string stockCode)
+        {
+            ucNaverSearch1.PropStockCode = stockCode;
+        }
 
         #endregion
 
