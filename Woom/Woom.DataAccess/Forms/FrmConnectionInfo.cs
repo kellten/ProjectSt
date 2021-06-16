@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using static Woom.DataAccess.ErrorManage.Class.ClsWoomErrorCode;
 using static Woom.DataAccess.PlugIn.ClsAxKH;
+using Woom.Telegram.Class;
 
 namespace Woom.DataAccess.Forms
 {
@@ -59,6 +60,7 @@ namespace Woom.DataAccess.Forms
                 lblMsgTitle.Text = "접속정보";
                 lblMsg.Text = "로그인 성공";
                 btnDisconnect.Enabled = true;
+                //Telegram_Send();
             }
             else
             {
@@ -74,6 +76,16 @@ namespace Woom.DataAccess.Forms
         #endregion
 
         #endregion
+
+        private void Telegram_Send()
+        {
+            string text = "로그인 성공";
+            
+            string errorMessage = null;
+            bool ret = ClsTelegramBot.SendMessage(text, out errorMessage);
+
+
+        }
 
         #region Control Event
         private void notifyIcon0_MouseDoubleClick(object sender, MouseEventArgs e)

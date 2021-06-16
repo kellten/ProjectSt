@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Selenium", "Woom.Selen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Sector", "Woom.Sector\Woom.Sector.csproj", "{375124B5-EF6A-4FF9-B974-19F21ED5E984}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Telegram", "Woom.Telegram\Woom.Telegram.csproj", "{94062D62-82EE-4B53-BDEA-0739C7A47F30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +138,18 @@ Global
 		{375124B5-EF6A-4FF9-B974-19F21ED5E984}.Release|x64.Build.0 = Release|Any CPU
 		{375124B5-EF6A-4FF9-B974-19F21ED5E984}.Release|x86.ActiveCfg = Release|Any CPU
 		{375124B5-EF6A-4FF9-B974-19F21ED5E984}.Release|x86.Build.0 = Release|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Debug|x64.Build.0 = Debug|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Debug|x86.Build.0 = Debug|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x64.ActiveCfg = Release|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x64.Build.0 = Release|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x86.ActiveCfg = Release|Any CPU
+		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

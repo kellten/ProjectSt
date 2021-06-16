@@ -23,8 +23,11 @@ namespace Woom.CallForm.Uc
         const string _clientId = "dIcPMP6xI1dX3QKlm2Qw"; //Application Client ID 입력
         const string _clientSecret = "CyyzooLmi3"; //Application Client Secret 입력
 
-        public string PropStockCode { get {return _stockCode; } set { _stockCode = value; SearchNews(); } }
-
+        public string PropStockCode { get  {return _stockCode; } 
+                                       set { _stockCode = value; 
+                                             SearchNews(); } }
+        int intDrgWindowWidth = 0;
+        int intDrgColumnWidth = 0;
         string _stockCode;
 
         public UcNaverSearch()
@@ -34,6 +37,8 @@ namespace Woom.CallForm.Uc
             //dgvNaverSearch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvNaverSearch.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
+            intDrgWindowWidth = dgvNaverSearch.Width;
+            intDrgColumnWidth = dgvNaverSearch.Columns[2].Width;
         }
 
         private void SearchNews()
@@ -136,6 +141,19 @@ namespace Woom.CallForm.Uc
             if (dgvNaverSearch.Rows[e.RowIndex].Cells["No"].Value.ToString().Trim() != "")
             {
                 System.Diagnostics.Process.Start(dgvNaverSearch.Rows[e.RowIndex].Cells["링크"].Value.ToString().Trim());
+            }
+        }
+              
+        
+        private void dgvNaverSearch_Resize(object sender, EventArgs e)
+        {
+            if (dgvNaverSearch.Width > intDrgWindowWidth)
+            {
+                dgvNaverSearch.Columns[2].Width = dgvNaverSearch.Columns[2].Width + (dgvNaverSearch.Width - intDrgWindowWidth);
+            }
+            else
+            {
+                dgvNaverSearch.Columns[2].Width = intDrgColumnWidth;
             }
         }
     }

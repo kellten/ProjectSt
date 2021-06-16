@@ -87,6 +87,12 @@
     <Compile Include="Uc\UcOpt10060PerStockCode.Designer.cs">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\UcOptSpeedCaller.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\UcOptSpeedCaller.Designer.cs">
+      <DependentUpon>UcOptSpeedCaller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Uc\UcStockCodeOptInfoData.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcOpt10060PerStockCode.resx">
       <DependentUpon>UcOpt10060PerStockCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\UcOptSpeedCaller.resx">
+      <DependentUpon>UcOptSpeedCaller.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcStockCodeOptInfoData.resx">
       <DependentUpon>UcStockCodeOptInfoData.cs</DependentUpon>

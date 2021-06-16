@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Woom.Telegram.Class;
 
 namespace Woom.Tester.Mdi
 {
@@ -10,6 +11,7 @@ namespace Woom.Tester.Mdi
         public MdiTester()
         {
             InitializeComponent();
+            //Telegram_Send();
         }
 
         private string _openType = "1";
@@ -165,6 +167,34 @@ namespace Woom.Tester.Mdi
         {
             //Form oform = new Woom.
             //ShowChildForm(oform);
+        }
+
+        private void toolStripButton1_세종_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://sejongdata.co.kr/");
+        }
+
+        private void Telegram_Send()
+        {
+            string text = "TEST";
+            string Who = "";
+            string errorMessage = null;
+            bool ret = ClsTelegramBot.SendMessage(text, out errorMessage);
+
+            switch (ClsTelegramBot._chatid)
+            {
+                case "chatId1":
+                    Who = "사용자1";
+                    break;
+
+                default:
+                    break;
+            }
+
+            ClsTelegramBot._chatid = "848121202";
+            text = "[" + Who + "] 전송시간 : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            bool ret2 = ClsTelegramBot.SendMessage(text, out errorMessage);
+
         }
     }
 }

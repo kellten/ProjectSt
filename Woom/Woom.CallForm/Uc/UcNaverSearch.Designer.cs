@@ -126,6 +126,7 @@ namespace Woom.CallForm.Uc
             this.dgvNaverSearch.Size = new System.Drawing.Size(857, 616);
             this.dgvNaverSearch.TabIndex = 15;
             this.dgvNaverSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNaverSearch_CellDoubleClick);
+            this.dgvNaverSearch.Resize += new System.EventHandler(this.dgvNaverSearch_Resize);
             // 
             // No
             // 

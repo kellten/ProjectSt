@@ -708,8 +708,15 @@ namespace Woom.Volume.Forms
             ucNaverSearch1.PropStockCode = stockCode;
         }
 
+
         #endregion
 
+        private void FrmStockList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ClsAxKH.AxKH_RaisedOnReceiveConditionVer -= new ClsAxKH.OnReceiveConditionVerEventHandler(OnReceiveConditionVer);
+            ClsAxKH.AxKH_RaisedOnReceiveTrCondition -= new ClsAxKH.OnReceiveTrConditionEventHandler(OnReceiveTrCondition);
 
+
+        }
     }
 }
