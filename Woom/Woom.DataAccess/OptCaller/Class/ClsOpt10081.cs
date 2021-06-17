@@ -63,11 +63,7 @@ namespace Woom.DataAccess.OptCaller.Class
         private DataTable _dt = new DataTable();
 
         // private ClsOptStatus _OptStatus;
-        private string _stdDate = "";
-
-        private string _stockCode = "";
-        private string _stockName = "";
-        private string _modifyJugaGb = "";
+ 
         private object lockObject = new object();
 
         #endregion 전역변수

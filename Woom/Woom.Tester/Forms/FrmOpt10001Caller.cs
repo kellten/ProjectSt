@@ -19,7 +19,6 @@ namespace Woom.Tester.Forms
 
         private DataTable _dtStockCode;
         private int _seqNo = 0;
-        private string _stdDate = "";
         private string _FormId = "";
         private int _ScreenNo = 100;
 
@@ -27,7 +26,6 @@ namespace Woom.Tester.Forms
 
         private Queue _StockQueue = new Queue();
 
-        private DataTable _dtOptCalMagam;
         private ClsDataAccessUtil _clsDataAccessUtil;
         private ClsUtil _clsUtil = new ClsUtil();
         private ClsCollectOptDataFunc _clsCollectOptDataFunc = new ClsCollectOptDataFunc();

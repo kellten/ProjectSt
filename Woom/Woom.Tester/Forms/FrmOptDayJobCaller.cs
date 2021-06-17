@@ -20,7 +20,7 @@ namespace Woom.Tester.Forms
         private int _seqNo = 0;
         private string _stdDate = "";
         private string _FormId = "99";
-        private string _FirstStockDate = ""; // 상장일
+        //private string _FirstStockDate = ""; // 상장일
 
         private ClsOpt10015 _opt10015 = new ClsOpt10015();
         private ClsOpt10081 _opt10081 = new ClsOpt10081();

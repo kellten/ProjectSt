@@ -57,8 +57,6 @@ namespace Woom.DataAccess.OptCaller.Class
             {
                 return true;
             }
-
-            return true;
         }
 
         public void InitOptCallingStatus()

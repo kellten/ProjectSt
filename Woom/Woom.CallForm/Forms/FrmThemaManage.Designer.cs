@@ -60,6 +60,12 @@
             this.ThemaByStock_STOCK_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThemaByStock_STOCK_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ucStockList1 = new Woom.CallForm.Uc.UcStockList();
+            this.tcStock = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.txtStockMemo = new System.Windows.Forms.TextBox();
+            this.BtnStoreThemaFromMemo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -83,6 +89,13 @@
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThemaPerStock)).BeginInit();
+            this.tcStock.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
+            this.splitContainer6.Panel1.SuspendLayout();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -351,6 +364,7 @@
             // 
             // splitContainer5
             // 
+            this.splitContainer5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer5.Location = new System.Drawing.Point(0, 0);
             this.splitContainer5.Name = "splitContainer5";
@@ -361,7 +375,7 @@
             // 
             // splitContainer5.Panel2
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.ucStockList1);
+            this.splitContainer5.Panel2.Controls.Add(this.tcStock);
             this.splitContainer5.Size = new System.Drawing.Size(1173, 756);
             this.splitContainer5.SplitterDistance = 873;
             this.splitContainer5.TabIndex = 0;
@@ -377,7 +391,7 @@
             this.dgvThemaPerStock.Location = new System.Drawing.Point(0, 0);
             this.dgvThemaPerStock.Name = "dgvThemaPerStock";
             this.dgvThemaPerStock.RowTemplate.Height = 23;
-            this.dgvThemaPerStock.Size = new System.Drawing.Size(873, 756);
+            this.dgvThemaPerStock.Size = new System.Drawing.Size(871, 754);
             this.dgvThemaPerStock.TabIndex = 0;
             this.dgvThemaPerStock.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvThemaPerStock_CellClick);
             this.dgvThemaPerStock.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvThemaPerStock_KeyDown);
@@ -403,10 +417,81 @@
             // ucStockList1
             // 
             this.ucStockList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucStockList1.Location = new System.Drawing.Point(0, 0);
+            this.ucStockList1.Location = new System.Drawing.Point(3, 3);
             this.ucStockList1.Name = "ucStockList1";
-            this.ucStockList1.Size = new System.Drawing.Size(296, 756);
+            this.ucStockList1.Size = new System.Drawing.Size(282, 724);
             this.ucStockList1.TabIndex = 0;
+            // 
+            // tcStock
+            // 
+            this.tcStock.Controls.Add(this.tabPage1);
+            this.tcStock.Controls.Add(this.tabPage2);
+            this.tcStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcStock.Location = new System.Drawing.Point(0, 0);
+            this.tcStock.Name = "tcStock";
+            this.tcStock.SelectedIndex = 0;
+            this.tcStock.Size = new System.Drawing.Size(294, 754);
+            this.tcStock.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ucStockList1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(288, 730);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "종목전체";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.splitContainer6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(286, 728);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "메모종목";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer6
+            // 
+            this.splitContainer6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer6.Name = "splitContainer6";
+            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer6.Panel1
+            // 
+            this.splitContainer6.Panel1.Controls.Add(this.BtnStoreThemaFromMemo);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.txtStockMemo);
+            this.splitContainer6.Size = new System.Drawing.Size(280, 722);
+            this.splitContainer6.SplitterDistance = 40;
+            this.splitContainer6.TabIndex = 0;
+            // 
+            // txtStockMemo
+            // 
+            this.txtStockMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtStockMemo.Location = new System.Drawing.Point(0, 0);
+            this.txtStockMemo.Multiline = true;
+            this.txtStockMemo.Name = "txtStockMemo";
+            this.txtStockMemo.Size = new System.Drawing.Size(278, 676);
+            this.txtStockMemo.TabIndex = 0;
+            // 
+            // BtnStoreThemaFromMemo
+            // 
+            this.BtnStoreThemaFromMemo.Location = new System.Drawing.Point(3, 7);
+            this.BtnStoreThemaFromMemo.Name = "BtnStoreThemaFromMemo";
+            this.BtnStoreThemaFromMemo.Size = new System.Drawing.Size(80, 23);
+            this.BtnStoreThemaFromMemo.TabIndex = 0;
+            this.BtnStoreThemaFromMemo.Text = "저장";
+            this.BtnStoreThemaFromMemo.UseVisualStyleBackColor = true;
+            this.BtnStoreThemaFromMemo.Click += new System.EventHandler(this.BtnStoreThemaFromMemo_Click);
             // 
             // FrmThemaManage
             // 
@@ -441,6 +526,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvThemaPerStock)).EndInit();
+            this.tcStock.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.splitContainer6.Panel1.ResumeLayout(false);
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            this.splitContainer6.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
+            this.splitContainer6.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -479,5 +572,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ThemaByStock_THEMA_NAME;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThemaByStock_STOCK_NAME;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThemaByStock_STOCK_CODE;
+        private System.Windows.Forms.TabControl tcStock;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.SplitContainer splitContainer6;
+        private System.Windows.Forms.Button BtnStoreThemaFromMemo;
+        private System.Windows.Forms.TextBox txtStockMemo;
     }
 }

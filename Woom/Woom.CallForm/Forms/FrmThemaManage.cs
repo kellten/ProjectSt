@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SDataAccess;
 using Woom.DataDefine.Util;
+using Woom.DataAccess.PlugIn;
+using Woom.DataAccess.OptCaller.Class;
 
 namespace Woom.CallForm.Forms
 {
     public partial class FrmThemaManage : Form
     {
         private ClsDataGridViewUtil _clsDataGridViewUtil;
-        private Woom.DataDefine.Util.ClsUtil clsUtil;
 
         public FrmThemaManage()
         {
@@ -43,6 +44,9 @@ namespace Woom.CallForm.Forms
             arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
             oSql.ExecuteNonQuery("p_ThemaAdd", CommandType.StoredProcedure, arrParam);
+
+            GetThemaData();
+
         }
         private void ThemaGroupStoreRecord(string actionGb)
         {
@@ -77,7 +81,7 @@ namespace Woom.CallForm.Forms
 
             oSql.ExecuteNonQuery("p_ThestAdd", CommandType.StoredProcedure, arrParam);
 
-            MessageBox.Show("입력되었습니다.");
+            //MessageBox.Show("입력되었습니다.");
 
             GetThemaByStockCode();
 
@@ -104,9 +108,7 @@ namespace Woom.CallForm.Forms
 
                     row = row + 1;
                 }
-
             }
-
         }
 
         private void GetThemaData()
@@ -312,7 +314,6 @@ namespace Woom.CallForm.Forms
                 return;
             }
 
-
             ThemstStoreRecord("A", stockCode);
         }
             
@@ -390,5 +391,72 @@ namespace Woom.CallForm.Forms
                 ThemstStoreRecord("D", dgvThemaPerStock.Rows[dgvThemaPerStock.CurrentRow.Index].Cells["STOCK_CODE"].ToString());
             }
         }
+
+        private void BtnStoreThemaFromMemo_Click(object sender, EventArgs e)
+        {
+            if (txtThema.Text == "")
+            {
+                MessageBox.Show("테마부터 지정하여 주십시요.");
+                return;
+            }
+
+            if (txtStockMemo.Text.Trim() == "")
+            {
+                MessageBox.Show("내역이 없습니다.");
+                return;
+            }
+
+            GetStockCodeFromStockMemo();
+
+        }
+
+        private DataTable _dtStockList;
+
+        private void GetStockCodeFromStockMemo()
+        {
+
+            if (_dtStockList == null)
+            {
+                ClsGetKoaStudioMethod clsGetKoaStudioMethod = new ClsGetKoaStudioMethod();
+
+                _dtStockList = new DataTable();
+
+                _dtStockList = clsGetKoaStudioMethod.GetCodeListByMarketCallBackDataTable("999").Copy();
+            }
+            
+            string stockCode = "";
+            for (int i = 0; i < txtStockMemo.Lines.Length - 1; i++)
+            {
+
+                if (txtStockMemo.Lines[i].ToString().Trim() == "")
+                {
+                    continue;
+                }
+                stockCode = "";
+
+                foreach (DataRow dr in _dtStockList.AsEnumerable().Where(Row => Row.Field<string>("STOCK_NAME") == txtStockMemo.Lines[i].ToString().Trim()).CopyToDataTable().Rows)
+                {
+                    stockCode = dr["STOCK_CODE"].ToString();
+                    break;
+                }
+
+                if (stockCode == "")
+                {
+                    foreach (DataRow dr in _dtStockList.AsEnumerable().Where(Row => Row.Field<string>("STOCK_CODE") == txtStockMemo.Lines[i].ToString().Trim()).CopyToDataTable().Rows)
+                    {
+                        stockCode = dr["STOCK_CODE"].ToString();
+                        break;
+                    }
+                }
+
+                if (stockCode != "")
+                {
+                    ThemstStoreRecord(actionGb: "A", stockCode);
+                }
+            }
+        
+        }
+
+        
     }
 }

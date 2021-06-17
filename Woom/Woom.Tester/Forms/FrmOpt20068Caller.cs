@@ -21,14 +21,14 @@ namespace Woom.Tester.Forms
         private int _seqNo = 0;
         private string _stdDate = "";
         private string _FormId = "81";
-        private string _stockName;
+        //private string _stockName;
 
         private ClsOpt20068 _opt20068 = new ClsOpt20068();
 
         // 마지막으로 돌린 일자
-        private string _LastPsDate = "";
+        //private string _LastPsDate = "";
         // 마지막으로 돌린 일자
-        private string _FirstPsDate = "";
+        //private string _FirstPsDate = "";
         #endregion 전역변수
         private ClsDataAccessUtil _clsDataAccessUtil;
 

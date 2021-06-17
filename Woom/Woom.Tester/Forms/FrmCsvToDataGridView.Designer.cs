@@ -31,13 +31,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btnStoreDb = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnGetDirectoryFile = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.btnStoreDb = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -57,7 +57,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1104, 404);
+            this.dataGridView1.Size = new System.Drawing.Size(1105, 404);
             this.dataGridView1.TabIndex = 2;
             // 
             // splitContainer1
@@ -97,8 +97,18 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer2.Size = new System.Drawing.Size(1352, 404);
-            this.splitContainer2.SplitterDistance = 244;
+            this.splitContainer2.SplitterDistance = 243;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // btnStoreDb
+            // 
+            this.btnStoreDb.Location = new System.Drawing.Point(12, 230);
+            this.btnStoreDb.Name = "btnStoreDb";
+            this.btnStoreDb.Size = new System.Drawing.Size(142, 62);
+            this.btnStoreDb.TabIndex = 5;
+            this.btnStoreDb.Text = "DB로 저장";
+            this.btnStoreDb.UseVisualStyleBackColor = true;
+            this.btnStoreDb.Click += new System.EventHandler(this.btnStoreDb_Click);
             // 
             // btnStart
             // 
@@ -158,16 +168,6 @@
             this.dataGridView2.Size = new System.Drawing.Size(1352, 403);
             this.dataGridView2.TabIndex = 3;
             // 
-            // btnStoreDb
-            // 
-            this.btnStoreDb.Location = new System.Drawing.Point(12, 250);
-            this.btnStoreDb.Name = "btnStoreDb";
-            this.btnStoreDb.Size = new System.Drawing.Size(142, 62);
-            this.btnStoreDb.TabIndex = 5;
-            this.btnStoreDb.Text = "DB로 저장";
-            this.btnStoreDb.UseVisualStyleBackColor = true;
-            this.btnStoreDb.Click += new System.EventHandler(this.btnStoreDb_Click);
-            // 
             // FrmCsvToDataGridView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -175,7 +175,7 @@
             this.ClientSize = new System.Drawing.Size(1352, 811);
             this.Controls.Add(this.splitContainer1);
             this.Name = "FrmCsvToDataGridView";
-            this.Text = "FrmCsvToDataGridView";
+            this.Text = "키움용Excel(FrmCsvToDataGridView)";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

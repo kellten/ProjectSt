@@ -55,7 +55,7 @@ namespace Woom.Tester.Forms
         #region 전역변수
 
         private DataTable _dtKthgp;
-        private DataTable _dt;
+        //private DataTable _dt;
         private Woom.DataAccess.OptCaller.Class.ClsGetKoaStudioMethod _clsGetKoaStudioMethod = new DataAccess.OptCaller.Class.ClsGetKoaStudioMethod();
         private int _seqNo = 0;
         private string _FormId = "01";

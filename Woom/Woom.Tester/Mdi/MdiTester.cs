@@ -6,7 +6,7 @@ namespace Woom.Tester.Mdi
 {
     public partial class MdiTester : Form
     {
-        private int childFormNumber = 0;
+        // private int childFormNumber = 0;
 
         public MdiTester()
         {
@@ -14,7 +14,7 @@ namespace Woom.Tester.Mdi
             //Telegram_Send();
         }
 
-        private string _openType = "1";
+        //private string _openType = "1";
 
         public void ShowChildForm(Form childForm, bool openType = false)
         {

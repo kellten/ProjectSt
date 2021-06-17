@@ -1134,7 +1134,7 @@ namespace Woom.Tester.Forms
 
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 _ClsOpt10060.Dispose();
 

@@ -40,7 +40,7 @@ namespace Woom.Tester.Forms
         private Queue _StockQueue = new Queue();
         private ClsDataAccessUtil _clsDataAccessUtil = new ClsDataAccessUtil();
         private ClsOpt10060 _ClsOpt10060;
-        private DataTable _UserDt;
+        //private DataTable _UserDt;
 
         private ClsUtil _clsUtil = new ClsUtil();
         private ClsCollectOptDataFunc _clsCollectOptDataFunc = new ClsCollectOptDataFunc();
@@ -480,7 +480,7 @@ namespace Woom.Tester.Forms
 
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 _ClsOpt10060.Dispose();
                 ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
@@ -658,7 +658,7 @@ namespace Woom.Tester.Forms
 
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 _ClsOpt10060.Dispose();
                 ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
@@ -834,7 +834,7 @@ namespace Woom.Tester.Forms
 
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 _ClsOpt10060.Dispose();
                 ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);

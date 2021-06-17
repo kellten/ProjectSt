@@ -78,10 +78,10 @@ namespace Woom.Tester.Forms
 
         private ClsOpt10005 _opt10005 = new ClsOpt10005();
 
-        // 마지막으로 돌린 일자
-        private string _LastPsDate = "";
-        // 마지막으로 돌린 일자
-        private string _FirstPsDate = "";
+        //// 마지막으로 돌린 일자
+        //private string _LastPsDate = "";
+        //// 마지막으로 돌린 일자
+        //private string _FirstPsDate = "";
         #endregion 전역변수
 
         private ClsDataAccessUtil _clsDataAccessUtil;
