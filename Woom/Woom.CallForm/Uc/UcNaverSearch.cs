@@ -41,6 +41,8 @@ namespace Woom.CallForm.Uc
             intDrgColumnWidth = dgvNaverSearch.Columns[2].Width;
         }
 
+        int _row;
+
         private void SearchNews()
         {
             try
@@ -64,6 +66,7 @@ namespace Woom.CallForm.Uc
                 else
                 {
                     clsDataGridViewUtil.RemoveGridViewRow(dgvNaverSearch);
+                    _row = 0;
                 }
                 
 
@@ -76,8 +79,7 @@ namespace Woom.CallForm.Uc
                 var parseJson = JObject.Parse(results);
                 var countsOfDisplay = Convert.ToInt32(parseJson["display"]);
                 var countsOfResults = Convert.ToInt32(parseJson["total"]);
-
-                int row = 0;
+                
 
                 for (int i = 0; i < countsOfDisplay; i++)
                 {
@@ -89,16 +91,28 @@ namespace Woom.CallForm.Uc
 
                     var link = parseJson["items"][i]["link"].ToString();
 
-                    //dgvNaverSearch.Rows.Add();
+                    if (_row > 0 && dgvNaverSearch.Rows[0].Cells["No"].Value.ToString() != "" )
+                    {
+                        DataGridViewRow dataGridViewRow = (DataGridViewRow)dgvNaverSearch.Rows[0].Clone();
+                        dataGridViewRow.Cells[0].Value = (_row = +1).ToString();
+                        dataGridViewRow.Cells[1].Value = textBoxKeyword.Text;
+                        dataGridViewRow.Cells[2].Value = title;
+                        dataGridViewRow.Cells[3].Value = description;
+                        dataGridViewRow.Cells[4].Value = link;
 
+                        dgvNaverSearch.Rows.Insert(0, dataGridViewRow);
+                    }
+                    else
+                    {
+                        dgvNaverSearch.Rows.Add();
+                        dgvNaverSearch.Rows[_row].Cells["No"].Value = (_row + 1).ToString();
+                        dgvNaverSearch.Rows[_row].Cells["검색명"].Value = textBoxKeyword.Text;
+                        dgvNaverSearch.Rows[_row].Cells["제목"].Value = title;
+                        dgvNaverSearch.Rows[_row].Cells["본문"].Value = description;
+                        dgvNaverSearch.Rows[_row].Cells["링크"].Value = link;
+                    }                    
 
-                    dgvNaverSearch.Rows[row].Cells["No"].Value = (row + 1).ToString();
-                    dgvNaverSearch.Rows[row].Cells["검색명"].Value = textBoxKeyword.Text;
-                    dgvNaverSearch.Rows[row].Cells["제목"].Value = title;
-                    dgvNaverSearch.Rows[row].Cells["본문"].Value = description;
-                    dgvNaverSearch.Rows[row].Cells["링크"].Value = link;
-
-                    row = row + 1;
+                    _row = _row + 1;
                 }
 
                 
@@ -159,11 +173,11 @@ namespace Woom.CallForm.Uc
         {
             if (dgvNaverSearch.Width > intDrgWindowWidth)
             {
-                dgvNaverSearch.Columns[2].Width = dgvNaverSearch.Columns[2].Width + (dgvNaverSearch.Width - intDrgWindowWidth);
+                dgvNaverSearch.Columns[3].Width = dgvNaverSearch.Columns[3].Width + (dgvNaverSearch.Width - intDrgWindowWidth);
             }
             else
             {
-                dgvNaverSearch.Columns[2].Width = intDrgColumnWidth;
+                dgvNaverSearch.Columns[3].Width = intDrgColumnWidth;
             }
         }
     }
