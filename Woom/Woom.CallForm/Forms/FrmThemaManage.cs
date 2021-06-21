@@ -451,7 +451,7 @@ namespace Woom.CallForm.Forms
 
                 if (stockCode != "")
                 {
-                    ThemstStoreRecord(actionGb: "A", stockCode);
+                    ThemstStoreRecord(actionGb: "A", stockCode:stockCode);
                 }
             }
         
