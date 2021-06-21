@@ -59,6 +59,7 @@
             this.dgvCond = new System.Windows.Forms.DataGridView();
             this.순서 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.조건식명 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.dgvConditionList = new System.Windows.Forms.DataGridView();
             this.ucStockCodeOptInfoData1 = new Woom.CallForm.Uc.UcStockCodeOptInfoData();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -67,7 +68,7 @@
             this.pnA = new System.Windows.Forms.Panel();
             this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -103,6 +104,7 @@
             this.dgv1.Controls.Add(this.tabPage1);
             this.dgv1.Controls.Add(this.tabPage2);
             this.dgv1.Controls.Add(this.tabPage5);
+            this.dgv1.Controls.Add(this.tabPage6);
             this.dgv1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv1.Location = new System.Drawing.Point(0, 0);
             this.dgv1.Name = "dgv1";
@@ -419,6 +421,15 @@
             this.조건식명.Name = "조건식명";
             this.조건식명.Width = 200;
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(466, 254);
+            this.webBrowser1.TabIndex = 1;
+            // 
             // dgvConditionList
             // 
             this.dgvConditionList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -509,14 +520,14 @@
             this.tabPage4.Text = "수급분석";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // webBrowser1
+            // tabPage6
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(466, 254);
-            this.webBrowser1.TabIndex = 1;
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(768, 947);
+            this.tabPage6.TabIndex = 3;
+            this.tabPage6.Text = "테마별";
+            this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // FrmStockList
             // 
@@ -603,5 +614,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 조건식명;
         private CallForm.Uc.UcStockCodeOptInfoData ucStockCodeOptInfoData1;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.TabPage tabPage6;
     }
 }
