@@ -61,8 +61,10 @@
             this.toolStripButton_DartNew = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_IR = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStripButton1_세종 = new System.Windows.Forms.ToolStripButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_에너지 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -272,7 +274,9 @@
             this.toolStripButton_DartNew,
             this.toolStripButton_IR,
             this.toolStripButton_Dart,
-            this.toolStripButton1_세종});
+            this.toolStripButton1_세종,
+            this.toolStripButton_에너지,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1168, 40);
@@ -334,13 +338,6 @@
             this.toolStripButton_Dart.Text = "공시";
             this.toolStripButton_Dart.Click += new System.EventHandler(this.toolStripButton_Dart_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(1056, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 6;
-            // 
             // toolStripButton1_세종
             // 
             this.toolStripButton1_세종.AutoSize = false;
@@ -351,6 +348,33 @@
             this.toolStripButton1_세종.Size = new System.Drawing.Size(50, 37);
             this.toolStripButton1_세종.Text = "세종";
             this.toolStripButton1_세종.Click += new System.EventHandler(this.toolStripButton1_세종_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1056, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 6;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 37);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // toolStripButton_에너지
+            // 
+            this.toolStripButton_에너지.AutoSize = false;
+            this.toolStripButton_에너지.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_에너지.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_에너지.Image")));
+            this.toolStripButton_에너지.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_에너지.Name = "toolStripButton_에너지";
+            this.toolStripButton_에너지.Size = new System.Drawing.Size(50, 37);
+            this.toolStripButton_에너지.Text = "에너지";
+            this.toolStripButton_에너지.Click += new System.EventHandler(this.toolStripButton_에너지_Click);
             // 
             // MdiTester
             // 
@@ -411,6 +435,8 @@
         private System.Windows.Forms.ToolStripMenuItem 섹터ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 기술ToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1_세종;
+        private System.Windows.Forms.ToolStripButton toolStripButton_에너지;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

@@ -21,6 +21,8 @@ namespace Woom.CallForm.Uc
             base.Dispose(disposing);
         }
 
+        public int MyProperty { get; set; }
+
         #region 구성 요소 디자이너에서 생성한 코드
 
         /// <summary> 
@@ -38,9 +40,11 @@ namespace Woom.CallForm.Uc
             this.label2 = new System.Windows.Forms.Label();
             this.dgvNaverSearch = new System.Windows.Forms.DataGridView();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.검색명 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.제목 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.본문 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.링크 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkAddSearch = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarDisplayCounts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNaverSearch)).BeginInit();
             this.SuspendLayout();
@@ -117,6 +121,7 @@ namespace Woom.CallForm.Uc
             this.dgvNaverSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNaverSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.No,
+            this.검색명,
             this.제목,
             this.본문,
             this.링크});
@@ -133,6 +138,11 @@ namespace Woom.CallForm.Uc
             this.No.HeaderText = "No.";
             this.No.Name = "No";
             this.No.Width = 30;
+            // 
+            // 검색명
+            // 
+            this.검색명.HeaderText = "검색명";
+            this.검색명.Name = "검색명";
             // 
             // 제목
             // 
@@ -151,10 +161,21 @@ namespace Woom.CallForm.Uc
             this.링크.HeaderText = "링크";
             this.링크.Name = "링크";
             // 
+            // chkAddSearch
+            // 
+            this.chkAddSearch.AutoSize = true;
+            this.chkAddSearch.Location = new System.Drawing.Point(748, 34);
+            this.chkAddSearch.Name = "chkAddSearch";
+            this.chkAddSearch.Size = new System.Drawing.Size(86, 16);
+            this.chkAddSearch.TabIndex = 16;
+            this.chkAddSearch.Text = "checkBox1";
+            this.chkAddSearch.UseVisualStyleBackColor = true;
+            // 
             // UcNaverSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkAddSearch);
             this.Controls.Add(this.dgvNaverSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtAddWord);
@@ -182,8 +203,10 @@ namespace Woom.CallForm.Uc
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvNaverSearch;
         private System.Windows.Forms.DataGridViewTextBoxColumn No;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 검색명;
         private System.Windows.Forms.DataGridViewTextBoxColumn 제목;
         private System.Windows.Forms.DataGridViewTextBoxColumn 본문;
         private System.Windows.Forms.DataGridViewTextBoxColumn 링크;
+        private System.Windows.Forms.CheckBox chkAddSearch;
     }
 }

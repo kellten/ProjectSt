@@ -57,7 +57,15 @@ namespace Woom.CallForm.Uc
 
                 ClsDataGridViewUtil clsDataGridViewUtil = new ClsDataGridViewUtil();
 
-                clsDataGridViewUtil.RemoveGridViewRow(dgvNaverSearch);
+                if (chkAddSearch.Checked == true)
+                {
+                    // clsDataGridViewUtil.RemoveGridViewRow(dgvNaverSearch);
+                }
+                else
+                {
+                    clsDataGridViewUtil.RemoveGridViewRow(dgvNaverSearch);
+                }
+                
 
                 string results = getResults();
                 results = results.Replace("<b>", "");
@@ -81,9 +89,11 @@ namespace Woom.CallForm.Uc
 
                     var link = parseJson["items"][i]["link"].ToString();
 
-                    dgvNaverSearch.Rows.Add();
+                    //dgvNaverSearch.Rows.Add();
+
 
                     dgvNaverSearch.Rows[row].Cells["No"].Value = (row + 1).ToString();
+                    dgvNaverSearch.Rows[row].Cells["검색명"].Value = textBoxKeyword.Text;
                     dgvNaverSearch.Rows[row].Cells["제목"].Value = title;
                     dgvNaverSearch.Rows[row].Cells["본문"].Value = description;
                     dgvNaverSearch.Rows[row].Cells["링크"].Value = link;

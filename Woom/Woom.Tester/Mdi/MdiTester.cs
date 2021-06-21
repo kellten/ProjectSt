@@ -16,6 +16,7 @@ namespace Woom.Tester.Mdi
 
         //private string _openType = "1";
 
+
         public void ShowChildForm(Form childForm, bool openType = false)
         {
             Boolean isAlreadyContained = false;
@@ -195,6 +196,11 @@ namespace Woom.Tester.Mdi
             text = "[" + Who + "] 전송시간 : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             bool ret2 = ClsTelegramBot.SendMessage(text, out errorMessage);
 
+        }
+
+        private void toolStripButton_에너지_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kr.investing.com/commodities/energy");
         }
     }
 }
