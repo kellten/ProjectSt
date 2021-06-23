@@ -6,13 +6,15 @@ namespace Woom.DataAccess.Logger
 {
     public static class ClsDbLogger
     {
-
+        public static bool LOG_ON = false;
         public enum LoggerGb { SendLoger, RecieveLoger, ErrorLoger }
         public static void StoreLogger(LoggerGb loggergb, string optCallNo, string transText)
         {
 
             try
             {
+                if (LOG_ON == false)
+                { return;  }
 
             ArrayParam arrParam = new ArrayParam();
             Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "KIWOOMDB");

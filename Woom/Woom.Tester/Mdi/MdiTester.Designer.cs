@@ -62,9 +62,10 @@
             this.toolStripButton_IR = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Dart = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1_세종 = new System.Windows.Forms.ToolStripButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_에너지 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chkLogOn = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -349,22 +350,6 @@
             this.toolStripButton1_세종.Text = "세종";
             this.toolStripButton1_세종.Click += new System.EventHandler(this.toolStripButton1_세종_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(1056, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 6;
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 37);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
             // toolStripButton_에너지
             // 
             this.toolStripButton_에너지.AutoSize = false;
@@ -376,11 +361,39 @@
             this.toolStripButton_에너지.Text = "에너지";
             this.toolStripButton_에너지.Click += new System.EventHandler(this.toolStripButton_에너지_Click);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 37);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1056, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 6;
+            // 
+            // chkLogOn
+            // 
+            this.chkLogOn.AutoSize = true;
+            this.chkLogOn.Location = new System.Drawing.Point(1056, 34);
+            this.chkLogOn.Name = "chkLogOn";
+            this.chkLogOn.Size = new System.Drawing.Size(88, 16);
+            this.chkLogOn.TabIndex = 8;
+            this.chkLogOn.Text = "DB로그저장";
+            this.chkLogOn.UseVisualStyleBackColor = true;
+            this.chkLogOn.CheckedChanged += new System.EventHandler(this.chkLogOn_CheckedChanged);
+            // 
             // MdiTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 614);
+            this.Controls.Add(this.chkLogOn);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
@@ -437,6 +450,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1_세종;
         private System.Windows.Forms.ToolStripButton toolStripButton_에너지;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.CheckBox chkLogOn;
     }
 }
 

@@ -168,7 +168,7 @@ namespace Woom.CallForm.Uc
             this.chkAddSearch.Name = "chkAddSearch";
             this.chkAddSearch.Size = new System.Drawing.Size(86, 16);
             this.chkAddSearch.TabIndex = 16;
-            this.chkAddSearch.Text = "checkBox1";
+            this.chkAddSearch.Text = "AddSearch";
             this.chkAddSearch.UseVisualStyleBackColor = true;
             // 
             // UcNaverSearch

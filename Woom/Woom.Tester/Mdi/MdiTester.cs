@@ -202,5 +202,17 @@ namespace Woom.Tester.Mdi
         {
             System.Diagnostics.Process.Start("https://kr.investing.com/commodities/energy");
         }
+
+        private void chkLogOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkLogOn.Checked == true)
+            {
+                Woom.DataAccess.Logger.ClsDbLogger.LOG_ON = true;
+            }
+            else
+            {
+                Woom.DataAccess.Logger.ClsDbLogger.LOG_ON = false;
+            }
+        }
     }
 }
