@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom", "Woom\Woom.csproj", "{EB08D764-03B6-4250-83BF-5E802E35E4FF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -31,6 +31,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Sector", "Woom.Sector\Woom.Sector.csproj", "{375124B5-EF6A-4FF9-B974-19F21ED5E984}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Telegram", "Woom.Telegram\Woom.Telegram.csproj", "{94062D62-82EE-4B53-BDEA-0739C7A47F30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woom.Dart", "Woom.Dart\Woom.Dart.csproj", "{E0204957-554D-4F99-ADDE-FDEB2ADC5355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +152,18 @@ Global
 		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x64.Build.0 = Release|Any CPU
 		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x86.ActiveCfg = Release|Any CPU
 		{94062D62-82EE-4B53-BDEA-0739C7A47F30}.Release|x86.Build.0 = Release|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Debug|x64.Build.0 = Debug|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Debug|x86.Build.0 = Debug|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Release|x64.ActiveCfg = Release|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Release|x64.Build.0 = Release|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0204957-554D-4F99-ADDE-FDEB2ADC5355}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
