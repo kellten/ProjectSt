@@ -62,13 +62,15 @@
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.dgvConditionList = new System.Windows.Forms.DataGridView();
             this.ucStockCodeOptInfoData1 = new Woom.CallForm.Uc.UcStockCodeOptInfoData();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.TbStockInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pnA = new System.Windows.Forms.Panel();
             this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -97,6 +99,8 @@
             this.TbStockInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.pnA.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv1
@@ -449,6 +453,15 @@
             this.ucStockCodeOptInfoData1.StockCode = null;
             this.ucStockCodeOptInfoData1.TabIndex = 0;
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Size = new System.Drawing.Size(768, 947);
+            this.tabPage6.TabIndex = 3;
+            this.tabPage6.Text = "테마별";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -471,6 +484,7 @@
             // 
             this.TbStockInfo.Controls.Add(this.tabPage3);
             this.TbStockInfo.Controls.Add(this.tabPage4);
+            this.TbStockInfo.Controls.Add(this.tabPage7);
             this.TbStockInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TbStockInfo.Location = new System.Drawing.Point(0, 0);
             this.TbStockInfo.Name = "TbStockInfo";
@@ -505,6 +519,7 @@
             this.ucNaverSearch1.AutoScroll = true;
             this.ucNaverSearch1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucNaverSearch1.Location = new System.Drawing.Point(0, 0);
+            this.ucNaverSearch1.MyProperty = 0;
             this.ucNaverSearch1.Name = "ucNaverSearch1";
             this.ucNaverSearch1.PropStockCode = null;
             this.ucNaverSearch1.Size = new System.Drawing.Size(836, 937);
@@ -520,14 +535,25 @@
             this.tabPage4.Text = "수급분석";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // tabPage6
+            // tabPage7
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(768, 947);
-            this.tabPage6.TabIndex = 3;
-            this.tabPage6.Text = "테마별";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.tabPage7.Controls.Add(this.dataGridView1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(846, 947);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "공시정보";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(27, 20);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(797, 564);
+            this.dataGridView1.TabIndex = 0;
             // 
             // FrmStockList
             // 
@@ -567,6 +593,8 @@
             this.TbStockInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.pnA.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -615,5 +643,7 @@
         private CallForm.Uc.UcStockCodeOptInfoData ucStockCodeOptInfoData1;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

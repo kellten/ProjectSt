@@ -10,7 +10,7 @@ using Woom.DataAccess.PlugIn;
 using Woom.DataDefine.OptData;
 using Woom.DataDefine.Util;
 using Woom.DataAccess.Logger;
-
+using Woom.Telegram.Class;
 
 namespace Woom.Tester.Forms
 {
@@ -303,6 +303,11 @@ namespace Woom.Tester.Forms
             if (_StockQueue.Count == 0)
             {
                 MessageBox.Show("작업이 완료되었습니다.");
+                string text = "작업이 완료되었습니다.";
+
+                string errorMessage = null;
+                bool ret = ClsTelegramBot.SendMessage(text, out errorMessage);
+
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();

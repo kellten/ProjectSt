@@ -16,6 +16,7 @@ using Woom.DataAccess.OptCaller.Class;
 using Woom.DataAccess.PlugIn;
 using Woom.DataDefine.OptData;
 using SDataAccess;
+using Woom.Dart.Class;
 
 namespace Woom.Volume.Forms
 {
@@ -706,6 +707,13 @@ namespace Woom.Volume.Forms
         private void UcStockCodeOptInfo_OnSelected(string stockCode)
         {
             ucNaverSearch1.PropStockCode = stockCode;
+            ClsDartApi clsDartApi = new ClsDartApi();
+
+            DataTable dt;
+
+            dt =  clsDartApi.Dart(stockcode: stockCode, startDate: DateTime.Now.ToString("yyyyMMdd"), endDate: DateTime.Now.AddMonths(-3).ToString("yyyyMMdd")).Copy();
+
+            dataGridView1.DataSource = dt;
         }
 
 

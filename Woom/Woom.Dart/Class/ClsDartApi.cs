@@ -6,10 +6,11 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Compression;
+using System.Data;
 
 namespace Woom.Dart.Class
 {
-    class ClsDartApi
+    public class ClsDartApi
     {
         protected string callWebClientZipSave(string targetURL, string outputPath)
         {
@@ -129,6 +130,62 @@ namespace Woom.Dart.Class
             return true;
         }
 
+        public DataTable Dart()
+        {
+            string authKey = "";
+            int seed = DateTime.Now.Millisecond;
+            Random r = new Random(seed);
+
+            int ranNum = r.Next();
+            authKey = "fc9f7996b19984e91edab1bed1dd0a6249836aa8"; // 종근
+     
+            String apiURL = "http://dart.fss.or.kr/api/search.xml?auth=" + authKey + "&crp_cd=&start_dt=&end_dt=&page_set=100";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiURL);
+            request.Method = "GET";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader1 = new StreamReader(response.GetResponseStream());
+
+            string page = reader1.ReadToEnd();
+            System.Data.DataTable dt = new System.Data.DataTable();
+
+            StringReader sReader = new StringReader(page);
+
+            System.Xml.XmlReader reader = System.Xml.XmlReader.Create((TextReader)sReader);
+
+            dt.ReadXml(reader);
+            return dt;
+        }
+
+        public DataTable Dart(string stockcode, string startDate, string endDate)
+        {
+            string authKey = "";
+            int seed = DateTime.Now.Millisecond;
+            Random r = new Random(seed);
+
+            int ranNum = r.Next();
+
+
+            authKey = "fc9f7996b19984e91edab1bed1dd0a6249836aa8"; // 종근
+
+
+            String apiURL = "http://dart.fss.or.kr/api/search.xml?auth=" + authKey + "&crp_cd=" + stockcode + "&start_dt=" + startDate + "&end_dt=" + endDate + "&page_set=100&sort=date&series=asc";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiURL);
+            request.Method = "GET";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader1 = new StreamReader(response.GetResponseStream());
+
+            string page = reader1.ReadToEnd();
+            System.Data.DataTable dt = new System.Data.DataTable();
+
+            StringReader sReader = new StringReader(page);
+
+            System.Xml.XmlReader reader = System.Xml.XmlReader.Create((TextReader)sReader);
+
+            dt.ReadXml(reader);
+            return dt;
+        }
 
     }
 }
