@@ -66,6 +66,7 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.chkLogOn = new System.Windows.Forms.CheckBox();
+            this.dart고유번호가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -215,14 +216,15 @@
             // tsbFrmStockList
             // 
             this.tsbFrmStockList.Name = "tsbFrmStockList";
-            this.tsbFrmStockList.Size = new System.Drawing.Size(162, 22);
+            this.tsbFrmStockList.Size = new System.Drawing.Size(180, 22);
             this.tsbFrmStockList.Text = "종목별 특이사항";
             this.tsbFrmStockList.Click += new System.EventHandler(this.tsbFrmStockList_Click);
             // 
             // 기본정보관리ToolStripMenuItem
             // 
             this.기본정보관리ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.테마그룹관리ToolStripMenuItem});
+            this.테마그룹관리ToolStripMenuItem,
+            this.dart고유번호가져오기ToolStripMenuItem});
             this.기본정보관리ToolStripMenuItem.Name = "기본정보관리ToolStripMenuItem";
             this.기본정보관리ToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
             this.기본정보관리ToolStripMenuItem.Text = "기본정보관리";
@@ -230,7 +232,7 @@
             // 테마그룹관리ToolStripMenuItem
             // 
             this.테마그룹관리ToolStripMenuItem.Name = "테마그룹관리ToolStripMenuItem";
-            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.테마그룹관리ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
             this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
@@ -388,6 +390,13 @@
             this.chkLogOn.UseVisualStyleBackColor = true;
             this.chkLogOn.CheckedChanged += new System.EventHandler(this.chkLogOn_CheckedChanged);
             // 
+            // dart고유번호가져오기ToolStripMenuItem
+            // 
+            this.dart고유번호가져오기ToolStripMenuItem.Name = "dart고유번호가져오기ToolStripMenuItem";
+            this.dart고유번호가져오기ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.dart고유번호가져오기ToolStripMenuItem.Text = "Dart 고유번호 가져오기";
+            this.dart고유번호가져오기ToolStripMenuItem.Click += new System.EventHandler(this.dart고유번호가져오기ToolStripMenuItem_Click);
+            // 
             // MdiTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -451,6 +460,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_에너지;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.CheckBox chkLogOn;
+        private System.Windows.Forms.ToolStripMenuItem dart고유번호가져오기ToolStripMenuItem;
     }
 }
 

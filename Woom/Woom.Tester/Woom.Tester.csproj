@@ -298,6 +298,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
   </ItemGroup>
@@ -317,6 +318,10 @@
     <ProjectReference Include="..\Woom.CallForm\Woom.CallForm.csproj">
       <Project>{cf263689-bcb2-4752-ae74-8ac4ec4d0c1d}</Project>
       <Name>Woom.CallForm</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Woom.Dart\Woom.Dart.csproj">
+      <Project>{e0204957-554d-4f99-adde-fdeb2adc5355}</Project>
+      <Name>Woom.Dart</Name>
     </ProjectReference>
     <ProjectReference Include="..\Woom.DataAccess\Woom.DataAccess.csproj">
       <Project>{b69864e4-2cec-4f50-8615-d902e820a4a5}</Project>

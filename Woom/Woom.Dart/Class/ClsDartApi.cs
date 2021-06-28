@@ -7,15 +7,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Compression;
 using System.Data;
+using ICSharpCode.SharpZipLib.Zip;
+using IronPython.Hosting;
 
 namespace Woom.Dart.Class
 {
     public class ClsDartApi
     {
-        protected string callWebClientZipSave(string targetURL, string outputPath)
+        private void PythonConnect()
+        {
+            var peEngine = Python.CreateEngine();
+            var vScope = peEngine.CreateScope();
+
+            try
+            {
+                var vSource = peEngine.CreateScriptSourceFromFile(@"E:\ProjectSt\OpenDartReader-master");
+                
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string callWebClientZipSave(string targetURL, string outputPath)
         {
             string result = string.Empty;
-            string saveFolder = "";
+            string saveFolder = @"C:\TEMP";
             Byte[] bytes = null; 
             try
             {
@@ -51,83 +71,84 @@ namespace Woom.Dart.Class
         /// 압축 풀기 성공 여부  
         /// password -null
         /// isDeleteZipFile true 지운다, false 안지운다
-        public static bool UnZipFiles(string zipFilePath, string unZipTargetFolderPath,
-                                        string password, bool isDeleteZipFile)
+        public bool UnZipFiles(string zipFilePath, string unZipTargetFolderPath,
+                                        string password, bool isDeleteZipFile, out string outFileName )
         {
+            bool retVal = true;
+            outFileName = "";
+            //ZIP 파일이 있는 경우만 수행.
+              if (File.Exists(zipFilePath))
+            {
+                // ZIP 스트림 생성. 
+                ZipInputStream zipInputStream = new ZipInputStream(File.OpenRead(zipFilePath));
 
-            // ZIP 파일이 있는 경우만 수행. 
-            //  if (File.Exists(zipFilePath))
-            //{
-            //    // ZIP 스트림 생성. 
-            //    ZipInputStream zipInputStream = new ZipInputStream(File.OpenRead(zipFilePath));
+                // 패스워드가 있는 경우 패스워드 지정. 
+                if (password != null && password != string.Empty)
+                    zipInputStream.Password = password;
 
+                try
+                {
+                    ZipEntry theEntry;
+                    long Count = 0;
+                    // 반복하며 파일을 가져옴. 
+                    while ((theEntry = zipInputStream.GetNextEntry()) != null)
+                    {
+                        // 폴더 
+                        string directoryName = Path.GetDirectoryName(theEntry.Name);
+                        string fileName = Path.GetFileName(theEntry.Name); // 파일 
 
-            //    // 패스워드가 있는 경우 패스워드 지정. 
-            //    if (password != null && password != string.Empty)
-            //    zipInputStream.Password = password;
+                        outFileName = fileName;
 
-            //    try
-            //    {
-            //        ZipEntry theEntry;
-            //        long Count = 0;
-            //        // 반복하며 파일을 가져옴. 
-            //        while ((theEntry = zipInputStream.GetNextEntry()) != null)
-            //        {
-            //            // 폴더 
-            //            string directoryName = Path.GetDirectoryName(theEntry.Name);
-            //            string fileName = Path.GetFileName(theEntry.Name); // 파일 
+                        // 폴더 생성 
+                        Directory.CreateDirectory(unZipTargetFolderPath + directoryName);
 
-            //            // 폴더 생성 
-            //            Directory.CreateDirectory(unZipTargetFolderPath + directoryName);
+                        // 파일 이름이 있는 경우 
+                        if (fileName != string.Empty)
+                        {
+                            // 파일 스트림 생성.(파일생성) 
+                            FileStream streamWriter =
+                                  File.Create((unZipTargetFolderPath + theEntry.Name));
 
-            //            // 파일 이름이 있는 경우 
-            //            if (fileName != string.Empty)
-            //            {
-            //                // 파일 스트림 생성.(파일생성) 
-            //                FileStream streamWriter =
-            //                      File.Create((unZipTargetFolderPath + theEntry.Name));
+                            int size = 2048;
+                            byte[] data = new byte[2048];
 
-            //                int size = 2048;
-            //                byte[] data = new byte[2048];
+                            // 파일 복사 
+                            while (true)
+                            {
+                                size = zipInputStream.Read(data, 0, data.Length);
 
-            //                // 파일 복사 
-            //                while (true)
-            //                {
-            //                    size = zipInputStream.Read(data, 0, data.Length);
+                                if (size > 0)
+                                    streamWriter.Write(data, 0, size);
+                                else
+                                    break;
+                            }
 
-            //                    if (size > 0)
-            //                    streamWriter.Write(data, 0, size);
-            //                else
-            //                        break;
-            //                }
+                            // 파일스트림 종료 
+                            streamWriter.Close();
+                        }
+                        ++Count;
+                    }
+                }
+                catch
+                {
+                    retVal = false;
+                }
+                finally
+                {
+                    // ZIP 파일 스트림 종료 
+                    zipInputStream.Close();
+                }
 
-            //                // 파일스트림 종료 
-            //                streamWriter.Close();
-            //            }
-            //            ++Count;
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        retVal = false;
-            //    }
-            //    finally
-            //    {
-            //        // ZIP 파일 스트림 종료 
-            //        zipInputStream.Close();
-            //    }
-
-            //    // ZIP파일 삭제를 원할 경우 파일 삭제. 
-            //    if (isDeleteZipFile)
-            //        try
-            //        {
-            //            File.Delete(zipFilePath);
-            //        }
-            //        catch { }
-            //}
-
-            //return retVal;
-            return true;
+                // ZIP파일 삭제를 원할 경우 파일 삭제. 
+                if (isDeleteZipFile)
+                    try
+                    {
+                        File.Delete(zipFilePath);
+                    }
+                    catch { }
+            }
+              
+            return retVal;
         }
 
         public DataTable Dart()

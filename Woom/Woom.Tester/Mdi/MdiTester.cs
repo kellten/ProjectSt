@@ -214,5 +214,11 @@ namespace Woom.Tester.Mdi
                 Woom.DataAccess.Logger.ClsDbLogger.LOG_ON = false;
             }
         }
+
+        private void dart고유번호가져오기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form oform = new Woom.Dart.Forms.FrmDartCaller();
+            ShowChildForm(oform);
+        }
     }
 }
