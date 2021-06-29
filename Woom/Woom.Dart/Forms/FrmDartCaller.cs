@@ -27,34 +27,31 @@ namespace Woom.Dart.Forms
         {
             try
             {
+                string path = @"C:\temp\";
+                string filePath = "";
+                string outStringFileName = "";
+                ClsDartApi clsDartApi = new ClsDartApi();
 
-                
+                filePath = clsDartApi.callWebClientZipSave("https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=fc9f7996b19984e91edab1bed1dd0a6249836aa8", path);
 
-                    string path = @"C:\temp\";
-            string filePath = "";
-            string outStringFileName = "";
-            ClsDartApi clsDartApi = new ClsDartApi();
+                clsDartApi.UnZipFiles(filePath, path, "", true, out outStringFileName);
 
-            filePath = clsDartApi.callWebClientZipSave("https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=fc9f7996b19984e91edab1bed1dd0a6249836aa8", path);
+                FileStream fileStream = new FileStream(path + outStringFileName, FileMode.Open);
 
-            clsDartApi.UnZipFiles(filePath, path, "", true, out outStringFileName);
+                _ds.ReadXml(fileStream);
 
-            FileStream fileStream = new FileStream(path + outStringFileName, FileMode.Open);
+                fileStream.Close();
 
-            _ds.ReadXml(fileStream);
+                    //dgvList.DataSource = _ds.Tables[0];
 
-            fileStream.Close();
-
-                //dgvList.DataSource = _ds.Tables[0];
-
-                GetDartCodeInStockName();
-                
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
+                    GetDartCodeInStockName();
+                    
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
 
         }
 
@@ -63,11 +60,10 @@ namespace Woom.Dart.Forms
             ClsGetKoaStudioMethod clsGetKoaStudioMethod = new ClsGetKoaStudioMethod();
 
             _dt = clsGetKoaStudioMethod.GetCodeListByMarketCallBackDataTable("999").Copy();
-
-            //DataTable dt = from t1 in _dt.AsEnumerable()
-            //           join t2 in _ds.Tables[0].AsEnumerable() on t1.Field<string>("STOCK_NAME") equals t2.Field<string>("corp_name") into tg
-            //           from tcheck in tg.CopyToDataTable()
-            //           select t1;
+            // corp_name, STOCK_NAME 조인
+            DataTable dt = (DataTable)(from t1 in _dt.AsEnumerable()
+                           join t2 in _ds.Tables[0].AsEnumerable() on t1.Field<string>("STOCK_NAME") equals t2.Field<string>("corp_name") into tg
+                           select tg.CopyToDataTable());
 
             //foreach (DataRow dr in rows)
             //{
