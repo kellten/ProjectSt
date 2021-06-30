@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using Woom.Dart.Class;
 using Woom.DataAccess.OptCaller.Class;
 using Woom.DataDefine.Util;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace Woom.Dart.Forms
 {
@@ -88,6 +90,107 @@ namespace Woom.Dart.Forms
                 row = row + 1;
             }
                        
+        }
+
+        private void ExportExcel(bool captions)
+        {
+            this.saveFileDialog1.FileName = "TempName";
+            this.saveFileDialog1.DefaultExt = "xls";
+            this.saveFileDialog1.Filter = "Excel files (*.xls)|*.xls";
+            this.saveFileDialog1.InitialDirectory = "c:\\";
+
+            DialogResult result = saveFileDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                int num = 0;
+                object missingType = Type.Missing;
+
+                Excel.Application objApp;
+                Excel._Workbook objBook;
+                Excel.Workbooks objBooks;
+                Excel.Sheets objSheets;
+                Excel._Worksheet objSheet;
+                Excel.Range range;
+
+                string[] headers = new string[dgvList.ColumnCount];
+                string[] columns = new string[dgvList.ColumnCount];
+
+                for (int c = 0; c < dgvList.ColumnCount; c++)
+                {
+                    headers[c] = dgvList.Rows[0].Cells[c].OwningColumn.HeaderText.ToString();
+                    num = c + 65;
+                    columns[c] = Convert.ToString((char)num);
+                }
+
+                try
+                {
+                    objApp = new Excel.Application();
+                    objBooks = objApp.Workbooks;
+                    objBook = objBooks.Add(Missing.Value);
+                    objSheets = objBook.Worksheets;
+                    objSheet = (Excel._Worksheet)objSheets.get_Item(1);
+
+                    if (captions)
+                    {
+                        for (int c = 0; c < dgvList.ColumnCount; c++)
+                        {
+                            range = objSheet.get_Range(columns[c] + "1", Missing.Value);
+                            range.set_Value(Missing.Value, headers[c]);
+                        }
+                    }
+
+                    for (int i = 0; i < dgvList.RowCount - 1; i++)
+                    {
+                        for (int j = 0; j < dgvList.ColumnCount; j++)
+                        {
+                            range = objSheet.get_Range(columns[j] + Convert.ToString(i + 2),
+                                                                   Missing.Value);
+                            range.set_Value(Missing.Value,
+                                                  dgvList.Rows[i].Cells[j].Value.ToString().Trim());
+                        }
+                    }
+
+                    objApp.Visible = false;
+                    objApp.UserControl = false;
+
+                    objBook.SaveAs(saveFileDialog1.FileName,
+                              Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal,
+                              missingType, missingType, missingType, missingType,
+                              Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange,
+                              missingType, missingType, missingType, missingType, missingType);
+                    objBook.Close(false, missingType, missingType);
+
+                    Cursor.Current = Cursors.Default;
+
+                    MessageBox.Show("Save Success!!!");
+                }
+                catch (Exception theException)
+                {
+                    String errorMessage;
+                    errorMessage = "Error: ";
+                    errorMessage = String.Concat(errorMessage, theException.Message);
+                    errorMessage = String.Concat(errorMessage, " Line: ");
+                    errorMessage = String.Concat(errorMessage, theException.Source);
+
+                    MessageBox.Show(errorMessage, "Error");
+                }
+
+            }
+        }
+            private void BtnExcelExport_Click(object sender, EventArgs e)
+        {
+            ExportExcel(true);  
+        }
+
+        private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

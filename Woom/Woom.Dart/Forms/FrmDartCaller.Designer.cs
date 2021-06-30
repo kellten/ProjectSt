@@ -34,6 +34,8 @@ namespace Woom.Dart.Forms
             this.corp_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stock_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.STOCK_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnExcelExport = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +61,8 @@ namespace Woom.Dart.Forms
             this.dgvList.RowTemplate.Height = 23;
             this.dgvList.Size = new System.Drawing.Size(761, 358);
             this.dgvList.TabIndex = 1;
+            this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
+            this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
             // 
             // corp_code
             // 
@@ -76,11 +80,22 @@ namespace Woom.Dart.Forms
             this.STOCK_NAME.Name = "STOCK_NAME";
             this.STOCK_NAME.Width = 200;
             // 
+            // BtnExcelExport
+            // 
+            this.BtnExcelExport.Location = new System.Drawing.Point(612, 12);
+            this.BtnExcelExport.Name = "BtnExcelExport";
+            this.BtnExcelExport.Size = new System.Drawing.Size(168, 34);
+            this.BtnExcelExport.TabIndex = 2;
+            this.BtnExcelExport.Text = "ExcelExport";
+            this.BtnExcelExport.UseVisualStyleBackColor = true;
+            this.BtnExcelExport.Click += new System.EventHandler(this.BtnExcelExport_Click);
+            // 
             // FrmDartCaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnExcelExport);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.BtnDartCall);
             this.Name = "FrmDartCaller";
@@ -97,5 +112,7 @@ namespace Woom.Dart.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn corp_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn stock_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn STOCK_NAME;
+        private System.Windows.Forms.Button BtnExcelExport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
