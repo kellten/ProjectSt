@@ -91,6 +91,10 @@
       <Project>{b69864e4-2cec-4f50-8615-d902e820a4a5}</Project>
       <Name>Woom.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Woom.DataDefine\Woom.DataDefine.csproj">
+      <Project>{ba0aa315-266f-4828-8366-bd100d13a6d1}</Project>
+      <Name>Woom.DataDefine</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\FrmDartCaller.resx">

@@ -51,5 +51,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Woom.DataDefine\Woom.DataDefine.csproj">
+      <Project>{ba0aa315-266f-4828-8366-bd100d13a6d1}</Project>
+      <Name>Woom.DataDefine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

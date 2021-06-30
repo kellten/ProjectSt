@@ -100,7 +100,7 @@
             // lblStockName
             // 
             this.lblStockName.AutoSize = true;
-            this.lblStockName.Location = new System.Drawing.Point(209, 90);
+            this.lblStockName.Location = new System.Drawing.Point(209, 147);
             this.lblStockName.Name = "lblStockName";
             this.lblStockName.Size = new System.Drawing.Size(54, 12);
             this.lblStockName.TabIndex = 37;
@@ -109,7 +109,7 @@
             // chkSpeedOn
             // 
             this.chkSpeedOn.AutoSize = true;
-            this.chkSpeedOn.Location = new System.Drawing.Point(14, 86);
+            this.chkSpeedOn.Location = new System.Drawing.Point(14, 143);
             this.chkSpeedOn.Name = "chkSpeedOn";
             this.chkSpeedOn.Size = new System.Drawing.Size(72, 16);
             this.chkSpeedOn.TabIndex = 38;
