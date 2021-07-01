@@ -9,6 +9,7 @@ using System.IO.Compression;
 using System.Data;
 using ICSharpCode.SharpZipLib.Zip;
 using IronPython.Hosting;
+using SDataAccess;
 
 namespace Woom.Dart.Class
 {
@@ -31,7 +32,7 @@ namespace Woom.Dart.Class
                 throw;
             }
         }
-
+        const string authKey = "fc9f7996b19984e91edab1bed1dd0a6249836aa8"; // 종근
         public string callWebClientZipSave(string targetURL, string outputPath)
         {
             string result = string.Empty;
@@ -158,7 +159,7 @@ namespace Woom.Dart.Class
             Random r = new Random(seed);
 
             int ranNum = r.Next();
-            authKey = "fc9f7996b19984e91edab1bed1dd0a6249836aa8"; // 종근
+            //authKey = "fc9f7996b19984e91edab1bed1dd0a6249836aa8"; // 종근
      
             String apiURL = "http://dart.fss.or.kr/api/search.xml?auth=" + authKey + "&crp_cd=&start_dt=&end_dt=&page_set=100";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiURL);
@@ -186,10 +187,6 @@ namespace Woom.Dart.Class
 
             int ranNum = r.Next();
 
-
-            authKey = "fc9f7996b19984e91edab1bed1dd0a6249836aa8"; // 종근
-
-
             String apiURL = "http://dart.fss.or.kr/api/search.xml?auth=" + authKey + "&crp_cd=" + stockcode + "&start_dt=" + startDate + "&end_dt=" + endDate + "&page_set=100&sort=date&series=asc";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiURL);
             request.Method = "GET";
@@ -206,6 +203,62 @@ namespace Woom.Dart.Class
 
             dt.ReadXml(reader);
             return dt;
+        }
+        /// <summary>
+        /// 공시검색 개발가이드 	https://opendart.fss.or.kr/api/list.json - JSON https://opendart.fss.or.kr/api/list.xml - XML
+        /// https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&apiId=2019001
+        /// </summary>
+        /// <param name="crtfc_key">API 인증키</param>
+        /// <param name="corp_code">고유번호</param>
+        /// <param name="bgn_de">시작일</param>
+        /// <param name="end_de">종료일</param>
+        /// <param name="last_report_at">최종보고서 검색여부</param>
+        /// <param name="bpIntf_ty">공시유형</param>
+        /// <param name="pblntf_detail_ty">공시상세유형</param>
+        /// <param name="corp_cls">법인구분</param>
+        /// <param name="sort">정렬</param>
+        /// <param name="sort_mth">정렬방법</param>
+        /// <param name="page_no">페이지 번호</param>
+        /// <param name="page_count">페이지 별 건수</param>
+        /// <returns></returns>
+        public DataTable GetDartSearchByDate(string stockCode, string crtfc_key, string corp_code, string bgn_de, string end_de, string last_report_at,
+                                             string bpIntf_ty, string pblntf_detail_ty, string corp_cls, string sort, string sort_mth, string page_no, string page_count)
+        {
+            RichQuery richQuery = new RichQuery();
+            DataTable dt = new DataTable();
+
+            dt = richQuery.p_DARTQuery(query: "1", corp_code: "", stock_code: stockCode, stock_name: "", DELETE_DATE: "", bln3tier: false).Tables[0].Copy();
+
+            if (dt.Rows.Count < 1)
+            {
+                return null;
+            }
+
+            string corpCode = dt.Rows[0]["corp_code"].ToString().Trim();
+
+            dt = null;
+            dt = new DataTable();
+
+            string apiUrl = "https://opendart.fss.or.kr/api/list.xml?" + "&crtfc_key=" + authKey + "&corp_code=" + corpCode + "&bgn_de=" + bgn_de + "&end_de=" + end_de +
+                            "&last_report_at=" + last_report_at + "&bpIntf_ty=" + bpIntf_ty + "&pblntf_detail_ty=" + pblntf_detail_ty + "&corp_cls=" + corp_cls + "&sort=" + sort +
+                            "&sort_mth=" + sort_mth + "&page_no=" + page_no + "&page_count=" + page_count;
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+            request.Method = "GET";
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader1 = new StreamReader(response.GetResponseStream());
+
+            string page = reader1.ReadToEnd();
+            System.Data.DataSet ds = new System.Data.DataSet();
+
+            StringReader sReader = new StringReader(page);
+
+            System.Xml.XmlReader reader = System.Xml.XmlReader.Create((TextReader)sReader);
+
+            ds.ReadXml(reader);
+            return ds.Tables[0];
+
         }
 
     }

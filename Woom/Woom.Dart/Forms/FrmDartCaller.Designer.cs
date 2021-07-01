@@ -36,6 +36,8 @@ namespace Woom.Dart.Forms
             this.STOCK_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtnExcelExport = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.txtStockCode = new System.Windows.Forms.TextBox();
+            this.BtnDartApiCall = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +92,30 @@ namespace Woom.Dart.Forms
             this.BtnExcelExport.UseVisualStyleBackColor = true;
             this.BtnExcelExport.Click += new System.EventHandler(this.BtnExcelExport_Click);
             // 
+            // txtStockCode
+            // 
+            this.txtStockCode.Location = new System.Drawing.Point(184, 25);
+            this.txtStockCode.Name = "txtStockCode";
+            this.txtStockCode.Size = new System.Drawing.Size(100, 21);
+            this.txtStockCode.TabIndex = 3;
+            // 
+            // BtnDartApiCall
+            // 
+            this.BtnDartApiCall.Location = new System.Drawing.Point(308, 25);
+            this.BtnDartApiCall.Name = "BtnDartApiCall";
+            this.BtnDartApiCall.Size = new System.Drawing.Size(109, 23);
+            this.BtnDartApiCall.TabIndex = 4;
+            this.BtnDartApiCall.Text = "공시정보불러오기";
+            this.BtnDartApiCall.UseVisualStyleBackColor = true;
+            this.BtnDartApiCall.Click += new System.EventHandler(this.BtnDartApiCall_Click);
+            // 
             // FrmDartCaller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnDartApiCall);
+            this.Controls.Add(this.txtStockCode);
             this.Controls.Add(this.BtnExcelExport);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.BtnDartCall);
@@ -102,6 +123,7 @@ namespace Woom.Dart.Forms
             this.Text = "FrmDartCaller";
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -114,5 +136,7 @@ namespace Woom.Dart.Forms
         private System.Windows.Forms.DataGridViewTextBoxColumn STOCK_NAME;
         private System.Windows.Forms.Button BtnExcelExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.TextBox txtStockCode;
+        private System.Windows.Forms.Button BtnDartApiCall;
     }
 }
