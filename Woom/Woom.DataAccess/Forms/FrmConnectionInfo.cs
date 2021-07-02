@@ -60,7 +60,7 @@ namespace Woom.DataAccess.Forms
                 lblMsgTitle.Text = "접속정보";
                 lblMsg.Text = "로그인 성공";
                 btnDisconnect.Enabled = true;
-                //Telegram_Send();
+                Telegram_Send();
             }
             else
             {
