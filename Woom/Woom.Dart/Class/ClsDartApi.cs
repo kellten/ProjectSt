@@ -10,6 +10,8 @@ using System.Data;
 using ICSharpCode.SharpZipLib.Zip;
 using IronPython.Hosting;
 using SDataAccess;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Woom.Dart.Class
 {
@@ -222,7 +224,7 @@ namespace Woom.Dart.Class
         /// <param name="page_count">페이지 별 건수</param>
         /// <returns></returns>
         public DataTable GetDartSearchByDate(string stockCode, string crtfc_key, string corp_code, string bgn_de, string end_de, string last_report_at,
-                                             string bpIntf_ty, string pblntf_detail_ty, string corp_cls, string sort, string sort_mth, string page_no, string page_count)
+                                             string pbIntf_ty, string pblntf_detail_ty, string corp_cls, string sort, string sort_mth, string page_no, string page_count)
         {
             RichQuery richQuery = new RichQuery();
             DataTable dt = new DataTable();
@@ -236,29 +238,117 @@ namespace Woom.Dart.Class
 
             string corpCode = dt.Rows[0]["corp_code"].ToString().Trim();
 
+            //string corpCode = "00126380";
+
             dt = null;
             dt = new DataTable();
 
+            //string apiUrl = "https://opendart.fss.or.kr/api/list.xml?" + "&crtfc_key=" + authKey + "&corp_code=" + corpCode + "&bgn_de=" + bgn_de + "&end_de=" + end_de +
+            //                "&last_report_at=" + last_report_at + "&pbIntf_ty=" + pbIntf_ty + "&pblntf_detail_ty=" + pblntf_detail_ty + "&corp_cls=" + corp_cls + "&sort=" + sort +
+            //                "&sort_mth=" + sort_mth + "&page_no=" + page_no + "&page_count=" + page_count;
+
+            //string apiUrl = "https://opendart.fss.or.kr/api/list.json?" + "&crtfc_key=" + authKey + "&corp_code=" + corpCode + "&bgn_de=" + bgn_de + "&end_de=" + end_de +
+            //                "&pbIntf_ty=" + pbIntf_ty + "&sort=" + sort +
+            //                "&sort_mth=" + sort_mth + "&page_no=" + page_no + "&page_count=" + page_count;
+
             string apiUrl = "https://opendart.fss.or.kr/api/list.xml?" + "&crtfc_key=" + authKey + "&corp_code=" + corpCode + "&bgn_de=" + bgn_de + "&end_de=" + end_de +
-                            "&last_report_at=" + last_report_at + "&bpIntf_ty=" + bpIntf_ty + "&pblntf_detail_ty=" + pblntf_detail_ty + "&corp_cls=" + corp_cls + "&sort=" + sort +
+                            "&pbIntf_ty=" + pbIntf_ty + "&sort=" + sort +
                             "&sort_mth=" + sort_mth + "&page_no=" + page_no + "&page_count=" + page_count;
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(apiUrl);
+            //string apiUrl = "https://opendart.fss.or.kr/api/list.json?" + "&crtfc_key=" + authKey + "&corp_code=" + corpCode + "&bgn_de=" + bgn_de + "&end_de=" + end_de +
+            //                "&page_no=" + page_no + "&page_count=" + page_count;
+
+            //string apiUrl = "https://opendart.fss.or.kr/api/list.json?crtfc_key=fc9f7996b19984e91edab1bed1dd0a6249836aa8&corp_code=00126380&bgn_de=20210117&end_de=20210717&pblntf_ty=A&pblntf_detail_ty=A001&corp_cls=Y&page_no=5&page_count=10";
+
+
+            string webClientResult = callWebClient(apiUrl);
+
+            dt.ReadXml(we)
+
+            
+            //var r = JObject.Parse(webClientResult);
+
+            //dt = JsonConvert.DeserializeObject<DataTable>(webClientResult);
+            return dt;
+
+        }
+
+        private string getResults(string apiUrl)
+        {
+            
+            WebRequest request = WebRequest.Create(apiUrl);
             request.Method = "GET";
+            string requestResult = "";
+            using (var response = request.GetResponse())
+            {
+                using (Stream dataStream = response.GetResponseStream())
+                {
+                    using (var reader = new StreamReader(dataStream))
+                    {
+                        requestResult = reader.ReadToEnd();
+                    }
+                }
+            }
 
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader reader1 = new StreamReader(response.GetResponseStream());
+            return requestResult;
+        }
+        public static string callWebClient(string apiUrl)
+        {
+            string result = string.Empty;
+            try
+            {
+                WebClient client = new WebClient();
 
-            string page = reader1.ReadToEnd();
-            System.Data.DataSet ds = new System.Data.DataSet();
+                //특정 요청 헤더값을 추가해준다. 
+                client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
 
-            StringReader sReader = new StringReader(page);
+                using (Stream data = client.OpenRead(apiUrl))
+                {
+                    using (StreamReader reader = new StreamReader(data))
+                    {
+                        string s = reader.ReadToEnd();
+                        result = s;
 
-            System.Xml.XmlReader reader = System.Xml.XmlReader.Create((TextReader)sReader);
+                        reader.Close();
+                        data.Close();
+                    }
+                }
 
-            ds.ReadXml(reader);
-            return ds.Tables[0];
+            }
+            catch (Exception e)
+            {
+                //통신 실패시 처리로직
+                Console.WriteLine(e.ToString());
+            }
+            return result;
+        }
 
+
+        public static string callWebRequest(string apiUrl)
+        {
+            string responseFromServer = string.Empty;
+
+            try
+            {
+
+                WebRequest request = WebRequest.Create(apiUrl);
+                request.Method = "GET";
+                request.ContentType = "application/json";
+                request.Headers["user-agent"] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+                using (WebResponse response = request.GetResponse())
+                using (Stream dataStream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(dataStream))
+                {
+                    responseFromServer = reader.ReadToEnd();
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            return responseFromServer;
         }
 
     }

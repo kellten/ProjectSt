@@ -196,8 +196,8 @@ namespace Woom.Dart.Forms
         private void BtnDartApiCall_Click(object sender, EventArgs e)
         {
             ClsDartApi clsDartApi = new ClsDartApi();
-            clsDartApi.GetDartSearchByDate(stockCode: txtStockCode.Text.Trim(), crtfc_key: "", corp_code: "", bgn_de: DateTime.Now.Date.AddMonths(-3).ToString("yyyyMMdd"), end_de: DateTime.Now.Date.ToString("yyyyMMdd"),
-                                           last_report_at: "", bpIntf_ty: "", pblntf_detail_ty: "", corp_cls: "", sort: "date", sort_mth: "desc", page_no: "", page_count: "");
+            clsDartApi.GetDartSearchByDate(stockCode: txtStockCode.Text.Trim(), crtfc_key: "", corp_code: "", bgn_de: DateTime.Now.Date.AddMonths(-6).ToString("yyyyMMdd"), end_de: DateTime.Now.Date.ToString("yyyyMMdd"),
+                                           last_report_at: "N", pbIntf_ty: "", pblntf_detail_ty: "A", corp_cls: "", sort: "date", sort_mth: "desc", page_no: "1", page_count: "10");
         }
     }
 }
