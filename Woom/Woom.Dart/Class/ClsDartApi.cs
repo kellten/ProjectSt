@@ -12,6 +12,7 @@ using IronPython.Hosting;
 using SDataAccess;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Woom.DataDefine.Util;
 
 namespace Woom.Dart.Class
 {
@@ -263,9 +264,19 @@ namespace Woom.Dart.Class
 
             string webClientResult = callWebClient(apiUrl);
 
-            dt.ReadXml(we)
+            int i = webClientResult.IndexOf("<status>");
+            int j = webClientResult.IndexOf("<list>");
 
-            
+            ClsUtil clsUtil = new ClsUtil();
+
+            string cutString = clsUtil.Mid(webClientResult, i + 1, j - i);
+
+            string makexml = webClientResult.Replace(cutString, "").Replace("<?xml version="1.0" encoding="UTF - 8" standalone="true"?>", "");
+
+
+
+            //dt.ReadXml();
+
             //var r = JObject.Parse(webClientResult);
 
             //dt = JsonConvert.DeserializeObject<DataTable>(webClientResult);
