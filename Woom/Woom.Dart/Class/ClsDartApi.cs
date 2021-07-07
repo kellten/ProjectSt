@@ -224,7 +224,7 @@ namespace Woom.Dart.Class
         /// <param name="page_no">페이지 번호</param>
         /// <param name="page_count">페이지 별 건수</param>
         /// <returns></returns>
-        public DataTable GetDartSearchByDate(string stockCode, string crtfc_key, string corp_code, string bgn_de, string end_de, string last_report_at,
+        public DataSet GetDartSearchByDate(string stockCode, string crtfc_key, string corp_code, string bgn_de, string end_de, string last_report_at,
                                              string pbIntf_ty, string pblntf_detail_ty, string corp_cls, string sort, string sort_mth, string page_no, string page_count)
         {
             RichQuery richQuery = new RichQuery();
@@ -239,10 +239,7 @@ namespace Woom.Dart.Class
 
             string corpCode = dt.Rows[0]["corp_code"].ToString().Trim();
 
-            //string corpCode = "00126380";
-
-            dt = null;
-            dt = new DataTable();
+            
 
             //string apiUrl = "https://opendart.fss.or.kr/api/list.xml?" + "&crtfc_key=" + authKey + "&corp_code=" + corpCode + "&bgn_de=" + bgn_de + "&end_de=" + end_de +
             //                "&last_report_at=" + last_report_at + "&pbIntf_ty=" + pbIntf_ty + "&pblntf_detail_ty=" + pblntf_detail_ty + "&corp_cls=" + corp_cls + "&sort=" + sort +
@@ -271,17 +268,83 @@ namespace Woom.Dart.Class
 
             string cutString = clsUtil.Mid(webClientResult, i + 1, j - i);
 
-            string makexml = webClientResult.Replace(cutString, "").Replace("<?xml version="1.0" encoding="UTF - 8" standalone="true"?>", "");
+            //string makexml = webClientResult.Replace(cutString, "").Replace("<?xml version="1.0" encoding="UTF - 8" standalone="true"?>", "");
+            StringReader sr = new StringReader(webClientResult.Replace(cutString, ""));
+
+            DataSet ds = new DataSet();
+            ds.ReadXml(sr);
 
 
+            if (ds.Tables[0].Rows.Count < 0)
+            {
+                return null;
+            }
+            else
+            {
+                if (ds.Tables[0].Rows[0]["stock_code"].ToString().Trim() != stockCode)
+                {
+                    ArrayParam arrParam = new ArrayParam();
+                    Sql oSql = new Sql(SDataAccess.ClsServerInfo.VADISSEVER, "RICHDB");
 
-            //dt.ReadXml();
+                    arrParam.Clear();
+                    arrParam.Add("@ACTION_GB", "C");
+                    arrParam.Add("@corp_code", corpCode);
+                    arrParam.Add("@STOCK_CODE", stockCode);
+                    arrParam.Add("@STOCK_NAME", "");
+                    arrParam.Add("@DELETE_DATE", DateTime.Now.ToString("yyyyMMdd"));
+                    arrParam.Add("@R_ERRORCD", -1, SqlDbType.Int, ParameterDirection.InputOutput);
 
-            //var r = JObject.Parse(webClientResult);
+                    oSql.ExecuteNonQuery("p_DartAdd", CommandType.StoredProcedure, arrParam);
 
-            //dt = JsonConvert.DeserializeObject<DataTable>(webClientResult);
-            return dt;
+                    GetDartSearchByDate(stockCode, crtfc_key, corp_code, bgn_de, end_de, last_report_at, pbIntf_ty, pblntf_detail_ty, corp_cls, sort, sort_mth, page_no, page_count);
+                }
+            }
 
+            // < corp_code > 00119195 </ corp_code >
+//< corp_name > 동화약품 </ corp_name >
+// < stock_code > 000020 </ stock_code >
+// < corp_cls > Y </ corp_cls >
+// < report_nm > 공정거래자율준수프로그램운영현황(안내공시) </ report_nm >
+// < rcept_no > 20210426800538 </ rcept_no >
+ // < flr_nm > 동화약품 </ flr_nm >
+// < rcept_dt > 20210426 </ rcept_dt >
+// < rm > 유 </ rm >
+
+
+            return ds;
+
+        }
+
+        public void GetDartDocuments(string rcept_no)
+        {
+            try
+            {
+                string path = @"C:\temp\";
+                string filePath = "";
+                string outStringFileName = "";
+                DataSet ds = new DataSet();
+
+                ClsDartApi clsDartApi = new ClsDartApi();
+
+                filePath = clsDartApi.callWebClientZipSave("https://opendart.fss.or.kr/api/document.xml?crtfc_key=fc9f7996b19984e91edab1bed1dd0a6249836aa8&rcept_no=" + rcept_no, path);
+
+                clsDartApi.UnZipFiles(filePath, path, "", true, out outStringFileName);
+
+                FileStream fileStream = new FileStream(path + outStringFileName, FileMode.Open);
+
+                ds.ReadXml(fileStream);
+
+                fileStream.Close();
+
+                //dgvList.DataSource = _ds.Tables[0];
+
+                //GetDartCodeInStockName();
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         private string getResults(string apiUrl)

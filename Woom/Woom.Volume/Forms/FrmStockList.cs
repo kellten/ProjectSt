@@ -648,6 +648,7 @@ namespace Woom.Volume.Forms
         private void dgvGiganUpDown_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             OpenNaverNews(dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_NAME"].Value.ToString());
+            ucDartApiView1.PropStockCode = dgvGiganUpDown.Rows[e.RowIndex].Cells["STOCK_CODE"].Value.ToString();
         }
 
         #endregion
@@ -707,13 +708,7 @@ namespace Woom.Volume.Forms
         private void UcStockCodeOptInfo_OnSelected(string stockCode)
         {
             ucNaverSearch1.PropStockCode = stockCode;
-            ClsDartApi clsDartApi = new ClsDartApi();
-
-            DataTable dt;
-
-            dt =  clsDartApi.Dart(stockcode: stockCode, startDate: DateTime.Now.ToString("yyyyMMdd"), endDate: DateTime.Now.AddMonths(-3).ToString("yyyyMMdd")).Copy();
-
-            dataGridView1.DataSource = dt;
+            ucDartApiView1.PropStockCode = stockCode;
         }
 
 

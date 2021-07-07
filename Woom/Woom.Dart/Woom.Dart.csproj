@@ -114,6 +114,9 @@
     <EmbeddedResource Include="Forms\FrmDartCaller.resx">
       <DependentUpon>FrmDartCaller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Uc\UcDartApiView.resx">
+      <DependentUpon>UcDartApiView.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

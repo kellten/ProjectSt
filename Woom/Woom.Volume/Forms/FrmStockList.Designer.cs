@@ -70,7 +70,7 @@
             this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ucDartApiView1 = new Woom.Dart.Uc.UcDartApiView();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -100,7 +100,6 @@
             this.tabPage3.SuspendLayout();
             this.pnA.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv1
@@ -537,7 +536,7 @@
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.dataGridView1);
+            this.tabPage7.Controls.Add(this.ucDartApiView1);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
@@ -546,14 +545,13 @@
             this.tabPage7.Text = "공시정보";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // ucDartApiView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(27, 20);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(797, 564);
-            this.dataGridView1.TabIndex = 0;
+            this.ucDartApiView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDartApiView1.Location = new System.Drawing.Point(3, 3);
+            this.ucDartApiView1.Name = "ucDartApiView1";
+            this.ucDartApiView1.Size = new System.Drawing.Size(840, 941);
+            this.ucDartApiView1.TabIndex = 0;
             // 
             // FrmStockList
             // 
@@ -594,7 +592,6 @@
             this.tabPage3.ResumeLayout(false);
             this.pnA.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -644,6 +641,6 @@
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private Dart.Uc.UcDartApiView ucDartApiView1;
     }
 }
