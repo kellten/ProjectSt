@@ -54,6 +54,9 @@ namespace Woom.Tester.Forms
             {
                 _dtStockCode = null;
                 _dtStockCode = new DataTable();
+                _StockQueue = null;
+                _StockQueue = new Queue();
+
             }
 
             if (chkDesc.Checked == true)
@@ -92,7 +95,9 @@ namespace Woom.Tester.Forms
         private void InitData(Opt10060TransType opt10060Trans)
         {
             lblTotalCount.Text = _dtStockCode.Rows.Count.ToString();
-            
+            _seqNo = 0;
+
+
             switch (opt10060Trans)
             {
                 case Opt10060TransType.PriceMaesu:
@@ -302,12 +307,49 @@ namespace Woom.Tester.Forms
 
             if (_StockQueue.Count == 0)
             {
-                MessageBox.Show("작업이 완료되었습니다.");
-                string text = "작업이 완료되었습니다.";
-
+                //MessageBox.Show("작업이 완료되었습니다.");
+                string text = "";
                 string errorMessage = null;
-                bool ret = ClsTelegramBot.SendMessage(text, out errorMessage);
+                
+                switch (opt10060Trans)
+                {
+                    case Opt10060TransType.PriceMaesu:
+                        lblPriceMaesuJobStatus.Text = "작업완료";
+                        text = "PriceMaesu 작업 완료";
+                         ClsTelegramBot.SendMessage(text, out errorMessage);
 
+                        if (chkContinueCall.Checked == true)
+                        {
+                            Btn10060PriceSellJob_Click(sender: this, e: new EventArgs());
+                        }
+                        break;
+                    case Opt10060TransType.PriceMaedo:
+                        lblPriceMaedoJobStatus.Text = "작업완료";
+                        text = "PriceMaedo 작업 완료";
+                        ClsTelegramBot.SendMessage(text, out errorMessage);
+                        if (chkContinueCall.Checked == true)
+                        {
+                            Btn10060QtyBuyJob_Click(sender: this, e: new EventArgs());
+                        }
+                        break;
+                    case Opt10060TransType.QtyMaesu:
+                        lblQtyMaesuJobStatus.Text = "작업완료";
+                        text = "QtyMaesu 작업 완료";
+                         ClsTelegramBot.SendMessage(text, out errorMessage);
+                        if (chkContinueCall.Checked == true)
+                        {
+                            Btn10060QtySellJob_Click(sender: this, e: new EventArgs());
+                        }
+                        break;
+                    case Opt10060TransType.QtyMaeDo:
+                        lblQtyMaedoJobStatus.Text = "작업완료";
+                        ClsTelegramBot.SendMessage(text, out errorMessage);
+                        text = "QtyMaedo 작업 완료";
+                        break;
+                    default:
+                        return "";
+                }
+                                             
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();

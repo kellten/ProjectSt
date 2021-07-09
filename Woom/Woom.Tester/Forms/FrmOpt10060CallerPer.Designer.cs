@@ -46,6 +46,11 @@
             this.lblTimePerCount = new System.Windows.Forms.Label();
             this.chkDesc = new System.Windows.Forms.CheckBox();
             this.lblIngCount = new System.Windows.Forms.Label();
+            this.lblPriceMaesuJobStatus = new System.Windows.Forms.Label();
+            this.lblPriceMaedoJobStatus = new System.Windows.Forms.Label();
+            this.lblQtyMaesuJobStatus = new System.Windows.Forms.Label();
+            this.lblQtyMaedoJobStatus = new System.Windows.Forms.Label();
+            this.chkContinueCall = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // dtpStdDate
@@ -211,11 +216,62 @@
             this.lblIngCount.TabIndex = 59;
             this.lblIngCount.Text = "label2";
             // 
+            // lblPriceMaesuJobStatus
+            // 
+            this.lblPriceMaesuJobStatus.AutoSize = true;
+            this.lblPriceMaesuJobStatus.Location = new System.Drawing.Point(869, 19);
+            this.lblPriceMaesuJobStatus.Name = "lblPriceMaesuJobStatus";
+            this.lblPriceMaesuJobStatus.Size = new System.Drawing.Size(38, 12);
+            this.lblPriceMaesuJobStatus.TabIndex = 60;
+            this.lblPriceMaesuJobStatus.Text = "label2";
+            // 
+            // lblPriceMaedoJobStatus
+            // 
+            this.lblPriceMaedoJobStatus.AutoSize = true;
+            this.lblPriceMaedoJobStatus.Location = new System.Drawing.Point(869, 44);
+            this.lblPriceMaedoJobStatus.Name = "lblPriceMaedoJobStatus";
+            this.lblPriceMaedoJobStatus.Size = new System.Drawing.Size(38, 12);
+            this.lblPriceMaedoJobStatus.TabIndex = 61;
+            this.lblPriceMaedoJobStatus.Text = "label3";
+            // 
+            // lblQtyMaesuJobStatus
+            // 
+            this.lblQtyMaesuJobStatus.AutoSize = true;
+            this.lblQtyMaesuJobStatus.Location = new System.Drawing.Point(869, 73);
+            this.lblQtyMaesuJobStatus.Name = "lblQtyMaesuJobStatus";
+            this.lblQtyMaesuJobStatus.Size = new System.Drawing.Size(38, 12);
+            this.lblQtyMaesuJobStatus.TabIndex = 62;
+            this.lblQtyMaesuJobStatus.Text = "label4";
+            // 
+            // lblQtyMaedoJobStatus
+            // 
+            this.lblQtyMaedoJobStatus.AutoSize = true;
+            this.lblQtyMaedoJobStatus.Location = new System.Drawing.Point(869, 102);
+            this.lblQtyMaedoJobStatus.Name = "lblQtyMaedoJobStatus";
+            this.lblQtyMaedoJobStatus.Size = new System.Drawing.Size(38, 12);
+            this.lblQtyMaedoJobStatus.TabIndex = 63;
+            this.lblQtyMaedoJobStatus.Text = "label5";
+            // 
+            // chkContinueCall
+            // 
+            this.chkContinueCall.AutoSize = true;
+            this.chkContinueCall.Location = new System.Drawing.Point(581, 152);
+            this.chkContinueCall.Name = "chkContinueCall";
+            this.chkContinueCall.Size = new System.Drawing.Size(72, 16);
+            this.chkContinueCall.TabIndex = 64;
+            this.chkContinueCall.Text = "연속조회";
+            this.chkContinueCall.UseVisualStyleBackColor = true;
+            // 
             // FrmOpt10060CallerPer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 251);
+            this.ClientSize = new System.Drawing.Size(984, 251);
+            this.Controls.Add(this.chkContinueCall);
+            this.Controls.Add(this.lblQtyMaedoJobStatus);
+            this.Controls.Add(this.lblQtyMaesuJobStatus);
+            this.Controls.Add(this.lblPriceMaedoJobStatus);
+            this.Controls.Add(this.lblPriceMaesuJobStatus);
             this.Controls.Add(this.lblIngCount);
             this.Controls.Add(this.chkDesc);
             this.Controls.Add(this.lblTime);
@@ -261,5 +317,10 @@
         private System.Windows.Forms.Label lblTimePerCount;
         private System.Windows.Forms.CheckBox chkDesc;
         private System.Windows.Forms.Label lblIngCount;
+        private System.Windows.Forms.Label lblPriceMaesuJobStatus;
+        private System.Windows.Forms.Label lblPriceMaedoJobStatus;
+        private System.Windows.Forms.Label lblQtyMaesuJobStatus;
+        private System.Windows.Forms.Label lblQtyMaedoJobStatus;
+        private System.Windows.Forms.CheckBox chkContinueCall;
     }
 }

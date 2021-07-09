@@ -95,9 +95,9 @@ namespace Woom.Tester.Forms
             tcs = new TaskCompletionSource<bool>();
             //Task.Delay(3000).Wait();
             if (ClsAxKH.SPEED_CALL == true)
-            { _clsDataAccessUtil.Delay(500); }
+            { _clsDataAccessUtil.Delay(550); }
             else
-            { _clsDataAccessUtil.Delay(3600); }
+            { _clsDataAccessUtil.Delay(3650); }
             
             tcs.SetResult(true);
         }
@@ -332,6 +332,8 @@ namespace Woom.Tester.Forms
 
                                 tcs.SetResult(true);
 
+                                WaitTime();
+
                                 OnGetStockCode();
 
                                 return;
@@ -351,6 +353,7 @@ namespace Woom.Tester.Forms
                     tcs.SetResult(true);
 
                     OnGetStockCode();
+
                     return;
 
                 }

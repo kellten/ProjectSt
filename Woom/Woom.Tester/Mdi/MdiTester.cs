@@ -192,7 +192,7 @@ namespace Woom.Tester.Mdi
                     break;
             }
 
-            ClsTelegramBot._chatid = "848121202";
+            ClsTelegramBot._chatid = SDataAccess.ClsApiInfo.TeleGramUserCode;
             text = "[" + Who + "] 전송시간 : " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             bool ret2 = ClsTelegramBot.SendMessage(text, out errorMessage);
 

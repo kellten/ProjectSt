@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Cache;
 using System.IO;
+using SDataAccess;
 
 namespace Woom.Telegram.Class
 {
@@ -13,8 +14,12 @@ namespace Woom.Telegram.Class
     {
 
         private static readonly string _baseUrl = "https://api.telegram.org/bot";
-        private static readonly string _token = "1831992690:AAF-n31jzEBkxn6C0nxZFD846I75EAzlWns";
-        public static string _chatid = "848121202";
+        private static  string _token = "";
+        public static string _chatid = "";
+        ClsTelegramBot()
+        {
+            
+        }
         /// <summary>
         /// 텔레그램봇에 메시지를 보냅니다.
         /// </summary>
@@ -23,12 +28,18 @@ namespace Woom.Telegram.Class
         /// <returns></returns>
         public static bool SendMessage(string text, out string errorMessage)
         {
-
             return SendMessage(_chatid, text, out errorMessage);
         }
 
         public static  bool SendMessage(string chatId, string text, out string errorMessage)
         {
+
+            if (chatId == "")
+            {
+                chatId = SDataAccess.ClsApiInfo.TeleGramUserCode;
+            }
+            _token = ClsApiInfo.TeleGramId;
+
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
