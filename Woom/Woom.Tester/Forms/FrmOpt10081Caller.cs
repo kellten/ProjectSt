@@ -10,6 +10,7 @@ using Woom.DataAccess.OptCaller.Class;
 using Woom.DataAccess.PlugIn;
 using Woom.DataDefine.OptData;
 using Woom.DataDefine.Util;
+using Woom.Telegram.Class;
 
 namespace Woom.Tester.Forms
 {
@@ -136,7 +137,10 @@ namespace Woom.Tester.Forms
 
             if (_StockQueue.Count == 0)
             {
-                MessageBox.Show("작업이 완료되었습니다.");
+                string text = "";
+                string errorMessage = null;
+                text = "PriceMaesu 작업 완료";
+                ClsTelegramBot.SendMessage(text, out errorMessage);
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();
@@ -313,6 +317,17 @@ namespace Woom.Tester.Forms
                         }
                     }
                 }
+                else
+                {
+                    ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
+
+                    _opt10081.Dispose();
+                    tcs.SetResult(true);
+
+                    OnGetStockCode();
+
+                    return;
+                }
 
                 // 최근 거래일 100일을 가져오는걸로 한다면
                 if (chk100.Checked == true)
@@ -337,6 +352,8 @@ namespace Woom.Tester.Forms
                         ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "S", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                         //_clsDataAccessUtil.Delay(3600);
+
+                        WaitTime();
 
                         _opt10081.SetInit(_FormId);
                         _opt10081.JustRequest(StockCode: sRQNameArray[1].ToString().Trim(), StockName: "", StdDate: sRQNameArray[2].ToString().Trim(), ModifyJugaGb: sRQNameArray[3].ToString().Trim(), nPrevNext: 2);

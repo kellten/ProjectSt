@@ -69,6 +69,7 @@
             this.pnA = new System.Windows.Forms.Panel();
             this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.ucDartApiView1 = new Woom.Dart.Uc.UcDartApiView();
             this.dgv1.SuspendLayout();
@@ -99,6 +100,7 @@
             this.TbStockInfo.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.pnA.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -526,6 +528,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.panel1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -533,6 +536,13 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "수급분석";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(199, 198);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 0;
             // 
             // tabPage7
             // 
@@ -591,6 +601,7 @@
             this.TbStockInfo.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.pnA.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -642,5 +653,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
         private Dart.Uc.UcDartApiView ucDartApiView1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
