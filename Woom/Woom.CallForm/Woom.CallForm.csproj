@@ -105,6 +105,12 @@
     <Compile Include="Uc\UcStockList.Designer.cs">
       <DependentUpon>UcStockList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Uc\UcThema.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Uc\UcThema.Designer.cs">
+      <DependentUpon>UcThema.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Uc\UcStockList.resx">
       <DependentUpon>UcStockList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Uc\UcThema.resx">
+      <DependentUpon>UcThema.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

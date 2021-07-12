@@ -139,7 +139,7 @@ namespace Woom.Tester.Forms
             {
                 string text = "";
                 string errorMessage = null;
-                text = "PriceMaesu 작업 완료";
+                text = "OPT10081 작업 완료";
                 ClsTelegramBot.SendMessage(text, out errorMessage);
                 return "End";
             }

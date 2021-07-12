@@ -93,6 +93,7 @@
     <Compile Include="Util\ClsDataGridViewUtil.cs" />
     <Compile Include="Util\ClsOpenSite.cs" />
     <Compile Include="Util\ClsUtil.cs" />
+    <Compile Include="Util\ClsUtilFunc.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

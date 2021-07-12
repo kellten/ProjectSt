@@ -35,6 +35,11 @@ namespace Woom.Dart.Uc
 
         public void GetDartInfo(string stockCode)
         {
+            if (stockCode == null)
+            {
+                return;
+            }
+
             DataTable dt = new DataTable();
 
             ClsDartApi clsDartApi = new ClsDartApi();

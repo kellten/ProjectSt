@@ -10,6 +10,7 @@ using Woom.DataAccess.PlugIn;
 using Woom.DataAccess.Logger;
 using Woom.DataDefine.Util;
 using Woom.DataDefine.OptData;
+using Woom.Telegram.Class;
 
 namespace Woom.Tester.Forms
 {
@@ -109,7 +110,13 @@ namespace Woom.Tester.Forms
             strStockCode = GetStockCode();
 
             if (strStockCode == "End")
-            { return; }
+            {
+                string text = "";
+                string errorMessage = null;
+                text = "OPT10081 작업 완료";
+                ClsTelegramBot.SendMessage(text, out errorMessage);
+                return; 
+            }
                         
             if (strStockCode == "")
             {

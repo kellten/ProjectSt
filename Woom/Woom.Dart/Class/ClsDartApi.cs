@@ -227,6 +227,11 @@ namespace Woom.Dart.Class
         public DataSet GetDartSearchByDate(string stockCode, string crtfc_key, string corp_code, string bgn_de, string end_de, string last_report_at,
                                              string pbIntf_ty, string pblntf_detail_ty, string corp_cls, string sort, string sort_mth, string page_no, string page_count)
         {
+            if (stockCode == null )
+            {
+                return null;
+            }
+
             RichQuery richQuery = new RichQuery();
             DataTable dt = new DataTable();
 

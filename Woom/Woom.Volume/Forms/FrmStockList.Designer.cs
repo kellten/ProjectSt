@@ -63,14 +63,33 @@
             this.dgvConditionList = new System.Windows.Forms.DataGridView();
             this.ucStockCodeOptInfoData1 = new Woom.CallForm.Uc.UcStockCodeOptInfoData();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.splitContainer7 = new System.Windows.Forms.SplitContainer();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.TbStockInfo = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pnA = new System.Windows.Forms.Panel();
             this.ucNaverSearch1 = new Woom.CallForm.Uc.UcNaverSearch();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.ucDartApiView1 = new Woom.Dart.Uc.UcDartApiView();
+            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
+            this.BtnSearch = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb0 = new System.Windows.Forms.TabPage();
             this.DvVolumeList = new System.Windows.Forms.DataGridView();
@@ -154,13 +173,9 @@
             this.IoforePrDe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tb3 = new System.Windows.Forms.TabPage();
             this.PnGraph = new System.Windows.Forms.Panel();
-            this.dtpFromDate = new System.Windows.Forms.DateTimePicker();
-            this.splitContainer6 = new System.Windows.Forms.SplitContainer();
-            this.dtpToDate = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.BtnSearch = new System.Windows.Forms.Button();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.ucDartApiView1 = new Woom.Dart.Uc.UcDartApiView();
+            this.ucThema1 = new Woom.CallForm.Uc.UcThema();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -182,6 +197,14 @@
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCond)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditionList)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).BeginInit();
+            this.splitContainer7.Panel1.SuspendLayout();
+            this.splitContainer7.Panel2.SuspendLayout();
+            this.splitContainer7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -190,7 +213,10 @@
             this.tabPage3.SuspendLayout();
             this.pnA.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
+            this.splitContainer6.Panel1.SuspendLayout();
+            this.splitContainer6.Panel2.SuspendLayout();
+            this.splitContainer6.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tb0.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DvVolumeList)).BeginInit();
@@ -204,10 +230,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvNuDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDetail)).BeginInit();
             this.tb3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
-            this.splitContainer6.Panel1.SuspendLayout();
-            this.splitContainer6.Panel2.SuspendLayout();
-            this.splitContainer6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv1
@@ -563,12 +586,174 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.ucThema1);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(768, 947);
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "테마별";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.splitContainer7);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Size = new System.Drawing.Size(768, 947);
+            this.tabPage8.TabIndex = 4;
+            this.tabPage8.Text = "거래대금회전율";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer7
+            // 
+            this.splitContainer7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer7.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer7.Name = "splitContainer7";
+            this.splitContainer7.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer7.Panel1
+            // 
+            this.splitContainer7.Panel1.Controls.Add(this.checkBox1);
+            this.splitContainer7.Panel1.Controls.Add(this.button1);
+            this.splitContainer7.Panel1.Controls.Add(this.button2);
+            this.splitContainer7.Panel1.Controls.Add(this.label5);
+            this.splitContainer7.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer7.Panel1.Controls.Add(this.button3);
+            this.splitContainer7.Panel1.Controls.Add(this.checkBox2);
+            this.splitContainer7.Panel1.Controls.Add(this.button4);
+            this.splitContainer7.Panel1.Controls.Add(this.numericUpDown1);
+            this.splitContainer7.Panel1.Controls.Add(this.label6);
+            this.splitContainer7.Panel1.Controls.Add(this.dateTimePicker1);
+            this.splitContainer7.Panel1.Controls.Add(this.dateTimePicker2);
+            // 
+            // splitContainer7.Panel2
+            // 
+            this.splitContainer7.Panel2.Controls.Add(this.dataGridView1);
+            this.splitContainer7.Size = new System.Drawing.Size(768, 947);
+            this.splitContainer7.SplitterDistance = 37;
+            this.splitContainer7.TabIndex = 1;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(622, 13);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 16);
+            this.checkBox1.TabIndex = 46;
+            this.checkBox1.Text = "거래대금";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1348, 7);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 45;
+            this.button1.Text = "실시간";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1161, 7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(181, 23);
+            this.button2.TabIndex = 44;
+            this.button2.Text = "Excel Export";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Location = new System.Drawing.Point(1067, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(88, 23);
+            this.label5.TabIndex = 43;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(914, 9);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(147, 21);
+            this.textBox1.TabIndex = 42;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1440, 9);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(181, 23);
+            this.button3.TabIndex = 41;
+            this.button3.Text = "최신 Opt내역 가져오기";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(532, 13);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(84, 16);
+            this.checkBox2.TabIndex = 40;
+            this.checkBox2.Text = "상승단위로";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(451, 9);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 39;
+            this.button4.Text = "조회";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(402, 10);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(43, 21);
+            this.numericUpDown1.TabIndex = 38;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(194, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(22, 12);
+            this.label6.TabIndex = 37;
+            this.label6.Text = " ~ ";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(13, 9);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(175, 21);
+            this.dateTimePicker1.TabIndex = 36;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(222, 9);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(174, 21);
+            this.dateTimePicker2.TabIndex = 35;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(764, 902);
+            this.dataGridView1.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -644,25 +829,71 @@
             this.tabPage4.Text = "수급분석";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // tabPage7
+            // splitContainer6
             // 
-            this.tabPage7.Controls.Add(this.ucDartApiView1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(846, 947);
-            this.tabPage7.TabIndex = 2;
-            this.tabPage7.Text = "공시정보";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.splitContainer6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer6.Name = "splitContainer6";
+            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // ucDartApiView1
+            // splitContainer6.Panel1
             // 
-            this.ucDartApiView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucDartApiView1.Location = new System.Drawing.Point(3, 3);
-            this.ucDartApiView1.Name = "ucDartApiView1";
-            this.ucDartApiView1.PropStockCode = null;
-            this.ucDartApiView1.Size = new System.Drawing.Size(840, 941);
-            this.ucDartApiView1.TabIndex = 0;
+            this.splitContainer6.Panel1.Controls.Add(this.BtnSearch);
+            this.splitContainer6.Panel1.Controls.Add(this.label4);
+            this.splitContainer6.Panel1.Controls.Add(this.label3);
+            this.splitContainer6.Panel1.Controls.Add(this.dtpToDate);
+            this.splitContainer6.Panel1.Controls.Add(this.dtpFromDate);
+            // 
+            // splitContainer6.Panel2
+            // 
+            this.splitContainer6.Panel2.Controls.Add(this.tabControl1);
+            this.splitContainer6.Size = new System.Drawing.Size(840, 941);
+            this.splitContainer6.SplitterDistance = 42;
+            this.splitContainer6.TabIndex = 0;
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Location = new System.Drawing.Point(297, 8);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(75, 23);
+            this.BtnSearch.TabIndex = 19;
+            this.BtnSearch.Text = "조회";
+            this.BtnSearch.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "기간 : ";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(165, 12);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(22, 12);
+            this.label3.TabIndex = 17;
+            this.label3.Text = " ~ ";
+            // 
+            // dtpToDate
+            // 
+            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpToDate.Location = new System.Drawing.Point(193, 9);
+            this.dtpToDate.Name = "dtpToDate";
+            this.dtpToDate.Size = new System.Drawing.Size(98, 21);
+            this.dtpToDate.TabIndex = 16;
+            // 
+            // dtpFromDate
+            // 
+            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFromDate.Location = new System.Drawing.Point(61, 8);
+            this.dtpFromDate.Name = "dtpFromDate";
+            this.dtpFromDate.Size = new System.Drawing.Size(98, 21);
+            this.dtpFromDate.TabIndex = 15;
             // 
             // tabControl1
             // 
@@ -713,6 +944,7 @@
             this.DvVolumeList.RowTemplate.Height = 23;
             this.DvVolumeList.Size = new System.Drawing.Size(824, 861);
             this.DvVolumeList.TabIndex = 0;
+            this.DvVolumeList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DvVolumeList_CellClick);
             // 
             // StockName
             // 
@@ -795,7 +1027,7 @@
             this.tb1.Location = new System.Drawing.Point(4, 22);
             this.tb1.Name = "tb1";
             this.tb1.Padding = new System.Windows.Forms.Padding(3);
-            this.tb1.Size = new System.Drawing.Size(830, 778);
+            this.tb1.Size = new System.Drawing.Size(830, 867);
             this.tb1.TabIndex = 1;
             this.tb1.Text = "기간별";
             this.tb1.UseVisualStyleBackColor = true;
@@ -828,7 +1060,7 @@
             this.DvVolumeGiganList.Location = new System.Drawing.Point(3, 3);
             this.DvVolumeGiganList.Name = "DvVolumeGiganList";
             this.DvVolumeGiganList.RowTemplate.Height = 23;
-            this.DvVolumeGiganList.Size = new System.Drawing.Size(824, 772);
+            this.DvVolumeGiganList.Size = new System.Drawing.Size(824, 861);
             this.DvVolumeGiganList.TabIndex = 0;
             // 
             // GStockName
@@ -936,7 +1168,7 @@
             this.tb2.Controls.Add(this.splitContainer5);
             this.tb2.Location = new System.Drawing.Point(4, 22);
             this.tb2.Name = "tb2";
-            this.tb2.Size = new System.Drawing.Size(832, 915);
+            this.tb2.Size = new System.Drawing.Size(830, 867);
             this.tb2.TabIndex = 2;
             this.tb2.Text = "상세";
             this.tb2.UseVisualStyleBackColor = true;
@@ -955,8 +1187,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.DgvDetail);
-            this.splitContainer5.Size = new System.Drawing.Size(832, 915);
-            this.splitContainer5.SplitterDistance = 390;
+            this.splitContainer5.Size = new System.Drawing.Size(830, 867);
+            this.splitContainer5.SplitterDistance = 369;
             this.splitContainer5.TabIndex = 0;
             // 
             // DgvNuDetail
@@ -986,7 +1218,7 @@
             this.DgvNuDetail.Location = new System.Drawing.Point(0, 0);
             this.DgvNuDetail.Name = "DgvNuDetail";
             this.DgvNuDetail.RowTemplate.Height = 23;
-            this.DgvNuDetail.Size = new System.Drawing.Size(832, 390);
+            this.DgvNuDetail.Size = new System.Drawing.Size(830, 369);
             this.DgvNuDetail.TabIndex = 2;
             // 
             // DateNuDe
@@ -1110,7 +1342,7 @@
             this.DgvDetail.Location = new System.Drawing.Point(0, 0);
             this.DgvDetail.Name = "DgvDetail";
             this.DgvDetail.RowTemplate.Height = 23;
-            this.DgvDetail.Size = new System.Drawing.Size(832, 521);
+            this.DgvDetail.Size = new System.Drawing.Size(830, 494);
             this.DgvDetail.TabIndex = 1;
             // 
             // dateDe
@@ -1209,7 +1441,7 @@
             this.tb3.Location = new System.Drawing.Point(4, 22);
             this.tb3.Name = "tb3";
             this.tb3.Padding = new System.Windows.Forms.Padding(3);
-            this.tb3.Size = new System.Drawing.Size(832, 915);
+            this.tb3.Size = new System.Drawing.Size(830, 867);
             this.tb3.TabIndex = 3;
             this.tb3.Text = "그래프";
             this.tb3.UseVisualStyleBackColor = true;
@@ -1221,83 +1453,36 @@
             this.PnGraph.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnGraph.Location = new System.Drawing.Point(3, 3);
             this.PnGraph.Name = "PnGraph";
-            this.PnGraph.Size = new System.Drawing.Size(826, 909);
+            this.PnGraph.Size = new System.Drawing.Size(824, 861);
             this.PnGraph.TabIndex = 0;
             // 
-            // dtpFromDate
+            // tabPage7
             // 
-            this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFromDate.Location = new System.Drawing.Point(61, 8);
-            this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(98, 21);
-            this.dtpFromDate.TabIndex = 15;
+            this.tabPage7.Controls.Add(this.ucDartApiView1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(846, 947);
+            this.tabPage7.TabIndex = 2;
+            this.tabPage7.Text = "공시정보";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // splitContainer6
+            // ucDartApiView1
             // 
-            this.splitContainer6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer6.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer6.Name = "splitContainer6";
-            this.splitContainer6.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ucDartApiView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucDartApiView1.Location = new System.Drawing.Point(3, 3);
+            this.ucDartApiView1.Name = "ucDartApiView1";
+            this.ucDartApiView1.PropStockCode = null;
+            this.ucDartApiView1.Size = new System.Drawing.Size(840, 941);
+            this.ucDartApiView1.TabIndex = 0;
             // 
-            // splitContainer6.Panel1
+            // ucThema1
             // 
-            this.splitContainer6.Panel1.Controls.Add(this.BtnSearch);
-            this.splitContainer6.Panel1.Controls.Add(this.label4);
-            this.splitContainer6.Panel1.Controls.Add(this.label3);
-            this.splitContainer6.Panel1.Controls.Add(this.dtpToDate);
-            this.splitContainer6.Panel1.Controls.Add(this.dtpFromDate);
-            // 
-            // splitContainer6.Panel2
-            // 
-            this.splitContainer6.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer6.Size = new System.Drawing.Size(840, 941);
-            this.splitContainer6.SplitterDistance = 42;
-            this.splitContainer6.TabIndex = 0;
-            // 
-            // dtpToDate
-            // 
-            this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpToDate.Location = new System.Drawing.Point(193, 9);
-            this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(98, 21);
-            this.dtpToDate.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(165, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 12);
-            this.label3.TabIndex = 17;
-            this.label3.Text = " ~ ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 13);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "기간 : ";
-            // 
-            // BtnSearch
-            // 
-            this.BtnSearch.Location = new System.Drawing.Point(297, 8);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(75, 23);
-            this.BtnSearch.TabIndex = 19;
-            this.BtnSearch.Text = "조회";
-            this.BtnSearch.UseVisualStyleBackColor = true;
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(768, 947);
-            this.tabPage8.TabIndex = 4;
-            this.tabPage8.Text = "거래대금회전율";
-            this.tabPage8.UseVisualStyleBackColor = true;
+            this.ucThema1.Location = new System.Drawing.Point(-29, -70);
+            this.ucThema1.Name = "ucThema1";
+            this.ucThema1.PropStockCode = null;
+            this.ucThema1.Size = new System.Drawing.Size(1235, 673);
+            this.ucThema1.TabIndex = 0;
             // 
             // FrmStockList
             // 
@@ -1330,6 +1515,15 @@
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCond)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvConditionList)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.splitContainer7.Panel1.ResumeLayout(false);
+            this.splitContainer7.Panel1.PerformLayout();
+            this.splitContainer7.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer7)).EndInit();
+            this.splitContainer7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -1338,7 +1532,11 @@
             this.tabPage3.ResumeLayout(false);
             this.pnA.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
+            this.splitContainer6.Panel1.ResumeLayout(false);
+            this.splitContainer6.Panel1.PerformLayout();
+            this.splitContainer6.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
+            this.splitContainer6.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tb0.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DvVolumeList)).EndInit();
@@ -1352,11 +1550,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvNuDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvDetail)).EndInit();
             this.tb3.ResumeLayout(false);
-            this.splitContainer6.Panel1.ResumeLayout(false);
-            this.splitContainer6.Panel1.PerformLayout();
-            this.splitContainer6.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).EndInit();
-            this.splitContainer6.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1497,5 +1691,20 @@
         private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.SplitContainer splitContainer7;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private CallForm.Uc.UcThema ucThema1;
     }
 }

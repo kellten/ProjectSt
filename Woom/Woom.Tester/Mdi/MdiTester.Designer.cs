@@ -50,6 +50,7 @@
             this.tsbFrmStockList = new System.Windows.Forms.ToolStripMenuItem();
             this.기본정보관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.테마그룹관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dart고유번호가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.섹터ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.기술ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -66,7 +67,8 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.chkLogOn = new System.Windows.Forms.CheckBox();
-            this.dart고유번호가져오기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.참고사이트ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.리포트ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -78,7 +80,8 @@
             this.optToolStripMenuItem,
             this.마켓분석ToolStripMenuItem,
             this.기본정보관리ToolStripMenuItem,
-            this.섹터ToolStripMenuItem});
+            this.섹터ToolStripMenuItem,
+            this.참고사이트ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -101,7 +104,7 @@
             // tsbConnectionInfo
             // 
             this.tsbConnectionInfo.Name = "tsbConnectionInfo";
-            this.tsbConnectionInfo.Size = new System.Drawing.Size(146, 22);
+            this.tsbConnectionInfo.Size = new System.Drawing.Size(180, 22);
             this.tsbConnectionInfo.Text = "접속정보";
             this.tsbConnectionInfo.Click += new System.EventHandler(this.tsbConnectionInfo_Click);
             // 
@@ -118,7 +121,7 @@
             this.opt90002ToolStripMenuItem,
             this.주식기본정보요청Opt10001ToolStripMenuItem});
             this.optTestToolStripMenuItem.Name = "optTestToolStripMenuItem";
-            this.optTestToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.optTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optTestToolStripMenuItem.Text = "OptTest";
             // 
             // mnuItem10059
@@ -187,21 +190,21 @@
             // 종목관리ToolStripMenuItem
             // 
             this.종목관리ToolStripMenuItem.Name = "종목관리ToolStripMenuItem";
-            this.종목관리ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.종목관리ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.종목관리ToolStripMenuItem.Text = "종목관리";
             this.종목관리ToolStripMenuItem.Click += new System.EventHandler(this.종목관리ToolStripMenuItem_Click);
             // 
             // 엑셀가져오기ToolStripMenuItem
             // 
             this.엑셀가져오기ToolStripMenuItem.Name = "엑셀가져오기ToolStripMenuItem";
-            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.엑셀가져오기ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.엑셀가져오기ToolStripMenuItem.Text = "엑셀가져오기";
             this.엑셀가져오기ToolStripMenuItem.Click += new System.EventHandler(this.엑셀가져오기ToolStripMenuItem_Click);
             // 
             // 크롤링테스트ToolStripMenuItem
             // 
             this.크롤링테스트ToolStripMenuItem.Name = "크롤링테스트ToolStripMenuItem";
-            this.크롤링테스트ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.크롤링테스트ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.크롤링테스트ToolStripMenuItem.Text = "크롤링테스트";
             this.크롤링테스트ToolStripMenuItem.Click += new System.EventHandler(this.크롤링테스트ToolStripMenuItem_Click);
             // 
@@ -236,6 +239,13 @@
             this.테마그룹관리ToolStripMenuItem.Text = "테마그룹관리";
             this.테마그룹관리ToolStripMenuItem.Click += new System.EventHandler(this.테마그룹관리ToolStripMenuItem_Click);
             // 
+            // dart고유번호가져오기ToolStripMenuItem
+            // 
+            this.dart고유번호가져오기ToolStripMenuItem.Name = "dart고유번호가져오기ToolStripMenuItem";
+            this.dart고유번호가져오기ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.dart고유번호가져오기ToolStripMenuItem.Text = "Dart 고유번호 가져오기";
+            this.dart고유번호가져오기ToolStripMenuItem.Click += new System.EventHandler(this.dart고유번호가져오기ToolStripMenuItem_Click);
+            // 
             // 섹터ToolStripMenuItem
             // 
             this.섹터ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -247,7 +257,7 @@
             // 기술ToolStripMenuItem
             // 
             this.기술ToolStripMenuItem.Name = "기술ToolStripMenuItem";
-            this.기술ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.기술ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.기술ToolStripMenuItem.Text = "반도체";
             this.기술ToolStripMenuItem.Click += new System.EventHandler(this.기술ToolStripMenuItem_Click);
             // 
@@ -390,12 +400,19 @@
             this.chkLogOn.UseVisualStyleBackColor = true;
             this.chkLogOn.CheckedChanged += new System.EventHandler(this.chkLogOn_CheckedChanged);
             // 
-            // dart고유번호가져오기ToolStripMenuItem
+            // 참고사이트ToolStripMenuItem
             // 
-            this.dart고유번호가져오기ToolStripMenuItem.Name = "dart고유번호가져오기ToolStripMenuItem";
-            this.dart고유번호가져오기ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.dart고유번호가져오기ToolStripMenuItem.Text = "Dart 고유번호 가져오기";
-            this.dart고유번호가져오기ToolStripMenuItem.Click += new System.EventHandler(this.dart고유번호가져오기ToolStripMenuItem_Click);
+            this.참고사이트ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.리포트ToolStripMenuItem});
+            this.참고사이트ToolStripMenuItem.Name = "참고사이트ToolStripMenuItem";
+            this.참고사이트ToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.참고사이트ToolStripMenuItem.Text = "참고사이트";
+            // 
+            // 리포트ToolStripMenuItem
+            // 
+            this.리포트ToolStripMenuItem.Name = "리포트ToolStripMenuItem";
+            this.리포트ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.리포트ToolStripMenuItem.Text = "리포트";
             // 
             // MdiTester
             // 
@@ -461,6 +478,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.CheckBox chkLogOn;
         private System.Windows.Forms.ToolStripMenuItem dart고유번호가져오기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 참고사이트ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 리포트ToolStripMenuItem;
     }
 }
 
