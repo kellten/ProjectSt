@@ -69,7 +69,7 @@ namespace Woom.Tester.Mdi
 
         private void opt10081ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form oform = new Woom.Tester.Forms.FrmOpt10081Caller();
+            Form oform = new Woom.Tester.Forms.FrmOpt10081Caller(null, false, false);
             ShowChildForm(oform);
         }
 
@@ -99,7 +99,7 @@ namespace Woom.Tester.Mdi
 
         private void 일별거래상세요청Opt10015ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form oform = new Woom.Tester.Forms.FrmOpt10015Caller(null);
+            Form oform = new Woom.Tester.Forms.FrmOpt10015Caller(null, false, false);
             ShowChildForm(oform);
         }
 
@@ -117,7 +117,7 @@ namespace Woom.Tester.Mdi
 
         private void 주식기본정보요청Opt10001ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form oform = new Woom.Tester.Forms.FrmOpt10001Caller();
+            Form oform = new Woom.Tester.Forms.FrmOpt10001Caller(null, false, false);
             ShowChildForm(oform, true);
         }
 
@@ -129,7 +129,7 @@ namespace Woom.Tester.Mdi
 
         private void 종목별투자자기관별차트요청Opt10060Ver2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form oform = new Woom.Tester.Forms.FrmOpt10060CallerPer();
+            Form oform = new Woom.Tester.Forms.FrmOpt10060CallerPer(null, false, false);
             ShowChildForm(oform);
         }
 

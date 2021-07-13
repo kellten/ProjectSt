@@ -34,8 +34,9 @@ namespace Woom.Tester.Forms
             PriceMaesu, PriceMaedo, QtyMaesu, QtyMaeDo
         }
 
+        private DataTable _UserDt;
 
-        public FrmOpt10060CallerPer()
+        public FrmOpt10060CallerPer(DataTable UserDt, bool AutoStart = false, bool chk100Click = false)
         {
             InitializeComponent();
 
@@ -45,6 +46,27 @@ namespace Woom.Tester.Forms
 
             _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
             dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
+
+            if (UserDt != null)
+            {
+                _UserDt = UserDt.Copy();
+                UserDt = null;
+            }
+            else
+            {
+                _UserDt = null;
+            }
+
+            if (chk100Click == true)
+            {
+                chk100.Checked = true;
+            }
+
+            if (AutoStart == true)
+            {
+                chkContinueCall.Checked = true;
+                btn10060PriceBuyJob_Click(null, new EventArgs());
+            }
 
         }
 
@@ -56,15 +78,21 @@ namespace Woom.Tester.Forms
                 _dtStockCode = new DataTable();
                 _StockQueue = null;
                 _StockQueue = new Queue();
-
             }
 
             if (chkDesc.Checked == true)
             {
                 Func<DataTable> funcGetStockData = () =>
                 {
-                    RichQuery oRichQuery = new RichQuery();
-                    return oRichQuery.p_ScodeQuery("4", "", "", false).Tables[0].Copy();
+                    if (_UserDt != null)
+                    {
+                        return _UserDt.Copy();
+                    }
+                    else
+                    {
+                        RichQuery oRichQuery = new RichQuery();
+                        return oRichQuery.p_ScodeQuery("4", "", "", false).Tables[0].Copy();
+                    }
                 };
 
                 _dtStockCode = funcGetStockData();
@@ -73,8 +101,15 @@ namespace Woom.Tester.Forms
             {
                 Func<DataTable> funcGetStockData = () =>
                 {
-                    RichQuery oRichQuery = new RichQuery();
-                    return oRichQuery.p_ScodeQuery("5", "", "", false).Tables[0].Copy();
+                    if (_UserDt != null)
+                    {
+                        return _UserDt.Copy();
+                    }
+                    else
+                    {
+                        RichQuery oRichQuery = new RichQuery();
+                        return oRichQuery.p_ScodeQuery("5", "", "", false).Tables[0].Copy();
+                    }
                 };
 
                 _dtStockCode = funcGetStockData();
@@ -1201,6 +1236,10 @@ namespace Woom.Tester.Forms
             {
                 _ClsOpt10060 = new ClsOpt10060();
             }
+            string text = "";
+            string errorMessage = null;
+            text = "10060QtySellJob 작업 Start";
+            ClsTelegramBot.SendMessage(text, out errorMessage);
 
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
@@ -1224,6 +1263,10 @@ namespace Woom.Tester.Forms
             {
                 _ClsOpt10060 = new ClsOpt10060();
             }
+            string text = "";
+            string errorMessage = null;
+            text = "10060QtyBuyJob 작업 Start";
+            ClsTelegramBot.SendMessage(text, out errorMessage);
 
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
@@ -1248,6 +1291,12 @@ namespace Woom.Tester.Forms
                 _ClsOpt10060 = new ClsOpt10060();
             }
 
+            string text = "";
+            string errorMessage = null;
+            text = "10060PriceSellJob 작업 Start";
+            ClsTelegramBot.SendMessage(text, out errorMessage);
+
+
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060QtyMaeSu);
@@ -1270,6 +1319,12 @@ namespace Woom.Tester.Forms
             {
                 _ClsOpt10060 = new ClsOpt10060();
             }
+
+            string text = "";
+            string errorMessage = null;
+            text = "10060PriceBuyJob 작업 Start";
+            ClsTelegramBot.SendMessage(text, out errorMessage);
+
 
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaeSu);
             ClsAxKH.AxKH_10060_OnReceived -= new ClsAxKH.OnReceivedEventHandler(OnReceiveTrData_Opt10060PriceMaedo);

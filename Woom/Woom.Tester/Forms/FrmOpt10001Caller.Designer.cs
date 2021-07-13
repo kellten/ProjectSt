@@ -96,7 +96,7 @@ namespace Woom.Tester.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 72);
+            this.ClientSize = new System.Drawing.Size(741, 105);
             this.Controls.Add(this.chkSpeedOn);
             this.Controls.Add(this.chk100);
             this.Controls.Add(this.lblStdDate);

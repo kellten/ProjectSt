@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.OPS10060 = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
+            this.chkDailyJob = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblStockName
@@ -121,11 +122,22 @@
             this.lblTime.TabIndex = 38;
             this.lblTime.Text = "label2";
             // 
+            // chkDailyJob
+            // 
+            this.chkDailyJob.AutoSize = true;
+            this.chkDailyJob.Location = new System.Drawing.Point(473, 68);
+            this.chkDailyJob.Name = "chkDailyJob";
+            this.chkDailyJob.Size = new System.Drawing.Size(72, 16);
+            this.chkDailyJob.TabIndex = 39;
+            this.chkDailyJob.Text = "데일리잡";
+            this.chkDailyJob.UseVisualStyleBackColor = true;
+            // 
             // FrmOpt10015Caller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(721, 129);
+            this.Controls.Add(this.chkDailyJob);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.OPS10060);
             this.Controls.Add(this.dtpStdDate);
@@ -153,5 +165,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label OPS10060;
         private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.CheckBox chkDailyJob;
     }
 }

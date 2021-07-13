@@ -11,6 +11,7 @@ using Woom.DataAccess.PlugIn;
 using Woom.DataDefine.OptData;
 using Woom.DataDefine.Util;
 using Woom.Telegram.Class;
+using Woom.Tester.Class;
 
 namespace Woom.Tester.Forms
 {
@@ -18,6 +19,7 @@ namespace Woom.Tester.Forms
     {
 
         private Queue _StockQueue = new Queue();
+        private bool _AutoStart;
 
         #region 전역변수
 
@@ -35,7 +37,7 @@ namespace Woom.Tester.Forms
         private ClsUtil _clsUtil = new ClsUtil();
         private ClsCollectOptDataFunc _clsCollectOptDataFunc = new ClsCollectOptDataFunc();
 
-        public FrmOpt10081Caller()
+        public FrmOpt10081Caller(DataTable UserDt, bool AutoStart = false, bool chk100Click = false)
         {
             InitializeComponent();
 
@@ -45,8 +47,15 @@ namespace Woom.Tester.Forms
 
             Func<DataTable> funcGetStockData = () =>
             {
-                RichQuery oRichQuery = new RichQuery();
-                return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+                if (UserDt != null)
+                {
+                    return UserDt.Copy();
+                }
+                else
+                {
+                    RichQuery oRichQuery = new RichQuery();
+                    return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+                }
             };
 
             _dtStockCode = funcGetStockData();
@@ -66,6 +75,15 @@ namespace Woom.Tester.Forms
             _stdDate = _clsCollectOptDataFunc.GetAvailableDate();
 
             dtpStdDate.Value = _clsUtil.StringToDateTime(_stdDate);
+
+            chk100.Checked = chk100Click;
+
+            _AutoStart = AutoStart;
+
+            if (AutoStart == true)
+            {
+                btn10081_Click(null, new EventArgs());
+            }
 
         }
 
@@ -141,6 +159,14 @@ namespace Woom.Tester.Forms
                 string errorMessage = null;
                 text = "OPT10081 작업 완료";
                 ClsTelegramBot.SendMessage(text, out errorMessage);
+                if (_AutoStart == true)
+                {
+                    ClsTesterUtil clsTesterUtil = new ClsTesterUtil();
+                    Form oform = new Woom.Tester.Forms.FrmOpt10001Caller(null, true, true);
+
+                    clsTesterUtil.ShowChildForm(oform, false, this);
+                }
+
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();
@@ -396,6 +422,10 @@ namespace Woom.Tester.Forms
         }
         private void btn10081_Click(object sender, EventArgs e)
         {
+            string text = "";
+            string errorMessage = null;
+            text = "OPT10081 작업 Start";
+            ClsTelegramBot.SendMessage(text, out errorMessage);
             GetOptCallMagamaData(_stdDate);
             OnGetStockCode();
         }

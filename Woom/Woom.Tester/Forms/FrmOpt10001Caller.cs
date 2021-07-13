@@ -10,6 +10,8 @@ using Woom.DataAccess.PlugIn;
 using Woom.DataAccess.Logger;
 using Woom.DataDefine.Util;
 using Woom.DataDefine.OptData;
+using Woom.Telegram.Class;
+using Woom.Tester.Class;
 
 namespace Woom.Tester.Forms
 {
@@ -31,8 +33,8 @@ namespace Woom.Tester.Forms
         private ClsCollectOptDataFunc _clsCollectOptDataFunc = new ClsCollectOptDataFunc();
 
         #endregion 전역변수
-
-        public FrmOpt10001Caller()
+        private bool _AutoStart;
+        public FrmOpt10001Caller(DataTable UserDt, bool AutoStart = false, bool chk100Click = false)
         {
             InitializeComponent();
 
@@ -42,8 +44,15 @@ namespace Woom.Tester.Forms
 
             Func<DataTable> funcGetStockData = () =>
             {
-                RichQuery oRichQuery = new RichQuery();
-                return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+                if (UserDt != null)
+                {
+                    return UserDt.Copy();
+                }
+                else
+                {
+                    RichQuery oRichQuery = new RichQuery();
+                    return oRichQuery.p_ScodeQuery("1", "", "", false).Tables[0].Copy();
+                }
             };
 
             _dtStockCode = funcGetStockData();
@@ -59,6 +68,19 @@ namespace Woom.Tester.Forms
             }
 
             proBar10001.Maximum = _dtStockCode.Rows.Count;
+
+            chk100.Checked = chk100Click;
+
+            _AutoStart = AutoStart;
+
+            if (AutoStart == true)
+            {
+                string text = "";
+                string errorMessage = null;
+                text = "OPT10001 작업 Start";
+                ClsTelegramBot.SendMessage(text, out errorMessage);
+                OnGetStockCode();
+            }
         }
 
         private void SetFormId()
@@ -123,7 +145,21 @@ namespace Woom.Tester.Forms
             strStockCode = GetStockCode();
 
             if (strStockCode == "End")
-            { return; }
+            {
+                string text = "";
+                string errorMessage = null;
+                text = "OPT10001 작업 완료";
+                ClsTelegramBot.SendMessage(text, out errorMessage);
+                if (_AutoStart == true)
+                {
+                    ClsTesterUtil clsTesterUtil = new ClsTesterUtil();
+                    Form oform = new Woom.Tester.Forms.FrmOpt10060CallerPer(null, true, true);
+
+                    clsTesterUtil.ShowChildForm(oform, false, this);
+                }
+
+                return;
+            }
 
             if (strStockCode == "")
             {
@@ -314,13 +350,13 @@ namespace Woom.Tester.Forms
             { return Convert.ToDecimal(str); }
         }
 
-        private void btn10001_Click_1(object sender, EventArgs e)
-        {
-            OnGetStockCode();
-        }
-
         private void btn10001_Click(object sender, EventArgs e)
         {
+            string text = "";
+            string errorMessage = null;
+            text = "OPT10001 작업 Start";
+            ClsTelegramBot.SendMessage(text, out errorMessage);
+
             OnGetStockCode();
         }
     }
