@@ -129,7 +129,7 @@ namespace Woom.Tester.Forms
             {
                 string text = "";
                 string errorMessage = null;
-                text = "OPT10081 작업 완료";
+                text = "OPT10015 작업 완료";
                 ClsTelegramBot.SendMessage(text, out errorMessage);
                 if (chkDailyJob.Checked == true)
                 {
@@ -185,7 +185,7 @@ namespace Woom.Tester.Forms
 
             if (_StockQueue.Count == 0)
             {
-                MessageBox.Show("작업이 완료되었습니다.");
+                //MessageBox.Show("작업이 완료되었습니다.");
                 return "End";
             }
             reValue = _StockQueue.Dequeue().ToString();

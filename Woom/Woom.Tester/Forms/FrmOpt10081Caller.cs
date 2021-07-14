@@ -333,6 +333,8 @@ namespace Woom.Tester.Forms
                                 ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
                                 _opt10081.Dispose();
 
+                                WaitTime();
+
                                 tcs.SetResult(true);
 
                                 OnGetStockCode();
@@ -348,6 +350,9 @@ namespace Woom.Tester.Forms
                     ClsDbLogger.OptCallMagamStoredData(actionGb: "EE", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "F", chainCompGb: "", chainMaxDate: "", chainMinDate: minDate);
 
                     _opt10081.Dispose();
+
+                    WaitTime();
+
                     tcs.SetResult(true);
 
                     OnGetStockCode();
@@ -361,6 +366,8 @@ namespace Woom.Tester.Forms
                     ClsDbLogger.OptCallMagamStoredData(actionGb: "A", optCaller: "OPT10081", stockCode: stockCode, stdDate: stdDate, maxDate: maxDate, minDate: minDate, jobIngGb: "C", chainCompGb: "", chainMaxDate: "", chainMinDate: "");
 
                     _opt10081.Dispose();
+
+                    WaitTime();
 
                     tcs.SetResult(true);
 
@@ -399,6 +406,8 @@ namespace Woom.Tester.Forms
 
                         _opt10081.Dispose();
 
+                        WaitTime();
+                        
                         tcs.SetResult(true);
 
                         OnGetStockCode();
@@ -415,7 +424,7 @@ namespace Woom.Tester.Forms
                 tcs.SetResult(true);
 
                 OnGetStockCode();
-
+                WaitTime();
                 MessageBox.Show(ex.Message.ToString());
                 throw;
             }
