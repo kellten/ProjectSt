@@ -63,12 +63,18 @@ namespace Woom.Dart.Uc
                 foreach (DataRow  dr in dt.Rows)
                 {
                     dgvDartView.Rows.Add();
+
                     dgvDartView.Rows[_row].Cells["rcept_no"].Value = dr["rcept_no"].ToString().Trim();
                     dgvDartView.Rows[_row].Cells["rcept_dt"].Value = dr["rcept_dt"].ToString().Trim();
                     dgvDartView.Rows[_row].Cells["corp_code"].Value = dr["corp_code"].ToString().Trim();
                     dgvDartView.Rows[_row].Cells["stock_code"].Value = dr["stock_code"].ToString().Trim();
                     dgvDartView.Rows[_row].Cells["report_nm"].Value = dr["report_nm"].ToString().Trim();
                     dgvDartView.Rows[_row].Cells["stock_name"].Value = dr["corp_name"].ToString().Trim();
+
+                    if (Convert.ToInt32(DateTime.Now.AddDays(-7).ToString("yyyyMMdd")) < Convert.ToInt32(dr["rcept_dt"].ToString()))
+                    {
+                        dgvDartView.Rows[_row].DefaultCellStyle.ForeColor = Color.Red;
+                    }
 
                     _row = _row + 1;
                 }

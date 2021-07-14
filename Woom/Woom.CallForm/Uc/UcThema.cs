@@ -32,6 +32,9 @@ namespace Woom.CallForm.Uc
         public delegate void OnSelectedEventHandler(string themaCode);
         public event OnSelectedEventHandler dgvThema_OnSelected;
 
+        public delegate void OnSelectedStockCodeEventHandler(string stockCode);
+        public event OnSelectedStockCodeEventHandler StockCode_OnSelected;
+
         public string PropStockCode
         {
             get { return _stockCode; }
@@ -479,6 +482,13 @@ namespace Woom.CallForm.Uc
         private void dgvThemaPerStock_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+            object handler;
+            handler = StockCode_OnSelected;
+
+            if (handler != null)
+            {
+                StockCode_OnSelected(dgvThemaPerStock.Rows[e.RowIndex].Cells["ThemaByStock_STOCK_CODE"].Value.ToString().Trim());
+            }
         }
 
         private void dgvThemaPerStock_KeyDown_1(object sender, KeyEventArgs e)

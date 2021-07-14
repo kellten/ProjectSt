@@ -39,7 +39,8 @@ namespace Woom.Volume.Forms
             GetConditionList();
 
             ucStockCodeOptInfoData1.OnSelectedStockCode += new CallForm.Uc.UcStockCodeOptInfoData.OnSelectedStockCodeHandler(UcStockCodeOptInfo_OnSelected);
-
+            ucThema1.dgvThema_OnSelected += new Woom.CallForm.Uc.UcThema.OnSelectedEventHandler(dgvThema_OnSelected);
+            ucThema1.StockCode_OnSelected += new Woom.CallForm.Uc.UcThema.OnSelectedStockCodeEventHandler(StockCode_OnSelected);
         }
 
         #region
@@ -350,7 +351,6 @@ namespace Woom.Volume.Forms
             }
         }
     
-
         #region OPT10001
         private void GetOpt10001ondgvGiganUpDown(int row, string stockCode)
         {
@@ -715,7 +715,6 @@ namespace Woom.Volume.Forms
             ucNaverSearch1.PropStockCode = stockCode;
             ucDartApiView1.PropStockCode = stockCode;
         }
-
 
         #endregion
 
@@ -1581,5 +1580,42 @@ namespace Woom.Volume.Forms
 
             DisplayVolumeListDetail(DvVolumeList.Rows[e.RowIndex].Cells["SimpleStockCode"].Value.ToString());
         }
+
+
+        #region 테마그룹
+        private void dgvThema_OnSelected(string themaCode)
+        {
+            if (themaCode == "")
+            {
+                return;
+            }
+
+            RichQuery richQuery = new RichQuery();
+
+            DataTable dt = richQuery.p_ThemaQuery(query: "1", THEMA_CODE: themaCode, TGPSEQ_NO: "", THEMA_NAME: "", WORK_ID: "", bln3tier: false).Tables[0].Copy();
+
+            if (dt != null)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DisplayVolumeList(dr["STOCK_CODE"].ToString().Trim(), false);
+                    DisplayVolumeListGigan(dr["STOCK_CODE"].ToString().Trim(), false);
+                } 
+            }
+
+            dt = null;
+
+        }
+
+        private void StockCode_OnSelected(string StockCode)
+        {
+            OpenNaverNews(ClsAxKH.GetMasterCodeName(StockCode));
+            ucDartApiView1.PropStockCode = StockCode;
+        }
+
+        #endregion
+
+
+
     }
 }

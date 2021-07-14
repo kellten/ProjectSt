@@ -63,6 +63,7 @@
             this.dgvConditionList = new System.Windows.Forms.DataGridView();
             this.ucStockCodeOptInfoData1 = new Woom.CallForm.Uc.UcStockCodeOptInfoData();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.ucThema1 = new Woom.CallForm.Uc.UcThema();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.splitContainer7 = new System.Windows.Forms.SplitContainer();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -175,7 +176,6 @@
             this.PnGraph = new System.Windows.Forms.Panel();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.ucDartApiView1 = new Woom.Dart.Uc.UcDartApiView();
-            this.ucThema1 = new Woom.CallForm.Uc.UcThema();
             this.dgv1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv0)).BeginInit();
@@ -593,6 +593,15 @@
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "테마별";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // ucThema1
+            // 
+            this.ucThema1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucThema1.Location = new System.Drawing.Point(0, 0);
+            this.ucThema1.Name = "ucThema1";
+            this.ucThema1.PropStockCode = null;
+            this.ucThema1.Size = new System.Drawing.Size(768, 947);
+            this.ucThema1.TabIndex = 0;
             // 
             // tabPage8
             // 
@@ -1475,14 +1484,6 @@
             this.ucDartApiView1.PropStockCode = null;
             this.ucDartApiView1.Size = new System.Drawing.Size(840, 941);
             this.ucDartApiView1.TabIndex = 0;
-            // 
-            // ucThema1
-            // 
-            this.ucThema1.Location = new System.Drawing.Point(-29, -70);
-            this.ucThema1.Name = "ucThema1";
-            this.ucThema1.PropStockCode = null;
-            this.ucThema1.Size = new System.Drawing.Size(1235, 673);
-            this.ucThema1.TabIndex = 0;
             // 
             // FrmStockList
             // 
