@@ -954,6 +954,7 @@
             this.DvVolumeList.Size = new System.Drawing.Size(824, 861);
             this.DvVolumeList.TabIndex = 0;
             this.DvVolumeList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DvVolumeList_CellClick);
+            this.DvVolumeList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DvVolumeList_CellDoubleClick);
             // 
             // StockName
             // 

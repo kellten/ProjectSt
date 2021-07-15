@@ -1573,6 +1573,10 @@ namespace Woom.Volume.Forms
 
         private void DvVolumeList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+          
+        }
+        private void DvVolumeList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (DvVolumeList.Rows[e.RowIndex].Cells["SimpleStockCode"].Value.ToString() == "")
             {
                 return;
@@ -1613,9 +1617,10 @@ namespace Woom.Volume.Forms
             ucDartApiView1.PropStockCode = StockCode;
         }
 
+
+
         #endregion
 
-
-
+    
     }
 }
